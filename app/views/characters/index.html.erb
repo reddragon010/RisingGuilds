@@ -1,0 +1,56 @@
+<h1>Listing characters</h1>
+
+<table>
+  <tr>
+    <th>Guild</th>
+    <th>User</th>
+    <th>Name</th>
+    <th>Rank</th>
+    <th>Level</th>
+    <th>Online</th>
+    <th>Last seen</th>
+    <th>Activity</th>
+    <th>Class</th>
+    <th>Race</th>
+    <th>Faction</th>
+    <th>Gender</th>
+    <th>Achivementpoints</th>
+    <th>Ail</th>
+    <th>Talentspec1</th>
+    <th>Talentspec2</th>
+    <th>Profession1</th>
+    <th>Profession2</th>
+    <th>Main</th>
+  </tr>
+
+<% @characters.each do |character| %>
+  <tr>
+    <td><%=h character.guild_id %></td>
+    <td><%=h character.user_id %></td>
+    <td><%=h character.name %></td>
+    <td><%=h character.rank %></td>
+    <td><%=h character.level %></td>
+    <td><%=h character.online %></td>
+    <td><%=h character.last_seen %></td>
+    <td><%=h character.activity %></td>
+    <td><%=h character.class_id %></td>
+    <td><%=h character.race_id %></td>
+    <td><%=h character.faction_id %></td>
+    <td><%=h character.gender_id %></td>
+    <td><%=h character.achivementpoints %></td>
+    <td><%=h character.ail %></td>
+    <td><%=h character.talentspec1 %></td>
+    <td><%=h character.talentspec2 %></td>
+    <td><%=h character.profession1 %></td>
+    <td><%=h character.profession2 %></td>
+    <td><%=h character.main %></td>
+    <td><%= link_to 'Show', character %></td>
+    <td><%= link_to 'Edit', edit_character_path(character) %></td>
+    <td><%= link_to 'Destroy', character, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New character', new_character_path %>
