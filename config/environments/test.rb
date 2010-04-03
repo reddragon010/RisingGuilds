@@ -1,5 +1,6 @@
 # Settings specified here will take precedence over those in config/environment.rb
-
+ENV['AUTOFEATURE'] = "true"
+ENV['RSPEC'] = "true"
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -29,6 +30,8 @@ config.action_mailer.delivery_method = :test
 
 config.gem "rspec", :lib => false, :version => ">=1.2.2"
 config.gem "rspec-rails", :lib => false, :version => ">=1.2.2"
+config.gem "mocha"
+config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
 config.gem "webrat", :lib => false, :version => ">=0.4.3"
 config.gem "cucumber", :lib => false, :version => ">=0.2.2"
 config.gem "cucumber-rails", :lib => false
