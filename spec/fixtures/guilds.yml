@@ -1,0 +1,31 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  officer_rank: 1
+  raidleader_rank: 1
+  ail: 1
+  activity: 1
+  growth: 1
+  altratio: 1
+  classratio: 1
+  achivementpoints: 1
+  ration: 1
+  token: MyString
+  website: MyString
+  description: MyText
+
+two:
+  name: MyString
+  officer_rank: 1
+  raidleader_rank: 1
+  ail: 1
+  activity: 1
+  growth: 1
+  altratio: 1
+  classratio: 1
+  achivementpoints: 1
+  ration: 1
+  token: MyString
+  website: MyString
+  description: MyText

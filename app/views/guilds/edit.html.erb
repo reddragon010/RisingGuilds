@@ -1,0 +1,64 @@
+<h1>Editing guild</h1>
+
+<% form_for(@guild) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :officer_rank %><br />
+    <%= f.text_field :officer_rank %>
+  </p>
+  <p>
+    <%= f.label :raidleader_rank %><br />
+    <%= f.text_field :raidleader_rank %>
+  </p>
+  <p>
+    <%= f.label :ail %><br />
+    <%= f.text_field :ail %>
+  </p>
+  <p>
+    <%= f.label :activity %><br />
+    <%= f.text_field :activity %>
+  </p>
+  <p>
+    <%= f.label :growth %><br />
+    <%= f.text_field :growth %>
+  </p>
+  <p>
+    <%= f.label :altratio %><br />
+    <%= f.text_field :altratio %>
+  </p>
+  <p>
+    <%= f.label :classratio %><br />
+    <%= f.text_field :classratio %>
+  </p>
+  <p>
+    <%= f.label :achivementpoints %><br />
+    <%= f.text_field :achivementpoints %>
+  </p>
+  <p>
+    <%= f.label :ration %><br />
+    <%= f.text_field :ration %>
+  </p>
+  <p>
+    <%= f.label :token %><br />
+    <%= f.text_field :token %>
+  </p>
+  <p>
+    <%= f.label :website %><br />
+    <%= f.text_field :website %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @guild %> |
+<%= link_to 'Back', guilds_path %>

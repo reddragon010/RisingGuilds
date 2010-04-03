@@ -1,0 +1,44 @@
+<h1>Listing guilds</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Officer rank</th>
+    <th>Raidleader rank</th>
+    <th>Ail</th>
+    <th>Activity</th>
+    <th>Growth</th>
+    <th>Altratio</th>
+    <th>Classratio</th>
+    <th>Achivementpoints</th>
+    <th>Ration</th>
+    <th>Token</th>
+    <th>Website</th>
+    <th>Description</th>
+  </tr>
+
+<% @guilds.each do |guild| %>
+  <tr>
+    <td><%=h guild.name %></td>
+    <td><%=h guild.officer_rank %></td>
+    <td><%=h guild.raidleader_rank %></td>
+    <td><%=h guild.ail %></td>
+    <td><%=h guild.activity %></td>
+    <td><%=h guild.growth %></td>
+    <td><%=h guild.altratio %></td>
+    <td><%=h guild.classratio %></td>
+    <td><%=h guild.achivementpoints %></td>
+    <td><%=h guild.ration %></td>
+    <td><%=h guild.token %></td>
+    <td><%=h guild.website %></td>
+    <td><%=h guild.description %></td>
+    <td><%= link_to 'Show', guild %></td>
+    <td><%= link_to 'Edit', edit_guild_path(guild) %></td>
+    <td><%= link_to 'Destroy', guild, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New guild', new_guild_path %>
