@@ -32,3 +32,4 @@ config.gem "rspec-rails", :lib => false, :version => ">=1.2.2"
 config.gem "webrat", :lib => false, :version => ">=0.4.3"
 config.gem "cucumber", :lib => false, :version => ">=0.2.2"
 config.gem "cucumber-rails", :lib => false
+config.gem "factory_girl"
