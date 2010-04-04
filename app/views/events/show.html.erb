@@ -1,0 +1,23 @@
+<p>
+  <b>Action:</b>
+  <%=h @event.action %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @event.content %>
+</p>
+
+<p>
+  <b>Guild:</b>
+  <%=h @event.guild_id %>
+</p>
+
+<p>
+  <b>Character:</b>
+  <%=h @event.character_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
