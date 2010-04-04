@@ -30,7 +30,6 @@ Factory.define :guild do |f|
   f.classratio 1
   f.achivementpoints 1000
   f.ration 1
-  f.token ActiveSupport::SecureRandom.hex(8)
   f.website("http://hordeofboons.com")
   f.description("The HordeOfBoons Guild")
 end
