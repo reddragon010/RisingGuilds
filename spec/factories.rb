@@ -31,5 +31,5 @@ Factory.define :guild do |f|
   f.achivementpoints 1000
   f.ration 1
   f.website("http://hordeofboons.com")
-  f.description("The HordeOfBoons Guild")
+  f.description("The HordeOfBoons Guild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")
 end
