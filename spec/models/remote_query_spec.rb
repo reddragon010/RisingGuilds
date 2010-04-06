@@ -19,10 +19,19 @@ describe RemoteQuery do
   
   it "should can update online characters" do
     @guild = Factory.create(:Guild)
-    @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
-    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true
-    @guild.remoteQueries.count.should == 0
+    @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/guild.xml").should be_true
+    onchar = @guild.characters.find_by_name("Ugmar")
+    onchar.name.should == "Ugmar"
+    onchar.update_attribute(:online,true)
+    staychar = @guild.characters.find_by_name("Nerox")
+    staychar.name.should == "Nerox"
+    staychar.update_attribute(:online,true)
     @guild = Guild.first
-    @guild.characters.find_by_online(true).count.should == 4
+    @guild.characters.find_all_by_online(true).count.should == 2
+    @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
+    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true  
+    @guild = Guild.first
+    @guild.characters.find_all_by_online(true).count.should == 4
   end
 end

@@ -12,16 +12,18 @@ class RemoteQuery < ActiveRecord::Base
   def execute(attribute=nil)
     begin
       self.send(self.action,attribute)
-    rescue
-      raise "ERROR on executing RemoteQuery #{self.id}"
+    rescue => exception
+      raise "#{exception.to_s} on executing RemoteQuery #{self.id} - #{exception.backtrace.join("\n")}"
     else
       self.destroy
       return true
     end
   end
   
+  private
+  
   def update_guild(uri)
-    uri = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild}" if uri.nil?
+    uri = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild.name}" if uri.nil?
     xml = get_xml(uri) 
     
     if !(xml%'guildInfo').children.empty?
@@ -76,6 +78,30 @@ class RemoteQuery < ActiveRecord::Base
     else
       #throw a exception
     end
+  end
+  
+  def update_guild_onlinelist(uri)
+    uri = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if uri.nil?
+    doc = get_html(uri)
+    
+    
+    self.guild.characters.each do |char|
+      newonline = doc.include?(">#{char.name}<")
+      attributes = Hash.new
+      if newonline == true && newonline == char.online
+        #attributes[:activity] = char.activity + 1 unless char.last_seen + 1.hour > Time.new 
+      elsif newonline == false && newonline != char.online
+        attributes[:last_seen] = Time.now
+      end
+      attributes[:online] = newonline
+      char.update_attributes!(attributes)
+    end
+    
+  end
+  
+  def get_html(uri)
+    response = open(uri)
+    return response.read
   end
   
   def get_xml(uri)
