@@ -5,12 +5,12 @@ describe Character do
   end
 
   it "should create a new instance given valid attributes" do
-    Factory.create(:character)
+    Factory.create(:Character)
   end
   
-  it "should can linked to a guild" do
-    @guild = Factory.create(:guild)
-    @character = Factory.create(:character)
+  it "should can be linked to a guild" do
+    @guild = Factory.create(:Guild)
+    @character = Factory.create(:Character)
     @character.Guild = @guild
     @character.Guild.name.should == @guild.name
   end

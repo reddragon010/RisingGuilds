@@ -1,4 +1,4 @@
-Factory.define :character do |f|
+Factory.define :Character do |f|
   f.user_id 1
   f.sequence(:name){|n| "TestBoon#{n}"} 
   f.rank 1
@@ -19,7 +19,7 @@ Factory.define :character do |f|
   f.main false
 end
 
-Factory.define :guild do |f|
+Factory.define :Guild do |f|
   f.sequence(:name){|n| "BoonHordeNo#{n}"} 
   f.officer_rank 2
   f.raidleader_rank 3
@@ -32,4 +32,10 @@ Factory.define :guild do |f|
   f.ration 1
   f.website("http://hordeofboons.com")
   f.description("The HordeOfBoons Guild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")
+end
+
+Factory.define :RemoteQuery do |f|
+  f.priority 1
+  f.efford 5
+  f.action "update guild"
 end
