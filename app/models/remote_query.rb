@@ -9,12 +9,20 @@ class RemoteQuery < ActiveRecord::Base
   validates_presence_of :efford
   validates_presence_of :action
   
-  def execute
-    self.send(self.action)
+  def execute(attribute=nil)
+    begin
+      self.send(self.action,attribute)
+    rescue
+      raise "ERROR on executing RemoteQuery #{self.id}"
+    else
+      self.destroy
+      return true
+    end
   end
   
-  def update_guild(uri=nil)
-    xml = get_xml(RAILS_ROOT + "/test/files/guild.xml") if uri.nil?
+  def update_guild(uri)
+    uri = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild}" if uri.nil?
+    xml = get_xml(uri) 
     
     if !(xml%'guildInfo').children.empty?
       arsenal_char_count = (xml%'guildInfo'%'guild'%'members')[:memberCount].to_i || nil
