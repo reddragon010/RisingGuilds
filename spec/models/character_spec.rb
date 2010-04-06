@@ -11,7 +11,7 @@ describe Character do
   it "should can be linked to a guild" do
     @guild = Factory.create(:Guild)
     @character = Factory.create(:Character)
-    @character.Guild = @guild
-    @character.Guild.name.should == @guild.name
+    @character.guild = @guild
+    @character.guild.name.should == @guild.name
   end
 end

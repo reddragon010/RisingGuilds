@@ -11,15 +11,15 @@ describe Guild do
   it "should know its characters" do
     @guild = Factory.create(:Guild)
     @characters = [Factory.create(:Character),Factory.create(:Character)]
-    @guild.Characters << @characters
-    @guild.Characters.count.should == 2
+    @guild.characters << @characters
+    @guild.characters.count.should == 2
   end
   
   it "should can get some RemoteQueries" do
     @guild = Factory.create(:Guild)
     @remotequeries = [Factory.create(:RemoteQuery),Factory.create(:RemoteQuery)]
-    @guild.RemoteQueries << @remotequeries
-    @guild.RemoteQueries.count.should == 2
+    @guild.remoteQueries << @remotequeries
+    @guild.remoteQueries.count.should == 2
   end
   
   it "shouldn't accept a description with lesser then 100 Characters" do

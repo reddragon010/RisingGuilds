@@ -1,7 +1,7 @@
 class Character < ActiveRecord::Base
-  belongs_to :Guild
-  has_many :Events
-  has_many :RemoteQueries
+  belongs_to :guild
+  has_many :events
+  has_many :remoteQueries
   
   
 end
