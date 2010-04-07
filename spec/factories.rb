@@ -12,10 +12,6 @@ Factory.define :Character do |f|
   f.gender_id 1
   f.achivementpoints 100
   f.ail  200
-  f.talentspec1 "value for talentspec1"
-  f.talentspec2 "value for talentspec2"
-  f.profession1 "value for profession1"
-  f.profession2 "value for profession2"
   f.main false
 end
 

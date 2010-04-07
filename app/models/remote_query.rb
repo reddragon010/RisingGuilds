@@ -25,8 +25,12 @@ class RemoteQuery < ActiveRecord::Base
   #private
   
   def update_guild(url)
+    raise "missing guild" if self.guild.nil?
+    
     url = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild.name}" if url.nil?
     xml = get_xml(url) 
+    
+    faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
     
     if !(xml%'guildInfo').children.empty?
 			arsenal_chars = Array.new
@@ -34,7 +38,7 @@ class RemoteQuery < ActiveRecord::Base
 			
 			(xml%'guildInfo'%'guild'%'members'/:character).each do |char|
 			    arsenal_char_names << char[:name]
-					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank])
+					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank], :faction_id => faction)
 			end
 			db_char_names = self.guild.characters.collect {|c| c.name}
 			
@@ -80,6 +84,8 @@ class RemoteQuery < ActiveRecord::Base
   end
   
   def update_guild_onlinelist(url)
+    raise "missing guild" if self.guild.nil?
+    
     url = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if url.nil?
     doc = get_html(url)
     
@@ -108,38 +114,34 @@ class RemoteQuery < ActiveRecord::Base
     end
     
   end
-=begin
+
   def update_character(url)
-    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{self.guild.name}" if url.nil?
-    xml = get_xml(url) 
+    raise 'missing character' if self.character.nil?
+    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{self.character.name}" if url.nil?
+    xml = get_xml(url)
     
     attributes = Hash.new
-    attributes['level'] = xml[:level]
-    attributes['classid'] = xml[:classId]
-    attributes['raceid'] = xml.race_id
-    attributes['factionid'] = arsenal_char.faction_id
-    attributes['genderid'] = arsenal_char.gender_id
-    attributes['points'] = arsenal_char.points
+    attributes['level']             = (xml%'characterInfo'%'character')[:level]
+    attributes['achivementpoints']  = (xml%'characterInfo'%'character')[:points]
     
-    unless arsenal_char.talent_spec.nil? || arsenal_char.talent_spec.empty?
-      arsenal_char.talent_spec.each_with_index do |talentspec,i|
-        attributes["talentspec#{i+1}"] = talentspec
-      end
-    end
-
-    unless arsenal_char.professions.nil? || arsenal_char.professions.empty?
-      arsenal_char.professions.each_with_index do |profession,i|
-        attributes["profession#{i+1}"] = profession
+    (xml%'professions'/:skill).each_with_index do |skill,i|
+		  attributes["profession#{i+1}"] = Character::Profession.new(skill)
+		end
+		
+		unless (xml%'talentSpecs').nil?
+      (xml%'talentSpecs'/:talentSpec).each_with_index do |talentSpec,i|
+        attributes["talentspec#{i+1}"] = Character::TalentSpec.new(talentSpec)
       end
     end
     
-    attributes['icon'] = arsenal_char.icon
-    attributes['race_icon'] = arsenal_char.race_icon
-    attributes['class_icon'] = arsenal_char.class_icon
+    items = Array.new
+    (xml%'items'/:item).each do |item|
+			items << Character::Item.new(item)
+		end
+		attributes["items"] = items unless items.empty?
 
-    self.update_attributes(attributes)
+    self.character.update_attributes(attributes)
   end
-=end
   
   #get the HTML-Code from URI
   def get_html(url)
