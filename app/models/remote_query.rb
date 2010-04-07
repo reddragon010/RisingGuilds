@@ -74,9 +74,6 @@ class RemoteQuery < ActiveRecord::Base
           end
         end
       end
-		  
-    else
-      #throw a exception
     end
   end
   
@@ -84,31 +81,39 @@ class RemoteQuery < ActiveRecord::Base
     uri = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if uri.nil?
     doc = get_html(uri)
     
-    
+    #process every member of the guild
     self.guild.characters.each do |char|
+      #test if char is online
       newonline = doc.include?(">#{char.name}<")
       attributes = Hash.new
+      #if char stay online
       if char.online == true && newonline == true then
+        #workaround: default activity is nil not 0
         char.activity = 0 if char.activity.nil?
-        if char.last_seen.nil? then
-          attributes[:last_seen] = Time.now
-          char.last_seen = Time.now
-        end 
-        attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) > Time.now 
+        #If user was still a hour online adds 1 to activity
+        attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) >= Time.now 
+      #if char has been gone offline
       elsif char.online == true && newonline == false then
         attributes[:last_seen] = Time.now
+        attributes[:online] = false
+      #if char comes online
+      elsif char.online == false && newonline == true
+        attributes[:last_seen] = Time.now
+        attributes[:online] = true
       end
-      attributes[:online] = newonline
-      char.update_attributes!(attributes)
+      
+      char.update_attributes!(attributes) unless attributes.empty?
     end
     
   end
   
+  #get the HTML-Code from URI
   def get_html(uri)
     response = open(uri)
     return response.read
   end
   
+  #get the preprocessed XML-Code from URI
   def get_xml(uri)
     response = open(uri)
     
