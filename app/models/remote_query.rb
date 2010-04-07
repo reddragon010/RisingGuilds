@@ -88,9 +88,14 @@ class RemoteQuery < ActiveRecord::Base
     self.guild.characters.each do |char|
       newonline = doc.include?(">#{char.name}<")
       attributes = Hash.new
-      if newonline == true && newonline == char.online
-        #attributes[:activity] = char.activity + 1 unless char.last_seen + 1.hour > Time.new 
-      elsif newonline == false && newonline != char.online
+      if char.online == true && newonline == true then
+        char.activity = 0 if char.activity.nil?
+        if char.last_seen.nil? then
+          attributes[:last_seen] = Time.now
+          char.last_seen = Time.now
+        end 
+        attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) > Time.now 
+      elsif char.online == true && newonline == false then
         attributes[:last_seen] = Time.now
       end
       attributes[:online] = newonline

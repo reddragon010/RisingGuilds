@@ -27,11 +27,11 @@ describe RemoteQuery do
     staychar = @guild.characters.find_by_name("Nerox")
     staychar.name.should == "Nerox"
     staychar.update_attribute(:online,true)
-    @guild = Guild.first
+    @guild = Guild.find_by_id(@guild.id)
     @guild.characters.find_all_by_online(true).count.should == 2
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
     @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true  
-    @guild = Guild.first
+    @guild = Guild.find_by_id(@guild.id)
     @guild.characters.find_all_by_online(true).count.should == 4
   end
 end
