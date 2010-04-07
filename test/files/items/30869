@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=30869" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_bracer_03" id="30869" level="141" name="Howling Wind Bracers" quality="4" type="Mail">
+      <cost sellPrice="40943"/>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Hyjal Summit" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=hyjalsummit&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="3" dropRate="2" heroic="1" id="17767" maxLevel="73" minLevel="73" name="Rage Winterchill" type="Undead" url="fl[source]=dungeon&amp;fl[dungeon]=hyjalsummit&amp;fl[difficulty]=heroic&amp;fl[boss]=17767"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

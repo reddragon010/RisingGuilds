@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=28530" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_jewelry_necklace_ahnqiraj_04" id="28530" level="115" name="Brooch of Unquenchable Fury" quality="4" type="Miscellaneous">
+      <cost sellPrice="88355"/>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Karazhan" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=karazhan&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="3" dropRate="3" heroic="1" id="15687" maxLevel="73" minLevel="73" name="Moroes" title="Tower Steward" type="Undead" url="fl[source]=dungeon&amp;fl[dungeon]=karazhan&amp;fl[difficulty]=heroic&amp;fl[boss]=15687"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

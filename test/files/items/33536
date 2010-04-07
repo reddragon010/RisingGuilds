@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=33536" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_belt_22" id="33536" level="128" name="Stormwrap" quality="4" type="Mail">
+      <cost>
+        <token count="60" icon="spell_holy_championsbond" id="29434"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <vendors>
+        <creature area="Shattrath City" classification="1" heroic="1" id="18525" maxLevel="72" minLevel="72" name="G'eras" type="Not specified"/>
+      </vendors>
+    </item>
+  </itemInfo>
+</page>

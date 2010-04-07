@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=32255" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_shield_38" id="32255" level="141" name="Felstone Bulwark" quality="4" type="Shields">
+      <cost sellPrice="93057"/>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Black Temple" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=blacktemple&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="3" dropRate="3" heroic="1" id="22898" maxLevel="73" minLevel="73" name="Supremus" type="Demon" url="fl[source]=dungeon&amp;fl[dungeon]=blacktemple&amp;fl[difficulty]=heroic&amp;fl[boss]=22898"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

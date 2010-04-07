@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=28810" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_boots_chain_05" id="28810" level="125" name="Windshear Boots" quality="4" type="Mail">
+      <cost sellPrice="58388"/>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Gruul's Lair" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=gruulslair&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="3" dropRate="3" heroic="1" id="19044" maxLevel="73" minLevel="73" name="Gruul the Dragonkiller" type="Humanoid" url="fl[source]=dungeon&amp;fl[dungeon]=gruulslair&amp;fl[difficulty]=heroic&amp;fl[boss]=19044"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

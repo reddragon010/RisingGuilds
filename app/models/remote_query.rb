@@ -15,10 +15,12 @@ class RemoteQuery < ActiveRecord::Base
     begin
       self.send(self.action,attribute)
     rescue => exception
-      raise "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{exception.backtrace.join("\n")}"
+      raise "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{self.attributes.to_yaml} \n #{exception.backtrace.join("\n")}"
+      logger.error "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{self.attributes.to_yaml} \n #{exception.backtrace.join("\n")}"
     else
-      self.destroy
       return true
+    ensure
+      self.destroy
     end
   end
   
@@ -140,6 +142,25 @@ class RemoteQuery < ActiveRecord::Base
 		end
 		attributes["items"] = items unless items.empty?
 
+    self.character.update_attributes(attributes)
+  end
+  
+  def update_character_ail(base_url)
+    base_url="http://eu.wowarmory.com/item-info.xml?i=" if base_url.nil?
+    return true if self.character.items.nil?
+    
+    ilevelsum = 0
+    items = Array.new
+    self.character.items.each{ |item|
+      xml = get_xml(base_url + item.id.to_s)
+      item.get_info(xml)
+      ilevelsum += item.level
+      items << item
+    }
+    
+    ail = Integer(ilevelsum / self.character.items.count)
+    
+    attributes = {:ail => ail, :items => items}
     self.character.update_attributes(attributes)
   end
   

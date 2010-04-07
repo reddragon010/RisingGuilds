@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=35578" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_shoulder_77" id="35578" level="155" name="Overlaid Chain Spaulders" quality="3" type="Mail">
+      <cost sellPrice="52485"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_01" id="34053" level="80" maxCount="1" minCount="1" name="Small Dream Shard" quality="3" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Utgarde Keep" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=utgardekeep&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="1" dropRate="4" id="23980" maxLevel="72" minLevel="72" name="Ingvar the Plunderer" type="Undead" url="fl[source]=dungeon&amp;fl[dungeon]=utgardekeep&amp;fl[difficulty]=all&amp;fl[boss]=23980"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

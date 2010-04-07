@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=27981" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_misc_cape_11" id="27981" level="115" name="Sethekk Oracle Cloak" quality="3" type="Cloth">
+      <cost sellPrice="26437"/>
+      <disenchantLoot requiredSkillRank="275">
+        <item dropRate="5" icon="inv_enchant_shardprismaticlarge" id="22449" level="70" maxCount="1" minCount="1" name="Large Prismatic Shard" quality="3" type="Enchanting"/>
+        <item dropRate="1" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="1" minCount="1" name="Void Crystal" quality="4" type="Enchanting"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Sethekk Halls" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=sethekkhalls&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="1" dropRate="3" heroic="1" id="20706" maxLevel="72" minLevel="72" name="Talon King Ikiss" type="Humanoid" url="fl[source]=dungeon&amp;fl[dungeon]=sethekkhalls&amp;fl[difficulty]=heroic&amp;fl[boss]=18473"/>
+        <creature area="Sethekk Halls" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=sethekkhalls&amp;fl[boss]=all&amp;fl[difficulty]=all" classification="1" dropRate="3" id="18473" maxLevel="69" minLevel="69" name="Talon King Ikiss" type="Humanoid" url="fl[source]=dungeon&amp;fl[dungeon]=sethekkhalls&amp;fl[difficulty]=all&amp;fl[boss]=18473"/>
+      </dropCreatures>
+    </item>
+  </itemInfo>
+</page>

@@ -71,6 +71,16 @@ describe RemoteQuery do
       @char.items.first.class.should == Character::Item
       @char.profession1.class.should == Character::Profession
       @char.profession2.class.should == Character::Profession
-      
+    end
+    
+    it "should update the ail of a character" do
+      @char = Factory.create(:Character,:name => "Nerox")
+      @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
+      @char.remoteQueries.first.execute(RAILS_ROOT + "/test/files/nerox_charsheet.xml").should be_true
+      @char = Character.find(@char.id)
+      @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character_ail")
+      @char.remoteQueries.first.execute(RAILS_ROOT + "/test/files/items/").should be_true
+      @char = Character.find(@char.id)
+      @char.ail.should == 129
     end
 end

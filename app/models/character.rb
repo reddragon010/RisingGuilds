@@ -40,11 +40,15 @@ class Character < ActiveRecord::Base
   end
 
   class Item
-  	attr_reader :item_id, :icon
+  	attr_reader :id, :icon, :level
 
   	def initialize(elem)
-  		@item_id 				= elem[:id].to_i
+  		@id 				= elem[:id].to_i
   		@icon 	    = elem[:icon]
+  	end
+  	
+  	def get_info(elem)
+  	  @level = (elem%'itemInfo'%'item')[:level].to_i
   	end
   end
 end

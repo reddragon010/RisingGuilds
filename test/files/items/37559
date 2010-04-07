@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=37559" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_jewelry_talisman_08" id="37559" level="138" name="Serrah's Star" quality="2" type="Miscellaneous">
+      <cost sellPrice="47427"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="5" icon="inv_misc_dust_infinite" id="34054" level="70" maxCount="3" minCount="2" name="Infinite Dust" quality="1" type="Enchanting"/>
+        <item dropRate="3" icon="inv_enchant_essencecosmiclesser" id="34056" level="70" maxCount="2" minCount="1" name="Lesser Cosmic Essence" quality="2" type="Enchanting"/>
+        <item dropRate="2" icon="inv_enchant_dreamshard_01" id="34053" level="80" maxCount="1" minCount="1" name="Small Dream Shard" quality="3" type="Enchanting"/>
+      </disenchantLoot>
+      <rewardFromQuests>
+        <quest area="Borean Tundra" id="11914" level="71" name="Keep the Secret Safe" reqMinLevel="69" suggestedPartySize="0"/>
+      </rewardFromQuests>
+    </item>
+  </itemInfo>
+</page>

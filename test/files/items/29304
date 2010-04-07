@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/_layout/items/info.xsl"?><page globalSearch="1" lang="en_us" requestQuery="i=29304" requestUrl="/item-info.xml">
+  <itemInfo>
+    <item icon="inv_jewelry_ring_54" id="29304" level="135" name="Band of Eternity" quality="4" type="Miscellaneous">
+      <providedForQuests>
+        <quest area="Tanaris" id="10472" level="70" name="Sage's Covenant" reqMinLevel="70" suggestedPartySize="0"/>
+      </providedForQuests>
+      <objectiveOfQuests>
+        <quest area="Tanaris" id="10472" level="70" name="Sage's Covenant" reqMinLevel="70" suggestedPartySize="0"/>
+      </objectiveOfQuests>
+      <rewardFromQuests>
+        <quest area="Tanaris" id="10468" level="70" name="Sage's Oath" reqMinLevel="70" suggestedPartySize="0"/>
+      </rewardFromQuests>
+    </item>
+  </itemInfo>
+</page>
