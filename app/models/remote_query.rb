@@ -1,5 +1,7 @@
 require "open-uri"
 require "hpricot"
+require 'net/http'
+require 'uri'
 
 class RemoteQuery < ActiveRecord::Base
   belongs_to :guild
@@ -13,22 +15,20 @@ class RemoteQuery < ActiveRecord::Base
     begin
       self.send(self.action,attribute)
     rescue => exception
-      raise "#{exception.to_s} on executing RemoteQuery #{self.id} - #{exception.backtrace.join("\n")}"
+      raise "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{exception.backtrace.join("\n")}"
     else
       self.destroy
       return true
     end
   end
   
-  private
+  #private
   
-  def update_guild(uri)
-    uri = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild.name}" if uri.nil?
-    xml = get_xml(uri) 
+  def update_guild(url)
+    url = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild.name}" if url.nil?
+    xml = get_xml(url) 
     
     if !(xml%'guildInfo').children.empty?
-      arsenal_char_count = (xml%'guildInfo'%'guild'%'members')[:memberCount].to_i || nil
-      
 			arsenal_chars = Array.new
 			arsenal_char_names = Array.new
 			
@@ -36,13 +36,12 @@ class RemoteQuery < ActiveRecord::Base
 			    arsenal_char_names << char[:name]
 					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank])
 			end
-			
 			db_char_names = self.guild.characters.collect {|c| c.name}
 			
 			# Calculate new/missing chars
       missing_char_names = db_char_names - arsenal_char_names
       new_char_names = arsenal_char_names - db_char_names
-      
+
       # Add new chars
       unless new_char_names.empty?
         arsenal_chars.each do |char|
@@ -74,12 +73,15 @@ class RemoteQuery < ActiveRecord::Base
           end
         end
       end
+      return true
+    else
+      raise "Empty Guild-Info"
     end
   end
   
-  def update_guild_onlinelist(uri)
-    uri = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if uri.nil?
-    doc = get_html(uri)
+  def update_guild_onlinelist(url)
+    url = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if url.nil?
+    doc = get_html(url)
     
     #process every member of the guild
     self.guild.characters.each do |char|
@@ -106,16 +108,76 @@ class RemoteQuery < ActiveRecord::Base
     end
     
   end
+=begin
+  def update_character(url)
+    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{self.guild.name}" if url.nil?
+    xml = get_xml(url) 
+    
+    attributes = Hash.new
+    attributes['level'] = xml[:level]
+    attributes['classid'] = xml[:classId]
+    attributes['raceid'] = xml.race_id
+    attributes['factionid'] = arsenal_char.faction_id
+    attributes['genderid'] = arsenal_char.gender_id
+    attributes['points'] = arsenal_char.points
+    
+    unless arsenal_char.talent_spec.nil? || arsenal_char.talent_spec.empty?
+      arsenal_char.talent_spec.each_with_index do |talentspec,i|
+        attributes["talentspec#{i+1}"] = talentspec
+      end
+    end
+
+    unless arsenal_char.professions.nil? || arsenal_char.professions.empty?
+      arsenal_char.professions.each_with_index do |profession,i|
+        attributes["profession#{i+1}"] = profession
+      end
+    end
+    
+    attributes['icon'] = arsenal_char.icon
+    attributes['race_icon'] = arsenal_char.race_icon
+    attributes['class_icon'] = arsenal_char.class_icon
+
+    self.update_attributes(attributes)
+  end
+=end
   
   #get the HTML-Code from URI
-  def get_html(uri)
-    response = open(uri)
-    return response.read
+  def get_html(url)
+    return open(url).read if !url.include?("http://")
+    
+    req = Net::HTTP::Get.new(url)
+		req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
+		
+		uri = URI.parse(url)
+		
+		http = Net::HTTP.new(uri.host, uri.port)
+	  
+		begin
+		  http.start do
+		    res = http.request req
+				# response = res.body
+				
+				tries = 0
+				response = case res
+					when Net::HTTPSuccess, Net::HTTPRedirection
+						res.body
+					else
+						tries += 1
+						if tries > 10
+							raise 'Timed out'
+						else
+							retry
+						end
+					end
+		  end
+		rescue
+			raise 'Specified server at ' + url + ' does not exist.'
+		end
   end
   
   #get the preprocessed XML-Code from URI
-  def get_xml(uri)
-    response = open(uri)
+  def get_xml(url)
+    response = get_html(url)
     
     doc = Hpricot.XML(response)
 		errors = doc.search("*[@errCode]")
