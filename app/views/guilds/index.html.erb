@@ -1,44 +1,18 @@
-<h1>Listing guilds</h1>
+<%= link_to 'New guild', new_guild_path %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Officer rank</th>
-    <th>Raidleader rank</th>
-    <th>Ail</th>
-    <th>Activity</th>
-    <th>Growth</th>
-    <th>Altratio</th>
-    <th>Classratio</th>
-    <th>Achivementpoints</th>
-    <th>Ration</th>
-    <th>Token</th>
-    <th>Website</th>
-    <th>Description</th>
-  </tr>
-
-<% @guilds.each do |guild| %>
-  <tr>
-    <td><%=h guild.name %></td>
-    <td><%=h guild.officer_rank %></td>
-    <td><%=h guild.raidleader_rank %></td>
-    <td><%=h guild.ail %></td>
-    <td><%=h guild.activity %></td>
-    <td><%=h guild.growth %></td>
-    <td><%=h guild.altratio %></td>
-    <td><%=h guild.classratio %></td>
-    <td><%=h guild.achivementpoints %></td>
-    <td><%=h guild.ration %></td>
-    <td><%=h guild.token %></td>
-    <td><%=h guild.website %></td>
-    <td><%=h guild.description %></td>
-    <td><%= link_to 'Show', guild %></td>
-    <td><%= link_to 'Edit', edit_guild_path(guild) %></td>
-    <td><%= link_to 'Destroy', guild, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @guilds.each_with_index do |guild,i| %>
+<div id="<%= i%>" class="guild">
+  <%= link_to image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100"), guild %><br />
+  <div class="adminmenu">  
+	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_path(guild) %>
+	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
+  </div>
+  <span class="name"><%=h guild.name %></span>
+  <span class="description"><%=h smart_truncate(guild.description, :words => 10) %></span>
+  <span class="membercount"><%=h guild.characters.find_all_by_online(true).count %>/<%=h guild.characters.count %></span>
+</div>
 <% end %>
-</table>
+
 
 <br />
 
-<%= link_to 'New guild', new_guild_path %>

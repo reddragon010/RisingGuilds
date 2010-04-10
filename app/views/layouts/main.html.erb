@@ -4,14 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Rising-Guilds: <%= controller.controller_name %> - <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <title>Guilds: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'style' %>
 </head>
 <body>
-<div id="page">
-<p style="color: green"><%= flash[:notice] %></p>
+  <div id="container">
+    <div id="header">
+      <h1>RisingGuilds</h1>
+    </div>
+    <div id="navigation"><%= link_to 'Home', root_url %> | <%= link_to 'Guilds', guilds_path %> | <%= link_to 'Characters', characters_path %></div>
+    <div id="maincontent">
+      <p style="color: green"><%= flash[:notice] %></p>
 
-<%= yield %>
-</div>
+      <%= yield %>
+      <br style="clear:both" />
+    </div>
+    <div id="fooder">
+      design, code and copyright by DreamBlaze<br />
+      powered by <%= link_to 'Ruby On Rails', "http://www.rubyonrails.org" %>
+    </div>
+  </div>
 </body>
 </html>
