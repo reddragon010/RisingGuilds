@@ -8,13 +8,18 @@
   <%= stylesheet_link_tag 'style' %>
 </head>
 <body>
-  <div id="container">
+  <div id="page">
     <div id="header">
       <h1>RisingGuilds</h1>
     </div>
     <div id="navigation"><%= link_to 'Home', root_url %> | <%= link_to 'Guilds', guilds_path %> | <%= link_to 'Characters', characters_path %></div>
-    <div id="maincontent">
-      <p style="color: green"><%= flash[:notice] %></p>
+    <div id="content">
+	<% if flash[:notice] %>
+      <p id="notice"><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:error] %>
+	  <p id="error"><%= flash[:error] %></p>
+	<% end %>
 
       <%= yield %>
       <br style="clear:both" />

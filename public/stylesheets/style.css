@@ -26,7 +26,7 @@ a:hover { color: #fff; background-color:#444; }
   display: table;
 }
 
-#container {
+#page {
     max-width: 800px;
     margin: auto;
     padding: 5px 15px 5px 15px;
@@ -47,7 +47,7 @@ a:hover { color: #fff; background-color:#444; }
     padding: inherit;
 }
 
-#maincontent {
+#content {
     background-color:white;
     text-align:left;
     border:black solid 1px;
@@ -92,3 +92,16 @@ a:hover { color: #fff; background-color:#444; }
   list-style: square;
 }
 
+#error {
+	color: red;
+	border: 1px red solid;
+	background-color: #FDD;
+	padding: 10px;
+}
+
+#notice{
+	color: green;
+	border: 1px green solid;
+	background-color: #DFD;
+	padding: 10px;
+}
