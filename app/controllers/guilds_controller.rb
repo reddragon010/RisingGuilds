@@ -1,4 +1,6 @@
 class GuildsController < ApplicationController
+  filter_resource_access
+  
   # GET /guilds
   # GET /guilds.xml
   def index
@@ -13,7 +15,6 @@ class GuildsController < ApplicationController
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
-    @guild = Guild.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +25,6 @@ class GuildsController < ApplicationController
   # GET /guilds/new
   # GET /guilds/new.xml
   def new
-    @guild = Guild.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,12 @@ class GuildsController < ApplicationController
 
   # GET /guilds/1/edit
   def edit
-    @guild = Guild.find(params[:id])
+   
   end
 
   # POST /guilds
   # POST /guilds.xml
   def create
-    @guild = Guild.new(params[:guild])
 
     respond_to do |format|
       if @guild.save
@@ -57,7 +56,6 @@ class GuildsController < ApplicationController
   # PUT /guilds/1
   # PUT /guilds/1.xml
   def update
-    @guild = Guild.find(params[:id])
 
     respond_to do |format|
       if @guild.update_attributes(params[:guild])
