@@ -4,76 +4,24 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :guild_id %><br />
-    <%= f.text_field :guild_id %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
-  <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
-  <p>
-    <%= f.label :rank %><br />
-    <%= f.text_field :rank %>
-  </p>
-  <p>
-    <%= f.label :level %><br />
-    <%= f.text_field :level %>
-  </p>
-  <p>
-    <%= f.label :online %><br />
-    <%= f.check_box :online %>
-  </p>
-  <p>
-    <%= f.label :last_seen %><br />
-    <%= f.datetime_select :last_seen %>
-  </p>
-  <p>
-    <%= f.label :activity %><br />
-    <%= f.text_field :activity %>
-  </p>
-  <p>
+ <p>
     <%= f.label :class_id %><br />
-    <%= f.text_field :class_id %>
+    <%= f.select(:class_id, CLASSES) %>
   </p>
   <p>
     <%= f.label :race_id %><br />
-    <%= f.text_field :race_id %>
+    <%= f.select(:race_id, RACES) %>
   </p>
   <p>
     <%= f.label :faction_id %><br />
-    <%= f.text_field :faction_id %>
+    <%= f.select(:faction_id, FACTION) %>
   </p>
   <p>
     <%= f.label :gender_id %><br />
-    <%= f.text_field :gender_id %>
-  </p>
-  <p>
-    <%= f.label :achivementpoints %><br />
-    <%= f.text_field :achivementpoints %>
-  </p>
-  <p>
-    <%= f.label :ail %><br />
-    <%= f.text_field :ail %>
-  </p>
-  <p>
-    <%= f.label :talentspec1 %><br />
-    <%= f.text_field :talentspec1 %>
-  </p>
-  <p>
-    <%= f.label :talentspec2 %><br />
-    <%= f.text_field :talentspec2 %>
-  </p>
-  <p>
-    <%= f.label :profession1 %><br />
-    <%= f.text_field :profession1 %>
-  </p>
-  <p>
-    <%= f.label :profession2 %><br />
-    <%= f.text_field :profession2 %>
+    <%= f.select(:gender_id, GENDER) %>
   </p>
   <p>
     <%= f.label :main %><br />

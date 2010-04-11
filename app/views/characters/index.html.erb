@@ -2,28 +2,26 @@
 
 <table>
   <tr>
-    <th>Guild</th>
-    <th>Name</th>
+    <th>Name(Owner)</th>
+	<th>Guild</th>
     <th>Level</th>
-    <th>Online</th>
     <th>Class</th>
     <th>Race</th>
     <th>Faction</th>
-    <th>Gender</th>
+	<th>Online</th>
   </tr>
 
 <% @characters.each do |character| %>
   <tr>
-    <td><%= link_to character.name, character %></td>
-	<td><%=h character.guild.nil? ? "Not Linked" : link_to(character.guild.name, guild_path) %></td>
+    <td><%= link_to character.name, character %>(<%= character.user.nil? ? "" : character.user.login %>)</td>
+	<td><%=h character.guild.nil? ? "" : link_to(character.guild.name, guild_path) %></td>
     <td><%=h character.level %></td>
-    <td><%=h character.online %></td>
-    <td><%=h character.class_id %></td>
-    <td><%=h character.race_id %></td>
-    <td><%=h character.faction_id %></td>
-    <td><%=h character.gender_id %></td>
-    <td><%= link_to 'Edit', edit_character_path(character) %></td>
-    <td><%= link_to 'Destroy', character, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= image_tag classicon_path(character.class_id) %></td>
+    <td><%= image_tag raceicon_path(character.race_id,character.gender_id),:size => "18x18" %></td>
+    <td><%= image_tag factionicon_path(character.faction_id), :size => "18x18" %></td>
+    <td><%= online_text(character.online) %></td>
+	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>
+    <td><%= link_to(image_tag("icons/delete.png", :alt => "del", :size => "16x16"), character, :confirm => 'Are you sure?', :method => :delete) %></td>
   </tr>
 <% end %>
 </table>

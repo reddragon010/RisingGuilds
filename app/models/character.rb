@@ -2,6 +2,7 @@ class Character < ActiveRecord::Base
   belongs_to :guild
   has_many :events
   has_many :remoteQueries
+  belongs_to :user
   
   serialize :profession1
   serialize :profession2

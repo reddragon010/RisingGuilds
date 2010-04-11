@@ -1,4 +1,6 @@
 class CharactersController < ApplicationController
+  filter_resource_access
+  
   # GET /characters
   # GET /characters.xml
   def index
@@ -13,8 +15,6 @@ class CharactersController < ApplicationController
   # GET /characters/1
   # GET /characters/1.xml
   def show
-    @character = Character.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @character }
@@ -24,8 +24,6 @@ class CharactersController < ApplicationController
   # GET /characters/new
   # GET /characters/new.xml
   def new
-    @character = Character.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @character }
@@ -34,14 +32,11 @@ class CharactersController < ApplicationController
 
   # GET /characters/1/edit
   def edit
-    @character = Character.find(params[:id])
   end
 
   # POST /characters
   # POST /characters.xml
   def create
-    @character = Character.new(params[:character])
-
     respond_to do |format|
       if @character.save
         flash[:notice] = 'Character was successfully created.'
@@ -57,8 +52,6 @@ class CharactersController < ApplicationController
   # PUT /characters/1
   # PUT /characters/1.xml
   def update
-    @character = Character.find(params[:id])
-
     respond_to do |format|
       if @character.update_attributes(params[:character])
         flash[:notice] = 'Character was successfully updated.'
@@ -74,7 +67,6 @@ class CharactersController < ApplicationController
   # DELETE /characters/1
   # DELETE /characters/1.xml
   def destroy
-    @character = Character.find(params[:id])
     @character.destroy
 
     respond_to do |format|

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  filter_resource_access
   # GET /events
   # GET /events.xml
   def index
@@ -13,7 +14,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.xml
   def show
-    @event = Event.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,6 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +33,13 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    @event = Event.find(params[:id])
+
   end
 
   # POST /events
   # POST /events.xml
   def create
-    @event = Event.new(params[:event])
+
 
     respond_to do |format|
       if @event.save
@@ -57,7 +56,6 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    @event = Event.find(params[:id])
 
     respond_to do |format|
       if @event.update_attributes(params[:event])

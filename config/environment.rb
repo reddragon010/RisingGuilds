@@ -6,6 +6,11 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+RACES   = {"Menschen" => 1, "Orcs" => 2 , "Zwerge" => 3, "Nachtelfen" => 4, "Untote" => 5, "Tauren" => 6, "Gnome" => 7,"Trolle" => 8,"Blutelfen" => 10, "Draenei" => 11}
+CLASSES = {"Krieger" => 1, "Paladin" => 2, "Jäger" => 3, "Schurke" => 4, "Priester" => 5, "Todesritter" => 6, "Schamane" => 7, "Magier" => 8, "Hexenmeister" => 9, "Druide" => 11} 
+FACTION = {"Allianz" => 0, "Horde" => 1}
+GENDER  = {"Männlich" => 0, "Weiblich" => 1}
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
