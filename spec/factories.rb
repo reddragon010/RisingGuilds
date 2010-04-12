@@ -35,3 +35,10 @@ Factory.define :RemoteQuery do |f|
   f.efford 5
   f.action "update guild"
 end
+
+Factory.define :user do |f|
+  f.sequence(:login) {|n| "user#{n}"}
+  f.sequence(:email) {|n| "user#{n}@gmx.net"}
+  f.password 'password'
+  f.password_confirmation 'password'
+end

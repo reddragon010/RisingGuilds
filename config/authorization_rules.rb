@@ -3,6 +3,12 @@ authorization do
     has_permission_on [:guilds, :characters], :to => [:index, :show, :new, :create, :edit, :update, :destroy]
   end
   
+  role :guildmanager do
+    has_permission_on [:guilds], :to => [:edit, :update, :destroy, :update_guild] do
+      if_attribute :id => is { user.role}
+    end
+  end
+  
   role :user do
     #includes :guest
     has_permission_on [:guilds, :characters], :to => [:index, :show, :new, :create]

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :login_required
+  
   def new
     @user = User.new
   end
@@ -30,4 +32,10 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+  
+  def characters
+    @user = @current_user
+    @characters = @user.characters
+  end
+  
 end

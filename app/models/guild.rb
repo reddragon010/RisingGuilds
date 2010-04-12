@@ -2,6 +2,8 @@ class Guild < ActiveRecord::Base
   has_many :events
   has_many :characters
   has_many :remoteQueries
+  has_many :assignments
+  has_many :users, :through => :assignments
   
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"

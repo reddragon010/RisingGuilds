@@ -105,3 +105,15 @@ a:hover { color: #fff; background-color:#444; }
 	background-color: #DFD;
 	padding: 10px;
 }
+
+#usermenu {
+	float: right;
+}
+
+#title {
+	float: left;
+	width: 400px;
+	font-size: 25pt;
+	font-weight: bold;
+	padding-top: 20px;
+}

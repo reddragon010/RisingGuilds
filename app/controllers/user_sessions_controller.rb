@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  before_filter :login_required, :only => [:destroy]
+  
   def new
     @user_session = UserSession.new
   end
@@ -9,6 +11,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_to_target_or_default(root_url)
     else
+      flash[:error] = "Login or Password incorrect!"
       render :action => :new
     end
   end
