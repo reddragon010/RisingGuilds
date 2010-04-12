@@ -93,6 +93,7 @@ class RemoteQuery < ActiveRecord::Base
     
     #process every member of the guild
     self.guild.characters.each do |char|
+      char.online = false if char.online.nil?
       #test if char is online
       newonline = doc.include?(">#{char.name}<")
       attributes = Hash.new

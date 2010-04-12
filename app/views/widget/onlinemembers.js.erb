@@ -1,0 +1,15 @@
+(function(){
+document.write("<span><%=h @guild.name %></span><br />");
+document.write("<span><%=h @characters.count %>/<%=h @guild.characters.count %> Online</span>");
+
+document.write("<table>");
+<% @characters.each do |character| %>
+document.write("  <tr>");
+document.write("    <td><%= image_tag classicon_path(character) %></td>");
+document.write("    <td><%= image_tag raceicon_path(character) %></td>");
+document.write("    <td><%=h character.level %></td>");
+document.write("    <td><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&n=<%=h character.name %>\"><%=h character.name %></a></td>");
+document.write("  </tr>");
+<% end %>
+document.write("</table>");
+})()

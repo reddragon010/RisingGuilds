@@ -10,6 +10,7 @@ class Guild < ActiveRecord::Base
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"
   validates_length_of :description, :maximum => 1000, :message => "ok thats to much. Please keep a little bit shorter"
+  validates_uniqueness_of :name
   
   validates_presence_of :token
   validates_uniqueness_of :token

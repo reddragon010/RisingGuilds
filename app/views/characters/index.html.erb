@@ -16,9 +16,9 @@
     <td><%= link_to character.name, character %>(<%= character.user.nil? ? "" : character.user.login %>)</td>
 	<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
     <td><%=h character.level %></td>
-    <td><%= image_tag classicon_path(character.class_id) %></td>
-    <td><%= image_tag raceicon_path(character.race_id,character.gender_id),:size => "18x18" %></td>
-    <td><%= image_tag factionicon_path(character.faction_id), :size => "18x18" %></td>
+    <td><%= image_tag classicon_path(character) %></td>
+    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+    <td><%= image_tag factionicon_path(character), :size => "18x18" %></td>
     <td><%= online_text(character.online) %></td>
 	<% permitted_to? :edit, character do %>
 	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>

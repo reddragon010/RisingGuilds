@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :events
 
-  map.resources :characters
+#  map.resources :characters
 
-  map.resources :guilds
+#  map.resources :guilds
   
   map.resource :user_session
   
@@ -14,7 +14,14 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   
-  map.resources :users
+# map.resources :users
+  
+  map.resources :guilds, :has_many => [:characters, :users, :widget]
+  
+  map.resources :characters, :has_one => [:guild, :user]
+  
+  map.resources :users, :has_many => [:characters, :guilds]
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -55,6 +62,9 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
+  
+  map.connect '/widget/:action/:id/:token', :controller => 'widget', :token => /.*/
+  
   map.connect ':controller/:id/:action'
   map.connect ':controller/:id/:action.:format'
 end

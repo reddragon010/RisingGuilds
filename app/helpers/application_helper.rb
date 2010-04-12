@@ -1,15 +1,15 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  def raceicon_path(race_id,gender_id)
-    "http://www.wowarmory.com/_images/icons/race/#{race_id}-#{gender_id}.gif"
+  def raceicon_path(char)
+    "http://www.wowarmory.com/_images/icons/race/#{char.race_id}-#{char.gender_id}.gif"
   end
   
-  def classicon_path(class_id)
-    "http://www.wowarmory.com/_images/icons/class/#{class_id}.gif"
+  def classicon_path(char)
+    "http://www.wowarmory.com/_images/icons/class/#{char.class_id}.gif"
   end
   
-  def factionicon_path(faction_id)
-    "http://www.wowarmory.com/_images/icons/faction/icon-#{faction_id}.gif"
+  def factionicon_path(char)
+    "http://www.wowarmory.com/_images/icons/faction/icon-#{char.faction_id}.gif"
   end
   
   def charicon_path(char)

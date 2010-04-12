@@ -4,8 +4,21 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.xml
   def index
-    @characters = Character.all
+    params[:sort] = 'rank ASC' if params[:sort].nil?
 
+    filter_keys = ['guild_id', 'character_id','token']
+    conditions = Hash.new
+    conditions.merge!(params)
+    conditions.delete_if {|key,value| !filter_keys.include? key}
+    
+    if conditions.empty? then
+      #@characters = Character.paginate(:all, :order => params[:sort], :page => params[:page])
+      @characters = Character.find(:all, :order => params[:sort])
+    else
+      #@characters = Character.paginate(:all, :order => params[:sort], :page => params[:page], :conditions => conditions)
+      @characters = Character.find(:all, :order => params[:sort], :conditions => conditions)
+    end
+   
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @characters }
