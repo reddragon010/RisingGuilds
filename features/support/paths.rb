@@ -14,6 +14,8 @@ module NavigationHelpers
       login_path
     when /the logout page/
       logout_path
+    when /my account/
+      account_path
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
