@@ -4,8 +4,8 @@ authorization do
   end
   
   role :guildmanager do
-    has_permission_on [:guilds], :to => [:edit, :update, :destroy, :update_guild] do
-      if_attribute :users => contains { user }
+    has_permission_on [:guilds], :to => [:edit, :update, :destroy] do
+      if_attribute :managers => contains { user }
     end
   end
   

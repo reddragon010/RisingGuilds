@@ -4,8 +4,12 @@
 <div id="<%= i%>" class="guild">
   <%= link_to image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100"), guild %><br />
   <div class="adminmenu">  
+	<% permitted_to? :edit, guild do %>
 	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_path(guild) %>
+	<% end %>
+	<% permitted_to? :destroy, guild do %>
 	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
+	<% end %>
   </div>
   <span class="name"><%=h guild.name %></span>
   <span class="description"><%=h smart_truncate(guild.description, :words => 10) %></span>

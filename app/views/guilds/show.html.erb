@@ -1,5 +1,7 @@
 <div id="guildmenu">
+	<% permitted_to? :edit, @guild do %>
 	<%= link_to "Sync Guild with Arsenal", :action => "update_guild", :id => @guild.id %>
+	<% end %>
 </div>
 <div id="infos">
 	<p>
@@ -56,6 +58,7 @@
 	  <%=h @guild.achivementpoints %>
 	</p>
 </div>
-
+<% permitted_to? :edit, @guild do %>
 <%= link_to 'Edit', edit_guild_path(@guild) %> |
+<% end %>
 <%= link_to 'Back', guilds_path %>

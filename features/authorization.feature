@@ -13,7 +13,8 @@ Feature: Authorization
 		And I am on the Guildpage
 		When I follow "Sync Guild with Arsenal"
 		Then I should see "Sorry, you are not allowed to access that page."
-		
+	
+	
 	
 		
 		
