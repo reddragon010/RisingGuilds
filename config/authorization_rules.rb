@@ -5,7 +5,7 @@ authorization do
   
   role :guildmanager do
     has_permission_on [:guilds], :to => [:edit, :update, :destroy, :update_guild] do
-      if_attribute :id => is { user.role}
+      if_attribute :users => contains { user }
     end
   end
   

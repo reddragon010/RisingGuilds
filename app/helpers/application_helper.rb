@@ -12,12 +12,34 @@ module ApplicationHelper
     "http://www.wowarmory.com/_images/icons/faction/icon-#{faction_id}.gif"
   end
   
+  def charicon_path(char)
+		icon_types = {:default => 'wow-default', 70 => 'wow-70', 80 => 'wow-80', :other => 'wow'}
+		
+		if char.level < 70
+		  dir = icon_types[:default]
+		elsif char.level >= 70
+			dir = icon_types[70]
+		elsif char.level >= 80
+			dir = icon_types[80]
+		else
+			dir = icon_types[:other]
+		end
+		
+		"http://www.wowarmory.com/_images/portraits/" + dir + "/#{char.gender_id}-#{char.race_id}-#{char.class_id}.gif"
+	end
+  
   def online_text(online)
     if online
       "<span style=\"color:green\">Online</span>"
     else
       "<span style=\"color:red\">Offline</span>"
     end
+  end
+  
+  def redirect_back_or(path)
+    redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to path
   end
   
   def smart_truncate(s, opts = {})

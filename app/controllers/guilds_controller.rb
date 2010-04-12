@@ -82,15 +82,17 @@ class GuildsController < ApplicationController
   
   def update_guild
     @guild = Guild.find(params[:id])
-    if @guild.remoteQueries.find_by_action('update_guild').empty?
-      @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
-      flash[:notice] = 'Guild will be updated soon'
-      format.html { redirect_to(@guild) }
-      format.xml  { head :ok }
-    else
-      flash[:error] = 'Update is in progress. Please be patient!'
-      format.html { redirect_to(@guild) }
-      format.xml  { head :error }
+    respond_to do |format|
+      if @guild.remoteQueries.find_all_by_action('update_guild').empty?
+        @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
+        flash[:notice] = 'Guild will be updated soon'
+        format.html { redirect_to(@guild) }
+        format.xml  { head :ok }
+      else
+        flash[:error] = 'Update is in progress. Please be patient!'
+        format.html { redirect_to(@guild) }
+        format.xml  { head :error }
+      end
     end
   end
 end

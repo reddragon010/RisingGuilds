@@ -17,5 +17,7 @@ class ApplicationController < ActionController::Base
   def permission_denied
     flash[:error] = "Sorry, you are not allowed to access that page."
     redirect_to :back
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
   end
 end

@@ -16,6 +16,10 @@ module NavigationHelpers
       logout_path
     when /my account/
       account_path
+    when /the Guildpage/
+      guild_path @guild
+    when /a new guild/
+      new_guild_path
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

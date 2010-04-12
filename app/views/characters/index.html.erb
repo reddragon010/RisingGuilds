@@ -14,14 +14,18 @@
 <% @characters.each do |character| %>
   <tr>
     <td><%= link_to character.name, character %>(<%= character.user.nil? ? "" : character.user.login %>)</td>
-	<td><%=h character.guild.nil? ? "" : link_to(character.guild.name, guild_path) %></td>
+	<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
     <td><%=h character.level %></td>
     <td><%= image_tag classicon_path(character.class_id) %></td>
     <td><%= image_tag raceicon_path(character.race_id,character.gender_id),:size => "18x18" %></td>
     <td><%= image_tag factionicon_path(character.faction_id), :size => "18x18" %></td>
     <td><%= online_text(character.online) %></td>
+	<% permitted_to? :edit, character do %>
 	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>
+	<% end %>
+	<% permitted_to? :destroy, character do%>
     <td><%= link_to(image_tag("icons/delete.png", :alt => "del", :size => "16x16"), character, :confirm => 'Are you sure?', :method => :delete) %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
