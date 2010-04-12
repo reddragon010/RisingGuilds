@@ -20,6 +20,10 @@ module NavigationHelpers
       guild_path @guild
     when /a new guild/
       new_guild_path
+    when /update guild/
+      "/guilds/#{@guild.id}/update_guild"
+    when /edit guild/
+      edit_guild_path @guild
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

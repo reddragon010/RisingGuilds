@@ -10,10 +10,39 @@ Feature: Authorization
 		
 	Scenario: Sync Guild as Guest
 		Given a Guild
-		And I am on the Guildpage
-		When I follow "Sync Guild with Arsenal"
+		When I go to update guild
 		Then I should see "Sorry, you are not allowed to access that page."
 	
+	Scenario: Edit Guild as Guest
+		Given a Guild
+		When I go to edit guild
+		Then I should see "Sorry, you are not allowed to access that page."
+		
+	Scenario: Create Guild as User
+		Given a Guild
+		And I am a registered user
+		And I am logged in
+		When I go to a new guild
+		And fill in some guildinfos
+		And I press "create"
+		Then I should see "Guild was successfully created."
+		
+	Scenario: Sync Guild as Guildmanager
+		Given a Guild
+		And I am a registered user
+		And I am a "guildmanager"
+		And I am logged in
+		And I am on the Guildpage
+		When I go to update guild
+		Then I should see "Guild will be updated soon"
+
+#	Scenario: Edit Guild as Guildmanager
+#		Given a Guild
+#		When I go to edit guild
+#		And fill in "name" with "Divinee"
+#		And I press "update"
+#		Then I should see "Guild was successfully edited."
+#		And I should see "Devinee"
 	
 	
 		

@@ -41,3 +41,9 @@ end
 Then /^I should see my account$/ do
   response.should contain(@user.login)
 end
+
+Given /^I am a "([^\"]*)"$/ do |role|
+  r = Role.create(:name => role)
+  @user.assignments << Assignment.create(:guild_id => @guild.id, :role_id => r.id)
+  @user.save
+end

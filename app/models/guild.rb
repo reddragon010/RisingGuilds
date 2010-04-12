@@ -20,10 +20,6 @@ class Guild < ActiveRecord::Base
     @managers
   end
   
-  def update_guild
-    Guild.RemoteQueries << RemoteQuery.new(:priority => 1, :efford => 5, :action =>"update_guild")
-  end
-  
   protected
   def before_validation_on_create
     self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
