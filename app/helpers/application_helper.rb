@@ -15,14 +15,16 @@ module ApplicationHelper
   def charicon_path(char)
 		icon_types = {:default => 'wow-default', 70 => 'wow-70', 80 => 'wow-80', :other => 'wow'}
 		
-		if char.level < 70
-		  dir = icon_types[:default]
-		elsif char.level >= 70
-			dir = icon_types[70]
-		elsif char.level >= 80
-			dir = icon_types[80]
+		unless char.level.nil?
+		  if char.level < 70
+  		  dir = icon_types[:default]
+  		elsif char.level >= 80
+  			dir = icon_types[80]
+  		elsif char.level >= 70
+  			dir = icon_types[70]
+  		end
 		else
-			dir = icon_types[:other]
+		  dir = icon_types[:other]
 		end
 		
 		"http://www.wowarmory.com/_images/portraits/" + dir + "/#{char.gender_id}-#{char.race_id}-#{char.class_id}.gif"
@@ -51,4 +53,7 @@ module ApplicationHelper
     n = opts[:words]
     a[0...n].join(' ') + (a.size > n ? '...' : '')
   end
+  
+  
+  
 end

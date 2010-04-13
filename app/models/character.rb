@@ -10,6 +10,8 @@ class Character < ActiveRecord::Base
   serialize :talentspec2
   serialize :items
   
+  validates_uniqueness_of :name
+  
   
   class TalentSpec
   	attr_reader :trees,:active,:group,:icon,:prim

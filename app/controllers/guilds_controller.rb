@@ -40,7 +40,8 @@ class GuildsController < ApplicationController
   # POST /guilds
   # POST /guilds.xml
   def create
-
+    @guild.assignments << Assignment.new(:user_id => current_user.id,:role_id => 1)
+    
     respond_to do |format|
       if @guild.save
         flash[:notice] = 'Guild was successfully created.'
@@ -92,6 +93,21 @@ class GuildsController < ApplicationController
         flash[:error] = 'Update is in progress. Please be patient!'
         format.html { redirect_to(@guild) }
         format.xml  { head :error }
+      end
+    end
+  end
+  
+  def join
+    @guild = Guild.find(params[:id])
+    respond_to do |format|
+      if params[:token] == @guild.token
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 4)
+        @guild.save
+        flash[:notice] = 'You have successfully joined this guild'
+        format.html { redirect_to(@guild) }
+      else
+        flash[:error] = 'Token wrong!'
+        format.html { redirect_to(@guild) }
       end
     end
   end

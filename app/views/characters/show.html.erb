@@ -1,5 +1,9 @@
 <p>
-	<%= image_tag charicon_path(@character),:size => "64x64",:alt => "Character Icon"%>
+	<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
+</p>
+
+<p>
+	<%= link_to 'Mark as Mine!', :confirm => 'Is this really you character?', :action => 'link' %>
 </p>
 
 <p>

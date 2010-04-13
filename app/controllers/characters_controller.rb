@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
   def index
     params[:sort] = 'rank ASC' if params[:sort].nil?
 
-    filter_keys = ['guild_id', 'character_id','token']
+    filter_keys = ['guild_id', 'character_id', 'user_id']
     conditions = Hash.new
     conditions.merge!(params)
     conditions.delete_if {|key,value| !filter_keys.include? key}
@@ -86,5 +86,68 @@ class CharactersController < ApplicationController
       format.html { redirect_to(characters_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def link
+    @character = Character.find(params[:id])
+    if @character.nil?
+      flash[:error] = "Character not found"
+      redirect_to root_url
+    elsif @character.user.nil?
+      flash[:notice] = "Character is now yours"
+      @character.user = current_user
+      unless @character.guild.nil? && !@character.guild.users.include?(current_user)
+        newrole = guildrank_to_role(@character.rank)
+        assignment = @character.guild.assignments.find_by_user_id(current_user.id)
+        assignment.update_attribute(:role_id,newrole.id) if assignment.role_id > newrole.id
+      end
+      @character.save
+      redirect_to(@character)
+    else
+      flash[:error] = "Character already marked! Please contact the support"
+      redirect_to(@character)
+    end
+  end
+  
+  def delink
+    @character = Character.find(params[:id])
+    if @character.nil?
+      flash[:error] = "Character not found"
+      redirect_to root_url
+    elsif @character.user.nil?
+      flash[:error] = "Character not marked"
+      redirect_to(@character)
+    else
+      @guild = @character.guild
+      @user = @character.user
+      @character.user = nil
+      @character.save
+      @guild = Guild.find(@guild.id)
+      flash[:notice] = "Character has been demarked"
+      if !@guild.characters.map{|c| c.user_id}.include?(@user.id)
+        @guild.assignments.find_all_by_user_id(@user.id).each{|a| a.destroy}
+        flash[:notice] += "\n Your last Char left the Guild! Your rights are removed"
+      else
+        newrank = @guild.characters.find(:all, :order => "role_id", :conditions => {:user_id => @user.id}).first.rank
+        newrole = guildrank_to_role(newrank)
+        assignment = @guild.assignments.find_by_user_id(@user.id)
+        assignment.update_attribute(:role_id, newrole.id) if assignment.role_id > newrole.id
+      end
+      
+      redirect_to "/users/#{current_user.id}/characters"
+    end
+  end
+  
+  protected
+  def guildrank_to_role(rank)
+    case rank
+    when 0
+      role = Role.find_by_name("guildleader")
+    when 1
+      role = Role.find_by_name("guildofficer")
+    else
+      role = Role.find_by_name("guildmember")
+    end
+    return role
   end
 end

@@ -57,6 +57,11 @@
 	  <b>Achivementpoints:</b>
 	  <%=h @guild.achivementpoints %>
 	</p>
+	<p>
+	  <b>Token:</b>
+	  <%=h @guild.token %>
+	</p>
+	
 </div>
 <% permitted_to? :edit, @guild do %>
 <%= link_to 'Edit', edit_guild_path(@guild) %> |

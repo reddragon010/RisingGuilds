@@ -15,7 +15,7 @@
 		<% if logged_in? %>
 		<%= link_to "Logout", logout_path %> |
 		<%= link_to "Account", account_path %> |
-		
+		<%= link_to "my Characters", "/users/#{current_user.id}/characters" %>
 		<% else %>
 		<%= link_to "Login", login_path %> |
 		<%= link_to "Register", register_path %> 

@@ -23,13 +23,9 @@
 	<% permitted_to? :edit, character do %>
 	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>
 	<% end %>
-	<% permitted_to? :destroy, character do%>
-    <td><%= link_to(image_tag("icons/delete.png", :alt => "del", :size => "16x16"), character, :confirm => 'Are you sure?', :method => :delete) %></td>
+	<% permitted_to? :delink, character do%>
+    <td><%= link_to(image_tag("icons/delete.png", :alt => "del", :size => "16x16"), "/characters/#{character.id}/delink", :confirm => 'Are you sure?') %></td>
 	<% end %>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New character', new_character_path %>

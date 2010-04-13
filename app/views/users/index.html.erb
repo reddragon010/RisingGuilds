@@ -9,5 +9,10 @@
 	<% end %>
   </div>
   <span class="username"><%= link_to user.login, user_path(user) %></span>
+  <ul>
+  <% user.assignments.each do |a| %>
+	<li><%= a.role.nil? ? "" : a.role.name %> (<%= a.guild.nil? ? "" : a.guild.name %>)</li>
+  <% end %>
+  </ul>
 </div>
 <% end %>
