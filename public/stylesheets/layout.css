@@ -1,0 +1,52 @@
+div#navbar, div.spacer {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div#navbar {
+	background-color: #8FC73E;
+	padding: 10px 0;
+}
+
+div#navbar ul {
+	list-style: none;
+	display: block;
+	margin: 0 10px;
+}
+
+div#navbar ul li {
+	float: left;
+	margin: 0 1.5em;
+}
+
+div.spacer {
+	background-color: #8FC73E;
+	height: 1em;
+}
+
+div.topSection div {
+	border: solid 10px #e5e5e6;
+	height: 280px;
+}
+
+div.topSection div p {
+	margin: 10px;
+}
+
+img#poster {
+	width: 360px;
+	height: 280px;
+}
+
+div#footer {
+	background-color: #e5e5e6;
+}
+
+div#footer div p{
+	margin: 5px;
+}
+
+div#legal {
+	clear:both;
+	margin: 10px;
+}
