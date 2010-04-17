@@ -27,42 +27,6 @@ a:hover { color: #fff; background-color:#444; }
   display: table;
 }
 
-#page {
-    max-width: 800px;
-    margin: auto;
-    padding: 5px 15px 5px 15px;
-}
-#header {
-    background-color:white;
-    text-align:left;
-    border:black solid 1px;
-    margin-bottom: 5px;
-    height: 60px;
-    padding: inherit;
-}
-
-#navigation {
-    background-color:white;
-    border:black solid 1px;
-    margin-bottom: 5px;
-    padding: inherit;
-}
-
-#content {
-    background-color:white;
-    text-align:left;
-    border:black solid 1px;
-    margin-bottom: 5px;
-    padding: inherit;
-}
-
-#fooder {
-    background-color:white;
-    text-align:right;
-    border:black solid 1px;
-    padding: inherit;
-}
-
 #errorExplanation {
   width: 400px;
   border: 2px solid red;
@@ -105,16 +69,4 @@ a:hover { color: #fff; background-color:#444; }
 	border: 1px green solid;
 	background-color: #DFD;
 	padding: 10px;
-}
-
-#usermenu {
-	float: right;
-}
-
-#title {
-	float: left;
-	width: 400px;
-	font-size: 25pt;
-	font-weight: bold;
-	padding-top: 20px;
 }

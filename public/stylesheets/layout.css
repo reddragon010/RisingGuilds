@@ -39,7 +39,10 @@ img#poster {
 }
 
 div#footer {
-	background-color: #e5e5e6;
+	background-color: white;
+	text-align:right;
+    border:black solid 1px;
+    padding: inherit;
 }
 
 div#footer div p{
@@ -49,4 +52,31 @@ div#footer div p{
 div#legal {
 	clear:both;
 	margin: 10px;
+}
+
+div#header {
+    background-color:white;
+    text-align:left;
+    border:black solid 1px;
+	height: 100px;
+}
+
+div#usermenu {
+	float: right;
+}
+
+div#title {
+	float: left;
+	width: 400px;
+	font-size: 25pt;
+	font-weight: bold;
+	padding-top: 20px;
+}
+
+div#content {
+    background-color:white;
+    text-align:left;
+    border:black solid 1px;
+    margin-bottom: 5px;
+    padding: inherit;
 }
