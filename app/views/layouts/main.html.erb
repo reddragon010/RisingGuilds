@@ -6,11 +6,13 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Guilds: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'style' %>
+  <%= javascript_include_tag :all %>
+  <%= javascript_include_tag 'jquery'%>
 </head>
 <body>
-  <div class="container_12">
+  <div id="container">
 	<!-- Header Div -->
-    <div class="grid_12" id="header">
+    <div id="header">
       <div id="title">RisingGuilds</div>
 	  <div id="usermenu">
 		<% if logged_in? %>
@@ -24,35 +26,49 @@
 	  </div>
     </div>
 	<div class="clean">&nbsp;</div>
-	<!-- END HeaderDiv -->
+	<!-- END Header Div -->
 	
-	<!-- Navbar Div -->
-    <div class="grid_12" id="navbar">
-		<ul>
+	<!-- NavBar Div -->
+	<div id ="mainnav">
+		<ul id="navbar">
 			<li><%= link_to 'Home', root_url %></li>
 			<li><%= link_to 'Guilds', guilds_path %></li>
 			<li><%= link_to 'Characters', characters_path %></li>
 		</ul> 
 	</div>
-	<div class="clear">&nbsp;</div>
-	<!-- End Navbar Div-->
+	<div class="clean">&nbsp;</div>
+	<!-- END NavBar Div -->
+	
+	<div id="center">
+	
+		<!-- Tabs Div -->
+	    <div id="secnav">
+			<ul id="tabs">
+				<li>Link1</li>
+				<li>Link2</li>
+				<li>Link3</li>
+			</ul> 
+		</div>
+		<!-- End Tabs Div -->
+	
+		<!-- Content Div -->
+	    <div id="content">	
+		<% if flash[:notice] %>
+	      <p id="notice"><%= flash[:notice] %></p>
+		<% end %>
+		<% if flash[:error] %>
+		  <p id="error"><%= flash[:error] %></p>
+		<% end %>
 
-	<!-- Content Div -->
-    <div class="grid_12" id="content">	
-	<% if flash[:notice] %>
-      <p id="notice"><%= flash[:notice] %></p>
-	<% end %>
-	<% if flash[:error] %>
-	  <p id="error"><%= flash[:error] %></p>
-	<% end %>
-
-      <%= yield %>
-    </div>
+	      <%= yield %>
+	    </div>
+		<!-- End Content Div-->
+		
+	</div>
 	<div class="clear">&nbsp;</div>
-	<!-- End Content Div-->
 	
 	<!-- Fooder Div -->
-    <div class="grid_12" id="footer">
+    <div id="footer">
       design, code and copyright by DreamBlaze<br />
       powered by <%= link_to 'Ruby On Rails', "http://www.rubyonrails.org" %>
     </div>

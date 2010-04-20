@@ -1,82 +1,106 @@
-div#navbar, div.spacer {
-	margin-top: 10px;
-	margin-bottom: 10px;
+ul#navbar {
+background: white;
+margin: 0;
+border: 1px solid black;
+list-style-type: none;
+height: 31px;
 }
 
-div#navbar {
-	background-color: #8FC73E;
-	padding: 10px 0;
+ul#navbar li {
+float: left;
 }
 
-div#navbar ul {
-	list-style: none;
-	display: block;
-	margin: 0 10px;
+ul#navbar li a {
+display: block;
+padding: 5px 15px 4px;
+text-decoration: none;
+color: black;
+letter-spacing: -0.1em;
 }
 
-div#navbar ul li {
-	float: left;
-	margin: 0 1.5em;
+ul#navbar li a:hover {
+color: white;
 }
 
-div.spacer {
-	background-color: #8FC73E;
-	height: 1em;
+ul#navbar li a#current {
+background: #EEE;
+color: #98CB00;
 }
 
-div.topSection div {
-	border: solid 10px #e5e5e6;
-	height: 280px;
+ul#tabs {
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 60px;
 }
 
-div.topSection div p {
-	margin: 10px;
+ul#tabs li {
+height: 60px;
+width: 60px;
+border: 1px solid black;
+background: white;
+margin-bottom: 2px;
 }
 
-img#poster {
-	width: 360px;
-	height: 280px;
+div#secnav {
+margin-top: 10px;
+margin-right:1px;
+position: relative;
+float: left;
 }
 
 div#footer {
-	background-color: white;
-	text-align:right;
-    border:black solid 1px;
-    padding: inherit;
+background-color: white;
+text-align: right;
+border: black solid 1px;
+padding: inherit;
 }
 
-div#footer div p{
-	margin: 5px;
+div#footer div p {
+margin: 5px;
 }
 
 div#legal {
-	clear:both;
-	margin: 10px;
+clear: both;
+margin: 10px;
 }
 
 div#header {
-    background-color:white;
-    text-align:left;
-    border:black solid 1px;
-	height: 100px;
+background-color: white;
+text-align: left;
+border: black solid 1px;
+height: 100px;
 }
 
 div#usermenu {
-	float: right;
+float: right;
 }
 
 div#title {
-	float: left;
-	width: 400px;
-	font-size: 25pt;
-	font-weight: bold;
-	padding-top: 20px;
+float: left;
+width: 400px;
+font-size: 25pt;
+font-weight: bold;
+padding-top: 20px;
 }
 
 div#content {
-    background-color:white;
-    text-align:left;
-    border:black solid 1px;
-    margin-bottom: 5px;
-    padding: inherit;
+background-color: white;
+text-align: left;
+border: black solid 1px;
+margin-bottom: 5px;
+padding: inherit;
+width: 897px;
+min-height: 400px;
+float: left;
+}
+
+div#center {
+width: 960px;
+min-height: 400px;
+}
+
+div#container {
+width: 960px;
+margin: auto;
 }
