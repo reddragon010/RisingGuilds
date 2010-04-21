@@ -27,27 +27,49 @@ background: #EEE;
 color: #98CB00;
 }
 
-ul#tabs {
+/* begin css tabs - thanks to & copyright by Joshua Kaufman */
+
+ul#tabs { /* general settings */
+text-align: left; /* set to left, right or center */
+margin-bottom:-1px; /* set margins as desired */
+font: 11px verdana, arial, sans-serif; /* set font as desired */
+border-bottom: 1px solid #000; /* set border COLOR as desired */
 list-style-type: none;
-margin: 0;
-padding: 0;
-width: 60px;
+padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
 }
 
-ul#tabs li {
-height: 60px;
-width: 60px;
-border: 1px solid black;
-background: white;
-margin-bottom: 2px;
+ul#tabs li { /* do not change */
+display: inline;
 }
 
-div#secnav {
-margin-top: 10px;
-margin-right:1px;
+body#tabs li.tab { /* settings for selected tab */
+border-bottom: 1px solid #fff; /* set border color to page background color */
+background-color: #fff; /* set background color to match above border color */
+}
+
+body#tabs li.tab a { /* settings for selected tab link */
+background-color: #fff; /* set selected tab background color as desired */
+color: #000; /* set selected tab link color as desired */
 position: relative;
-float: left;
+top: 1px;
+padding-top: 4px; /* must change with respect to padding (X) above and below */
 }
+
+ul#tabs li a { /* settings for all tab links */
+padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+border: 1px solid #000; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+background-color: #FFF; /* set unselected tab background color as desired */
+color: #000; /* set unselected tab link color as desired */
+margin-right: 0px; /* set additional spacing between tabs as desired */
+text-decoration: none;
+border-bottom: none;
+}
+
+ul#tabs a:hover { /* settings for hover effect */
+background: #CCC; /* set desired hover color */
+}
+
+/* end css tabs */
 
 div#footer {
 background-color: white;
@@ -90,9 +112,7 @@ text-align: left;
 border: black solid 1px;
 margin-bottom: 5px;
 padding: inherit;
-width: 897px;
 min-height: 400px;
-float: left;
 }
 
 div#center {
