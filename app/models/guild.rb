@@ -15,25 +15,29 @@ class Guild < ActiveRecord::Base
   
   def managers
     @managers = Array.new
-    assignments.find_all_by_role_id(1).each{|a| @managers << a.user}
+    @managers_role_id ||= Role.find_by_name("guild_manager").id
+    assignments.find_all_by_role_id(@managers_role_id).each{|a| @managers << a.user}
     @managers
   end
   
   def leaders
-    @managers = Array.new
-    assignments.find_all_by_role_id(2).each{|a| @managers << a.user}
-    @managers
+    @leaders = Array.new
+    @leaders_role_id ||= Role.find_by_name("guild_leader").id
+    assignments.find_all_by_role_id(@leaders_role_id).each{|a| @leaders << a.user}
+    @leaders
   end
   
   def officers
-    @managers = Array.new
-    assignments.find_all_by_role_id(3).each{|a| @managers << a.user}
-    @managers
+    @officers = Array.new
+    @officers_role_id ||= Role.find_by_name("guild_officer").id
+    assignments.find_all_by_role_id(@officer_role_id).each{|a| @officers << a.user}
+    @officers
   end
   
   def members
     @members = Array.new
-    assignments.find_all_by_role_id(4).each{|a| @members << a.user}
+    @members_role_id ||= Role.find_by_name("guild_members").id
+    assignments.find_all_by_role_id(@members_role_id).each{|a| @members << a.user}
     @members
   end
   
