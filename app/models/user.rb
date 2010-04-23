@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     roles.each do |role|
       role_symbols << role.name.underscore.to_sym
     end
-    role_symbols << :user #if role_symbols.empty?
+    role_symbols << :user
     return role_symbols
   end
 end
