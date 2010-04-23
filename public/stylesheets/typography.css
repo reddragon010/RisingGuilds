@@ -2,8 +2,12 @@ div#navbar ul li {
 	font: bold 1em Arial;
 }
 
+ul#tabs {
+	font: 11px verdana, arial, sans-serif;
+}
+
 p {
-	font: .8em/1.4em Georgia;
+	font: .8em/1.4em verdana, arial, sans-serif;
 	margin: .2em 0;
 }
 

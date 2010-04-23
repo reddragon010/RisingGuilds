@@ -32,7 +32,6 @@ color: #98CB00;
 ul#tabs { /* general settings */
 text-align: left; /* set to left, right or center */
 margin-bottom:-1px; /* set margins as desired */
-font: 11px verdana, arial, sans-serif; /* set font as desired */
 border-bottom: 1px solid #000; /* set border COLOR as desired */
 list-style-type: none;
 padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
@@ -111,7 +110,7 @@ background-color: white;
 text-align: left;
 border: black solid 1px;
 margin-bottom: 5px;
-padding: inherit;
+padding: 5px;
 min-height: 400px;
 }
 
