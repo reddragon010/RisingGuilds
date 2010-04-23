@@ -1,6 +1,8 @@
 class GuildsController < ApplicationController
   filter_resource_access
   
+  before_filter :setup_tabs
+  
   # GET /guilds
   # GET /guilds.xml
   def index
@@ -81,7 +83,7 @@ class GuildsController < ApplicationController
     end
   end
   
-  def update_guild
+  def actualize
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if @guild.remoteQueries.find_all_by_action('update_guild').empty?
@@ -109,6 +111,18 @@ class GuildsController < ApplicationController
         flash[:error] = 'Token wrong!'
         format.html { redirect_to(@guild) }
       end
+    end
+  end
+  
+  protected
+  
+  def setup_tabs
+    tabs = Array.new
+    if permitted_to? :edit, @guild
+    	tabs << self.class.helpers.link_to("Show", guild_path(@guild))
+    	tabs << self.class.helpers.link_to("Edit", edit_guild_path(@guild))
+    	tabs << ""
+    	tabs << self.class.helpers.link_to("Actualize", :action => "actualize", :id => @guild.id)
     end
   end
 end

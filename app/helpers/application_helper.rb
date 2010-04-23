@@ -54,6 +54,39 @@ module ApplicationHelper
     a[0...n].join(' ') + (a.size > n ? '...' : '')
   end
   
+  def sort_td_class_helper(param)
+    if params[:sort] == param then
+      'class="sortup"' 
+    elsif params[:sort] == param + " DESC"
+      'class="sortdown"'
+    end
+  end
   
+  def sort_link_helper(text, param)
+    key = param
+    if params[:sort] == param
+      key += " DESC"
+    end
+    
+    link_to text, :sort => key
+  end
+  
+  def tabs_content(tabs)
+    if tabs.is_a? Array then
+      tab_html = ""
+      tabs.each do |tab|
+        unless tab.empty?
+          tab_html += "<li class=\"tab\">#{tab}</li>\n"
+        else
+          tab_html += "<li class=\"tab\" id=\"spacer\">&nbsp;</li>\n"
+        end
+      end
+      content_for :tabs do
+        tab_html
+      end
+    else
+      return ''
+    end
+  end
   
 end

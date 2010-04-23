@@ -1,14 +1,12 @@
-<h1>Listing characters</h1>
-
 <table>
   <tr>
-    <th>Name(Owner)</th>
-	<th>Guild</th>
-    <th>Level</th>
-    <th>Class</th>
-    <th>Race</th>
-    <th>Faction</th>
-	<th>Online</th>
+    <th <%= sort_td_class_helper('name') %>><%= sort_link_helper('Name','name') %></th>
+	<th <%= sort_td_class_helper('guild') %>><%= sort_link_helper('Guild','guild_id') %></th>
+    <th <%= sort_td_class_helper('level') %>><%= sort_link_helper('Level','level') %></th>
+    <th <%= sort_td_class_helper('class') %>><%= sort_link_helper('Class','class_id') %></th>
+    <th <%= sort_td_class_helper('race') %>><%= sort_link_helper('Race','race_id') %></th>
+    <th <%= sort_td_class_helper('faction') %>><%= sort_link_helper('Faction','faction_id') %></th>
+	<th <%= sort_td_class_helper('online') %>><%= sort_link_helper('Online','online') %></th>
   </tr>
 
 <% @characters.each do |character| %>

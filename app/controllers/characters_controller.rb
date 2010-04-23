@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.xml
   def index
-    params[:sort] = 'rank ASC' if params[:sort].nil?
+    params[:sort] = 'guild_id, rank' if params[:sort].nil?
 
     filter_keys = ['guild_id', 'character_id', 'user_id']
     conditions = Hash.new

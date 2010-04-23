@@ -27,6 +27,10 @@ background: #EEE;
 color: #98CB00;
 }
 
+li#spacer {
+	padding-left: 20px;
+}
+
 /* begin css tabs - thanks to & copyright by Joshua Kaufman */
 
 ul#tabs { /* general settings */

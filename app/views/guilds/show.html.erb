@@ -1,6 +1,10 @@
+<% 
+tabs_content(@tabs) 
+%>
+
 <div id="guildmenu">
 	<% permitted_to? :edit, @guild do %>
-	<%= link_to "Sync Guild with Arsenal", :action => "update_guild", :id => @guild.id %>
+	<%= link_to "Sync Guild with Arsenal", :action => "actualize", :id => @guild.id %>
 	<% end %>
 </div>
 <div id="infos">
