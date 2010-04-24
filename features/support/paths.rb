@@ -16,12 +16,12 @@ module NavigationHelpers
       logout_path
     when /my account/
       account_path
-    when /the Guildpage/
+    when /the guildpage/
       guild_path @guild
     when /a new guild/
       new_guild_path
-    when /update guild/
-      "/guilds/#{@guild.id}/update_guild"
+    when /actualize guild/
+      "/guilds/#{@guild.id}/actualize"
     when /edit guild/
       edit_guild_path @guild
     

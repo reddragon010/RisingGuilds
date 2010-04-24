@@ -1,7 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+manager:
+  name: guildmanager
 
-two:
-  name: MyString
+leader:
+  name: guildleader
+ 
+member:
+  name: guildmember
+
+officer:
+  name: guildofficer
+

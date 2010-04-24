@@ -1,0 +1,17 @@
+<% content_for :tabs do %>
+<% if tabs.is_a? Array then %>
+<!-- Tabs Div -->
+<div id="secnav">
+	<ul id="tabs">
+	<% tabs.each do |tab| %>
+		<% unless tab.empty? %>
+		<%= "<li class=\"tab\">#{tab}</li>" %>
+		<% else %>
+		<%= "<li class=\"tab\" id=\"spacer\">&nbsp;</li>" %>
+		<% end %>
+	<% end %>
+	</ul>
+</div>
+<!-- End Tabs Div -->
+<% end %>
+<% end %>

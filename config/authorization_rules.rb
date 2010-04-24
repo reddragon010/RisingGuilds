@@ -4,16 +4,6 @@ authorization do
   end
   
   role :user do
-    #Can administrate Guilds if is a manager, officer or leader
-    has_permission_on :guilds, :to => [:edit, :update, :destroy, :update_guild], :join_by => :or do
-      if_attribute :managers => contains { user }
-      if_attribute :leaders => contains { user }
-      if_attribute :officers => contains { user }
-    end
-    #Can link chars if is a member of the guild
-    has_permission_on :characters, :to => [:link] do
-      if_attribute :guild => { :users => contains { user } }
-    end
     #Can only view chars
     has_permission_on :characters, :to => [:index, :show]
     #Can view and create guilds
@@ -21,6 +11,16 @@ authorization do
     #Can delink own chars
     has_permission_on :characters, :to => [:delink] do
       if_attribute :user_id => is { user.id }
+    end
+    #Can link chars if is a member of the guild
+    has_permission_on :characters, :to => [:link] do
+      if_attribute :guild => { :users => contains { user } }
+    end
+    #Can administrate Guilds if is a manager, officer or leader
+    has_permission_on :guilds, :to => [:edit, :update, :destroy, :actualize], :join_by => :or do
+      if_attribute :managers => contains { user }
+      if_attribute :leaders => contains { user }
+      if_attribute :officers => contains { user }
     end
   end
   

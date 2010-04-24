@@ -1,13 +1,1 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  action: MyString
-  content: MyString
-  guild_id: 1
-  character_id: 1
-
-two:
-  action: MyString
-  content: MyString
-  guild_id: 1
-  character_id: 1

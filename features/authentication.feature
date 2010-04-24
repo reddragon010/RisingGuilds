@@ -20,7 +20,7 @@ Feature: Authentication
 		And I am on the homepage
 		When I follow "Logout"
 		Then I should see "Logout successful!"
-		And I should see "Register"
+		And I should see "SignUp"
 		And I should see "Login"
 		
 	Scenario: access account

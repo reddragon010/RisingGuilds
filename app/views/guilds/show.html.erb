@@ -1,12 +1,14 @@
 <% 
-tabs_content(@tabs) 
+tabs = Array.new
+tabs << link_to("Guild", guild_path(@guild))
+if permitted_to? :edit, @guild
+	tabs << link_to("Edit", edit_guild_path(@guild))
+	tabs << ""
+	tabs << link_to("Actualize", :action => "actualize", :id => @guild.id)
+end
+render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>
 
-<div id="guildmenu">
-	<% permitted_to? :edit, @guild do %>
-	<%= link_to "Sync Guild with Arsenal", :action => "actualize", :id => @guild.id %>
-	<% end %>
-</div>
 <div id="infos">
 	<p>
 	  <b>Name:</b>

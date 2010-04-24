@@ -6,6 +6,6 @@ describe User do
   end
 
   it "should create a new instance given valid attributes" do
-    Factory(:user)
+    Factory(:User)
   end
 end

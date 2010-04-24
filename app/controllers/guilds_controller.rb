@@ -1,8 +1,6 @@
 class GuildsController < ApplicationController
   filter_resource_access
   
-  before_filter :setup_tabs
-  
   # GET /guilds
   # GET /guilds.xml
   def index
@@ -17,7 +15,7 @@ class GuildsController < ApplicationController
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
@@ -114,15 +112,4 @@ class GuildsController < ApplicationController
     end
   end
   
-  protected
-  
-  def setup_tabs
-    tabs = Array.new
-    if permitted_to? :edit, @guild
-    	tabs << self.class.helpers.link_to("Show", guild_path(@guild))
-    	tabs << self.class.helpers.link_to("Edit", edit_guild_path(@guild))
-    	tabs << ""
-    	tabs << self.class.helpers.link_to("Actualize", :action => "actualize", :id => @guild.id)
-    end
-  end
 end

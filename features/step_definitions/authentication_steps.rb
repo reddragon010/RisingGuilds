@@ -1,5 +1,5 @@
 def user(login="user")
-  @user ||= Factory(:user, :login => login)
+  @user ||= Factory(:User, :login => login)
 end
 
 def login(username="user",password="password")

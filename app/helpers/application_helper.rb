@@ -71,22 +71,4 @@ module ApplicationHelper
     link_to text, :sort => key
   end
   
-  def tabs_content(tabs)
-    if tabs.is_a? Array then
-      tab_html = ""
-      tabs.each do |tab|
-        unless tab.empty?
-          tab_html += "<li class=\"tab\">#{tab}</li>\n"
-        else
-          tab_html += "<li class=\"tab\" id=\"spacer\">&nbsp;</li>\n"
-        end
-      end
-      content_for :tabs do
-        tab_html
-      end
-    else
-      return ''
-    end
-  end
-  
 end
