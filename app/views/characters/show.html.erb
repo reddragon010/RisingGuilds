@@ -1,69 +1,63 @@
-<p>
-	<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
-</p>
+<% 
+tabs = Array.new
+tabs << link_to('< Back', characters_path)
+tabs << ""
+tabs << link_to('Mark as Mine!', :confirm => 'Is this really you character?', :action => 'link') if permitted_to? :link, @character
+tabs << link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character
 
-<p>
-	<%= link_to 'Mark as Mine!', :confirm => 'Is this really you character?', :action => 'link' %>
-</p>
+render :partial => 'shared/tabs', :locals => {:tabs => tabs}
+%>
 
-<p>
-  <b>Guild:</b>
-  <%=h @character.guild_id %>
-</p>
+<div id="charheader">
+	<div id="avatar">
+		<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
+		<div id="level">
+		  <%=h @character.level %>
+		</div>
+	</div>
 
-<p>
-  <b>User:</b>
-  <%=h @character.user_id %>
-</p>
+	<div id="iconbar">
+	  <div id="class-icon"><%= image_tag classicon_path(@character),:size => "18x18" %></div>
+	  <div id="race-icon"><%= image_tag raceicon_path(@character),:size => "18x18" %></div>
+	  <div id="faction-icon"><%= image_tag factionicon_path(@character), :size => "18x18" %></div>
+	</div>
+	
+	<div id="infos">
+		<div id="name">
+		  <%=h @character.name %> <span id="main"><%=h "Mainchar" if @character.main %></span>
+		</div>
+		
+		<% unless @character.guild.nil? %>
+		<div id="guild">
+		  <%= link_to(@character.guild.name, guild_path(@character.guild))  %> <%=h "(Rank " + @character.rank.to_s + ")" %>
+		</div>
+		<% end %>
+	
+		<% unless @character.user.nil? %>
+		<div id="owner">
+		  owned by <%=h @character.user.login  %>
+		</p>
+		<% end %>
 
-<p>
-  <b>Name:</b>
-  <%=h @character.name %>
-</p>
+	</div>
+</div>
 
-<p>
-  <b>Rank:</b>
-  <%=h @character.rank %>
-</p>
+<div id="onlinestatus">
+	<%= online_text(@character.online) %>
+</div>
 
-<p>
-  <b>Level:</b>
-  <%=h @character.level %>
-</p>
-
-<p>
-  <b>Online:</b>
-  <%=h @character.online %>
-</p>
+<div id="details">
+<h3>Details</h3>
 
 <p>
   <b>Last seen:</b>
   <%=h @character.last_seen %>
 </p>
 
+
 <p>
   <b>Activity:</b>
   <%=h @character.activity %>
-</p>
-
-<p>
-  <b>Class:</b>
-  <%=h @character.class_id %>
-</p>
-
-<p>
-  <b>Race:</b>
-  <%=h @character.race_id %>
-</p>
-
-<p>
-  <b>Faction:</b>
-  <%=h @character.faction_id %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%=h @character.gender_id %>
 </p>
 
 <p>
@@ -76,31 +70,46 @@
   <%=h @character.ail %>
 </p>
 
-<p>
-  <b>Talentspec1:</b>
-  <%=h @character.talentspec1 %>
-</p>
+	<% if @character.profession1 && @character.profession2 then %>
+	<div id="prefessions">
+	  <h3>Professions:</h3>
+	
+	    <% if @character.profession1 then %>
+	    <div class="profession">
+		  <%= image_tag(professionicon_path(@character.profession1))  %>
+	      <%= profession_progressbar(@character.profession1) %>
+		</div>
+	    <% end %>
+	
+	    <% if @character.profession2 then %>
+	    <div class="profession">
+		  <%= image_tag(professionicon_path(@character.profession2)) %>
+	      <%= profession_progressbar(@character.profession2) %>
+		</div>
+	    <% end %>
+	  </table>
+	</div>
+	<% end %>
 
-<p>
-  <b>Talentspec2:</b>
-  <%=h @character.talentspec2 %>
-</p>
+	<% if @character.talentspec1 && @character.talentspec1 %>
+	<div id="talentspecs">
+	  <h3>Talentspecs:</h3>
+	
+	  <% if @character.talentspec1 %>
+	  <%= image_tag(talentspecicon_path(@character.talentspec1,@character.class_id)) %> <%=h @character.talentspec1.prim %> 
+	  [<%=h @character.talentspec1.trees[1] %>,<%=h @character.talentspec1.trees[2] %>,<%=h @character.talentspec1.trees[3] %>]<br />
+	  <% end %>
+	
+	  <% if @character.talentspec2 %>
+	  <%= image_tag(talentspecicon_path(@character.talentspec2,@character.class_id)) %><%=h @character.talentspec2.prim %> 
+	  [<%=h @character.talentspec2.trees[1] %>,<%=h @character.talentspec2.trees[2] %>,<%=h @character.talentspec2.trees[3] %>]
+	  <% end %>
+	</div>
+	<% end %>
 
-<p>
-  <b>Profession1:</b>
-  <%=h @character.profession1 %>
-</p>
+</div>
 
-<p>
-  <b>Profession2:</b>
-  <%=h @character.profession2 %>
-</p>
-
-<p>
-  <b>Main:</b>
-  <%=h @character.main %>
-</p>
-
-
-<%= link_to 'Edit', edit_character_path(@character) %> |
-<%= link_to 'Back', characters_path %>
+<div id="events">
+	<h3>Newest Events</h3>
+	<%= render :partial => 'shared/event', :collection => @character.events.last(10).reverse %>
+</div>

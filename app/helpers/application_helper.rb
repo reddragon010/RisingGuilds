@@ -12,6 +12,17 @@ module ApplicationHelper
     "http://www.wowarmory.com/_images/icons/faction/icon-#{char.faction_id}.gif"
   end
   
+  def professionicon_path(profession)
+    "http://arsenal.rising-gods.de/images/icons/professions/#{profession.key}-sm.gif"
+  end
+  
+  def talentspecicon_path(talentspec,class_id)
+    talentspec.trees[0] = 0
+    spec_id = talentspec.trees.index(talentspec.trees.sort.last)
+    "http://arsenal.rising-gods.de/images/icons/class/#{class_id}/talents/#{spec_id}.gif"
+    #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
+  end
+  
   def charicon_path(char)
 		icon_types = {:default => 'wow-default', 70 => 'wow-70', 80 => 'wow-80', :other => 'wow'}
 		
@@ -69,6 +80,18 @@ module ApplicationHelper
     end
     
     link_to text, :sort => key
+  end
+  
+  def progressbar(value,text)
+    op =  "<div class=\"bar-container\">\n"    
+    op += "<div style=\"width: #{value}%;\">#{text}</div>\n"
+    op += "</div>\n"
+  end
+  
+  def profession_progressbar(profession)
+    value = profession.value.to_f / profession.max.to_f * 100
+    text = profession.value.to_s + "/" + profession.max.to_s
+    progressbar(value.to_s,text)
   end
   
 end

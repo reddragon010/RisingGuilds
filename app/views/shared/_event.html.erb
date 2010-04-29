@@ -1,0 +1,19 @@
+<%
+case event.action
+  when 'joined'
+    text = " has joined the Guild (#{time_ago_in_words(event.created_at)} ago)"
+  when 'left'
+    text = " has left the Guild (#{time_ago_in_words(event.created_at)} ago)"
+  when 'promoted'
+    text = " was promoted to rank #{event.character.rank} (#{time_ago_in_words(event.created_at)} ago)"
+  when 'demoted'
+    text = " was demoted to rank #{event.character.rank} (#{time_ago_in_words(event.created_at)} ago)"
+  when 'cameonline'
+    text = " came online (#{time_ago_in_words(event.created_at)} ago)"
+  when 'wentoffline'
+    text = " went offline (#{time_ago_in_words(event.created_at)} ago)"
+  else
+    text = "--"
+end
+%>
+<div class="event"><%= link_to event.character.name, :controller => 'characters', :action => 'show', :id => event.character.id if event.character %><%=h text %></div>

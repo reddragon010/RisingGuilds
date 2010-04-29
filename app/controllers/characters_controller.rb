@@ -109,32 +109,39 @@ class CharactersController < ApplicationController
     end
   end
   
+  # delete character-user connection
   def delink
     @character = Character.find(params[:id])
+    #error if char was not found
     if @character.nil?
       flash[:error] = "Character not found"
       redirect_to root_url
+    #error if char is not marked
     elsif @character.user.nil?
       flash[:error] = "Character not marked"
       redirect_to(@character)
     else
       @guild = @character.guild
       @user = @character.user
+      #delete owner from char
       @character.user = nil
       @character.save
+      #cleanup guild permissions
       @guild = Guild.find(@guild.id)
       flash[:notice] = "Character has been demarked"
-      if !@guild.characters.map{|c| c.user_id}.include?(@user.id)
-        @guild.assignments.find_all_by_user_id(@user.id).each{|a| a.destroy}
+      if !@guild.characters.map{|c| c.user_id}.include?(@user.id)             #check if last char of the user has left the guild and
+        @guild.assignments.find_all_by_user_id(@user.id).each{|a| a.destroy}  #destroy all assignments between user and guild
         flash[:notice] += "\n Your last Char left the Guild! Your rights are removed"
-      else
-        newrank = @guild.characters.find(:all, :order => "role_id", :conditions => {:user_id => @user.id}).first.rank
+      else                                                                    #if the char was not the last change the rank to the highest char still in the guild
+        userchars = @guild.characters.find(:all, :conditions => {:user_id => @user.id})
+        ranks = userchars.collect{ |c| c.rank }
+        newrank = ranks.sort.first
         newrole = guildrank_to_role(newrank)
         assignment = @guild.assignments.find_by_user_id(@user.id)
         assignment.update_attribute(:role_id, newrole.id) if assignment.role_id > newrole.id
       end
       
-      redirect_to "/users/#{current_user.id}/characters"
+      redirect_to_target_or_default "/users/#{current_user.id}/characters"
     end
   end
   

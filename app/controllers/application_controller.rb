@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
   before_filter { |c| Authorization.current_user = c.current_user}
-  
+  before_filter :write_return_to
   
   
   protected
@@ -19,5 +19,9 @@ class ApplicationController < ActionController::Base
     redirect_to :back
     rescue ActionController::RedirectBackError
       redirect_to root_path
+  end
+  
+  def write_return_to
+    session[:return_to] ||= request.referer
   end
 end

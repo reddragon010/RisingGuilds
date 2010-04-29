@@ -116,6 +116,7 @@ border: black solid 1px;
 margin-bottom: 5px;
 padding: 5px;
 min-height: 400px;
+position:relative;
 }
 
 div#center {

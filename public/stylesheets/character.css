@@ -1,0 +1,55 @@
+#charheader {
+	width: 400px;
+}
+
+#avatar {
+	float: left;
+	border: 1px solid #999;
+	position: relative;
+	width: 64px;
+	height: 64px;
+}
+
+img#avatar {
+	
+}
+
+#iconbar {
+	float: left;
+}
+
+#infos {
+	margin-left: 100px;
+	margin-bottom: 20px;
+}
+
+#guild {
+	font-size: 12pt;
+	margin-bottom: 10px;
+}
+
+#name {
+	font-size: 18pt;
+	margin-bottom: 5px;
+}
+
+#level {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 10px;
+	font-size: 10pt;
+	color: #EEE;
+	font-weight: bold;
+}
+
+#owner {
+	font-size: 8pt;
+}
+
+#onlinestatus {
+	position: absolute;
+	top:0;
+	right:0;
+	margin: 5px;
+}
