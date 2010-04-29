@@ -18,6 +18,20 @@ namespace :queryqueue do
       rq.destroy
     end
   end
+  
+  task :show => :environment do
+    queries = RemoteQuery.find(:all,:order => "created_at ASC, priority")
+    queries.each do |query| 
+      puts "Query No. #{query.id} => g:#{query.guild_id} c:#{query.character_id} a:#{query.action}"
+    end
+  end
+  
+  task :update_character => :environment do
+    Character.all.each do |char|
+      char.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_character')
+    end
+  end
+
 end
 
 namespace :onlinestatus do

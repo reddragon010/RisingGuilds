@@ -29,7 +29,7 @@ class RemoteQuery < ActiveRecord::Base
   def update_guild(url)
     raise "missing guild" if self.guild.nil?
     
-    url = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{self.guild.name}" if url.nil?
+    url = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{CGI.escape(self.guild.name)}" if url.nil?
     xml = get_xml(url) 
     
     faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
@@ -121,7 +121,7 @@ class RemoteQuery < ActiveRecord::Base
 
   def update_character(url)
     raise 'missing character' if self.character.nil?
-    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{self.character.name}" if url.nil?
+    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{CGI.escape(self.character.name)}" if url.nil?
     xml = get_xml(url)
     
     attributes = Hash.new
@@ -143,7 +143,9 @@ class RemoteQuery < ActiveRecord::Base
 			items << Character::Item.new(item)
 		end
 		attributes["items"] = items unless items.empty?
-
+    
+    Event.create(:character_id => self.character.id, :action => "levelup", :content => attributes['level']) if self.character.level && attributes['level'] != self.character.level
+    
     self.character.update_attributes(attributes)
   end
   
@@ -165,6 +167,9 @@ class RemoteQuery < ActiveRecord::Base
     attributes = {:ail => ail, :items => items}
     self.character.update_attributes(attributes)
   end
+  
+  
+  
   
   #get the HTML-Code from URI
   def get_html(url)
