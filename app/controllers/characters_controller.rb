@@ -179,6 +179,24 @@ class CharactersController < ApplicationController
     end
   end
   
+  def make_main
+    @character = Character.find(params[:id])
+    @character.user.characters.each do |char|
+      char.update_attribute(:main,false)
+    end
+    respond_to do |format|
+      if @character.update_attribute(:main,true)
+        flash[:notice] =  @character.name + ' is now your new main'
+        format.html { redirect_to(@character) }
+        format.xml  { head :ok }
+      else
+        flash[:error] = 'error - please contact the support'
+        format.html { redirect_to(@character) }
+        format.xml  { head :error }
+      end
+    end
+  end
+  
   protected
   def guildrank_to_role(rank)
     case rank

@@ -9,7 +9,7 @@ authorization do
     #Can view and create guilds
     has_permission_on :guilds, :to => [:index, :show, :new, :create, :join]
     #Can delink own chars
-    has_permission_on :characters, :to => [:delink, :actualize, :generate_ail] do
+    has_permission_on :characters, :to => [:delink, :actualize, :generate_ail,:make_main] do
       if_attribute :user_id => is { user.id }
     end
     #Can link chars if is a member of the guild
