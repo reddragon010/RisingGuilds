@@ -1,4 +1,13 @@
-<h1>New guild</h1>
+<% 
+tabs = Array.new
+tabs << link_to("Index", guilds_path)
+
+if permitted_to? :create, @guild
+	tabs << link_to("New guild", new_guild_path)
+end
+render :partial => 'shared/tabs', :locals => {:tabs => tabs}
+%>
+
 
 <% form_for(@guild) do |f| %>
   <%= f.error_messages %>
