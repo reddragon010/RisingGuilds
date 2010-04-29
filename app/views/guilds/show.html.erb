@@ -1,9 +1,11 @@
 <% 
 tabs = Array.new
 tabs << link_to("Guild", guild_path(@guild))
+tabs << link_to("Members", "/guilds/#{@guild.id}/characters")
+
 if permitted_to? :edit, @guild
-	tabs << link_to("Edit", edit_guild_path(@guild))
 	tabs << ""
+	tabs << link_to("Edit", edit_guild_path(@guild))
 	tabs << link_to("Actualize", :action => "actualize", :id => @guild.id)
 end
 render :partial => 'shared/tabs', :locals => {:tabs => tabs}

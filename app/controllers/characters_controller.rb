@@ -5,7 +5,9 @@ class CharactersController < ApplicationController
   # GET /characters.xml
   def index
     params[:sort] = 'guild_id, rank' if params[:sort].nil?
-
+    
+    @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
+    
     filter_keys = ['guild_id', 'character_id', 'user_id']
     conditions = Hash.new
     conditions.merge!(params)

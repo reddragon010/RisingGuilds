@@ -1,7 +1,26 @@
+<% unless @guild.nil?%>
+<% 
+tabs = Array.new
+tabs << link_to("Guild", guild_path(@guild))
+tabs << link_to("Members", "/guilds/#{@guild.id}/characters")
+
+if permitted_to? :edit, @guild
+	tabs << ""
+	tabs << link_to("Edit", edit_guild_path(@guild))
+	tabs << link_to("Actualize", :action => "actualize", :id => @guild.id)
+end
+render :partial => 'shared/tabs', :locals => {:tabs => tabs}
+%>
+<% end %>
+
 <table>
   <tr>
     <th <%= sort_td_class_helper('name') %>><%= sort_link_helper('Name','name') %></th>
+	<% if @guild.nil?%>
 	<th <%= sort_td_class_helper('guild') %>><%= sort_link_helper('Guild','guild_id') %></th>
+	<% else %>
+	<th <%= sort_td_class_helper('rank') %>><%= sort_link_helper('Rank','rank') %></th>
+	<% end %>
     <th <%= sort_td_class_helper('level') %>><%= sort_link_helper('Level','level') %></th>
     <th <%= sort_td_class_helper('class') %>><%= sort_link_helper('Class','class_id') %></th>
     <th <%= sort_td_class_helper('race') %>><%= sort_link_helper('Race','race_id') %></th>
@@ -12,7 +31,11 @@
 <% @characters.each do |character| %>
   <tr>
     <td><%= link_to character.name, character %></td>
+	<% if @guild.nil?%>
 	<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
+	<% else %>
+	<td><%=h character.rank %></td>
+	<% end %>
     <td><%=h character.level %></td>
     <td><%= image_tag classicon_path(character),:size => "18x18" %></td>
     <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
