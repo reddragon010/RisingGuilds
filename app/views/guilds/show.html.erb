@@ -32,40 +32,45 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	  <%=h @guild.description %>
 </div>
 <div id="details">
-	<p>
+	<div>
 	  <b>Ail:</b>
 	  <%=h @guild.ail %>
-	</p>
+	</div>
 
-	<p>
+	<div>
 	  <b>Activity:</b>
 	  <%=h @guild.activity %>
-	</p>
+	</div>
 
-	<p>
+	<div>
 	  <b>Growth:</b>
 	  <%=h @guild.growth %>
-	</p>
+	</div>
 
-	<p>
+	<div>
 	  <b>Altratio:</b>
 	  <%=h @guild.altratio %>
-	</p>
+	</div>
 
-	<p>
+	<div>
 	  <b>Classratio:</b>
 	  <%=h @guild.classratio %>
-	</p>
+	</div>
 
-	<p>
+	<div>
 	  <b>Achivementpoints:</b>
 	  <%=h @guild.achivementpoints %>
-	</p>
-	<% if permitted_to? :edit, @guild %>
-	<div id ="secret">
-	  <b>Token:</b>
-	  <%=h @guild.token %>
 	</div>
-	<% end %>
-	
 </div>
+
+<div id="events">
+	<h3>Newest Events</h3>
+	<%= render :partial => 'shared/event', :collection => @guild.events.last(20).reverse %>
+</div>
+
+<% if permitted_to? :edit, @guild %>
+<div id ="secret">
+  <b>Token:</b>
+  <%=h @guild.token %>
+</div>
+<% end %>

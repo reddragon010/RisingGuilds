@@ -12,6 +12,10 @@ class Character < ActiveRecord::Base
   
   validates_uniqueness_of :name
   
+  def netto_activity
+    Integer((self.activity / ((Time.now - self.created_at) / 60 / 60)) * 100) unless self.activity.nil?
+  end
+  
   class TalentSpec
   	attr_reader :trees,:active,:group,:icon,:prim
 

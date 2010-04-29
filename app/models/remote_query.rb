@@ -80,10 +80,66 @@ class RemoteQuery < ActiveRecord::Base
           end
         end
       end
+      
       return true
     else
       raise "Empty Guild-Info"
     end
+  end
+  
+  def update_guild_indicators(arg)
+    attributes = {}
+    
+    #ail
+    ails = self.guild.characters.collect{|char| char.ail}
+    ails.delete_if{|x| x.nil?}
+    attributes[:ail] = ails.sum / ails.size unless ails.empty?
+      
+    #Activity
+    activities = self.guild.characters.collect{|char| char.netto_activity}
+    activities.delete_if{|x| x.nil?}
+    attributes[:activity] = activities.sum / activities.size unless activities.empty?
+    
+    #Alt Ratio
+    unless self.guild.characters.find_by_main(true).nil? || self.guild.characters.find_by_main(false).nil?
+      mains = self.guild.characters.find_by_main(true).count 
+      alts = self.guild.characters.find_by_main(false).count
+      attributes[:altratio] = mains / alts
+    end
+    
+    #Classratio
+    members = self.guild.characters.count
+    part = members.to_f / 9.to_f
+    sum = 0
+    (1..9).each do |i|
+      sum += (((self.guild.characters.find_all_by_class_id(i).count.to_f / members.to_f) - (1.to_f/9.to_f))*100).abs
+    end
+    attributes[:classratio] = Integer(sum)
+    
+    #Growth
+    unless self.guild.events.find_by_action("joined").nil? #|| self.guild.events.find_by_action("left").nil?
+      joined = Event.find(:all, :conditions =>  ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id ,"joined",1.month.ago]).count
+      left = Event.find(:all, :conditions => ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id,"left",1.month.ago]).count
+      growth = joined - left
+      attributes[:growth] = (growth.to_f / (members-growth).to_f)*100
+      attributes[:growth] = nil if attributes[:growth] == 1.0/0
+    end
+    
+    #Achivementpoints
+    achivementpoints = self.guild.characters.collect{|char| char.achivementpoints}
+    achivementpoints.delete_if{|x| x.nil?}
+    unless achivementpoints.empty?
+      yourpoints = achivementpoints.sum / achivementpoints.size
+      allpoints = Guild.all.collect{|g| g.achivementpoints}
+      allpoints.delete_if{|x| x.nil?}
+      unless allpoints.empty?
+        bestpoints = allpoints.sort.last
+        attributes[:achivementpoints] = Integer(yourpoints.to_f / bestpoints.to_f)
+      end
+    end
+    
+    self.guild.update_attributes(attributes) unless attributes.empty?
+    
   end
   
   def update_guild_onlinelist(url)
@@ -102,8 +158,8 @@ class RemoteQuery < ActiveRecord::Base
       if char.online == true && newonline == true then
         #workaround: default activity is nil not 0
         char.activity = 0 if char.activity.nil?
-        #If user was still a hour online adds 1 to activity
-        attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) >= Time.now 
+        #If user was still 1 hour online adds 1 to activity
+        attributes[:activity] = char.activity + 1 unless (char.last_seen + 12.hour) >= Time.now 
       #if char has been gone offline
       elsif char.online == true && newonline == false then
         attributes[:last_seen] = Time.now
