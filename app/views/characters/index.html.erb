@@ -11,7 +11,7 @@
 
 <% @characters.each do |character| %>
   <tr>
-    <td><%= link_to character.name, character %>(<%= character.user.nil? ? "" : character.user.login %>)</td>
+    <td><%= link_to character.name, character %></td>
 	<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
     <td><%=h character.level %></td>
     <td><%= image_tag classicon_path(character),:size => "18x18" %></td>

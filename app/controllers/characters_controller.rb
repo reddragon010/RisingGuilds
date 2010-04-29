@@ -145,6 +145,38 @@ class CharactersController < ApplicationController
     end
   end
   
+  def actualize
+    @character = Character.find(params[:id])
+    respond_to do |format|
+      if @character.remoteQueries.find_all_by_action('update_character').empty?
+        @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 5, :action => "update_character")
+        flash[:notice] = 'Character will be updated soon'
+        format.html { redirect_to(@character) }
+        format.xml  { head :ok }
+      else
+        flash[:error] = 'Update is in progress. Please be patient!'
+        format.html { redirect_to(@character) }
+        format.xml  { head :error }
+      end
+    end
+  end
+  
+  def generate_ail
+    @character = Character.find(params[:id])
+    respond_to do |format|
+      if @character.remoteQueries.find_all_by_action('update_character_ail').empty?
+        @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 10, :action => "update_character_ail")
+        flash[:notice] = 'Character\'s AIL will be updated soon'
+        format.html { redirect_to(@character) }
+        format.xml  { head :ok }
+      else
+        flash[:error] = 'Update is in progress. Please be patient!'
+        format.html { redirect_to(@character) }
+        format.xml  { head :error }
+      end
+    end
+  end
+  
   protected
   def guildrank_to_role(rank)
     case rank

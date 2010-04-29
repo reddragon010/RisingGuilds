@@ -4,6 +4,11 @@ tabs << link_to('< Back', characters_path)
 tabs << ""
 tabs << link_to('Mark as Mine!', :confirm => 'Is this really you character?', :action => 'link') if permitted_to? :link, @character
 tabs << link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character
+if permitted_to? :actualize, @character
+	tabs << ""
+	tabs << link_to('Actualize', :action => 'actualize') 
+	tabs << link_to('Generate AIL', :action => 'generate_ail')
+end
 
 render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>
@@ -65,10 +70,12 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
   <%=h @character.achivementpoints %>
 </p>
 
+<% if @character.ail %>
 <p>
   <b>Ail:</b>
-  <%=h @character.ail %>
+  <%=h @character.ail %> &plusmn; <%=h @character.ail_stddev %>
 </p>
+<% end %>
 
 	<% if @character.profession1 && @character.profession2 then %>
 	<div id="prefessions">

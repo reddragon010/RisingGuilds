@@ -12,6 +12,14 @@ class Character < ActiveRecord::Base
   
   validates_uniqueness_of :name
   
+  def ail_stddev
+    values = self.items.collect{|i| i.level}
+    average = values.inject(:+).to_f / values.size
+    result = 0
+    result.to_f
+    values.each{|value| result += ((value-average)**2) * (1 / values.size.to_f)}
+    Integer(Math.sqrt(result))
+  end
   
   class TalentSpec
   	attr_reader :trees,:active,:group,:icon,:prim
