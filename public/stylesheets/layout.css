@@ -95,6 +95,7 @@ background-color: white;
 text-align: left;
 border: black solid 1px;
 height: 100px;
+margin-bottom:10px;
 }
 
 div#usermenu {
@@ -114,7 +115,7 @@ background-color: white;
 text-align: left;
 border: black solid 1px;
 margin-bottom: 5px;
-padding: 5px;
+padding: 10px;
 min-height: 400px;
 position:relative;
 }
@@ -127,4 +128,10 @@ min-height: 400px;
 div#container {
 width: 960px;
 margin: auto;
+}
+
+.clear {
+	float: none;
+	clear: both;
+	height: 0px;
 }

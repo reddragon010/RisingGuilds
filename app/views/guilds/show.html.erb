@@ -1,6 +1,6 @@
 <% 
 tabs = Array.new
-tabs << link_to("Guild", guild_path(@guild))
+tabs << link_to("Index", guilds_path)
 tabs << link_to("Members", "/guilds/#{@guild.id}/characters")
 
 if permitted_to? :edit, @guild
@@ -11,29 +11,25 @@ end
 render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>
 
-<div id="infos">
-	<p>
-	  <b>Name:</b>
+<div id="guildinfos">
+	<div id="guildlogo">
+		<%= image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100") %>
+	</div>
+	<div id="guildname">
 	  <%=h @guild.name %>
-	</p>
-	<p>
-	  <b>Officer rank:</b>
-	  <%=h @guild.officer_rank %>
-	</p>
-	<p>
-	  <b>Raidleader rank:</b>
-	  <%=h @guild.raidleader_rank %>
-	</p>
-	<p>
-	  <b>Website:</b>
+	</div>
+	<div id="guildmembers">
+	  <%=h @guild.characters.count %> members <%=h "(#{@guild.characters.find_all_by_online(true).count} online)"%>
+	</div>
+	<% unless @guild.website.nil? %>
+	<div id="website">
 	  <%=h @guild.website %>
-	</p>
+	</div>
+	<% end %>
 </div>
+<div class="clear">&nbsp;</div>
 <div id="description">
-	<p>
-	  <b>Description:</b>
 	  <%=h @guild.description %>
-	</p>
 </div>
 <div id="details">
 	<p>
@@ -65,13 +61,11 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	  <b>Achivementpoints:</b>
 	  <%=h @guild.achivementpoints %>
 	</p>
-	<p>
+	<% if permitted_to? :edit, @guild %>
+	<div id ="secret">
 	  <b>Token:</b>
 	  <%=h @guild.token %>
-	</p>
+	</div>
+	<% end %>
 	
 </div>
-<% permitted_to? :edit, @guild do %>
-<%= link_to 'Edit', edit_guild_path(@guild) %> |
-<% end %>
-<%= link_to 'Back', guilds_path %>

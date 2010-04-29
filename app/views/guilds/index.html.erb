@@ -1,6 +1,5 @@
 <% 
 tabs = Array.new
-tabs << link_to("Index", guilds_path)
 
 if permitted_to? :create, @guild
 	tabs << link_to("New guild", new_guild_path)
@@ -10,7 +9,9 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 
 <% @guilds.each_with_index do |guild,i| %>
 <div id="<%= i%>" class="guild">
-  <%= link_to image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100"), guild %><br />
+  <div id="guildlogo">
+	<%= link_to image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100"), guild %>
+  </div>
   <div class="adminmenu">  
 	<% permitted_to? :edit, guild do %>
 	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_path(guild) %>

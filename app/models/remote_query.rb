@@ -163,8 +163,9 @@ class RemoteQuery < ActiveRecord::Base
     }
     
     ail = Integer(ilevelsum / self.character.items.count)
+    ailstddev = ail_stddev(items)
     
-    attributes = {:ail => ail, :items => items}
+    attributes = {:ail => ail, :ailstddev => ailstddev, :items => items}
     self.character.update_attributes(attributes)
   end
   
@@ -221,4 +222,15 @@ class RemoteQuery < ActiveRecord::Base
 			return (doc%'page')
 		end
 	end
+	
+	def ail_stddev(items)
+    values = items.collect{|i| i.level}
+    return false if values.include?(nil)
+    average = values.inject(:+).to_f / values.size
+    result = 0
+    result.to_f
+    values.each{|value| result += ((value-average)**2) * (1 / values.size.to_f)}
+    return Integer(Math.sqrt(result))
+  end
 end
+
