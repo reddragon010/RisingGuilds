@@ -69,13 +69,14 @@ class RemoteQuery < ActiveRecord::Base
 
       #Delete missing chars
       unless missing_char_names.empty?
-        characters.each do |char|
+        self.guild.characters.each do |char|
           if missing_char_names.include?(char.name) then
             event = Event.new(:action => 'left')
             event.character = char
             event.guild = self.guild
             event.save
-            char.update_attribute(:guild_id, nil)
+            attributes = {:guild_id => nil, :rank => nil}
+            char.update_attributes(attributes)
           end
         end
       end

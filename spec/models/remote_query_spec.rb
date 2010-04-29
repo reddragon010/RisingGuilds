@@ -10,11 +10,13 @@ describe RemoteQuery do
   
   it "should can update guilds" do
     @guild = Factory.create(:Guild)
+    @guild.characters << Factory.create(:Character, :name => "Notexistingchar_d")
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
     @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/guild.xml").should be_true
     @guild.remoteQueries.count.should == 0
     @guild = Guild.find(@guild.id)
     @guild.characters.count.should == 36
+    @guild.characters.find_by_name("Notexistingchar_d").should be_nil
   end
   
   it "should can update still online characters and raise activity" do
