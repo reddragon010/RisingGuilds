@@ -26,9 +26,16 @@ namespace :queryqueue do
     end
   end
   
-  task :update_character => :environment do
+  task :update_characters => :environment do
     Character.all.each do |char|
       char.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_character')
+    end
+  end
+  
+  task :update_guilds => :environment do
+    Guild.all.each do |guild|
+      guild.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_guild')
+      guild.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 1, :action => 'update_guild_indicators')
     end
   end
 

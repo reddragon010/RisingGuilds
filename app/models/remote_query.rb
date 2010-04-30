@@ -102,8 +102,8 @@ class RemoteQuery < ActiveRecord::Base
     
     #Alt Ratio
     unless self.guild.characters.find_by_main(true).nil? || self.guild.characters.find_by_main(false).nil?
-      mains = self.guild.characters.find_by_main(true).count 
-      alts = self.guild.characters.find_by_main(false).count
+      mains = self.guild.characters.find_all_by_main(true).count 
+      alts = self.guild.characters.find_all_by_main(false).count
       attributes[:altratio] = mains / alts
     end
     
