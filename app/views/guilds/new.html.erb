@@ -16,6 +16,12 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
+
+  <p>
+    <%= f.label :realm %><br />
+    <%= f.select :realm, {'PvE-Realm' => 'PvE-Realm', 'PvP-Realm' => 'PvP-Realm'} %>
+  </p>
+
   <p>
     <%= f.label :website %><br />
     <%= f.text_field :website %>

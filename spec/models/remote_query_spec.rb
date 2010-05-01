@@ -24,7 +24,7 @@ describe RemoteQuery do
     @guild.characters << Factory.create(:Character, :name => "Nerox")
     staychar = @guild.characters.find_by_name("Nerox")
     staychar.name.should == "Nerox"
-    staychar.update_attributes(:online => true, :last_seen => 2.hour.ago)
+    staychar.update_attributes(:online => true, :last_seen => 13.hour.ago)
     @guild = Guild.find(@guild.id)
     @guild.characters.find_all_by_online(true).count.should == 1
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")

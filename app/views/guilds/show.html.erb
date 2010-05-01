@@ -21,9 +21,12 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	<div id="guildmembers">
 	  <%=h @guild.characters.count %> members <%=h "(#{@guild.characters.find_all_by_online(true).count} online)"%>
 	</div>
+	<div id="guildrealm">
+	  <%=h @guild.realm %>	
+	</div>
 	<% unless @guild.website.nil? %>
 	<div id="website">
-	  <%=h @guild.website %>
+	  <%= link_to @guild.website, @guild.website %>
 	</div>
 	<% end %>
 </div>

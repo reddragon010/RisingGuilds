@@ -13,6 +13,8 @@ class Guild < ActiveRecord::Base
   validates_presence_of :token
   validates_uniqueness_of :token
   
+  validates_presence_of :realm
+  
   def managers
     @managers = Array.new
     @managers_role_id ||= Role.find_by_name("guildmanager").id

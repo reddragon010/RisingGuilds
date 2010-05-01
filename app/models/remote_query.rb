@@ -29,7 +29,7 @@ class RemoteQuery < ActiveRecord::Base
   def update_guild(url)
     raise "missing guild" if self.guild.nil?
     
-    url = "http://arsenal.rising-gods.de/guild-info.xml?r=PvE-Realm&gn=#{CGI.escape(self.guild.name)}" if url.nil?
+    url = "http://arsenal.rising-gods.de/guild-info.xml?r=#{self.guild.realm}&gn=#{CGI.escape(self.guild.name)}" if url.nil?
     xml = get_xml(url) 
     
     faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
@@ -145,7 +145,9 @@ class RemoteQuery < ActiveRecord::Base
   def update_guild_onlinelist(url)
     raise "missing guild" if self.guild.nil?
     
-    url = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve" if url.nil?
+    list_realm = self.guild.realm[0..2].downcase
+    
+    url = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=#{list_realm}" if url.nil?
     doc = get_html(url)
     
     #process every member of the guild
