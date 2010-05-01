@@ -140,3 +140,12 @@ margin: auto;
 	clear: both;
 	height: 0px;
 }
+
+#twitter {
+	text-align: center;
+	width: 100%;
+}
+
+.twtr-doc {
+	margin:auto;
+}
