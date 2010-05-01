@@ -79,7 +79,12 @@ module ApplicationHelper
       key += " DESC"
     end
     
-    link_to text, :sort => key
+    #really dirty hack !!
+    unless params[:user_id].nil? 
+      link_to text, "/users/#{params[:user_id]}/characters?sort=#{key}"
+    else 
+      link_to text, :sort => key
+    end
   end
   
   def progressbar(value,text)

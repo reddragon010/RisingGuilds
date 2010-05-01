@@ -17,7 +17,7 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_path(guild) %>
 	<% end %>
 	<% permitted_to? :destroy, guild do %>
-	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
+	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), guild ,:confirm => 'Are you sure?', :methode => 'delete' %>
 	<% end %>
   </div>
   <span class="name"><%=h guild.name %></span>
