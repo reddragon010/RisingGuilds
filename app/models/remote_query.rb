@@ -40,7 +40,7 @@ class RemoteQuery < ActiveRecord::Base
 			
 			(xml%'guildInfo'%'guild'%'members'/:character).each do |char|
 			    arsenal_char_names << char[:name]
-					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank], :faction_id => faction)
+					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank], :faction_id => faction, :realm => self.guild.realm)
 			end
 			db_char_names = self.guild.characters.collect {|c| c.name}
 			
@@ -179,7 +179,7 @@ class RemoteQuery < ActiveRecord::Base
 
   def update_character(url)
     raise 'missing character' if self.character.nil?
-    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=PvE-Realm&cn=#{CGI.escape(self.character.name)}" if url.nil?
+    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=#{self.character.realm}&cn=#{CGI.escape(self.character.name)}" if url.nil?
     xml = get_xml(url)
     
     attributes = Hash.new

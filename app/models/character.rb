@@ -11,6 +11,7 @@ class Character < ActiveRecord::Base
   serialize :items
   
   validates_uniqueness_of :name
+  validates_presence_of :realm
   
   def netto_activity
     Integer((self.activity / ((Time.now - self.created_at) / 60 / 60)) * 100) unless self.activity.nil?
