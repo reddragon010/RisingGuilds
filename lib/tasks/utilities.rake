@@ -43,14 +43,17 @@ end
 
 namespace :onlinestatus do
   task :update => :environment do
-    doc = get_html("http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve")
+    doc = Hash.new
+    doc['PvE-Realm'] = get_html("http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve")
+    doc['PvP-Realm'] = get_html("http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pvp")
     
-    raise "Can't get Onlinelist" unless doc.include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_deactiv.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_activ.gif\'></a>')
+    raise "Can't get PvE-Onlinelist" unless doc['PvE-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_deactiv.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_activ.gif\'></a>') 
+    raise "Can't get PvP-Onlinelist" unless doc['PvP-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_activ.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_deactiv.gif\'></a>')
     
     #process every character
     Character.all.each do |char|
       #test if char is online
-      newonline = doc.include?(">#{char.name}<")
+      newonline = doc[char.realm.to_s].include?(">#{char.name}<")
       attributes = Hash.new
       
       char.online = false if char.online.nil?
@@ -78,7 +81,7 @@ namespace :onlinestatus do
   end
   
   def get_html(url)
-    return open(url).read if !url.include?("http://")
+    return open(url).read unless url.include?("http://")
     
     req = Net::HTTP::Get.new(url)
 		req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
