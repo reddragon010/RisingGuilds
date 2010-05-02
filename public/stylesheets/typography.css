@@ -24,7 +24,6 @@ div#legal p {
 h1 {
 	font: bold 1.5em Helvetica;
 	margin: .2em 0;
-	text-align: center;
 }
 a {
 	color: #1162b7;
@@ -34,7 +33,6 @@ a {
 h2 { 
 	font: bold 1.3em Helvetica;
 	margin: .2em 0;
-	text-align: center;
 }
 
 p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset {

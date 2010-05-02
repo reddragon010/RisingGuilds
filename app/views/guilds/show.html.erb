@@ -12,10 +12,10 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>
 
 <div id="guildinfos">
-	<div id="guildlogo">
+	<div class="guildlogo">
 		<%= image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100") %>
 	</div>
-	<div id="guildname">
+	<div class="guildname">
 	  <%=h @guild.name %>
 	</div>
 	<div id="guildmembers">
