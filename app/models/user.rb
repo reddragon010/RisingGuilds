@@ -5,6 +5,15 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :assignments
   has_many :guilds, :through => :assignments
   
+  def active?
+    active
+  end
+  
+  def activate!
+    self.active = true
+    save
+  end
+  
   def role_symbols
     role_symbols = Array.new
     role_symbols << :admin if admin?
