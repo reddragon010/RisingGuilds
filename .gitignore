@@ -10,3 +10,4 @@ public/stylesheets/all.css
 .DS_Store
 doc/api
 doc/app
+public/system

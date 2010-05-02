@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "declarative_authorization"
   config.gem "tabs_on_rails", :source => "http://gemcutter.org" 
+  config.gem 'paperclip', :source => 'http://gemcutter.org'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

@@ -10,7 +10,7 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 <% @guilds.each_with_index do |guild,i| %>
 <div id="<%= i%>" class="guild">
   <div class="guildlogo">
-	<%= link_to image_tag("ph_guildlogo.png", :alt => "guildlogo", :size => "100x100"), guild %>
+	<%= link_to image_tag(guild.logo.url, :alt => "guildlogo", :size => "100x100"), guild %>
   </div>
   <div class="adminmenu">  
 	<% permitted_to? :edit, guild do %>
@@ -20,10 +20,12 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), guild ,:confirm => 'Are you sure?', :action => :delete %>
 	<% end %>
   </div>
-  <div class="guildname"><%=h guild.name %></div>
-  <span class="membercount"><%=h guild.characters.count %> Members (<%=h guild.characters.find_all_by_online(true).count %> Online)</span>
-  <span><%=h guild.realm%></span>
-  <div class="description"><%=h smart_truncate(guild.description, :words => 20) %></div>
+  <div class="guilddetails">
+    <div class="guildname"><%=h guild.name %></div>
+    <span class="membercount"><%=h guild.characters.count %> Members (<%=h guild.characters.find_all_by_online(true).count %> Online)</span>
+    <span><%=h guild.realm%></span>
+    <div class="description"><%=h smart_truncate(guild.description, :words => 20) %></div>
+  </div>
 </div>
 <% end %>
 

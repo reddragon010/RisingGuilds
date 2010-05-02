@@ -15,6 +15,12 @@ class Guild < ActiveRecord::Base
   
   validates_presence_of :realm
   
+  has_attached_file :logo, :default_url => "defaults/:attachment/:style/missing.png", :default_style => :formatted, :styles => { :formatted => {
+                                          :geometry => '100x100#',
+                                          :quality => 80,
+                                          :format => 'PNG'
+                                          }}
+  
   def managers
     @managers = Array.new
     @managers_role_id ||= Role.find_by_name("guildmanager").id
