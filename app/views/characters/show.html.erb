@@ -2,7 +2,7 @@
 tabs = Array.new
 tabs << link_to('Index', characters_path)
 tabs << ""
-tabs << link_to('Mark as Mine!', @character, :action => 'link', :confirm => 'Is this really you character?') if permitted_to? :link, @character
+tabs << link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character
 tabs << link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character
 if permitted_to? :actualize, @character
 	tabs << ""
