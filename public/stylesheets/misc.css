@@ -1,6 +1,7 @@
 /* ---- Scaffold ---- */
 body { 
-  background-color: #bbf;
+  background:url(../images/woltk_theme/bg.png) no-repeat;
+  background-color:#020202;
   color: #333;
   text-align: center;
 }
