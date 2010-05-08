@@ -1,6 +1,6 @@
 div#ketten {
 	margin:0px auto;
-	background:url(../images/woltk_theme/ketten.png);
+	background:url(../images/ketten.png);
 	width:1008px;
 	height:205px;
 	margin-top:-15px;
@@ -8,7 +8,7 @@ div#ketten {
 }
 
 ul#navbar {
-background:url(../images/woltk_theme/nav_normal.png);
+background:url(../images/nav_normal.png);
 margin: 0px auto;
 list-style-type: none;
 width:983px;
@@ -113,14 +113,14 @@ margin: 10px;
 }
 
 div#header {
-background:url(../images/woltk_theme/header.png);
+background:url(../images/header.png);
 text-align: left;
 height:174px;
 width:1068px;
 }
 
 div#title {
-background:url(../images/woltk_theme/logo.png) no-repeat;
+background:url(../images/logo.png) no-repeat;
 width:510px;
 height:99px;
 margin-top:20px;
