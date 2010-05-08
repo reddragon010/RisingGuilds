@@ -2,6 +2,7 @@ Factory.define :Character do |f|
   f.user_id 1
   f.sequence(:name){|n| "TestBoon#{n}"} 
   f.rank 1
+  f.realm "PvE-Realm"
   f.level 70
   f.online false
   f.last_seen 2.days.ago
@@ -42,6 +43,7 @@ Factory.define :User do |f|
   f.sequence(:email) {|n| "user#{n}@gmx.net"}
   f.password 'password'
   f.password_confirmation 'password'
+  f.active true
 end
 
 Factory.define :Role do |f|
