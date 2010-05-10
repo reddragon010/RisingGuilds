@@ -44,8 +44,8 @@ end
 namespace :onlinestatus do
   task :update => :environment do
     doc = Hash.new
-    doc['PvE-Realm'] = get_html("http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pve")
-    doc['PvP-Realm'] = get_html("http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=pvp")
+    doc['PvE-Realm'] = get_html(configatron.onlinelist.url + "pve")
+    doc['PvP-Realm'] = get_html(configatron.onlinelist.url + "pvp")
     
     raise "Can't get PvE-Onlinelist" unless doc['PvE-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_deactiv.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_activ.gif\'></a>') 
     raise "Can't get PvP-Onlinelist" unless doc['PvP-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_activ.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_deactiv.gif\'></a>')

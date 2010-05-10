@@ -11,9 +11,9 @@ class RemoteQuery < ActiveRecord::Base
   validates_presence_of :efford
   validates_presence_of :action
   
-  def execute(attribute=nil)
+  def execute
     begin
-      self.send(self.action,attribute)
+      self.send(self.action)
     rescue => exception
       raise "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{self.attributes.to_yaml} \n #{exception.backtrace.join("\n")}"
       logger.error "#{exception.to_s} on executing RemoteQuery #{self.id} \n #{self.attributes.to_yaml} \n #{exception.backtrace.join("\n")}"
@@ -24,12 +24,22 @@ class RemoteQuery < ActiveRecord::Base
     end
   end
   
-  #private
+  private
   
-  def update_guild(url)
+  def update_guild
     raise "missing guild" if self.guild.nil?
     
-    url = "http://arsenal.rising-gods.de/guild-info.xml?r=#{self.guild.realm}&gn=#{CGI.escape(self.guild.name)}" if url.nil?
+    # http://arsenal.rising-gods.de/ guild-info.xml ? r= #{self.guild.realm} gn= #{CGI.escape(self.guild.name)}
+    url = configatron.arsenal.url.base 
+    url += configatron.arsenal.url.guild.info 
+    if configatron.arsenal.test.nil?
+      url += '?' + configatron.arsenal.url.realm 
+      url += self.guild.realm + "&"
+      url += configatron.arsenal.url.guild.name
+      url += CGI.escape(self.guild.name)
+    end
+
+    
     xml = get_xml(url) 
     
     faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
@@ -87,7 +97,7 @@ class RemoteQuery < ActiveRecord::Base
     end
   end
   
-  def update_guild_indicators(arg)
+  def update_guild_indicators
     attributes = {}
     
     #ail
@@ -142,12 +152,14 @@ class RemoteQuery < ActiveRecord::Base
     
   end
   
-  def update_guild_onlinelist(url)
+  def update_guild_onlinelist
     raise "missing guild" if self.guild.nil?
     
     list_realm = self.guild.realm[0..2].downcase
     
-    url = "http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server=#{list_realm}" if url.nil?
+    url = configatron.onlinelist.url
+    url += list_realm.to_s if configatron.arsenal.test.nil?
+    
     doc = get_html(url)
     
     #process every member of the guild
@@ -177,9 +189,18 @@ class RemoteQuery < ActiveRecord::Base
     
   end
 
-  def update_character(url)
+  def update_character
     raise 'missing character' if self.character.nil?
-    url = "http://arsenal.rising-gods.de/character-sheet.xml?r=#{self.character.realm}&cn=#{CGI.escape(self.character.name)}" if url.nil?
+    
+    url = configatron.arsenal.url.base 
+    url += configatron.arsenal.url.character.sheet 
+    if configatron.arsenal.test.nil?
+      url += "?" + configatron.arsenal.url.realm
+      url += self.character.realm + "&"
+      url += configatron.arsenal.url.character.name
+      url += CGI.escape(self.character.name) 
+    end
+    
     xml = get_xml(url)
     
     attributes = Hash.new
@@ -207,14 +228,18 @@ class RemoteQuery < ActiveRecord::Base
     self.character.update_attributes(attributes)
   end
   
-  def update_character_ail(base_url)
-    base_url="http://eu.wowarmory.com/item-info.xml?i=" if base_url.nil?
+  def update_character_ail
+    #http://eu.wowarmory.com/ item-info.xml ? i=
+    url = configatron.wowarmory.url.base
+    url += configatron.wowarmory.url.item.info
+    url += "?" + configatron.wowarmory.url.item.itemid if configatron.arsenal.test.nil?
+    
     return true if self.character.items.nil?
     
     ilevelsum = 0
     items = Array.new
     self.character.items.each{ |item|
-      xml = get_xml(base_url + item.id.to_s)
+      xml = get_xml(url + item.id.to_s)
       item.get_info(xml)
       ilevelsum += item.level
       items << item
@@ -275,7 +300,7 @@ class RemoteQuery < ActiveRecord::Base
 				raise error[:errCode]
 			end
 		elsif (doc%'page').nil?
-			raise "EmptyPage"
+			raise "EmptyPage (#{url})"
 		else
 			return (doc%'page')
 		end

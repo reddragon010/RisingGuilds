@@ -12,7 +12,7 @@ describe RemoteQuery do
     @guild = Factory.create(:Guild)
     @guild.characters << Factory.create(:Character, :name => "Notexistingchar_d")
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
-    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/guild.xml").should be_true
+    @guild.remoteQueries.first.execute.should be_true
     @guild.remoteQueries.count.should == 0
     @guild = Guild.find(@guild.id)
     @guild.characters.count.should == 36
@@ -28,12 +28,12 @@ describe RemoteQuery do
     @guild = Guild.find(@guild.id)
     @guild.characters.find_all_by_online(true).count.should == 1
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
-    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true  
+    @guild.remoteQueries.first.execute.should be_true  
     @guild = Guild.find(@guild.id)
     Character.find_by_name("Nerox").activity.should == 2
     @guild.characters.find_all_by_online(true).count.should == 1
     @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
-    @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true 
+    @guild.remoteQueries.first.execute.should be_true 
     Character.find_by_name("Nerox").activity.should == 3
   end
   
@@ -46,7 +46,7 @@ describe RemoteQuery do
      @guild = Guild.find(@guild.id)
      @guild.characters.find_all_by_online(true).count.should == 1
      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
-     @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true  
+     @guild.remoteQueries.first.execute.should be_true  
      @guild = Guild.find(@guild.id)
      @guild.characters.find_all_by_online(true).count.should == 0
    end
@@ -56,7 +56,7 @@ describe RemoteQuery do
       @guild.characters << Factory.create(:Character, :name => "Nerox")
       @guild.characters << Factory.create(:Character, :name => "Merlinia")
       @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_onlinelist")
-      @guild.remoteQueries.first.execute(RAILS_ROOT + "/test/files/onlinelist.html").should be_true
+      @guild.remoteQueries.first.execute.should be_true
       @guild = Guild.find(@guild.id)
       @guild.characters.find_all_by_online(true).count.should == 2
     end
@@ -64,7 +64,7 @@ describe RemoteQuery do
     it "should update characters on update_character" do
       @char = Factory.create(:Character,:name => "Nerox")
       @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
-      @char.remoteQueries.first.execute(RAILS_ROOT + "/test/files/nerox_charsheet.xml").should be_true
+      @char.remoteQueries.first.execute.should be_true
       @char = Character.find(@char.id)
       @char.achivementpoints.should == 1425
       @char.level.should == 77
@@ -78,10 +78,10 @@ describe RemoteQuery do
     it "should update the ail of a character" do
       @char = Factory.create(:Character,:name => "Nerox")
       @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
-      @char.remoteQueries.first.execute(RAILS_ROOT + "/test/files/nerox_charsheet.xml").should be_true
+      @char.remoteQueries.first.execute.should be_true
       @char = Character.find(@char.id)
       @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character_ail")
-      @char.remoteQueries.first.execute(RAILS_ROOT + "/test/files/items/").should be_true
+      @char.remoteQueries.first.execute.should be_true
       @char = Character.find(@char.id)
       @char.ail.should == 129
     end
