@@ -1,7 +1,8 @@
 /* ---- Scaffold ---- */
 body { 
-  background-color: #bbf;
-  color: #333;
+  background:url(../images/bg.png) no-repeat;
+  background-color:#020202;
+  color: #4c4c4c;
   text-align: center;
 }
 

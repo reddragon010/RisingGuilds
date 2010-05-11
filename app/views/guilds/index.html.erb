@@ -14,10 +14,10 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
   </div>
   <div class="adminmenu">  
 	<% permitted_to? :edit, guild do %>
-	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_path(guild) %>
+	<%= link_to image_tag("icons/edit.png", :alt => "edt", :size => "70x21"), edit_guild_path(guild) %>
 	<% end %>
 	<% permitted_to? :destroy, guild do %>
-	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), guild_path(guild) ,:confirm => 'Are you sure?', :method => :delete %>
+	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "70x21"), guild_path(guild) ,:confirm => 'Are you sure?', :method => :delete %>
 	<% end %>
   </div>
   <div class="guilddetails">

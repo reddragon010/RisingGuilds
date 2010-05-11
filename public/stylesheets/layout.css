@@ -1,25 +1,45 @@
+div#ketten {
+	margin:0px auto;
+	background:url(../images/ketten.png);
+	width:1008px;
+	height:205px;
+	margin-top:-15px;
+	margin-bottom: 10px;
+}
+
 ul#navbar {
-background: white;
-margin: 0;
-border: 1px solid black;
+background:url(../images/nav_normal.png);
+margin: 0px auto;
 list-style-type: none;
-height: 31px;
+width:983px;
+height:79px;
+margin-top:-158px;
+margin-bottom:70px;
 }
 
 ul#navbar li {
+font-size:18px;
 float: left;
+margin-left:4px;
 }
 
 ul#navbar li a {
-display: block;
-padding: 5px 15px 4px;
+vertical-align:middle;
+padding: 50px 30px 0px;
 text-decoration: none;
-color: black;
-letter-spacing: -0.1em;
+color:#5a5a5a;
 }
 
 ul#navbar li a:hover {
+padding-top:5px;
+padding-bottom:60px;
 color: white;
+}
+
+ul#navbar li a:active {
+padding-top:5px;
+padding-bottom:60px;
+color:#FFF;
 }
 
 ul#navbar li a#current {
@@ -79,10 +99,8 @@ background: #CCC; /* set desired hover color */
 /* end css tabs */
 
 div#footer {
-background-color: white;
-text-align: right;
-border: black solid 1px;
-padding: inherit;
+text-align: center;
+color:#4a8b9e;
 }
 
 div#footer div p {
@@ -95,43 +113,44 @@ margin: 10px;
 }
 
 div#header {
-background-color: white;
+background:url(../images/header.png);
 text-align: left;
-border: black solid 1px;
-height: 100px;
-margin-bottom:10px;
+height:174px;
+width:1068px;
+}
+
+div#title {
+background:url(../images/logo.png) no-repeat;
+width:510px;
+height:99px;
+margin-top:20px;
+margin-left:30px;
+float: left;
 }
 
 div#usermenu {
 float: right;
-margin: 5px;
-}
-
-div#title {
-float: left;
-width: 400px;
-font-size: 25pt;
-font-weight: bold;
-padding-top: 20px;
+margin: 10px;
+font-size:16px;
 }
 
 div#content {
-background-color: white;
-text-align: left;
+background-color:#171717;
+text-align:center;
 border: black solid 1px;
-margin-bottom: 5px;
+margin-bottom: 10px;
 padding: 10px;
 min-height: 400px;
 position:relative;
 }
 
 div#center {
-width: 960px;
+width:1068px;
 min-height: 400px;
 }
 
 div#container {
-width: 960px;
+width: 1068px;
 margin: auto;
 }
 
@@ -141,9 +160,17 @@ margin: auto;
 	height: 0px;
 }
 
+#heading {
+	margin-top:20px;
+	margin-bottom:20px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:16px;
+}
+
 #twitter {
 	text-align: center;
 	width: 100%;
+	margin-bottom:20px;
 }
 
 .twtr-doc {
