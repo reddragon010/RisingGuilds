@@ -1,0 +1,27 @@
+Currently I'am looking for a nice guy who is willing to translate the keyparts of the documentation from german to englisch. At the moment i've got to less time to do it by myself. 
+A big sorry to all non-german people out there!
+
+h2. RisingGuilds
+
+RisingGuilds ist ein webbasierendes System für WorldOfWarcaft-Gilden auf dem PServer "rising-gods.de". Es wurde speziell für die dort verwendete XMLArsenal konzipiert, könnte theoretisch aber auch mit der Blizzard-Armory funktionieren. Das Projekt ist Open-Source und wird von einem kleinen Team aus Hobby-Entwicklern realisiert.
+
+h2. Ziel
+
+Das Hauptziel das Projekts ist es den Gilden und Spielern Werkzeuge zur Verfügung zu stellen die es ihnen ermöglichen Gilden besser zu vergleichen und zu verwalten. Den Gildenführern werden zahlreiche Tools angeboten mit denen sie ihre Mitglieder besser koordinieren und informieren können. Normalen Spielern wird weiters das finden einer passenden Gilde erleichtert. Allgemein soll dieses System die Community unterstützen und eine zentrale Plattform für jede Art von Gilde darstellen.
+
+h2. Kern-Features
+
+* Jeder Spieler soll sich einen Account anlegen können und diesen mit seinen Charakteren verlinken könnne
+* Jeder User soll Gilden anlegen, verwalten und beitreten können
+* Jede Gilde soll ihr eigene kleine Seite verwalten können über die sie einerseits Werbung und Ausschreibungen stellen kann, andererseits gildeninterne Events planen und durchführen können.
+* Jeder Charakter soll im System mit den wichtigsten Daten dargestellt werden. Dies dient zur besseren Übersicht für die Gildenadministration.
+
+Die detailierte Auflistung der Features findest du in unserem "GitHub-Wiki":http://wiki.github.com/reddragon010/RisingGuilds/
+
+h2. Mitarbeit
+
+Zur Zeit suchen wir noch aktive, motivierte (Hobby-)Entwickler die uns bei der Realisierung des Projekts unterstützen. Solltest du Interesse haben schicke einfach eine Nachricht über GitHub an reddragon010 oder einen der anderen Mitarbeiter.
+
+h2. Installation
+
+In unserem Wiki findest du sehr detaillierte Anleitungen zur Installation unter Windows und Debian.

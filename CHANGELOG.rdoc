@@ -1,0 +1,3 @@
+== 0.1.0 ALPHA 11-05-2010
+
+* first public version
