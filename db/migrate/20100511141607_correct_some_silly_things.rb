@@ -43,7 +43,6 @@ class CorrectSomeSillyThings < ActiveRecord::Migration
 
   def self.down
     change_table :characters do |t|
-      t.change :guild_id, :integer, :null => true
       t.change :name, :string, :null => true
       t.change :online, :boolean, :null => true
       t.change_default :online, nil

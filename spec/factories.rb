@@ -18,15 +18,13 @@ end
 
 Factory.define :Guild do |f|
   f.sequence(:name){|n| "BoonHordeNo#{n}"} 
-  f.officer_rank 2
-  f.raidleader_rank 3
   f.ail 200
   f.activity 1
   f.growth 1
   f.altratio 1
   f.classratio 1
   f.achivementpoints 1000
-  f.ration 1
+  f.rating 1
   f.realm "PvE-Realm"
   f.website("http://hordeofboons.com")
   f.description("The HordeOfBoons Guild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")

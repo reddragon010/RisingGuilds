@@ -60,8 +60,6 @@ namespace :onlinestatus do
       
       #if char stay online
       if char.online == true && newonline == true then
-        #workaround: default activity is nil not 0
-        char.activity = 0 if char.activity.nil?
         #If user was still a hour online adds 1 to activity
         attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) >= Time.now 
         puts "#{char.name} is still online"

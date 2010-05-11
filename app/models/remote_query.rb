@@ -127,7 +127,7 @@ class RemoteQuery < ActiveRecord::Base
     attributes[:classratio] = Integer(sum)
     
     #Growth
-    unless self.guild.events.find_by_action("joined").nil? #|| self.guild.events.find_by_action("left").nil?
+    unless self.guild.events.find_by_action("joined").nil?
       joined = Event.find(:all, :conditions =>  ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id ,"joined",1.month.ago]).count
       left = Event.find(:all, :conditions => ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id,"left",1.month.ago]).count
       growth = joined - left
@@ -170,8 +170,6 @@ class RemoteQuery < ActiveRecord::Base
       attributes = Hash.new
       #if char stay online
       if char.online == true && newonline == true then
-        #workaround: default activity is nil not 0
-        char.activity = 0 if char.activity.nil?
         #If user was still 1 hour online adds 1 to activity
         attributes[:activity] = char.activity + 1 unless (char.last_seen + 12.hour) >= Time.now 
       #if char has been gone offline
@@ -238,12 +236,12 @@ class RemoteQuery < ActiveRecord::Base
     
     ilevelsum = 0
     items = Array.new
-    self.character.items.each{ |item|
+    self.character.items.each do |item|
       xml = get_xml(url + item.id.to_s)
       item.get_info(xml)
       ilevelsum += item.level
       items << item
-    }
+    end
     
     ail = Integer(ilevelsum / self.character.items.count)
     ailstddev = ail_stddev(items)
