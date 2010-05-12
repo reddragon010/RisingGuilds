@@ -4,6 +4,7 @@ div#navbar ul li {
 
 ul#tabs {
 	font: 11px verdana, arial, sans-serif;
+	margin-top:-20px;
 }
 
 p {
