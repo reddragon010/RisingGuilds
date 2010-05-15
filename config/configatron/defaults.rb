@@ -20,3 +20,6 @@ configatron.wowarmory.url.item.info = 'item-info.xml'
 configatron.wowarmory.url.item.itemid = 'i='
 
 configatron.onlinelist.url = 'http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server='
+
+#Notifier Config
+configatron.notifier.default_url = 'localhost:3000'
