@@ -2,3 +2,5 @@
 # 
 # Example:
 #   configatron.file.storage = :s3
+
+configatron.notifier.default_url = "risingguilds.dreamblaze.net"
