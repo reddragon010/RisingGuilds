@@ -3,6 +3,7 @@ class Character < ActiveRecord::Base
   has_many :events
   has_many :remoteQueries
   belongs_to :user
+  has_many :attendances
   
   serialize :profession1
   serialize :profession2

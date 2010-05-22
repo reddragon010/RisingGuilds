@@ -2,6 +2,7 @@
 tabs = Array.new
 tabs << link_to("Index", guilds_path)
 tabs << link_to("Members", "/guilds/#{@guild.id}/characters")
+tabs << link_to("Raids", "/guilds/#{@guild.id}/raids")
 
 if permitted_to? :edit, @guild
 	tabs << ""

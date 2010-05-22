@@ -1,9 +1,24 @@
 class RaidsController < ApplicationController
+  filter_resource_access
+  
   # GET /raids
   # GET /raids.xml
   def index
-    @raids = Raid.all
-
+    params[:sort] = 'guild_id, start' if params[:sort].nil?
+    
+    @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
+    
+    filter_keys = ['guild_id', 'start', 'closed']
+    conditions = Hash.new
+    conditions.merge!(params)
+    conditions.delete_if {|key,value| !filter_keys.include? key}
+    
+    if conditions.empty? then
+      @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort])
+    else
+      @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort], :conditions => conditions)
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @raids }
@@ -13,7 +28,6 @@ class RaidsController < ApplicationController
   # GET /raids/1
   # GET /raids/1.xml
   def show
-    @raid = Raid.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,8 +38,7 @@ class RaidsController < ApplicationController
   # GET /raids/new
   # GET /raids/new.xml
   def new
-    @raid = Raid.new
-
+    @raid.guild_id = params[:guild_id]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @raid }
@@ -34,18 +47,17 @@ class RaidsController < ApplicationController
 
   # GET /raids/1/edit
   def edit
-    @raid = Raid.find(params[:id])
+
   end
 
   # POST /raids
   # POST /raids.xml
   def create
-    @raid = Raid.new(params[:raid])
 
     respond_to do |format|
       if @raid.save
         flash[:notice] = 'Raid was successfully created.'
-        format.html { redirect_to(@raid) }
+        format.html { redirect_to("/guilds/#{@raid.guild.id}/raids/#{@raid.id}") }
         format.xml  { render :xml => @raid, :status => :created, :location => @raid }
       else
         format.html { render :action => "new" }
@@ -57,7 +69,6 @@ class RaidsController < ApplicationController
   # PUT /raids/1
   # PUT /raids/1.xml
   def update
-    @raid = Raid.find(params[:id])
 
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
@@ -74,7 +85,6 @@ class RaidsController < ApplicationController
   # DELETE /raids/1
   # DELETE /raids/1.xml
   def destroy
-    @raid = Raid.find(params[:id])
     @raid.destroy
 
     respond_to do |format|

@@ -1,5 +1,5 @@
 <h1>Listing raids</h1>
-
+<% unless @raids.nil? || @raids.empty? %>
 <table>
   <tr>
     <th>Guild</th>
@@ -15,7 +15,7 @@
 
 <% @raids.each do |raid| %>
   <tr>
-    <td><%=h raid.guild_id %></td>
+    <td><%=h raid.guild.name %></td>
     <td><%=h raid.title %></td>
     <td><%=h raid.max_attendees %></td>
     <td><%=h raid.invite_start %></td>
@@ -30,7 +30,9 @@
   </tr>
 <% end %>
 </table>
-
+<% else %>
+<p>There are no raids which could be attended by you</p>
+<% end %>
 <br />
 
-<%= link_to 'New raid', new_raid_path %>
+<%= link_to 'New raid', "/guilds/#{@guild.id}/raids/new" unless @guild.nil? %>

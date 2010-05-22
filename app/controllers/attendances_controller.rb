@@ -1,4 +1,6 @@
 class AttendancesController < ApplicationController
+  filter_resource_access
+  
   # GET /attendances
   # GET /attendances.xml
   def index

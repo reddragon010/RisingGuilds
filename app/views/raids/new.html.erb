@@ -4,10 +4,6 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :guild_id %><br />
-    <%= f.text_field :guild_id %>
-  </p>
-  <p>
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </p>
@@ -39,6 +35,8 @@
     <%= f.label :closed %><br />
     <%= f.check_box :closed %>
   </p>
+	
+	<%= f.hidden_field :guild_id  %>
   <p>
     <%= f.submit 'Create' %>
   </p>
