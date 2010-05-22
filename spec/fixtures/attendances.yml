@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  character_id: 1
+  raid_id: 1
+  role: MyString
+  status: 1
+  message: 
+
+two:
+  character_id: 1
+  raid_id: 1
+  role: MyString
+  status: 1
+  message: 

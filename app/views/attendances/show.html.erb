@@ -1,0 +1,28 @@
+<p>
+  <b>Character:</b>
+  <%=h @attendance.character_id %>
+</p>
+
+<p>
+  <b>Raid:</b>
+  <%=h @attendance.raid_id %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%=h @attendance.role %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @attendance.status %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @attendance.message %>
+</p>
+
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>
