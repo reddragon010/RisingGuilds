@@ -5,7 +5,7 @@ class CreateAttendances < ActiveRecord::Migration
       t.integer :raid_id, :null => false
       t.string :role, :null => false
       t.integer :status, :null => false, :default => 1
-      t.sting :message
+      t.string :message
 
       t.timestamps
     end

@@ -7,7 +7,6 @@ describe Attendance do
       :raid_id => 1,
       :role => "value for role",
       :status => 1,
-      :message => 
     }
   end
 
