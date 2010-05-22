@@ -1,8 +1,3 @@
-require "open-uri"
-require "hpricot"
-require 'net/http'
-require 'uri'
-
 class RemoteQuery < ActiveRecord::Base
   belongs_to :guild
   belongs_to :character
@@ -23,6 +18,8 @@ class RemoteQuery < ActiveRecord::Base
       self.destroy
     end
   end
+  
+  
   
   private
   
@@ -249,60 +246,6 @@ class RemoteQuery < ActiveRecord::Base
     attributes = {:ail => ail, :ailstddev => ailstddev, :items => items}
     self.character.update_attributes(attributes)
   end
-  
-  
-  
-  
-  #get the HTML-Code from URI
-  def get_html(url)
-    return open(url).read if !url.include?("http://")
-    
-    req = Net::HTTP::Get.new(url)
-		req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
-		
-		uri = URI.parse(url)
-		
-		http = Net::HTTP.new(uri.host, uri.port)
-	  
-		begin
-		  http.start do
-		    res = http.request req
-				# response = res.body
-				
-				tries = 0
-				response = case res
-					when Net::HTTPSuccess, Net::HTTPRedirection
-						res.body
-					else
-						tries += 1
-						if tries > 10
-							raise 'Timed out'
-						else
-							retry
-						end
-					end
-		  end
-		rescue
-			raise 'Specified server at ' + url + ' does not exist.'
-		end
-  end
-  
-  #get the preprocessed XML-Code from URI
-  def get_xml(url)
-    response = get_html(url)
-    
-    doc = Hpricot.XML(response)
-		errors = doc.search("*[@errCode]")
-		if errors.size > 0
-			errors.each do |error|
-				raise error[:errCode]
-			end
-		elsif (doc%'page').nil?
-			raise "EmptyPage (#{url})"
-		else
-			return (doc%'page')
-		end
-	end
 	
 	def ail_stddev(items)
     values = items.collect{|i| i.level}
@@ -315,3 +258,53 @@ class RemoteQuery < ActiveRecord::Base
   end
 end
 
+#get the HTML-Code from URI
+def get_html(url)
+  return open(url).read if !url.include?("http://")
+  
+  req = Net::HTTP::Get.new(url)
+	req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
+	
+	uri = URI.parse(url)
+	
+	http = Net::HTTP.new(uri.host, uri.port)
+  
+	begin
+	  http.start do
+	    res = http.request req
+			# response = res.body
+			
+			tries = 0
+			case res
+				when Net::HTTPSuccess, Net::HTTPRedirection
+					res.body
+				else
+					tries += 1
+					if tries > 10
+						raise 'Timed out'
+					else
+						retry
+					end
+				end
+	  end
+	rescue
+		raise 'Specified server at ' + url + ' does not exist.'
+	end
+end
+
+#get the preprocessed XML-Code from URI
+def get_xml(url)
+  response = get_html(url) if response.nil?
+  
+  doc = Hpricot.XML(response)
+	errors = doc.search("*[@errCode]")
+	if errors.size > 0
+		errors.each do |error|
+			raise error[:errCode]
+		end
+	elsif (doc%'page').nil?
+		raise "EmptyPage (#{url})"
+	else
+		return (doc%'page')
+	end
+end

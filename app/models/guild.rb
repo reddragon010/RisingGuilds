@@ -54,8 +54,54 @@ class Guild < ActiveRecord::Base
     self.save
   end
   
+  def valid_name?
+    url = configatron.arsenal.url.base 
+    url += configatron.arsenal.url.guild.info 
+    if configatron.arsenal.test.nil?
+      url += '?' + configatron.arsenal.url.realm 
+      url += self.realm + "&"
+      url += configatron.arsenal.url.guild.name
+      url += CGI.escape(self.name)
+    else
+      return true
+    end
+    
+    begin # check header response
+      res = Net::HTTP.get_response(URI.parse(url))
+      case res
+        when Net::HTTPSuccess then
+          begin
+            check_xml(res.body)
+            return true
+          rescue
+            return false
+          end
+        when Net::HTTPClientError then 
+          raise "ClientError on #{url}"
+        else raise "ServerError on #{url}"
+      end
+    rescue # Recover on DNS failures..
+      raise "DNS failure on #{url}"
+    end
+  end
+  
   protected
   def before_validation_on_create
     self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
+  end
+  
+  #get the preprocessed XML-Code from URI
+  def check_xml(html)
+    doc = Hpricot.XML(html)
+  	errors = doc.search("*[@errCode]")
+  	if errors.size > 0
+  		errors.each do |error|
+  			raise error[:errCode]
+  		end
+  	elsif (doc%'page').nil?
+  		raise "EmptyPage (#{url})"
+  	else
+  		return true
+  	end
   end
 end
