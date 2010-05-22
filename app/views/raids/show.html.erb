@@ -1,0 +1,48 @@
+<p>
+  <b>Guild:</b>
+  <%=h @raid.guild_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @raid.title %>
+</p>
+
+<p>
+  <b>Max attendees:</b>
+  <%=h @raid.max_attendees %>
+</p>
+
+<p>
+  <b>Invite start:</b>
+  <%=h @raid.invite_start %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%=h @raid.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%=h @raid.end %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @raid.description %>
+</p>
+
+<p>
+  <b>Leader:</b>
+  <%=h @raid.leader %>
+</p>
+
+<p>
+  <b>Closed:</b>
+  <%=h @raid.closed %>
+</p>
+
+
+<%= link_to 'Edit', edit_raid_path(@raid) %> |
+<%= link_to 'Back', raids_path %>

@@ -1,0 +1,36 @@
+<h1>Listing raids</h1>
+
+<table>
+  <tr>
+    <th>Guild</th>
+    <th>Title</th>
+    <th>Max attendees</th>
+    <th>Invite start</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Description</th>
+    <th>Leader</th>
+    <th>Closed</th>
+  </tr>
+
+<% @raids.each do |raid| %>
+  <tr>
+    <td><%=h raid.guild_id %></td>
+    <td><%=h raid.title %></td>
+    <td><%=h raid.max_attendees %></td>
+    <td><%=h raid.invite_start %></td>
+    <td><%=h raid.start %></td>
+    <td><%=h raid.end %></td>
+    <td><%=h raid.description %></td>
+    <td><%=h raid.leader %></td>
+    <td><%=h raid.closed %></td>
+    <td><%= link_to 'Show', raid %></td>
+    <td><%= link_to 'Edit', edit_raid_path(raid) %></td>
+    <td><%= link_to 'Destroy', raid, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New raid', new_raid_path %>

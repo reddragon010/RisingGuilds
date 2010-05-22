@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base  
-  default_url_options[:host] = configatron.notifier.default_url.to_s
+  default_url_options[:host] = configatron.notifier.default_url
   
   def password_reset_instructions(user)  
     subject       "Password Reset Instructions"  
