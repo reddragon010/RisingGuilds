@@ -1,5 +1,24 @@
 <h1>Listing raids</h1>
 <% unless @raids.nil? || @raids.empty? %>
+<div id="calendar">
+	<h2 id="month">
+	  <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y/%m") %>
+	  <%=h @date.strftime("%B %Y") %>
+	  <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y/%m") %>
+	</h2>
+	<% calendar_for @raids, :year => @date.year, :month => @date.month do |calendar| %>
+	  <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+	  <% calendar.day(:day_method => :start) do |date, raids| %>
+		<%= date.day %>
+		<ul>
+		  <% for raid in raids %>
+		    <li><%= link_to h(raid.title), "/guilds/#{raid.guild.id}/raids/#{raid.id}" %></li>
+		  <% end %>
+		</ul>
+	  <% end %>
+	<% end %>
+</div>
+
 <table>
   <tr>
     <th>Guild</th>

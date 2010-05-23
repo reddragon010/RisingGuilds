@@ -13,6 +13,8 @@ class RaidsController < ApplicationController
     conditions.merge!(params)
     conditions.delete_if {|key,value| !filter_keys.include? key}
     
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    
     if conditions.empty? then
       @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort])
     else
