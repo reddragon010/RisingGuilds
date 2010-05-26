@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :characters
   map.resources :users, :has_many => [:characters, :guilds]
   map.resources :raids, :has_many => [:attendances]
+  map.resources :attendances
 
   # The priority is based upon order of creation: first created -> highest priority.
 

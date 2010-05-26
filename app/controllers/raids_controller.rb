@@ -34,7 +34,13 @@ class RaidsController < ApplicationController
   # GET /raids/1
   # GET /raids/1.xml
   def show
-
+    
+    unless @raid.attendances.nil? || @raid.attendances.empty?
+      @attendance = @raid.attendances.find_by_character_id(current_user.characters.collect{|c| c.id})
+    else
+      @attendance = Attendance.new(:raid_id => @raid.id)
+    end 
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @raid }

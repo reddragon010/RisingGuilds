@@ -45,8 +45,11 @@
   </tr>
 
 <% unless @raid.attendances.empty? %>
-<% (0..4).each do |i| %>
-<% @raid.attendances.find{|a| a.status == i}.each do |attendance|%>	
+<% (1..4).each do |i| %>
+  <tr>
+	<td colspan=2><%=h configatron.raidplanner.status.index(i) %></td>
+  </rt>
+<% @raid.attendances.find_all_by_status(i).each do |attendance|%>	
   <tr>
 	<td><%=h attendance.character.name %></td>
 	<td><%=h attendance.role %>
@@ -56,7 +59,11 @@
 <% end %>
 </table>
 
-<%= link_to 'Attend'%>
+<% if @attendance.new_record? %>
+<%= render :partial => "new_attend_form", :object => @attendance %>
+<% else %>
+<%= render :partial => "update_attend_form", :object => @attendance%>
+<% end %>
 
 <%= link_to 'Edit', edit_raid_path(@raid) %> |
 <%= link_to 'Back', raids_path %>

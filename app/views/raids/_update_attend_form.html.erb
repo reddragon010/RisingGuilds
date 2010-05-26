@@ -1,0 +1,23 @@
+<% form_for(@attendance) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :character %><br />
+	<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %>
+  </p>
+  <p>
+    <%= f.label :role %><br />
+	<%= f.select(:role, {:dd => "dd", :heal => "heal", :tank => "tank"}, {:prompt => "Select a role"}) %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+	<%= f.select(:status, configatron.raidplanner.status) %>
+  </p>
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_field :message %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

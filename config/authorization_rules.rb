@@ -29,7 +29,7 @@ authorization do
     
     #Can edit own attendances
     has_permission_on :attendances, :to => :change do
-      if_attribute :character_id => is { user.id }
+      if_attribute :character => {:user_id => is { user.id } }
     end
     
     #Can edit own Raids
