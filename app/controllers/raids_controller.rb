@@ -21,6 +21,10 @@ class RaidsController < ApplicationController
       @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort], :conditions => conditions)
     end
     
+    @upcomming_raids = @raids.find_all{|raid| raid.invite_start > Time.now}  #(:all, :conditions => "invite_start > #{Time.now}")
+    @past_raids = @raids.find_all{|raid| raid.end <= Time.now} #(:all, :conditions => "end <= #{Time.now}")
+    @running_raids = @raids.find_all{|raid| raid.start < Time.now && raid.end > Time.now} #(:all, :conditions => "start < #{Time.now} AND end > #{Time.now}")
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @raids }
