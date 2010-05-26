@@ -1,5 +1,3 @@
-<%= debug @running_raids %>
-
 <% unless @raids.nil? || @raids.empty? %>
 <div id="calendar">
 	<h2 id="month">
@@ -13,7 +11,7 @@
 		<%= date.day %>
 		<ul>
 		  <% for raid in raids %>
-		    <li><%= link_to h(raid.title), "/guilds/#{raid.guild.id}/raids/#{raid.id}" %></li>
+		    <li><%= link_to h(raid.title), guild_raid_path(raid.guild, raid) %></li>
 		  <% end %>
 		</ul>
 	  <% end %>

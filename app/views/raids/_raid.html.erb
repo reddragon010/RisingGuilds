@@ -11,7 +11,7 @@
     <td><%=h raid.description %></td>
     <td><%=h raid.leader %></td>
     <td><%=h raid.closed %></td>
-    <td><%= link_to 'Show', raid %></td>
-    <td><%= link_to 'Edit', edit_raid_path(raid) %></td>
-    <td><%= link_to 'Destroy', raid, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show',guild_raid_path(raid.guild, raid) %></td>
+    <td><%= link_to 'Edit', edit_guild_raid_path(raid.guild, raid) %></td>
+    <td><%= link_to 'Destroy', guild_raid_path(raid.guild, raid), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
