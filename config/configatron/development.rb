@@ -3,3 +3,4 @@
 # Example:
 #   configatron.file.storage = :local
 
+configatron.paperclip.command_path = "/opt/local/bin"

@@ -1,0 +1,17 @@
+<% @timeformat = "%d/%m %Y - %H:%M" %>  
+  <tr>
+	<% unless params[:guild_id] %>
+    <td><%=h raid.guild.name %></td>
+	<% end %>
+    <td><%=h raid.title %></td>
+    <td><%=h raid.max_attendees %></td>
+    <td><%=h raid.invite_start.strftime(@timeformat) %></td>
+    <td><%=h raid.start.strftime(@timeformat) %></td>
+    <td><%=h raid.end.strftime(@timeformat) %></td>
+    <td><%=h raid.description %></td>
+    <td><%=h raid.leader %></td>
+    <td><%=h raid.closed %></td>
+    <td><%= link_to 'Show',guild_raid_path(raid.guild, raid) %></td>
+    <td><%= link_to 'Edit', edit_guild_raid_path(raid.guild, raid) %></td>
+    <td><%= link_to 'Destroy', guild_raid_path(raid.guild, raid), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>

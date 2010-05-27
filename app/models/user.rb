@@ -61,6 +61,7 @@ class User < ActiveRecord::Base
       role_symbols << role.name.underscore.to_sym
     end
     role_symbols << :user
+    role_symbols << :member unless guilds.empty?
     return role_symbols
   end
 end

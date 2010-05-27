@@ -1,0 +1,1 @@
+Paperclip.options[:command_path] = configatron.paperclip.command_path unless configatron.paperclip.command_path.nil?

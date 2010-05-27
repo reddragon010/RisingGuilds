@@ -1,0 +1,28 @@
+<h1>Listing attendances</h1>
+
+<table>
+  <tr>
+    <th>Character</th>
+    <th>Raid</th>
+    <th>Role</th>
+    <th>Status</th>
+    <th>Message</th>
+  </tr>
+
+<% @attendances.each do |attendance| %>
+  <tr>
+    <td><%=h attendance.character_id %></td>
+    <td><%=h attendance.raid_id %></td>
+    <td><%=h attendance.role %></td>
+    <td><%=h attendance.status %></td>
+    <td><%=h attendance.message %></td>
+    <td><%= link_to 'Show', attendance %></td>
+    <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
+    <td><%= link_to 'Destroy', attendance, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New attendance', new_attendance_path %>

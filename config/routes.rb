@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  
   map.resources :events
   
   map.resource :user_session
@@ -15,9 +16,11 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
   map.activate '/activate/:id', :controller => 'activations', :action => 'create'
   
-  map.resources :guilds, :has_many => [:characters, :users]
-  map.resources :characters, :has_one => [:guild, :user]
+  map.resources :guilds, :has_many => [:characters, :users, :raids]
+  map.resources :characters
   map.resources :users, :has_many => [:characters, :guilds]
+  map.resources :raids, :has_many => [:attendances]
+  map.resources :attendances
 
   # The priority is based upon order of creation: first created -> highest priority.
 

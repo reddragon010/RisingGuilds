@@ -1,0 +1,45 @@
+<% unless @raids.nil? || @raids.empty? %>
+<div id="calendar">
+	<h2 id="month">
+	  <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y/%m") %>
+	  <%=h @date.strftime("%B %Y") %>
+	  <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y/%m") %>
+	</h2>
+	<% calendar_for @raids, :year => @date.year, :month => @date.month do |calendar| %>
+	  <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+	  <% calendar.day(:day_method => :start) do |date, raids| %>
+		<%= date.day %>
+		<ul>
+		  <% for raid in raids %>
+		    <li><%= link_to h(raid.title), guild_raid_path(raid.guild, raid) %></li>
+		  <% end %>
+		</ul>
+	  <% end %>
+	<% end %>
+</div>
+
+<table>
+  <tr>
+	<% unless params[:guild_id] %>
+    <th>Guild</th>
+	<% end %>
+    <th>Title</th>
+    <th>Max attendees</th>
+    <th>Invite start</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Description</th>
+    <th>Leader</th>
+    <th>Closed</th>
+  </tr>
+
+<%= render :partial => "raid", :collection => @upcomming_raids %>
+<%= render :partial => "raid", :collection => @running_raids %>
+<%= render :partial => "raid", :collection => @past_raids %>
+</table>
+<% else %>
+<p>There are no raids which could be attended by you</p>
+<% end %>
+<br />
+
+<%= link_to 'New raid', "/guilds/#{@guild.id}/raids/new" unless @guild.nil? %>

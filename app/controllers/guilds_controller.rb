@@ -40,16 +40,22 @@ class GuildsController < ApplicationController
   # POST /guilds
   # POST /guilds.xml
   def create
-    @guild.assignments << Assignment.new(:user_id => current_user.id,:role_id => 1)
-    
+
     respond_to do |format|
-      if @guild.save
-        flash[:notice] = 'Guild was successfully created.'
-        format.html { redirect_to(@guild) }
-        format.xml  { render :xml => @guild, :status => :created, :location => @guild }
+      if @guild.valid_name?
+        @guild.assignments << Assignment.new(:user_id => current_user.id,:role_id => 1)
+        if @guild.save
+          flash[:notice] = 'Guild was successfully created.'
+          format.html { redirect_to(@guild) }
+          format.xml  { render :xml => @guild, :status => :created, :location => @guild }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @guild.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @guild.errors, :status => :unprocessable_entity }
+        flash[:error] = 'Guild doesn\'t exist!'
+        format.html {render :action => "new"}
+        format.xml  {render :xml => @guild.errors, :status => :unprocessable_entity }
       end
     end
   end
