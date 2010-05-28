@@ -36,13 +36,33 @@ Feature: Authorization
 		When I follow "Actualize"
 		Then I should see "Guild will be updated soon"
 
-#	Scenario: Edit Guild as Guildmanager
-#		Given a Guild
-#		When I go to edit guild
-#		And fill in "name" with "Divinee"
-#		And I press "update"
-#		Then I should see "Guild was successfully edited."
-#		And I should see "Devinee"
+	Scenario: Edit Guild as Guildmanager
+		Given a guild
+		And I am a registered user
+		And I am a "guildmanager" of the guild
+		And I am logged in
+		When I go to edit guild
+		And fill in "guild_website" with "http://another.website.com"
+		And I press "update"
+		Then I should see "Guild was successfully updated."
+		And I should see "http://another.website.com"
+		
+	Scenario: Join a guild with valid token
+		Given a guild
+		And I am a registered user
+		And I am logged in
+		When I join the guild with a valid token
+		Then I should see "You have successfully joined this guild"
+		And I should be a member of the guild
+		
+	Scenario: Join a guild with invalid token
+		Given a guild
+		And I am a registered user
+		And I am logged in
+		When I join the guild with a invalid token
+		Then I should see "invalid token! Please contact your guildmanager"
+		And I should not be a member of the guild
+		
 	
 	
 		

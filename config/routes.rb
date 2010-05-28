@@ -61,7 +61,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
-  map.connect '/guilds/:id/join/:token', :controller => 'guild', :action => 'join', :token => /.*/
+  map.connect '/guilds/:id/join/:token', :controller => 'guilds', :action => 'join', :token => /.*/
   map.connect '/widget/:action/:id/:token', :controller => 'widget', :token => /.*/
   
   map.connect ':controller/:id/:action'
