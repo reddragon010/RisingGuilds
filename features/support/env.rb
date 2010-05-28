@@ -18,6 +18,8 @@ require 'webrat/core/matchers'
 require "factory_girl"
 require "#{Rails.root}/spec/factories"
 
+require 'email_spec/cucumber'
+
 Webrat.configure do |config|
   config.mode = :rails
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
