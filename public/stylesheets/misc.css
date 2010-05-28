@@ -153,3 +153,10 @@ div.bar-container > div {
   font-size: 11px;
   text-align: center;
 }
+
+/* ---- Tooltips ---- */
+div.tooltip {
+  padding: 5px;
+  margin: 5px;
+  background-color: #F0F0F0;
+}
