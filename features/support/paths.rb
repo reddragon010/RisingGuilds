@@ -14,6 +14,8 @@ module NavigationHelpers
       login_path
     when /the logout page/
       logout_path
+    when /the signup page/
+      signup_path
     when /my account/
       account_path
     when /the guildpage/

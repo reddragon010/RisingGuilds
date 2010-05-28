@@ -18,6 +18,7 @@ require 'webrat/core/matchers'
 require "factory_girl"
 require "#{Rails.root}/spec/factories"
 
+require 'email_spec'
 require 'email_spec/cucumber'
 
 Webrat.configure do |config|
