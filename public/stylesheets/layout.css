@@ -83,9 +83,9 @@ padding-top: 4px; /* must change with respect to padding (X) above and below */
 }
 
 ul#tabs li a { /* settings for all tab links */
-padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+padding: 5px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
 border: 1px solid #000; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-background-color: #FFF; /* set unselected tab background color as desired */
+background-color: #666666; /* set unselected tab background color as desired */
 color: #000; /* set unselected tab link color as desired */
 margin-right: 0px; /* set additional spacing between tabs as desired */
 text-decoration: none;
