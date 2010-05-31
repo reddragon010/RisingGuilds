@@ -24,7 +24,7 @@ Given /^I am logged in$/ do
   login
 end
 
-Given /^I'am logged out$/ do
+Given /^I am logged out$/ do
   visit logout_path
 end
 
@@ -34,7 +34,7 @@ When /^I login as "([^\"]*)" with password "([^\"]*)"$/ do |username, password|
   end
 end
 
-Then /^I should be on ([^\"]*)$/ do |page_name|
+Then /^I should be on ([^\"]*)$/ do |page_name| #"
   response.request.path.should == path_to(page_name)
 end
 
@@ -47,3 +47,21 @@ Given /^I am a "([^\"]*)"$/ do |role|
   @user.assignments << Assignment.create(:guild_id => @guild.id, :role_id => r.id)
   @user.save
 end
+
+When /^I join the guild with a valid token$/ do
+  visit "guilds/#{@guild.id}/join/#{@guild.token}"
+end
+
+When /^I join the guild with a invalid token$/ do
+  visit "guilds/#{@guild.id}/join/#{@guild.token + "invalid"}"
+end
+
+
+Then /^I should be a member of the guild$/ do
+  @guild.users.first.login.should == @user.login
+end
+
+Then /^I should not be a member of the guild$/ do
+  @guild.users.empty?.should == true
+end
+

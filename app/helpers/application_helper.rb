@@ -1,5 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
+  #Wow specific helpers
   def raceicon_path(char)
     "http://www.wowarmory.com/_images/icons/race/#{char.race_id}-#{char.gender_id}.gif"
   end
@@ -41,6 +43,7 @@ module ApplicationHelper
 		"http://www.wowarmory.com/_images/portraits/" + dir + "/#{char.gender_id}-#{char.race_id}-#{char.class_id}.gif"
 	end
   
+  #Online-Text helper
   def online_text(online)
     if online
       "<span style=\"color:green\">Online</span>"
@@ -49,12 +52,14 @@ module ApplicationHelper
     end
   end
   
+  #Authlogic redirect_back helper
   def redirect_back_or(path)
     redirect_to :back
     rescue ActionController::RedirectBackError
       redirect_to path
   end
   
+  #Truncate helper
   def smart_truncate(s, opts = {})
     opts = {:words => 12}.merge(opts)
     if opts[:sentences]
@@ -65,6 +70,7 @@ module ApplicationHelper
     a[0...n].join(' ') + (a.size > n ? '...' : '')
   end
   
+  #Tablesort helper
   def sort_td_class_helper(param)
     if params[:sort] == param then
       'class="sortup"' 
@@ -87,6 +93,7 @@ module ApplicationHelper
     end
   end
   
+  #Prograssbar helper
   def progressbar(value,text)
     op =  "<div class=\"bar-container\">\n"    
     op += "<div style=\"width: #{value}%;\">#{text}</div>\n"
@@ -97,6 +104,12 @@ module ApplicationHelper
     value = profession.value.to_f / profession.max.to_f * 100
     text = profession.value.to_s + "/" + profession.max.to_s
     progressbar(value.to_s,text)
+  end
+  
+  #tooltip helper
+  def tooltip(id,style=nil,&block)
+    content = capture(&block)
+    concat render(:partial => "shared/tooltip", :locals => {:id => id, :style => style, :text => content})
   end
   
 end

@@ -6,7 +6,7 @@ authorization do
   role :user do
     includes :guest
     
-    #Can create guilds
+    #Can create and join guilds
     has_permission_on :guilds, :to => [ :setup, :join]
     #Can delink own chars
     has_permission_on :characters, :to => [:delink, :actualize, :generate_ail,:make_main] do

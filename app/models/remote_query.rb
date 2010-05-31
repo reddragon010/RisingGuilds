@@ -218,7 +218,7 @@ class RemoteQuery < ActiveRecord::Base
 		end
 		attributes["items"] = items unless items.empty?
     
-    Event.create(:character_id => self.character.id, :action => "levelup", :content => attributes['level']) if self.character.level && attributes['level'] != self.character.level
+    Event.create(:character_id => self.character.id, :action => "levelup", :content => attributes['level']) if !self.character.level.nil? && attributes['level'].to_i != self.character.level.to_i
     
     self.character.update_attributes(attributes)
   end

@@ -112,7 +112,7 @@ class GuildsController < ApplicationController
         flash[:notice] = 'You have successfully joined this guild'
         format.html { redirect_to(@guild) }
       else
-        flash[:error] = 'Token wrong!'
+        flash[:error] = 'invalid token! Please contact your guildmanager'
         format.html { redirect_to(@guild) }
       end
     end

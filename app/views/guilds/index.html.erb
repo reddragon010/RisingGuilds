@@ -1,8 +1,8 @@
-<% 
+<%
 tabs = Array.new
 
 if permitted_to? :create, @guild
-	tabs << link_to("New guild", new_guild_path)
+tabs << link_to("New guild", new_guild_path)
 end
 render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>
@@ -10,15 +10,15 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 <% @guilds.each_with_index do |guild,i| %>
 <div id="<%= i%>" class="guild">
   <div class="guildlogo">
-	<%= link_to image_tag(guild.logo.url, :alt => "guildlogo", :size => "100x100"), guild %>
+<%= link_to image_tag(guild.logo.url, :alt => "guildlogo", :size => "100x100"), guild %>
   </div>
-  <div class="adminmenu">  
-	<% permitted_to? :edit, guild do %>
-	<%= link_to image_tag("icons/edit.png", :alt => "edt", :size => "70x21"), edit_guild_path(guild) %>
-	<% end %>
-	<% permitted_to? :destroy, guild do %>
-	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "70x21"), guild_path(guild) ,:confirm => 'Are you sure?', :method => :delete %>
-	<% end %>
+  <div class="adminmenu">
+<% permitted_to? :edit, guild do %>
+<%= link_to image_tag("icons/edit.png", :alt => "edt", :size => "70x21"), edit_guild_path(guild) %>
+<% end %>
+<% permitted_to? :destroy, guild do %>
+<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "70x21"), guild_path(guild) ,:confirm => 'Are you sure?', :method => :delete %>
+<% end %>
   </div>
   <div class="guilddetails">
     <div class="guildname"><%=h guild.name %></div>
@@ -31,4 +31,3 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 
 
 <br />
-
