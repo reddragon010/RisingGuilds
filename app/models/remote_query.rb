@@ -59,15 +59,20 @@ class RemoteQuery < ActiveRecord::Base
       unless new_char_names.empty?
         arsenal_chars.each do |char|
           if new_char_names.include?(char.name) then
-            event = Event.new(:action => 'joined')
-            event.guild = self.guild
-            
-            exist_char = Character.find_all_by_name(char.name)
-            unless exist_char.empty?
-              char = exist_char.first
-              char.update_attribute(:guild_id,id)
+            #Move an existing char instead of creating a new one
+            exist_char = Character.find_by_name(char.name)
+            unless exist_char.nil?
+              exist_char.rank = char.rank
+              exist_char.guild = char.guild
+              char = exist_char
             end
             
+            #save it
+            char.save!
+            
+            #Trigger Join-Event
+            event = Event.new(:action => 'joined')
+            event.guild = self.guild
             event.character = char
             event.save
           end

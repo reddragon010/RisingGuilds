@@ -85,4 +85,17 @@ describe RemoteQuery do
       @char = Character.find(@char.id)
       @char.ail.should == 129
     end
+    
+    #test for Error #17 ... existing chars don't get added to guilds
+    it "should add existing chars to the correct guild" do
+      Factory.create(:Guild)
+      @guild = Factory.create(:Guild)
+      @char = Factory.create(:Character, :name => "Kohorn")
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild = Guild.find(@guild.id)
+      @guild.characters.count.should == 36
+      @guild.characters.find_by_name("Kohorn").should == @char
+    end
 end
