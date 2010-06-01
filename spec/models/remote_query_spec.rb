@@ -118,4 +118,30 @@ describe RemoteQuery do
       @char.reload
       @char.events.last.should == @event
     end
+    
+    #pro/demote on guild_update
+    it "shoud update the rank and trigger the pro/demote-event" do
+      @guild = Factory.create(:Guild)
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @guild.characters.find_by_name("Kohorn").rank.should == 0
+      @guild.characters.find_by_name("Illandra").rank.should == 2
+      @guild.characters.find_by_name("Liezzy").rank.should == 1
+      configatron.arsenal.url.guild.info = 'guild_rank.xml'
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @char = @guild.characters.find_by_name("Kohorn")
+      @char.rank.should == 1
+      @char.events.last.action == "demoted"
+      @char = @guild.characters.find_by_name("Illandra")
+      @char.rank.should == 0
+      @char.events.last.action == "promoted"
+      @char = @guild.characters.find_by_name("Liezzy")
+      @char.rank.should == 2
+      @char.events.last.action == "demoted"
+    end
 end
