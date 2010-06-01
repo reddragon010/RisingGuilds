@@ -98,4 +98,24 @@ describe RemoteQuery do
       @guild.characters.count.should == 36
       @guild.characters.find_by_name("Kohorn").should == @char
     end
+    
+    #test for Error #13 ... double-levelup-events
+    it "shoud update the level and trigger the event ONCE" do
+      @char = Factory.create(:Character,:name => "Nerox")
+      @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
+      @char.remoteQueries.first.execute.should be_true
+      @char.reload
+      @char.level.should == 77
+      configatron.arsenal.url.character.sheet = 'char_levelup.xml'
+      @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
+      @char.remoteQueries.first.execute.should be_true
+      @char.reload
+      @char.level.should == 78
+      @event = @char.events.last
+      @event.action.should == "levelup"
+      @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
+      @char.remoteQueries.first.execute.should be_true
+      @char.reload
+      @char.events.last.should == @event
+    end
 end
