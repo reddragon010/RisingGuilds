@@ -4,6 +4,8 @@ class Attendance < ActiveRecord::Base
   has_one :guild, :through => :raid
   
   validates_presence_of :raid_id
+  validates_presence_of :character_id
+  validates_presence_of :status
   
   protected
   

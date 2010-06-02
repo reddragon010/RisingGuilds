@@ -48,11 +48,13 @@
 <% (1..4).each do |i| %>
   <tr>
 	<td colspan=2><%=h configatron.raidplanner.status.index(i) %></td>
-  </rt>
+  </tr>
 <% @raid.attendances.find_all_by_status(i).each do |attendance|%>	
-  <tr>
+  <tr style="<%= approve_style_helper(attendance.approved) %>">
 	<td><%=h attendance.character.name %></td>
-	<td><%=h attendance.role %>
+	<td><%=h attendance.role %></td>
+	<td><%=h attendance.message %></td>
+	<td><%= link_to((attendance.approved ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance)%>
   </tr>
 <% end %>
 <% end %>
