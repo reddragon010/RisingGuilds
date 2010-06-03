@@ -12,16 +12,28 @@
     <%= f.text_field :max_attendees %>
   </p>
   <p>
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
     <%= f.label :invite_start %><br />
-    <%= f.datetime_select :invite_start %>
+    <%= f.time_select :invite_start %>
   </p>
   <p>
     <%= f.label :start %><br />
-    <%= f.datetime_select :start %>
+    <%= f.time_select :start %>
   </p>
   <p>
     <%= f.label :end %><br />
-    <%= f.datetime_select :end %>
+    <%= f.time_select :end %>
+  </p>
+  <p>
+    <%= f.label :min_lvl %><br />
+    <%= f.text_field :min_lvl %>
+  </p>
+  <p>
+    <%= f.label :max_lvl %><br />
+    <%= f.text_field :max_lvl %>
   </p>
   <p>
     <%= f.label :description %><br />

@@ -4,7 +4,7 @@ class Raid < ActiveRecord::Base
   has_many :characters, :through => :attendances
   
   #only future Date/Time is valid
-  validates_each(:invite_start,:start,:end) do |record, attr, value|
+  validates_each(:date,:invite_start,:start,:end) do |record, attr, value|
     record.errors.add attr, 'have to be in the future' if value < Time.now
   end
   
