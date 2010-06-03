@@ -23,7 +23,11 @@ authorization do
     end
     
     #Can edit Raids and assignments if is a manager of raid's guild
-    has_permission_on [:raids, :assignmets], :to => :change, :join_by => :or do
+    has_permission_on [:attendances], :to => [:change, :approve] do
+      if_attribute :guild => { :managers => contains { user } }
+    end
+    
+    has_permission_on [:raids], :to => [:change, :approve_all] do
       if_attribute :guild => { :managers => contains { user } }
     end
     

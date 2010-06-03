@@ -51,17 +51,21 @@ Member
 <% unless @raid.attendances.empty? %>
 <% (1..4).each do |i| %>
 <br /><br />
+
 <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+
 <tr valign="top">
-	  <td><div class="contentHeader"> <%=h configatron.raidplanner.status.index(i) %></div></td>
+  <td><div class="contentHeader"> <%=h configatron.raidplanner.status.index(i) %></div></td>
   </tr>
 
-  <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
+    <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
 
-  <tr>
+  <tr style="<%= approve_style_helper(attendance.approved) %>">
     <td><div class="charname"><%=h attendance.character.name %></div></td>
     <td><div class="charlvl"><%=h attendance.character.level %></div></td>
-        <td><div class="charrole"><%=h attendance.role %></div></td>
+    <td><div class="charrole"><%=h attendance.role %></div></td>
+    <td><%=h attendance.message %></td>
+    <td><%= link_to((attendance.approved ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance)%>
   </tr>
 
 <% end %>

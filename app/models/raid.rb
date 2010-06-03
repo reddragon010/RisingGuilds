@@ -3,10 +3,11 @@ class Raid < ActiveRecord::Base
   has_many :attendances
   has_many :characters, :through => :attendances
   
-  #only future Date/Time is valid
-  validates_each(:date,:invite_start,:start,:end) do |record, attr, value|
-    record.errors.add attr, 'have to be in the future' if value < Time.now
-  end
+#only future Date/Time is valid
+# Bug with new date collum
+#  validates_each(:date,:invite_start,:start,:end) do |record, attr, value|
+#    record.errors.add attr, 'have to be in the future' if value < Time.now
+#  end
   
 =begin still buggy yet :(
   validates_each(:invite_start) do |record, attr, value|

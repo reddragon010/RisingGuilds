@@ -84,4 +84,19 @@ class AttendancesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def approve
+    @attendance = Attendance.find(params[:id])
+    respond_to do |format|
+      if @attendance.toggle!(:approved)
+      flash[:notice] = 'Attendance was successfully updated.'
+      format.html { redirect_to_target_or_default(@attendance.raid) }
+      format.xml  { head :ok }
+    else
+      format.html { render :controller => "raid", :action => "show", :id => @attendance.raid.id  }
+      format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
 end
