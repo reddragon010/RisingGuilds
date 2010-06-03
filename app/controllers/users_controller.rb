@@ -3,6 +3,22 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
+    
+    params[:sort] = 'login' if params[:sort].nil?
+    
+    @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
+    
+    
+    unless @guild.nil? then
+      @users = @guild.users.find(:all, :order => params[:sort])
+    else
+      @users = User.find(:all, :order => params[:sort])
+    end
+   
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @characters }
+    end
   end
   
   def new

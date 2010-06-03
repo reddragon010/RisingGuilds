@@ -1,18 +1,30 @@
+<table>
+<tr>
+	<th>Login</th>
+	<th>Assignments</th>
+	<th>Last Login</th>
+	<th></th>
+</tr>
 <% @users.each do |user| %>
-<div class="user">
-  <div class="adminmenu">  
-	<% permitted_to? :edit, user do %>
-	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_user_path(guild) %>
-	<% end %>
-	<% permitted_to? :destroy, user do %>
-	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
-	<% end %>
-  </div>
-  <span class="username"><%= link_to user.login, user_path(user) %></span>
-  <ul>
-  <% user.assignments.each do |a| %>
-	<li><%= a.role.nil? ? "" : a.role.name %> (<%= a.guild.nil? ? "" : a.guild.name %>)</li>
-  <% end %>
-  </ul>
-</div>
+<tr>
+	<td class="username"><%= link_to user.login, user_path(user) %></td>
+	<td>
+		<ul><% user.assignments.each do |a| %>
+			<% if @guild.nil? || a.guild_id == @guild.id %>
+			<li><%= a.role.nil? ? "" : a.role.name %> <% if @guild.nil? %>(<%= a.guild.nil? ? "" : a.guild.name %>)<% end %></li>
+			<% end %>
+		<% end %></ul>
+	</td>
+	
+	<td><%=h user.last_login_at %></td>
+	<td>
+		<% permitted_to? :edit, user do %>
+		<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_user_path(guild) %>
+		<% end %>
+		<% permitted_to? :destroy, user do %>
+		<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
+		<% end %>
+	</td>
+</tr>
 <% end %>
+</table>
