@@ -40,7 +40,7 @@ class RaidsController < ApplicationController
     else
       @attendance = Attendance.new(:raid_id => @raid.id)
     end 
-    
+    @guild = @raid.guild
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @raid }

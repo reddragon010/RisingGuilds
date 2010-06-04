@@ -1,0 +1,34 @@
+<% content_for :tabs do %>
+<% 
+tabs = Array.new 
+if params[:action] == "index"
+	tabs << link_to("Guild", guild_path(@guild))
+	tabs << link_to("Members", "/guilds/#{@guild.id}/characters")
+	tabs << link_to("Raids", "/guilds/#{@guild.id}/raids")
+
+	if permitted_to? :edit, @guild
+		tabs << ""
+		tabs << link_to("Edit", edit_guild_path(@guild))
+		tabs << link_to("Actualize", :action => "actualize", :id => @guild.id)
+	end
+elsif params[:action] == "show"
+	tabs << link_to('Index', characters_path)
+	tabs << ""
+	tabs << link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character
+	tabs << link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character
+	if permitted_to? :actualize, @character
+		tabs << ""
+		tabs << link_to('Actualize', :action => 'actualize') 
+		tabs << link_to('Generate AIL', :action => 'generate_ail')
+	end
+end
+render :partial => 'shared/tabs', :locals => {:tabs => tabs}
+%>
+<% end %>
+
+<% content_for :content do %>
+  <%= yield %>
+<% end %>
+
+<%= render(:file => 'layouts/application')%>
+

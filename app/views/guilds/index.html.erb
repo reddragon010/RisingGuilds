@@ -1,12 +1,3 @@
-<%
-tabs = Array.new
-
-if permitted_to? :create, @guild
-tabs << link_to("New guild", new_guild_path)
-end
-render :partial => 'shared/tabs', :locals => {:tabs => tabs}
-%>
-
 <% @guilds.each_with_index do |guild,i| %>
 <div id="<%= i%>" class="guild">
   <div class="guildlogo">
