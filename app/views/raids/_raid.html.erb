@@ -1,10 +1,13 @@
-<% @timeformat = "%d/%m %Y - %H:%M" %>  
+<% @timeformat = "%H:%M" %>
+<% @dateformat = "%d/%m %Y" %>
+
   <tr>
 	<% unless params[:guild_id] %>
     <td><%=h raid.guild.name %></td>
 	<% end %>
     <td><%=h raid.title %></td>
     <td><%=h raid.max_attendees %></td>
+    <td><%=h raid.date.strftime(@dateformat) %></td>
     <td><%=h raid.invite_start.strftime(@timeformat) %></td>
     <td><%=h raid.start.strftime(@timeformat) %></td>
     <td><%=h raid.end.strftime(@timeformat) %></td>

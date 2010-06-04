@@ -27,7 +27,7 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	</div>
 	<% unless @guild.website.nil? %>
 	<div id="website">
-	  <%= link_to @guild.website, @guild.website %>
+	  <%= link_to @guild.website, @guild.website, :popup => true %>
 	</div>
 	<% end %>
 </div>

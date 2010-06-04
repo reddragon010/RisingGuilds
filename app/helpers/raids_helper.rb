@@ -1,4 +1,5 @@
 module RaidsHelper
+
   def approve_style_helper(approved)
     if approved
       return "color:green;"
@@ -6,4 +7,5 @@ module RaidsHelper
       return "color:red;"
     end
   end
+
 end

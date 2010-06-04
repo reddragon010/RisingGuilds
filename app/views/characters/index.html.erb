@@ -52,7 +52,7 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>
 	<% end %>
 	<% permitted_to? :delink, character do%>
-    <td><%= link_to(image_tag("icons/delete.png", :alt => "del", :size => "16x16"), "/characters/#{character.id}/delink", :confirm => 'Are you sure?') %></td>
+        <td><%= link_to(image_tag("icons/delink.png", :alt => "del", :size => "17x17"), "/characters/#{character.id}/delink", :confirm => 'Are you sure?') %></td>
 	<% end %>
 	<% permitted_to? :make_main, character do%>
 	<td><%= link_to(image_tag("icons/mainchar.png", :alt => "main", :size => "16x16"), "/characters/#{character.id}/make_main") unless character.main %></td>
