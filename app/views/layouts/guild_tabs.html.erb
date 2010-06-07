@@ -1,0 +1,23 @@
+<% content_for :tabs do %>
+<%
+@tabs << link_to("Guild", guild_path(@guild))
+@tabs << link_to("Members", guild_characters_path(@guild))
+@tabs << link_to("Raids", guild_raids_path(@guild))
+@tabs << link_to("Users", guild_users_path(@guild))
+
+if permitted_to? :edit, @guild
+	@tabs << ""
+	@tabs << link_to("Edit", edit_guild_path(@guild))
+	@tabs << link_to("Actualize", :action => "actualize", :id => @guild.id)
+end
+
+render :partial => 'shared/tabs', :locals => {:tabs => @tabs}
+%>
+<% end %>
+
+<% content_for :content do %>
+  <%= yield %>
+<% end %>
+
+<%= render(:file => 'layouts/application')%>
+

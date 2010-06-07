@@ -1,0 +1,29 @@
+<tr>
+	<td class="username"><%= link_to user.login, user_path(user) %></td>
+	<td><%=h user.last_login_at %></td>
+	<td>
+		<% permitted_to? :edit, user do %>
+		<%= link_to image_tag("icons/page_edit.png", :alt => "edit", :size => "16x16"), edit_user_path(user) %>
+		<% end %>
+	</td>
+	<td>
+		<% permitted_to? :destroy, user do %>
+		<%= link_to image_tag("icons/delete.png", :alt => "delete", :size => "16x16"), :method => :delete %>
+		<% end %>
+	</td>
+	<td>
+		<% permitted_to? :kick, user do %>
+		<%= link_to image_tag("icons/kick.png", :alt => "kick", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/kick" %>
+		<% end %>
+	</td>
+	<td>
+		<% permitted_to? :promote, user do %>
+		<%= link_to image_tag("icons/arrow_up.png", :alt => "promote", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/promote" %>
+		<% end %>
+	</td>
+	<td>
+		<% permitted_to? :demote, user do %>
+		<%= link_to image_tag("icons/arrow_down.png", :alt => "demote", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/demote" %>
+		<% end %>
+	</td>
+</tr>

@@ -39,7 +39,7 @@
 	<!-- END NavBar Div -->
 	
 	<div id="center">
-	
+		
 		<%= yield(:tabs) %>
 	
 		<!-- Content Div -->
@@ -50,7 +50,8 @@
 		<% if flash[:error] %>
 		  <p id="error"><%= flash[:error] %></p>
 		<% end %>
-	      <%= yield(:content) or yield %>
+		
+	    <%= yield(:content) or yield %>
 	    </div>
 		<!-- End Content Div-->
 		
