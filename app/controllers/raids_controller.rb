@@ -1,6 +1,8 @@
 class RaidsController < ApplicationController
   filter_resource_access
   
+  before_filter :setup_raidicons, :only => [:edit, :new]
+  
   # GET /raids
   # GET /raids.xml
   def index
@@ -51,6 +53,7 @@ class RaidsController < ApplicationController
   # GET /raids/new.xml
   def new
     @raid.guild_id = params[:guild_id]
+  	
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @raid }
@@ -103,6 +106,14 @@ class RaidsController < ApplicationController
       format.html { redirect_to(raids_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  
+  def setup_raidicons
+    raid_icons_files = Dir.entries(RAILS_ROOT + "/public/images/icons/raid").reject {|f| f[0,1] == "." || f == "nil.png"} 
+  	@raid_icons = {}
+  	raid_icons_files.each{|f| @raid_icons[f.chomp(".png")] = f}
   end
   
 end

@@ -5,8 +5,8 @@ class Raid < ActiveRecord::Base
 
 #only future Date/Time is valid
 # Bug with new date collum
-  validates_each(:date,:invite_start,:start,:end) do |record, attr, value|
-    record.errors.add attr, 'have to be in the future' if value < Time.now
+  validates_each(:date) do |record, attr, value|
+    record.errors.add attr, 'have to be in the future' if value < Date.today
   end
 
   

@@ -43,8 +43,9 @@ class GuildsController < ApplicationController
 
     respond_to do |format|
       if @guild.valid_name?
-        @guild.assignments << Assignment.new(:user_id => current_user.id,:role_id => 1)
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 1)
         if @guild.save
+          
           flash[:notice] = 'Guild was successfully created.'
           format.html { redirect_to(@guild) }
           format.xml  { render :xml => @guild, :status => :created, :location => @guild }

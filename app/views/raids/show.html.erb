@@ -1,5 +1,6 @@
 <script type="text/javascript" charset="utf-8">kickoff=new Date(<%= "#{@raid.date.year}, #{@raid.date.month}, #{@raid.date.day}, #{@raid.start.hour}, #{@raid.start.min}" %>);setInterval('updateCDTime(kickoff)', 1000 );</script>
 
+<div id="raid_icon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
 <div id="countdown_time"></div>
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="contentRaid">
