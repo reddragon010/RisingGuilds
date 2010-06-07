@@ -6,7 +6,7 @@
 	  <%=h @guild.name %>
 	</div>
 	<div id="guildmembers">
-	  <%=h @guild.characters.count %> members <%=h "(#{@guild.characters.find_all_by_online(true).count} online)"%>
+	  <%=h @guild.characters.count %> members <%=h "(#{@online_characters.count} online)"%>
 	</div>
 	<div id="guildrealm">
 	  <%=h @guild.realm %>	
@@ -17,10 +17,13 @@
 	</div>
 	<% end %>
 </div>
+
 <div class="clear">&nbsp;</div>
+
 <div id="description">
 	  <%=h @guild.description %>
 </div>
+
 <div id="details">
 	<div>
 	  <b>Ail:</b>
@@ -53,6 +56,29 @@
 	</div>
 </div>
 
+<% unless @online_characters.nil? %>
+<div id="onlinecharacers">
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Rank</th>
+		<th>Class</th>
+		<th>Race</th>
+		<th>Level</th>
+	</tr>
+	<% @online_characters.each do |character| %>
+	<tr>
+		<td><%= link_to character.name, character_path(character) %></td>
+		<td><%=h character.rank %></td>
+		<td><%= image_tag classicon_path(character),:size => "18x18" %></td>
+	    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+		<td><%=h character.level %></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<% end %>
+
 <div id="events">
 	<h3>Newest Events</h3>
 	<%= render :partial => 'shared/event', :collection => @guild.events.last(20).reverse %>
@@ -60,9 +86,9 @@
 
 <div style="position:relative; width:100%">
 <% if permitted_to? :edit, @guild %>
-<div id ="secret">
-  <b>Token:</b>
-  <%=h @guild.token %>
-</div>
+	<div id ="secret">
+  		<b>Token:</b>
+  		<%=h @guild.token %>
+	</div>
 <% end %>
 </div>

@@ -16,6 +16,7 @@ class GuildsController < ApplicationController
   # GET /guilds/1.xml
   def show
     
+    @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
