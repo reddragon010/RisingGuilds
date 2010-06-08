@@ -1,6 +1,19 @@
+<% content_for :tooltop do %>
+<% user.characters.each do |character| %>
+<% tooltip("tooltip_#{character.id}") do %>
+	<%= character.name %>
+<% end %>
+<% end %>
+<% end %>
+
 <tr>
 	<td class="username"><%= link_to user.login, user_path(user) %></td>
 	<td><%=h user.last_login_at %></td>
+	<td>
+	<% user.characters.each do |character|%>
+		<%= link_to image_path(charicon_path(character)), character_path(character), :id => "tooltip_#{character.id}" %>
+	<% end %>
+	</td>
 	<td>
 		<% permitted_to? :edit, user do %>
 		<%= link_to image_tag("icons/page_edit.png", :alt => "edit", :size => "16x16"), edit_user_path(user) %>

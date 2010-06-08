@@ -36,6 +36,11 @@
 	</div>
 </div>
 
+<div>
+	<%= link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character %>
+	<%= link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character %>
+</div>
+
 <div id="details">
 <h3>Details</h3>
 

@@ -8,9 +8,21 @@
 	</thead>
 	<tbody>
 		<tr>
-			<th colspan="3">Managers</th>
+			<th colspan="3">Leaders</th>
 		</tr>
-		<%= render :partial => 'user', :collection => @guild.managers, :as => :user, :locals => {:guild => @guild}%>
+		<%= render :partial => 'user', :collection => @guild.leaders, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<tbody>
+		<tr>
+			<th colspan="3">Officers</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.officers, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<tbody>
+		<tr>
+			<th colspan="3">Raidleaders</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.raidleaders, :as => :user, :locals => {:guild => @guild}%>
 	</tbody>
 	<tbody>
 		<tr>
@@ -19,3 +31,5 @@
 		<%= render :partial => 'user', :collection => @guild.members, :as => :user, :locals => {:guild => @guild}%>
 	</tbody>
 </table>
+
+<%= yield :tooltip %>
