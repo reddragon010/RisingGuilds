@@ -25,18 +25,18 @@
 		<% end %>
 	</td>
 	<td>
-		<% permitted_to? :kick, user do %>
-		<%= link_to image_tag("icons/kick.png", :alt => "kick", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/kick" %>
-		<% end %>
+		<% #permitted_to? :kick, user do %>
+		<%= link_to image_tag("icons/kick.png", :alt => "kick", :size => "16x16"), "/users/#{user.id}/kick?guild_id=#{guild.id}" %>
+		<% #end %>
 	</td>
 	<td>
-		<% permitted_to? :promote, user do %>
-		<%= link_to image_tag("icons/arrow_up.png", :alt => "promote", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/promote" %>
-		<% end %>
+		<% #permitted_to? :promote, user do %>
+		<%= link_to image_tag("icons/arrow_up.png", :alt => "promote", :size => "16x16"), "/users/#{user.id}/promote?guild_id=#{guild.id}" %>
+		<% #end %>
 	</td>
 	<td>
-		<% permitted_to? :demote, user do %>
-		<%= link_to image_tag("icons/arrow_down.png", :alt => "demote", :size => "16x16"), "/guilds/#{guild.id}/users/#{user.id}/demote" %>
-		<% end %>
+		<% #permitted_to? :demote, user do %>
+		<%= link_to image_tag("icons/arrow_down.png", :alt => "demote", :size => "16x16"), "/users/#{user.id}/demote?guild_id=#{guild.id}" %>
+		<% #end %>
 	</td>
 </tr>

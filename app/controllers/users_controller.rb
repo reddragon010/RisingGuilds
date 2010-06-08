@@ -79,7 +79,7 @@ class UsersController < ApplicationController
     else
       flash[:error] = "you have not enought rights to kick this user"
     end
-    redirect_to guild_path(@guild)
+    redirect_to guild_users_path(@guild)
   end
   
   def promote
@@ -92,14 +92,14 @@ class UsersController < ApplicationController
     if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
-        flash[:notice] = "User Promoted!"
+        flash[:notice] = "User promoted!"
       else
         flash[:error] = "ERROR!"
       end
     else
       flash[:error] = "you have not enought rights to promote this user"
     end
-    redirect_to guild_path(@guild)
+    redirect_to guild_users_path(@guild)
   end
   
   def demote
@@ -112,14 +112,14 @@ class UsersController < ApplicationController
     if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
-        flash[:notice] = "User Promoted!"
+        flash[:notice] = "User demoted!"
       else
         flash[:error] = "ERROR!"
       end
     else
       flash[:error] = "you have not enought rights to promote this user"
     end
-    redirect_to guild_path(@guild)
+    redirect_to guild_users_path(@guild)
   end
   
   private
