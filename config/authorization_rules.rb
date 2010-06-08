@@ -12,38 +12,10 @@ authorization do
     has_permission_on :characters, :to => [:delink, :actualize, :generate_ail,:make_main] do
       if_attribute :user_id => is { user.id }
     end
-    #Can link chars if is a member of the guild
-    has_permission_on :characters, :to => [:link], :join_by => :and  do
-      if_attribute :guild => { :users => contains { user } }
-      if_attribute :user_id => is_not { user.id }
-    end
-    #Can administrate Guilds if is a officer or leader
-    has_permission_on :guilds, :to => [:change, :actualize], :join_by => :or do
-      if_attribute :leaders => contains { user }
-      if_attribute :officers => contains { user }
-    end
-    
-    #Can create/edit Raids and edit attendances if is a leader, officer or raidleader of raid's guild
-    has_permission_on [:attendances], :to => [:change, :approve], :join_by => :or do
-      if_attribute :guild => { :raidleaders => contains { user } }
-      if_attribute :guild => { :officers => contains { user } }
-      if_attribute :guild => { :leaders => contains { user } }
-    end
-    
-    has_permission_on [:raids], :to => [:setup, :change, :approve_all], :join_by => :or do
-      if_attribute :guild => { :raidleaders => contains { user } }
-      if_attribute :guild => { :officers => contains { user } }
-      if_attribute :guild => { :leaders => contains { user } }
-    end
     
     #Can edit own attendances
     has_permission_on :attendances, :to => :change do
       if_attribute :character => {:user_id => is { user.id } }
-    end
-    
-    #Can edit leading Raids
-    has_permission_on :raids, :to => :change do
-      if_attribute :leader => is { user.id }
     end
     
   end
@@ -53,7 +25,39 @@ authorization do
   end
   
   role :leader do
+    includes :officer
+  end
+  
+  role :officer do
+    includes :raidleader
+    
+    #Can administrate Guilds if is a officer or leader
+    has_permission_on :guilds, :to => [:change, :actualize], :join_by => :or do
+      if_attribute :leaders => contains { user }
+      if_attribute :officers => contains { user }
+    end
+  end
+  
+  role :raidleader do
     includes :guildmember
+    has_permission_on :raids, :to => :new
+    has_permission_on :raids, :to => :create do
+      if_attribute :guild => { :raidleaders => contains { user } }
+      if_attribute :guild => { :officers => contains { user } }
+      if_attribute :guild => { :leaders => contains { user } }
+    end
+    
+    #Can create/edit Raids and edit attendances if is a leader, officer or raidleader of raid's guild
+    has_permission_on [:raids,:attendances], :to => [:change, :approve], :join_by => :or do
+      if_attribute :guild => { :raidleaders => contains { user } }
+      if_attribute :guild => { :officers => contains { user } }
+      if_attribute :guild => { :leaders => contains { user } }
+    end
+    
+    #Can edit leading Raids
+    has_permission_on :raids, :to => :change do
+      if_attribute :leader => is { user.id }
+    end
   end
   
   role :member do
@@ -63,6 +67,12 @@ authorization do
     #Can view Raids of the own Guilds
     has_permission_on :raids, :to => :view do
       if_attribute :guild => { :users => contains{ user } }
+    end
+    
+    #Can link chars if is a member of the guild
+    has_permission_on :characters, :to => [:link], :join_by => :and  do
+      if_attribute :guild => { :users => contains { user } }
+      if_attribute :user_id => is_not { user.id }
     end
   end
   

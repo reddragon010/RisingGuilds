@@ -111,7 +111,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if params[:token] == @guild.token
-        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("leader").id)
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
         @guild.save
         flash[:notice] = 'You have successfully joined this guild'
         format.html { redirect_to(@guild) }

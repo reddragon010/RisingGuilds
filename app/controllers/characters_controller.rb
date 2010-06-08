@@ -22,7 +22,13 @@ class CharactersController < ApplicationController
     end
    
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        unless params[:guild_id].nil?
+          render :layout => 'guild_tabs'
+        else
+          render
+        end
+      end
       format.xml  { render :xml => @characters }
     end
   end
