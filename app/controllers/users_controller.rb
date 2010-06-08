@@ -82,6 +82,46 @@ class UsersController < ApplicationController
     redirect_to guild_path(@guild)
   end
   
+  def promote
+    if params[:guild_id].nil?
+      flash[:error] = "No guild specified!"
+      redirect_to root_url
+    end
+    @user = User.find(params[:id])
+    @guild = Guild.find(params[:guild_id])
+    if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
+      asmt = @guild.assignments.find_by_user_id(@user.id)
+      if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
+        flash[:notice] = "User Promoted!"
+      else
+        flash[:error] = "ERROR!"
+      end
+    else
+      flash[:error] = "you have not enought rights to promote this user"
+    end
+    redirect_to guild_path(@guild)
+  end
+  
+  def demote
+    if params[:guild_id].nil?
+      flash[:error] = "No guild specified!"
+      redirect_to root_url
+    end
+    @user = User.find(params[:id])
+    @guild = Guild.find(params[:guild_id])
+    if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
+      asmt = @guild.assignments.find_by_user_id(@user.id)
+      if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
+        flash[:notice] = "User Promoted!"
+      else
+        flash[:error] = "ERROR!"
+      end
+    else
+      flash[:error] = "you have not enought rights to promote this user"
+    end
+    redirect_to guild_path(@guild)
+  end
+  
   private
   def choose_layout
     unless params[:guild_id].nil?
