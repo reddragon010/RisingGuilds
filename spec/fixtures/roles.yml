@@ -1,14 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 manager:
-  name: guildmanager
+  name: manager
 
 leader:
-  name: guildleader
+  name: leader
  
 member:
-  name: guildmember
+  name: member
 
 officer:
-  name: guildofficer
+  name: officer
 

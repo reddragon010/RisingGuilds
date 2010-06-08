@@ -40,35 +40,35 @@ describe Guild do
     @guild.should have_at_least(1).error_on(:token)
   end
   
-  it "should know its managers" do
+  it "should know its raidleaders" do
     @guild = Factory(:Guild)
-    Factory(:Role,:name => 'guildmanager')
-    manager = Factory(:User)
-    @guild.assignments << Assignment.create(:user_id => manager.id, :guild_id => @guild.id, :role_id => Role.find_by_name('guildmanager'))
-    @guild.managers.first.should == manager
+    Factory(:Role,:name => 'raidleader')
+    raidleader = Factory(:User)
+    @guild.assignments << Assignment.create(:user_id => raidleader.id, :guild_id => @guild.id, :role_id => Role.find_by_name('raidleader'))
+    @guild.raidleaders.first.should == raidleader
   end
   
   it "should know its leaders" do
     @guild = Factory(:Guild)
-    Factory(:Role,:name => 'guildleader')
+    Factory(:Role,:name => 'leader')
     leader = Factory(:User)
-    @guild.assignments << Assignment.create(:user_id => leader.id, :guild_id => @guild.id, :role_id => Role.find_by_name('guildleader'))
+    @guild.assignments << Assignment.create(:user_id => leader.id, :guild_id => @guild.id, :role_id => Role.find_by_name('leader'))
     @guild.leaders.first.should == leader
   end
   
   it "should know its officers" do
     @guild = Factory(:Guild)
-    Factory(:Role,:name => 'guildofficer')
+    Factory(:Role,:name => 'officer')
     officer = Factory(:User)
-    @guild.assignments << Assignment.create(:user_id => officer.id, :guild_id => @guild.id, :role_id => Role.find_by_name('guildofficer'))
+    @guild.assignments << Assignment.create(:user_id => officer.id, :guild_id => @guild.id, :role_id => Role.find_by_name('officer'))
     @guild.officers.first.should == officer
   end
   
   it "should know its members" do
     @guild = Factory(:Guild)
-    Factory(:Role,:name => 'guildmember')
+    Factory(:Role,:name => 'member')
     member = Factory(:User)
-    @guild.assignments << Assignment.create(:user_id => member.id, :guild_id => @guild.id, :role_id => Role.find_by_name('guildmember'))
+    @guild.assignments << Assignment.create(:user_id => member.id, :guild_id => @guild.id, :role_id => Role.find_by_name('member'))
     @guild.members.first.should == member
   end
   

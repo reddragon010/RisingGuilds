@@ -4,8 +4,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
   
-  layout :choose_layout
-  
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   
@@ -17,24 +15,6 @@ class ApplicationController < ActionController::Base
   
   def setup_tabs
     @tabs = Array.new
-  end
-  
-  def choose_layout
-    case controller_name
-    when "guilds"
-      return "guild_tabs" if params[:guild_id] || action_name != 'index'
-    when "characters"
-      if params[:guild_id]
-        return "guild_tabs" 
-      else
-        return "character_tabs"
-      end
-    when "raids"
-      return "guild_tabs" if params[:guild_id]
-    when "users"
-      return "guild_tabs" if params[:guild_id]
-    end
-    return "application"
   end
   
   def permission_denied

@@ -1,13 +1,15 @@
 class GuildsController < ApplicationController
   filter_resource_access
   
+  layout "guild_tabs"
+  
   # GET /guilds
   # GET /guilds.xml
   def index
     @guilds = Guild.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "application"} # index.html.erb
       format.xml  { render :xml => @guilds }
     end
   end
@@ -28,7 +30,7 @@ class GuildsController < ApplicationController
   def new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => "application"} # new.html.erb
       format.xml  { render :xml => @guild }
     end
   end
@@ -109,7 +111,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if params[:token] == @guild.token
-        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 4)
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("leader").id)
         @guild.save
         flash[:notice] = 'You have successfully joined this guild'
         format.html { redirect_to(@guild) }
@@ -119,5 +121,7 @@ class GuildsController < ApplicationController
       end
     end
   end
+  
+  
   
 end

@@ -20,7 +20,7 @@ Feature: WidgetApi
 		
 	Scenario: Get onlinemember-widget
 		Given I got an apikey
-		And I am a "guildmanager" of the guild
+		And I am a "leader" of the guild
 		When I go to Divine´s onlinemembers-widget
 		Then I should see "document.write("
 		

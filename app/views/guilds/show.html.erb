@@ -85,7 +85,7 @@
 </div>
 
 <div style="position:relative; width:100%">
-<% if permitted_to? :edit, @guild %>
+<% if permitted_to? :change, @guild %>
 	<div id ="secret">
   		<b>Token:</b>
   		<%=h @guild.token %>

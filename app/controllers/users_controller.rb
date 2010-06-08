@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create]
-  layout :choose_layout, :only => [:index]
   
   def index
     @users = User.all
