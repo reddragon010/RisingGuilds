@@ -1,5 +1,5 @@
 Factory.define :Character do |f|
-  f.user_id 1
+  f.user_id nil
   f.sequence(:name){|n| "TestBoon#{n}"} 
   f.rank 1
   f.realm "PvE-Realm"

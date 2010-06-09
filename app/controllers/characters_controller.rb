@@ -22,7 +22,13 @@ class CharactersController < ApplicationController
     end
    
     respond_to do |format|
-      format.html # index.html.erb
+      format.html do
+        unless params[:guild_id].nil?
+          render :layout => 'guild_tabs'
+        else
+          render
+        end
+      end
       format.xml  { render :xml => @characters }
     end
   end
@@ -96,15 +102,8 @@ class CharactersController < ApplicationController
       flash[:error] = "Character not found"
       redirect_to root_url
     elsif @character.user.nil?
-      flash[:notice] = "Character is now yours"
-      @character.user = current_user
-      unless @character.guild.nil? && !@character.guild.users.include?(current_user)
-        newrole = guildrank_to_role(@character.rank)
-        assignment = @character.guild.assignments.find_by_user_id(current_user.id)
-        assignment.update_attribute(:role_id,newrole.id) if assignment.role_id > newrole.id
-      end
-      @character.save
-      redirect_to(@character)
+        flash[:notice] = "Character is now yours" if @character.update_attribute(:user_id, current_user.id)
+        redirect_to(@character) 
     else
       flash[:error] = "Character already marked! Please contact the support"
       redirect_to(@character)
@@ -129,21 +128,9 @@ class CharactersController < ApplicationController
       @character.user = nil
       @character.save
       #cleanup guild permissions
-      @guild = Guild.find(@guild.id)
+      @guild.reload
       flash[:notice] = "Character has been demarked"
-      if !@guild.characters.map{|c| c.user_id}.include?(@user.id)             #check if last char of the user has left the guild and
-        @guild.assignments.find_all_by_user_id(@user.id).each{|a| a.destroy}  #destroy all assignments between user and guild
-        flash[:notice] += "\n Your last Char left the Guild! Your rights are removed"
-      else                                                                    #if the char was not the last change the rank to the highest char still in the guild
-        userchars = @guild.characters.find(:all, :conditions => {:user_id => @user.id})
-        ranks = userchars.collect{ |c| c.rank }
-        newrank = ranks.sort.first
-        newrole = guildrank_to_role(newrank)
-        assignment = @guild.assignments.find_by_user_id(@user.id)
-        assignment.update_attribute(:role_id, newrole.id) if assignment.role_id > newrole.id
-      end
-      
-      redirect_to_target_or_default "/users/#{current_user.id}/characters"
+      redirect_to(@character)
     end
   end
   

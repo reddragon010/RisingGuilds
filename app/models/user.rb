@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     Notifier.deliver_activation_confirmation(self)
   end
   
+  def guild_role_id(guild_id)
+    self.assignments.find_all_by_guild_id(guild_id, :order => "role_id").last.role_id
+  end
+  
   def role_symbols
     role_symbols = Array.new
     role_symbols << :admin if admin?

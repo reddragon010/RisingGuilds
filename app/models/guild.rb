@@ -21,30 +21,32 @@ class Guild < ActiveRecord::Base
                                           :format => 'PNG'
                                           }}
   
-  def managers
-    @managers = Array.new
-    @managers_role_id ||= Role.find_by_name("guildmanager").id
-    assignments.find_all_by_role_id(@managers_role_id).each{|a| @managers << a.user}
-    @managers
-  end
+  
   
   def leaders
     @leaders = Array.new
-    @leaders_role_id ||= Role.find_by_name("guildleader").id
+    @leaders_role_id ||= Role.find_by_name("leader").id
     assignments.find_all_by_role_id(@leaders_role_id).each{|a| @leaders << a.user}
     @leaders
   end
   
   def officers
     @officers = Array.new
-    @officers_role_id ||= Role.find_by_name("guildofficer").id
+    @officers_role_id ||= Role.find_by_name("officer").id
     assignments.find_all_by_role_id(@officers_role_id).each{|a| @officers << a.user}
     @officers
   end
   
+  def raidleaders
+    @raidleaders = Array.new
+    @raidleaders_role_id ||= Role.find_by_name("raidleader").id
+    assignments.find_all_by_role_id(@raidleaders_role_id).each{|a| @raidleaders << a.user}
+    @raidleaders
+  end
+  
   def members
     @members = Array.new
-    @members_role_id ||= Role.find_by_name("guildmember").id
+    @members_role_id ||= Role.find_by_name("member").id
     assignments.find_all_by_role_id(@members_role_id).each{|a| @members << a.user}
     @members
   end
@@ -63,7 +65,7 @@ class Guild < ActiveRecord::Base
       url += configatron.arsenal.url.guild.name
       url += CGI.escape(self.name)
     else
-      return true
+      return true #just mock it for tests
     end
     
     begin # check header response
