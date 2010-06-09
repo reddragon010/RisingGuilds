@@ -2,7 +2,7 @@
 tabs = Array.new
 
 if permitted_to? :create, @guild
-tabs << link_to("New guild", new_guild_path)
+tabs << link_to(t('guilds.new'), new_guild_path)
 end
 render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 %>

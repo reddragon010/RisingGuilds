@@ -2,25 +2,25 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
+    <%= f.label t('guilds.name') %><br />
     <%= f.text_field :name, :disabled => true %>
   </p>
   <p>
-	<%= f.label :logo %><br />
-	<%= f.file_field :logo %>
+    <%= f.label t('guilds.logo')%><br />
+    <%= f.file_field :logo %>
   </p>
   <p>
-    <%= f.label :website %><br />
+    <%= f.label t('guilds.logo') %><br />
     <%= f.text_field :website %>
   </p>
   <p>
-    <%= f.label :description %><br />
+    <%= f.label t('guilds.logo') %><br />
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit t('guilds.update') %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @guild %> |
-<%= link_to 'Back', guilds_path %>
+<%= link_to t('guilds.show'), @guild %> |
+<%= link_to t('guilds.back'), guilds_path %>
