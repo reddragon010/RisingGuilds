@@ -9,62 +9,68 @@
   <%= javascript_include_tag :all %>
 </head>
 <body>
-  <div id="container">
-	<!-- Header Div -->
-    <div id="header">
-      <div id="title"></div>
-	  <div id="usermenu">
-		<% if logged_in? %>
-		<%= link_to "Logout", logout_path %> |
-		<%= link_to "Account", account_path %> |
-		<%= link_to "my Characters", "/users/#{current_user.id}/characters" %>
-		<% else %>
-		<%= link_to "Login", login_path %> |
-		<%= link_to "SignUp", signup_path %> 
-		<% end %>
-	  </div>
-    </div>
-	<div id="ketten" </div>
-	<div class="clear">&nbsp;</div>
-	<!-- END Header Div -->
-	
-	<!-- NavBar Div -->
-	<div id ="mainnav">
-		<ul id="navbar">
-			<li><%= link_to 'Home', root_url %></li>
-			<li><%= link_to 'Guilds', guilds_path %></li>
-		</ul> 
-	</div>
-	<div class="clear">&nbsp;</div>
-	<!-- END NavBar Div -->
-	
-	<div id="center">
+	<!-- TopBar Div -->
+	<div id="topbar">
+		<div class="topbar-content">
+			<% if logged_in? %>
+			You are logged in as <%= link_to h(current_user.login.capitalize), account_path %> (<%= link_to "Logout", logout_path %>) |
+			<%= link_to "my Characters", "/users/#{current_user.id}/characters" %>
+			<% else %>
+			<%= link_to "Login", login_path %> |
+			<%= link_to "SignUp", signup_path %> 
+			<% end %>
+		</div>
+	</div>  
+
+	<div id="container">	
+		<!-- Header Div -->
+	    <div id="header">
+	      <div id="title"></div>
+		  <div id="usermenu">
 		
-		<%= yield(:tabs) %>
-	
-		<!-- Content Div -->
-	    <div id="content">	
-		<% if flash[:notice] %>
-	      <p id="notice"><%= flash[:notice] %></p>
-		<% end %>
-		<% if flash[:error] %>
-		  <p id="error"><%= flash[:error] %></p>
-		<% end %>
-		
-	    <%= yield(:content) or yield %>
+		  </div>
 	    </div>
-		<!-- End Content Div-->
-		
-	</div>
-	<div class="clear">&nbsp;</div>
+		<div id="ketten" </div>
+		<div class="clear">&nbsp;</div>
+		<!-- END Header Div -->
 	
-	<!-- Fooder Div -->
-    <div id="footer">
-      design, code and copyright by DreamBlaze<br />
-      powered by <%= link_to 'Ruby On Rails', "http://www.rubyonrails.org" %>
-    </div>
-	<div class="clear">&nbsp;</div>
-	<!-- End Footer Div-->
+		<!-- NavBar Div -->
+		<div id ="mainnav">
+			<ul id="navbar">
+				<li><%= link_to 'Home', root_url %></li>
+				<li><%= link_to 'Guilds', guilds_path %></li>
+			</ul> 
+		</div>
+		<div class="clear">&nbsp;</div>
+		<!-- END NavBar Div -->
+	
+		<div id="center">
+		
+			<%= yield(:tabs) %>
+	
+			<!-- Content Div -->
+		    <div id="content">	
+			<% if flash[:notice] %>
+		      <p id="notice"><%= flash[:notice] %></p>
+			<% end %>
+			<% if flash[:error] %>
+			  <p id="error"><%= flash[:error] %></p>
+			<% end %>
+		
+		    <%= yield(:content) or yield %>
+		    </div>
+			<!-- End Content Div-->
+		
+		</div>
+		<div class="clear">&nbsp;</div>
+	
+		<!-- Fooder Div -->
+	    <div id="footer">
+	      design, code and copyright by DreamBlaze<br />
+	      powered by <%= link_to 'Ruby On Rails', "http://www.rubyonrails.org" %>
+	    </div>
+		<div class="clear">&nbsp;</div>
+		<!-- End Footer Div-->
 	
   </div>
 </body>

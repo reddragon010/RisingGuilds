@@ -117,6 +117,7 @@ background:url(../images/woltk_theme/header.png);
 text-align: left;
 height:174px;
 width:1068px;
+margin-top: 30px;
 }
 
 div#title {
@@ -166,6 +167,7 @@ margin: auto;
 	font-size:16px;
 }
 
+/* Twitter Widget */
 #twitter {
 	text-align: center;
 	width: 100%;
@@ -175,3 +177,26 @@ margin: auto;
 .twtr-doc {
 	margin:auto;
 }
+
+
+/* TopBar */
+#topbar {
+	position: absolute;
+	top: -10px;
+	width: 98%;
+	padding-right:20px;
+	text-align: center;
+}
+
+.topbar-content {
+	padding:10px;
+	height: 10px;
+	background-color: #111;
+	margin: auto;
+	text-align: right;
+	margin-left: 8px;
+	color: #666666;
+	margin-top: 5px;
+	font: bold 11px Arial, Helvetica, sans-serif;
+}
+
