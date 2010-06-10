@@ -19,9 +19,17 @@ class GuildsController < ApplicationController
   def show
     
     @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
+    @events = @guild.events.paginate :page => params[:page]
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
+      format.js do    
+        unless params[:page].nil?      
+          render :update do |page|
+            page.replace 'events', :partial => 'events'
+          end
+        end
+      end
     end
   end
 

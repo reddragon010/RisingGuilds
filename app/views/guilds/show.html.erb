@@ -79,9 +79,9 @@
 </div>
 <% end %>
 
-<div id="events">
-	<h3>Newest Events</h3>
-	<%= render :partial => 'shared/event', :collection => @guild.events.last(20).reverse %>
+<h3>Newest Events</h3>
+<div id="events_box">
+	<%= render :partial => "events", :locals => {:events => @events}%>
 </div>
 
 <div style="position:relative; width:100%">

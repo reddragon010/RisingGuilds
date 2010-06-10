@@ -30,6 +30,7 @@ Rails::Initializer.run do |config|
   config.gem "declarative_authorization"
   config.gem 'paperclip', :source => 'http://gemcutter.org'
   config.gem 'configatron'
+  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
