@@ -56,6 +56,7 @@ class RaidsController < ApplicationController
   # GET /raids/new.xml
   def new
     @raid.guild_id = @guild.id
+    @raid.leader = current_user
   	
     respond_to do |format|
       format.html # new.html.erb
@@ -65,7 +66,14 @@ class RaidsController < ApplicationController
 
   # GET /raids/1/edit
   def edit
-
+    if @raid.closed?
+      flash[:error] = "You can't edit closed raids"
+      redirect_to guild_raids_path(@raid)
+      return true
+    end
+    
+    @possible_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
+    @possible_leaders.collect!{|l| [l.login,l.id]}
   end
 
   # POST /raids

@@ -174,11 +174,11 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.update_attribute(:main,true)
         flash[:notice] =  @character.name + ' is now your new main'
-        format.html { redirect_to(@character) }
+        format.html { redirect_to_target_or_default(character_path(@character)) }
         format.xml  { head :ok }
       else
         flash[:error] = 'error - please contact the support'
-        format.html { redirect_to(@character) }
+        format.html { redirect_to_target_or_default(character_path(@character)) }
         format.xml  { head :error }
       end
     end

@@ -46,9 +46,9 @@ module ApplicationHelper
   #Online-Text helper
   def online_text(online)
     if online
-      "<span style=\"color:green\">Online</span>"
+      "<span style=\"color:green\">Yes</span>"
     else
-      "<span style=\"color:red\">Offline</span>"
+      "<span style=\"color:red\">No</span>"
     end
   end
   

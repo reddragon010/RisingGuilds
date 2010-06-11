@@ -24,7 +24,7 @@ class Raid < ActiveRecord::Base
   end
 =end
   
-  def closed
+  def closed?
     return false if self.new_record?
     self[:closed] || self.invite_start < Time.now
   end

@@ -18,25 +18,60 @@
 	<% end %>
 </div>
 
-<table width="100%" border="0" cellspacing="3" cellpadding="1" align="center" class="poll">
-  <tr>
-	<% unless params[:guild_id] %>
-    <th>Guild</th>
-	<% end %>
-    <th>Title</th>
-    <th>Max attendees</th>
-    <th>Date</th>
-    <th>Invite start</th>
-    <th>Start</th>
-    <th>End</th>
-    <th>Description</th>
-    <th>Leader</th>
-    <th>Closed</th>
-  </tr>
-
-<%= render :partial => "raid", :collection => @upcomming_raids %>
-<%= render :partial => "raid", :collection => @running_raids %>
-<%= render :partial => "raid", :collection => @past_raids %>
+<table>
+  <thead>
+	<tr>
+		<th></th>
+    	<th>Guild</th>
+    	<th>Title</th>
+    	<th>Date</th>
+    	<th>Invite start</th>
+    	<th>Start</th>
+    	<th>End</th>
+    	<th>Leader</th>
+		<th class="narrow">Max</th>
+		<th class="narrow">In</th>
+    	<th class="narrow">Closed</th>
+		<th class="narrow"></th>
+		<th class="narrow"></th>
+  	</tr>
+  </thead>
+  <tbody>
+	<tr class="header">
+		<th></th>
+		<th colspan="7"><%= image_tag('icons/door_in.png')%> Upcomming Raids</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<%= render :partial => "raid", :collection => @upcomming_raids %>
+  </tbody>
+  <tbody>
+	<tr class="header">
+		<th></th>
+		<th colspan="7"><%= image_tag('icons/door_open.png')%> Running Raids</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>	
+	<%= render :partial => "raid", :collection => @running_raids %>
+  </tbody>
+  <tbody>
+	<tr class="header">
+		<th></th>
+		<th colspan="7"><%= image_tag('icons/door.png')%> Past Raids</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<%= render :partial => "raid", :collection => @past_raids %>
+  </tbody>
 </table>
 <% else %>
 <p>There are no raids which could be attended by you</p>

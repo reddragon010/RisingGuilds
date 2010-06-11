@@ -1,48 +1,50 @@
 <table width="100%" border="0" cellspacing="3" cellpadding="1" align="center" class="poll">
-  <tr>
-    <th <%= sort_td_class_helper('name') %>><%= sort_link_helper('Name','name') %></th>
-	<% if @guild.nil?%>
-	<th <%= sort_td_class_helper('guild') %>><%= sort_link_helper('Guild','guild_id') %></th>
-	<% else %>
-	<th <%= sort_td_class_helper('rank') %>><%= sort_link_helper('Rank','rank') %></th>
-	<% end %>
-    <th <%= sort_td_class_helper('level') %>><%= sort_link_helper('Level','level') %></th>
-    <th <%= sort_td_class_helper('class') %>><%= sort_link_helper('Class','class_id') %></th>
-    <th <%= sort_td_class_helper('race') %>><%= sort_link_helper('Race','race_id') %></th>
-    <th <%= sort_td_class_helper('faction') %>><%= sort_link_helper('Faction','faction_id') %></th>
-	<th <%= sort_td_class_helper('online') %>><%= sort_link_helper('Online','online') %></th>
-	<th <%= sort_td_class_helper('profession1') %>><%= sort_link_helper('Profession1','profession1') %></th>
-	<th <%= sort_td_class_helper('profession2') %>><%= sort_link_helper('Profession2','profession2') %></th>
-	<th <%= sort_td_class_helper('talentspec1') %>><%= sort_link_helper('Talentspec1','talentspec1') %></th>
-	<th <%= sort_td_class_helper('talentspec2') %>><%= sort_link_helper('Talentspec2','talentspec2') %></th>
-  </tr>
-
+  <thead>
+	<tr>
+		<th <%= sort_td_class_helper('name') %>><%= sort_link_helper('Name','name') %></th>
+		<% if @guild.nil?%>
+		<th <%= sort_td_class_helper('guild') %>><%= sort_link_helper('Guild','guild_id') %></th>
+		<% else %>
+		<th <%= sort_td_class_helper('rank') %>><%= sort_link_helper('Rank','rank') %></th>
+		<% end %>
+		<th <%= sort_td_class_helper('level') %>><%= sort_link_helper('Level','level') %></th>
+		<th <%= sort_td_class_helper('class') %>><%= sort_link_helper('Class','class_id') %></th>
+		<th <%= sort_td_class_helper('race') %>><%= sort_link_helper('Race','race_id') %></th>
+		<th <%= sort_td_class_helper('faction') %>><%= sort_link_helper('Faction','faction_id') %></th>
+		<th <%= sort_td_class_helper('online') %>><%= sort_link_helper('Online','online') %></th>
+		<th <%= sort_td_class_helper('profession1') %>><%= sort_link_helper('Profession1','profession1') %></th>
+		<th <%= sort_td_class_helper('profession2') %>><%= sort_link_helper('Profession2','profession2') %></th>
+		<th <%= sort_td_class_helper('talentspec1') %>><%= sort_link_helper('Talentspec1','talentspec1') %></th>
+		<th <%= sort_td_class_helper('talentspec2') %>><%= sort_link_helper('Talentspec2','talentspec2') %></th>
+		<th class="narrow"></th>
+		<th class="narrow"></th>
+	</tr>
+  </thead>
+  <tbody>
 <% @characters.each do |character| %>
-  <tr>
-    <td><%= link_to character.name, character %></td>
-	<% if @guild.nil?%>
-	<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
-	<% else %>
-	<td><%=h character.rank %></td>
-	<% end %>
-    <td><%=h character.level %></td>
-    <td><%= image_tag classicon_path(character),:size => "18x18" %></td>
-    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
-    <td><%= image_tag factionicon_path(character), :size => "18x18" %></td>
-    <td><%= online_text(character.online) %></td>
-	<td><%=h truncate(character.profession1.name,8,".") unless character.profession1.nil? %></td>
-	<td><%=h truncate(character.profession2.name,8,".") unless character.profession2.nil? %></td>
-	<td><%=h truncate(character.talentspec1.prim,9,".") unless character.talentspec1.nil? %></td>
-	<td><%=h truncate(character.talentspec2.prim,9,".") unless character.talentspec2.nil? %></td>
-	<% permitted_to? :edit, character do %>
-	<td><%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %></td>
-	<% end %>
-	<% permitted_to? :delink, character do%>
-        <td><%= link_to(image_tag("icons/delink.png", :alt => "del", :size => "17x17"), "/characters/#{character.id}/delink", :confirm => 'Are you sure?') %></td>
-	<% end %>
-	<% permitted_to? :make_main, character do%>
-	<td><%= link_to(image_tag("icons/mainchar.png", :alt => "main", :size => "16x16"), "/characters/#{character.id}/make_main") unless character.main %></td>
-	<% end %>
-  </tr>
+	  <tr>
+	    <td><%= link_to character.name, character %></td>
+		<% if @guild.nil?%>
+		<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
+		<% else %>
+		<td class="narrow"><%=h character.rank %></td>
+		<% end %>
+	    <td class="narrow"><%=h character.level %></td>
+	    <td class="narrow"><%= image_tag classicon_path(character),:size => "18x18" %></td>
+	    <td class="narrow"><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+	    <td class="narrow"><%= image_tag factionicon_path(character), :size => "18x18" %></td>
+	    <td><%= online_text(character.online) %></td>
+		<td><%=h truncate(character.profession1.name,8,".") unless character.profession1.nil? %></td>
+		<td><%=h truncate(character.profession2.name,8,".") unless character.profession2.nil? %></td>
+		<td><%=h truncate(character.talentspec1.prim,9,".") unless character.talentspec1.nil? %></td>
+		<td><%=h truncate(character.talentspec2.prim,9,".") unless character.talentspec2.nil? %></td>
+		<td class="narrow"><% permitted_to? :edit, character do %>
+		<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_character_path(character) %>
+		<% end %></td>
+		<td class="narrow"><% permitted_to? :make_main, character do%>
+		<%= link_to(image_tag("icons/mainchar.png", :alt => "main", :size => "16x16"), "/characters/#{character.id}/make_main") unless character.main %>
+		<% end %></td>
+	  </tr>
 <% end %>
+  </tbody>
 </table>
