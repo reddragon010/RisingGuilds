@@ -200,3 +200,25 @@ margin: auto;
 	font: bold 11px Arial, Helvetica, sans-serif;
 }
 
+/* Tables */
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead {
+	background-color: #222;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+
+tr.header {
+	background-color: #111;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	text-align: left;
+}
+
+.narrow {
+	width: 16px;
+}

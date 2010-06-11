@@ -1,4 +1,5 @@
 <tr>
+	<td></td>
 	<td class="username"><%= link_to user.login, user_path(user) %></td>
 	<td><%=h user.last_login_at %></td>
 	<td>
@@ -6,6 +7,7 @@
 		<%= link_to image_tag(classicon_path(character)), character_path(character), :id => "tooltip_#{character.id}" %>
 	<% end %>
 	</td>
+	<% if params[:guild_id].nil? %>
 	<td>
 		<% permitted_to? :edit, user do %>
 		<%= link_to image_tag("icons/page_edit.png", :alt => "edit", :size => "16x16"), edit_user_path(user) %>
@@ -16,18 +18,19 @@
 		<%= link_to image_tag("icons/delete.png", :alt => "delete", :size => "16x16"), :method => :delete %>
 		<% end %>
 	</td>
+	<% end %>
 	<% unless current_user.nil? || user.nil? || guild.nil? %>
-	<td>
+	<td class="narrow">
 		<% if user.kickable_by?(current_user,guild) %>
 		<%= link_to image_tag("icons/kick.png", :alt => "kick", :size => "16x16"), "/users/#{user.id}/kick?guild_id=#{guild.id}" %>
 		<% end %>
 	</td>
-	<td>
+	<td class="narrow">
 		<% if user.promoteable_by?(current_user,guild) %>
 		<%= link_to image_tag("icons/arrow_up.png", :alt => "promote", :size => "16x16"), "/users/#{user.id}/promote?guild_id=#{guild.id}" %>
 		<% end %>
 	</td>
-	<td>
+	<td class="narrow">
 		<% if user.demoteable_by?(current_user,guild) %>
 		<%= link_to image_tag("icons/arrow_down.png", :alt => "demote", :size => "16x16"), "/users/#{user.id}/demote?guild_id=#{guild.id}" %>
 		<% end %>
