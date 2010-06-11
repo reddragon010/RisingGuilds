@@ -1,6 +1,3 @@
-<% ttid = "tooltip_" + rand(1000).to_s %>
-
-<div id='<%= ttid %>' class='tooltip' style="<%= style %>">
-  <%= text %>
-</div>
+<%- ttid = "tooltip_" + rand(1000).to_s -%>
+<div id='<%= ttid %>' class='tooltip' style="<%= style %>"><%= text %></div>
 <script type="text/javascript">var my_tooltip_<%= ttid %> = new Tooltip('<%= id %>', '<%=h ttid %>')</script>

@@ -12,7 +12,13 @@ class UsersController < ApplicationController
     
     
     unless @guild.nil? then
-      @users = @guild.users.find(:all, :order => params[:sort])
+      if @guild.users.include?(current_user) then
+        @users = @guild.users.find(:all, :order => params[:sort])
+      else
+        flash[:error] = "Sorry, you are not allowed to access that page."
+        redirect_to_target_or_default(root_path)
+        return true
+      end
     else
       @users = User.find(:all, :order => params[:sort])
     end
@@ -73,7 +79,7 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
-    if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
+    if @user.kickable_by?(current_user,@guild)
       @guild.assignments.find_all_by_user_id(@user.id).each {|a| a.destroy}
       flash[:notice] = "User kicked!"
     else
@@ -89,7 +95,7 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
-    if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
+    if @user.promoteable_by?(current_user,@guild)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
         flash[:notice] = "User promoted!"
@@ -109,7 +115,7 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
-    if current_user.guild_role_id(@guild.id) < @user.guild_role_id(@guild.id)
+    if @user.demoteable_by?(current_user,@guild)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
         flash[:notice] = "User demoted!"

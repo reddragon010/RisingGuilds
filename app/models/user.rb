@@ -55,7 +55,24 @@ class User < ActiveRecord::Base
   end
   
   def guild_role_id(guild_id)
-    self.assignments.find_all_by_guild_id(guild_id, :order => "role_id").last.role_id
+    a = self.assignments.find_all_by_guild_id(guild_id, :order => "role_id").last
+    unless a.nil?
+      return a.role_id
+    else
+      return false
+    end
+  end
+  
+  def kickable_by?(user, guild)
+    user == self || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+  end
+  
+  def promoteable_by?(user, guild)
+    user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+  end
+  
+  def demoteable_by?(user, guild)
+    user == self || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
   end
   
   def role_symbols
