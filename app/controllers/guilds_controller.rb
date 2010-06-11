@@ -6,18 +6,18 @@ class GuildsController < ApplicationController
   # GET /guilds
   # GET /guilds.xml
   def index
-    @guilds = Guild.all
-
-    respond_to do |format|
-      format.html { render :layout => "application"} # index.html.erb
-      format.xml  { render :xml => @guilds }
+    unless current_user.nil? || current_user.assignments.empty?
+      redirect_to guild_path(current_user.assignments.first.guild)
+    else
+      flash[:error] = 'you are not logged in or haven\'t assigned to a guild, yet'
+      redirect_to_target_or_default(root_path)
     end
   end
 
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
-    
+    @guilds = current_user.assignments.collect{|a| a.guild }.uniq
     @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
     @events = @guild.events.paginate :page => params[:page]
     respond_to do |format|

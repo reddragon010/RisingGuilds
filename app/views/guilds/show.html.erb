@@ -1,3 +1,11 @@
+<div style="position:relative; width:100%">
+	<div id="guild_switcher">
+		<%= select("id", "name", @guilds.collect {|g| [g.name, g.id] }, 
+			{:selected => params[:id].to_i},  
+			{:onchange => "window.location='/guilds/'+this.value;"} ) %>
+	</div>
+</div>
+
 <div id="guildinfos">
 	<div class="guildlogo">
 		<%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>

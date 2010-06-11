@@ -11,7 +11,10 @@
 
 /* --- show --- */
 
-
+#guild_switcher {
+	position: absolute;
+	right:0px;
+}
 
 #guildinfos {
 
