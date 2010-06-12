@@ -1,6 +1,7 @@
 <h1>Guild Rating</h1>
 
 <table>
+  <thead>
 	<tr>
 		<th>#</th>
 		<th>Name</th>
@@ -8,6 +9,8 @@
 		<th>Members</th>
 		<th>Website</th>
 	</tr>
+	</thead>
+	<tbody>
 	<% @guilds.each_with_index do |guild,i| %>
 	<tr>
 		<td><%= "#{i+1}." %></td>
@@ -17,5 +20,6 @@
 		<td><%= link_to guild.website, guild.website %></td>
 	</tr>	
 	<% end %>
-<table>
+  </tbody>
+</table>
 <%= will_paginate @guilds%>

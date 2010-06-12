@@ -33,39 +33,42 @@
 </div>
 
 <div id="details">
-	<div>
-	  <b>Ail:</b>
-	  <%=h @guild.ail %>
-	</div>
-
-	<div>
-	  <b>Activity:</b>
-	  <%=h @guild.activity %>
-	</div>
-
-	<div>
-	  <b>Growth:</b>
-	  <%=h @guild.growth %>
-	</div>
-
-	<div>
-	  <b>Altratio:</b>
-	  <%=h @guild.altratio %>
-	</div>
-
-	<div>
-	  <b>Classratio:</b>
-	  <%=h @guild.classratio %>
-	</div>
-
-	<div>
-	  <b>Achivementpoints:</b>
-	  <%=h @guild.achivementpoints %>
-	</div>
+	<h3>Details</h3>
+	<table>
+		<tr>
+			<td style="width:50%;"></td>
+			<td style="width:50%;"></td>
+		</tr>
+		<tr class="right">
+			<td><b>Ail:</b></td>
+			<td><%=h @guild.ail %></td>
+		</tr>
+		<tr class="right">
+			<td><b>Activity:</b></td>
+			<td><%=h @guild.activity %></td>
+		</tr>
+		<tr class="right">
+			<td><b>Growth:</b></td>
+			<td><%=h @guild.growth %></td>
+		</tr class="right">
+		<tr class="right">
+			<td><b>Altratio:</b></td>
+			<td><%=h @guild.altratio %></td>
+		</tr>
+		<tr class="right">
+			<td><b>Classratio:</b></td>
+			<td><%=h @guild.classratio %></td>
+		</tr>
+		<tr class="right">
+			<td><b>Achivementpoints:</b></td>
+			<td><%=h @guild.achivementpoints %></td>
+		</tr>
+	</table>
 </div>
 
 <% unless @online_characters.nil? %>
 <div id="onlinecharacers">
+<h3>online Chars</h3>
 <table>
 	<tr>
 		<th>Name</th>
