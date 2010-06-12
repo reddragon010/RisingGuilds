@@ -12,20 +12,16 @@
     <%= f.text_field :max_attendees %>
   </p>
   <p>
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
-  </p>
-  <p>
-    <%= f.label :invite_start %><br />
-    <%= f.time_select :invite_start %>
-  </p>
-  <p>
     <%= f.label :start %><br />
-    <%= f.time_select :start %>
+    <%= f.datetime_select :start, :default => 1.day.from_now %>
   </p>
   <p>
-    <%= f.label :end %><br />
-    <%= f.time_select :end %>
+    <%= f.label :invitation_window %><br />
+    <%= f.select :invitation_window, [15,30,45,60] %>
+  </p>
+  <p>
+    <%= f.label :duration %><br />
+    <%= f.select :duration, [1,2,3,4,5,6] %>
   </p>
   <p>
     <%= f.label :min_lvl %><br />
@@ -54,10 +50,6 @@
 		}
 		}); 
 	</script>
-  </p>
-  <p>
-    <%= f.label :leader %><br />
-    
   </p>
   <p>
     <%= f.label :closed %><br />

@@ -26,9 +26,10 @@ class RaidsController < ApplicationController
       @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort], :conditions => conditions)
     end
     
-    @upcomming_raids = @raids.find_all{|raid| raid.invite_start > Time.now}  #(:all, :conditions => "invite_start > #{Time.now}")
-    @past_raids = @raids.find_all{|raid| raid.end <= Time.now} #(:all, :conditions => "end <= #{Time.now}")
-    @running_raids = @raids.find_all{|raid| raid.start < Time.now && raid.end > Time.now} #(:all, :conditions => "start < #{Time.now} AND end > #{Time.now}")
+    @upcomming_raids = Raid.find(:all, :conditions => ['invite_start > ? AND guild_id = "?"',DateTime.now,@guild.id])
+    #really ugly fix!! "End" got a Timezone problem ... I've tried many things but nothing worked :(
+    @running_raids = Raid.find(:all, :conditions => ['invite_start <= ? AND ? <= end AND guild_id = "?"',DateTime.now,DateTime.now - 2.hours,@guild.id])
+    @past_raids = Raid.find(:all, :conditions => ['end < ? AND guild_id = "?"',DateTime.now - 2.hours,@guild.id])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -56,7 +57,7 @@ class RaidsController < ApplicationController
   # GET /raids/new.xml
   def new
     @raid.guild_id = @guild.id
-    @raid.leader = current_user
+    @raid.leader = current_user.id
   	
     respond_to do |format|
       format.html # new.html.erb
@@ -68,7 +69,7 @@ class RaidsController < ApplicationController
   def edit
     if @raid.closed?
       flash[:error] = "You can't edit closed raids"
-      redirect_to guild_raids_path(@raid)
+      redirect_to guild_raids_path(@raid.guild)
       return true
     end
     
@@ -79,11 +80,13 @@ class RaidsController < ApplicationController
   # POST /raids
   # POST /raids.xml
   def create
-
+    @raid.end = @raid.start + @raid.duration.to_i.hours
+    @raid.invite_start = @raid.start - @raid.invitation_window.to_i.minutes
+    
     respond_to do |format|
       if @raid.save
         flash[:notice] = 'Raid was successfully created.'
-        format.html { redirect_to("/guilds/#{@raid.guild.id}/raids/#{@raid.id}") }
+        format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { render :xml => @raid, :status => :created, :location => @raid }
       else
         format.html { render :action => "new" }
@@ -99,10 +102,10 @@ class RaidsController < ApplicationController
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
         flash[:notice] = 'Raid was successfully updated.'
-        format.html { redirect_to(@raid) }
+        format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to edit_guild_raid(@raid.guild, @raid) }
         format.xml  { render :xml => @raid.errors, :status => :unprocessable_entity }
       end
     end
@@ -111,10 +114,11 @@ class RaidsController < ApplicationController
   # DELETE /raids/1
   # DELETE /raids/1.xml
   def destroy
+    @guild = @raid.guild
     @raid.destroy
 
     respond_to do |format|
-      format.html { redirect_to(raids_url) }
+      format.html { redirect_to(guild_raids_path(@guild)) }
       format.xml  { head :ok }
     end
   end

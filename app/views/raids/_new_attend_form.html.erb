@@ -1,26 +1,20 @@
 <% form_for(@attendance) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :character %><br />
-	<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %>
-  </p>
-  <p>
-    <%= f.label :role %><br />
-	<%= f.select(:role, {:dd => "dd", :heal => "heal", :tank => "tank"}, {:prompt => "Select a role"}) %>
-  </p>
-  <p>
-    <%= f.label :status %><br />
-	<%= f.select(:status, configatron.raidplanner.status) %>
-  </p>
-  <p>
-    <%= f.label :message %><br />
-    <%= f.text_field :message %>
-  </p>
-
+  <table>
+	<tr>
+		<th><%= f.label :character %></th>
+		<th><%= f.label :role %></th>
+		<th><%= f.label :status %></th>
+		<th><%= f.label :message %></th>
+		<th></th>
+	</tr>
+	<tr>
+		<td><%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %></td>
+		<td><%= f.select(:role, {:dd => "dd", :heal => "heal", :tank => "tank"}, {:prompt => "Select a role"}) %></td>
+		<td><%= f.select(:status, configatron.raidplanner.status) %></td>
+		<td><%= f.text_field :message %></td>
+		<td><%= f.submit 'Create' %></td>
+	</tr>
+  </table>
   <%= f.hidden_field :raid_id %>
-
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
 <% end %>

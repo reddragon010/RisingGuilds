@@ -8,9 +8,9 @@
     <td><%=h raid.invite_start.strftime(@timeformat) %></td>
     <td><%=h raid.start.strftime(@timeformat) %></td>
     <td><%=h raid.end.strftime(@timeformat) %></td>
-    <td><%= raid.leader.nil? ? "" : link_to(User.find(raid.leader).login,guild_characters_path(User.find(raid.leader))) %></td>
+    <td><%= raid.leader.nil? ? "" : link_to(User.find(raid.leader.to_i).login,guild_users_path(raid.guild)) %></td>
 	<td><%=h raid.max_attendees %></td>
-	<td><%=h raid.attendances.find_by_status(4).nil? ? "0" : raid.attendances.find_by_status(4).count %>
+	<td><%=h raid.attendances.find_by_approved(true).nil? ? "0" : raid.attendances.find_all_by_approved(true).count %>
     <td><%= raid.closed? ? image_tag('icons/lock_closed.png') : image_tag('icons/lock_open.png') %></td>
     <td><%= link_to(image_tag('icons/page_edit.png'), edit_guild_raid_path(raid.guild, raid)) if permitted_to?(:edit, raid) %></td>
     <td><%= link_to(image_tag('icons/kick.png'), guild_raid_path(raid.guild, raid), :confirm => 'Are you sure?', :method => :delete) if permitted_to?(:destroy, raid) %></td>
