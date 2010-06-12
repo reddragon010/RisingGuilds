@@ -1,6 +1,11 @@
 class RaidsController < ApplicationController
   filter_resource_access
   
+  before_filter :setup_raidicons, :only => [:edit, :new]
+  before_filter :setup_guild_id
+  
+  layout :choose_layout
+  
   # GET /raids
   # GET /raids.xml
   def index
@@ -40,7 +45,7 @@ class RaidsController < ApplicationController
     else
       @attendance = Attendance.new(:raid_id => @raid.id)
     end 
-    
+    @guild = @raid.guild
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @raid }
@@ -50,7 +55,8 @@ class RaidsController < ApplicationController
   # GET /raids/new
   # GET /raids/new.xml
   def new
-    @raid.guild_id = params[:guild_id]
+    @raid.guild_id = @guild.id
+  	
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @raid }
@@ -104,4 +110,25 @@ class RaidsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+  
+  def setup_raidicons
+    raid_icons_files = Dir.entries(RAILS_ROOT + "/public/images/icons/raid").reject {|f| f[0,1] == "." || f == "nil.png"} 
+  	@raid_icons = {}
+  	raid_icons_files.each{|f| @raid_icons[f.chomp(".png")] = f}
+  end
+  
+  def setup_guild_id
+    @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
+  end
+  
+  def choose_layout
+    unless params[:guild_id].nil?
+      return 'guild_tabs'
+    else
+      return 'application'
+    end
+  end
+  
 end

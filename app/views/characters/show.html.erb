@@ -1,18 +1,3 @@
-<% 
-tabs = Array.new
-tabs << link_to('Index', characters_path)
-tabs << ""
-tabs << link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character
-tabs << link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character
-if permitted_to? :actualize, @character
-	tabs << ""
-	tabs << link_to('Actualize', :action => 'actualize') 
-	tabs << link_to('Generate AIL', :action => 'generate_ail')
-end
-
-render :partial => 'shared/tabs', :locals => {:tabs => tabs}
-%>
-
 <div id="charheader">
 	<div id="avatar">
 		<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
@@ -49,6 +34,11 @@ render :partial => 'shared/tabs', :locals => {:tabs => tabs}
 	<div id="onlinestatus">
 		<%= online_text(@character.online) %>
 	</div>
+</div>
+
+<div>
+	<%= link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character %>
+	<%= link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character %>
 </div>
 
 <div id="details">

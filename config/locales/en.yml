@@ -2,4 +2,20 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  home:
+    title: "Wellcome to Rising-Guilds"
+
+  activations:
+    password: "Set your password"
+    activate_account: "Activate your account"
+    activate: "Activate"
+
+  guilds:
+    update: "Update"
+    show: "Show"
+    back: "Back"
+    logo: "Logo"
+    name: "Name"
+    website: "Website"
+    description: "Description"
+    new: "New guild"

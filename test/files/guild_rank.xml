@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/layout/guild/roster.xsl"?>
+<page globalSearch="1" lang="de_de" requestUrl="/guild-info.xml">
+  <tabInfo subTab="guildRoster" tab="guild" tabGroup="guild" tabUrl="r=PvE-Realm&amp;gn=Divine"/>
+  <guildInfo>
+    <guildHeader battleGroup="Rising Gods" faction="1" members="36" name="Divine" nameUrl="Divine" realm="PvE-Realm" realmUrl="PvE-Realm" url="r=PvE-Realm&amp;gn=Divine">
+      <emblem emblemBackground="2" emblemBorderColor="16" emblemBorderStyle="5" emblemIconColor="16" emblemIconStyle="10"/>
+    </guildHeader>
+    <guild>
+      <members memberCount="36">
+        <character achPoints="0" classId="11" genderId="0" level="80" name="Kohorn" raceId="6" rank="1" url="r=PvE-Realm&amp;n=Kohorn"/>
+        <character achPoints="0" classId="5" genderId="1" level="80" name="Liezzy" raceId="10" rank="2" url="r=PvE-Realm&amp;n=Liezzy"/>
+        <character achPoints="0" classId="5" genderId="1" level="80" name="Illandra" raceId="10" rank="0" url="r=PvE-Realm&amp;n=Illandra"/>
+        <character achPoints="0" classId="2" genderId="0" level="80" name="Peyah" raceId="10" rank="2" url="r=PvE-Realm&amp;n=Peyah"/>
+        <character achPoints="0" classId="7" genderId="0" level="80" name="Nerox" raceId="6" rank="3" url="r=PvE-Realm&amp;n=Nerox"/>
+        <character achPoints="0" classId="8" genderId="1" level="80" name="Merlinia" raceId="10" rank="3" url="r=PvE-Realm&amp;n=Merlinia"/>
+        <character achPoints="0" classId="3" genderId="0" level="70" name="Onur" raceId="10" rank="4" url="r=PvE-Realm&amp;n=Onur"/>
+        <character achPoints="0" classId="2" genderId="0" level="68" name="Amaralith" raceId="10" rank="4" url="r=PvE-Realm&amp;n=Amaralith"/>
+        <character achPoints="0" classId="1" genderId="0" level="80" name="Shiyo" raceId="8" rank="4" url="r=PvE-Realm&amp;n=Shiyo"/>
+        <character achPoints="0" classId="2" genderId="1" level="73" name="Eschi" raceId="10" rank="4" url="r=PvE-Realm&amp;n=Eschi"/>
+        <character achPoints="0" classId="4" genderId="1" level="71" name="Alannah" raceId="8" rank="4" url="r=PvE-Realm&amp;n=Alannah"/>
+        <character achPoints="0" classId="2" genderId="0" level="80" name="Dezard" raceId="10" rank="4" url="r=PvE-Realm&amp;n=Dezard"/>
+        <character achPoints="0" classId="6" genderId="0" level="80" name="Letal" raceId="2" rank="4" url="r=PvE-Realm&amp;n=Letal"/>
+        <character achPoints="0" classId="6" genderId="1" level="71" name="Laneira" raceId="2" rank="4" url="r=PvE-Realm&amp;n=Laneira"/>
+        <character achPoints="0" classId="7" genderId="0" level="63" name="Ugmar" raceId="2" rank="4" url="r=PvE-Realm&amp;n=Ugmar"/>
+        <character achPoints="0" classId="7" genderId="0" level="48" name="Shackle" raceId="8" rank="4" url="r=PvE-Realm&amp;n=Shackle"/>
+        <character achPoints="0" classId="5" genderId="1" level="7" name="Sayre" raceId="10" rank="4" url="r=PvE-Realm&amp;n=Sayre"/>
+        <character achPoints="0" classId="3" genderId="0" level="70" name="Rahin" raceId="8" rank="5" url="r=PvE-Realm&amp;n=Rahin"/>
+        <character achPoints="0" classId="9" genderId="1" level="75" name="Kyra" raceId="10" rank="5" url="r=PvE-Realm&amp;n=Kyra"/>
+        <character achPoints="0" classId="5" genderId="1" level="76" name="Pleasure" raceId="5" rank="5" url="r=PvE-Realm&amp;n=Pleasure"/>
+        <character achPoints="0" classId="2" genderId="1" level="80" name="Rommé" raceId="10" rank="5" url="r=PvE-Realm&amp;n=Romm%C3%A9"/>
+        <character achPoints="0" classId="11" genderId="1" level="71" name="Thoro" raceId="6" rank="5" url="r=PvE-Realm&amp;n=Thoro"/>
+        <character achPoints="0" classId="11" genderId="0" level="41" name="Fuhma" raceId="6" rank="5" url="r=PvE-Realm&amp;n=Fuhma"/>
+        <character achPoints="0" classId="9" genderId="0" level="24" name="Akarim" raceId="10" rank="5" url="r=PvE-Realm&amp;n=Akarim"/>
+        <character achPoints="0" classId="9" genderId="0" level="31" name="Voice" raceId="5" rank="5" url="r=PvE-Realm&amp;n=Voice"/>
+        <character achPoints="0" classId="6" genderId="1" level="70" name="Isnamiel" raceId="10" rank="5" url="r=PvE-Realm&amp;n=Isnamiel"/>
+        <character achPoints="0" classId="6" genderId="0" level="61" name="Naggaroth" raceId="10" rank="5" url="r=PvE-Realm&amp;n=Naggaroth"/>
+        <character achPoints="0" classId="7" genderId="0" level="76" name="Raiko" raceId="2" rank="6" url="r=PvE-Realm&amp;n=Raiko"/>
+        <character achPoints="0" classId="8" genderId="0" level="72" name="Duddits" raceId="10" rank="6" url="r=PvE-Realm&amp;n=Duddits"/>
+        <character achPoints="0" classId="11" genderId="0" level="74" name="Lekroz" raceId="6" rank="6" url="r=PvE-Realm&amp;n=Lekroz"/>
+        <character achPoints="0" classId="3" genderId="1" level="71" name="Isabeau" raceId="10" rank="6" url="r=PvE-Realm&amp;n=Isabeau"/>
+        <character achPoints="0" classId="7" genderId="0" level="13" name="Welldone" raceId="6" rank="6" url="r=PvE-Realm&amp;n=Welldone"/>
+        <character achPoints="0" classId="5" genderId="0" level="8" name="Shishi" raceId="5" rank="6" url="r=PvE-Realm&amp;n=Shishi"/>
+        <character achPoints="0" classId="4" genderId="1" level="21" name="Teophala" raceId="10" rank="6" url="r=PvE-Realm&amp;n=Teophala"/>
+        <character achPoints="0" classId="3" genderId="0" level="14" name="Thym" raceId="8" rank="6" url="r=PvE-Realm&amp;n=Thym"/>
+        <character achPoints="0" classId="5" genderId="1" level="6" name="Ladýgaga" raceId="10" rank="6" url="r=PvE-Realm&amp;n=Lad%C3%BDgaga"/>
+      </members>
+    </guild>
+  </guildInfo>
+</page>

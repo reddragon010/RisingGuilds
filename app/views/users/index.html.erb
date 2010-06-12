@@ -1,18 +1,35 @@
-<% @users.each do |user| %>
-<div class="user">
-  <div class="adminmenu">  
-	<% permitted_to? :edit, user do %>
-	<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_user_path(guild) %>
-	<% end %>
-	<% permitted_to? :destroy, user do %>
-	<%= link_to image_tag("icons/delete.png", :alt => "del", :size => "16x16"), :method => :delete %>
-	<% end %>
-  </div>
-  <span class="username"><%= link_to user.login, user_path(user) %></span>
-  <ul>
-  <% user.assignments.each do |a| %>
-	<li><%= a.role.nil? ? "" : a.role.name %> (<%= a.guild.nil? ? "" : a.guild.name %>)</li>
-  <% end %>
-  </ul>
-</div>
-<% end %>
+<table>
+	<thead>
+	<tr>
+		<th>Login</th>
+		<th>Last Login</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th colspan="3">Leaders</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.leaders, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<tbody>
+		<tr>
+			<th colspan="3">Officers</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.officers, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<tbody>
+		<tr>
+			<th colspan="3">Raidleaders</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.raidleaders, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<tbody>
+		<tr>
+			<th colspan="3">Members</th>
+		</tr>
+		<%= render :partial => 'user', :collection => @guild.members, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+</table>
+
+<%= yield :tooltip %>

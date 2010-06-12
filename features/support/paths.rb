@@ -20,6 +20,8 @@ module NavigationHelpers
       account_path
     when /the guildpage/
       guild_path @guild
+    when /the guildmembers-page/
+      guild_characters_path @guild
     when /a new guild/
       new_guild_path
     when /actualize guild/

@@ -1,13 +1,15 @@
 class GuildsController < ApplicationController
   filter_resource_access
   
+  layout "guild_tabs"
+  
   # GET /guilds
   # GET /guilds.xml
   def index
     @guilds = Guild.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "application"} # index.html.erb
       format.xml  { render :xml => @guilds }
     end
   end
@@ -16,6 +18,7 @@ class GuildsController < ApplicationController
   # GET /guilds/1.xml
   def show
     
+    @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
@@ -27,7 +30,7 @@ class GuildsController < ApplicationController
   def new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => "application"} # new.html.erb
       format.xml  { render :xml => @guild }
     end
   end
@@ -43,8 +46,9 @@ class GuildsController < ApplicationController
 
     respond_to do |format|
       if @guild.valid_name?
-        @guild.assignments << Assignment.new(:user_id => current_user.id,:role_id => 1)
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 1)
         if @guild.save
+          
           flash[:notice] = 'Guild was successfully created.'
           format.html { redirect_to(@guild) }
           format.xml  { render :xml => @guild, :status => :created, :location => @guild }
@@ -107,7 +111,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if params[:token] == @guild.token
-        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 4)
+        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
         @guild.save
         flash[:notice] = 'You have successfully joined this guild'
         format.html { redirect_to(@guild) }
@@ -117,5 +121,7 @@ class GuildsController < ApplicationController
       end
     end
   end
+  
+  
   
 end

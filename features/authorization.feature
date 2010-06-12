@@ -3,6 +3,31 @@ Feature: Authorization
 	I want to have some restrictions
 	So that I can feel save
 	
+	Scenario: View Guild as User
+		Given a guild
+		And I am a registered user
+		And I am logged in
+		When I go to the guildpage
+		Then I should see "Guild"
+		And I should see "Members"
+		
+	Scenario: View Guild as Guest
+		Given a guild
+		When I go to the guildpage
+		Then I should see "Guild"
+		And I should see "Members"
+		
+	Scenario: View Guild as Member
+		Given a guild
+		And I am a registered user
+		And I am a "member" of the guild
+		And I am logged in
+		When I go to the guildpage
+		Then I should see "Guild"
+		And I should see "Members"
+		And I should see "Raids"
+		And I should see "Users"
+	
 	Scenario: Create Guild as Guest
 		Given I am on the homepage
 		When I go to a new guild
@@ -27,19 +52,19 @@ Feature: Authorization
 		And I press "create"
 		Then I should see "Guild was successfully created."
 		
-	Scenario: Sync Guild as Guildmanager
+	Scenario: Sync Guild as manager
 		Given a guild
 		And I am a registered user
-		And I am a "guildmanager" of the guild
+		And I am a "leader" of the guild
 		And I am logged in
 		And I am on the guildpage
 		When I follow "Actualize"
 		Then I should see "Guild will be updated soon"
 
-	Scenario: Edit Guild as Guildmanager
+	Scenario: Edit Guild as manager
 		Given a guild
 		And I am a registered user
-		And I am a "guildmanager" of the guild
+		And I am a "leader" of the guild
 		And I am logged in
 		When I go to edit guild
 		And fill in "guild_website" with "http://another.website.com"

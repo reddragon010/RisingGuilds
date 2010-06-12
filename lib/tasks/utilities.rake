@@ -11,6 +11,7 @@ namespace :queryqueue do
     end
   end
   
+  desc "delete each item on the queryqueue"
   task :clear => :environment do
     RemoteQuery.all.each do |rq| 
       puts "Destroy RemoteQuery No. #{rq.id}"
@@ -19,6 +20,7 @@ namespace :queryqueue do
     end
   end
   
+  desc "show the queryqueue"
   task :show => :environment do
     queries = RemoteQuery.find(:all,:order => "created_at ASC, priority")
     queries.each do |query| 
@@ -26,12 +28,14 @@ namespace :queryqueue do
     end
   end
   
+  desc "fill the queryqueue with update-character-requests"
   task :update_characters => :environment do
     Character.all.each do |char|
       char.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_character')
     end
   end
   
+  desc "fill the queryqueue with update-guild-requests"
   task :update_guilds => :environment do
     Guild.all.each do |guild|
       guild.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_guild')
@@ -42,6 +46,7 @@ namespace :queryqueue do
 end
 
 namespace :onlinestatus do
+  desc "update the onlinestatus of all characters"
   task :update => :environment do
     doc = Hash.new
     doc['PvE-Realm'] = get_html(configatron.onlinelist.url + "pve")

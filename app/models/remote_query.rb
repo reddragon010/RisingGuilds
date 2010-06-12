@@ -44,9 +44,11 @@ class RemoteQuery < ActiveRecord::Base
     if !(xml%'guildInfo').children.empty?
 			arsenal_chars = Array.new
 			arsenal_char_names = Array.new
+			arsenal_char_ranks = Hash.new
 			
 			(xml%'guildInfo'%'guild'%'members'/:character).each do |char|
 			    arsenal_char_names << char[:name]
+			    arsenal_char_ranks[char[:name]] = char[:rank].to_i
 					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.guild.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank], :faction_id => faction, :realm => self.guild.realm)
 			end
 			db_char_names = self.guild.characters.collect {|c| c.name}
@@ -59,15 +61,20 @@ class RemoteQuery < ActiveRecord::Base
       unless new_char_names.empty?
         arsenal_chars.each do |char|
           if new_char_names.include?(char.name) then
-            event = Event.new(:action => 'joined')
-            event.guild = self.guild
-            
-            exist_char = Character.find_all_by_name(char.name)
-            unless exist_char.empty?
-              char = exist_char.first
-              char.update_attribute(:guild_id,id)
+            #Move an existing char instead of creating a new one
+            exist_char = Character.find_by_name(char.name)
+            unless exist_char.nil?
+              exist_char.rank = char.rank
+              exist_char.guild = char.guild
+              char = exist_char
             end
             
+            #save it
+            char.save!
+            
+            #Trigger Join-Event
+            event = Event.new(:action => 'joined')
+            event.guild = self.guild
             event.character = char
             event.save
           end
@@ -85,6 +92,28 @@ class RemoteQuery < ActiveRecord::Base
             attributes = {:guild_id => nil, :rank => nil}
             char.update_attributes(attributes)
           end
+        end
+      end
+      
+      #rank update
+      self.guild.characters.each do |char|
+        if char.rank != arsenal_char_ranks[char.name]
+          content = char.rank
+          char.rank = arsenal_char_ranks[char.name]
+          if char.rank < arsenal_char_ranks[char.name]
+             event = Event.new(:action => 'promoted')
+             event.character = char
+             event.guild = self.guild
+             event.content = content
+             event.save
+          elsif char.rank < arsenal_char_ranks[char.name]
+            event = Event.new(:action => 'demoted')
+            event.character = char
+            event.guild = self.guild
+            event.content = content
+            event.save
+          end
+          char.save!
         end
       end
       
