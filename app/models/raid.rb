@@ -5,53 +5,35 @@ class Raid < ActiveRecord::Base
   
   attr_accessor :invitation_window, :duration
 
-#only future Date/Time is valid
-# Bug with new date collum
-#  validates_each(:date) do |record, attr, value|
-#    record.errors.add attr, 'have to be in the future' if value < Date.today
-#  end
-
-  
-=begin still buggy yet :(
-  validates_each(:invite_start) do |record, attr, value|
-    record.errors.add attr, 'have to happen befor start' if value > self.start
+  #only future Date/Time is valid
+  validates_each(:invite_start,:start,:end) do |record, attr, value|
+    record.errors.add attr, 'have to be in the future' if value < Time.now
   end
-  
-  validates_each(:start) do |record, attr, value|
-    record.errors.add attr, 'have to happen after invite start and before end ' if value < self.invite_start && self.end
+
+  validates_each(:invite_start) do |record, attr, value|
+    record.errors.add attr, 'have to happen befor start' if value > record.start
   end
   
   validates_each(:end) do |record, attr, value|
-    record.errors.add attr, 'have to happen after start' if value < self.start
+    record.errors.add attr, 'have to happen after start' if value < record.start
   end
-=end
 
-=begin
-  def invitation_window=(minutes)
-    self.invite_start = self.start - minutes.to_i.minutes
-  end
-  
   def invitation_window
-    if self.start.nil? || self.invite_start.nil?
-      return 30
+    if start.nil? || invite_start.nil?
+      return @invitation_window
     else
-      return Integer((self.start - self.invite_start).to_f / 60.to_f)
+      return Integer((self.start.to_f - self.invite_start.to_f) / 60.to_f)
     end
-  end
-
-  def duration=(hours)
-    self.end = self.start + hours.to_i.hours
   end
   
   def duration
     if self.start.nil? || self.end.nil?
-      return 2
+      return @duration
     else
       return Integer((self.end - self.start).to_f / 3600.to_f)
     end
   end
-=end
-  
+
   def date
     self.start.to_date
   end

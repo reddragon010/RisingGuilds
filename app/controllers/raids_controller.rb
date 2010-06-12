@@ -73,6 +73,9 @@ class RaidsController < ApplicationController
       return true
     end
     
+    @raid.invitation_window = Integer((@raid.start.to_f - @raid.invite_start.to_f) / 60.to_f)
+    @raid.duration = Integer((@raid.end - @raid.start).to_f / 3600.to_f)
+    
     @possible_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
     @possible_leaders.collect!{|l| [l.login,l.id]}
   end

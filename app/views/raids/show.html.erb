@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8">kickoff=new Date(<%= "#{@raid.date.year}, #{@raid.date.month}, #{@raid.date.day}, #{@raid.start.hour}, #{@raid.start.min}" %>);setInterval('updateCDTime(kickoff)', 1000 );</script>
 
 <div style="position:relative; width:100%">
-	<div id="raid_icon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
+	<div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
 </div>
 
 <h1><%= @raid.title %></h1>

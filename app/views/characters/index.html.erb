@@ -23,10 +23,12 @@
   <tbody>
 <% @characters.each do |character| %>
 	  <tr>
-	    <td><%= link_to character.name, character %></td>
+	    
 		<% if @guild.nil?%>
+		<td><%= link_to character.name, character %></td>
 		<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
 		<% else %>
+		<td><%= link_to character.name, guild_character_path(character.guild,character) %></td>
 		<td class="narrow"><%=h character.rank %></td>
 		<% end %>
 	    <td class="narrow"><%=h character.level %></td>

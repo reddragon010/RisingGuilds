@@ -47,3 +47,15 @@ end
 Factory.define :Role do |f|
   f.name "testuser"
 end
+
+Factory.define :Raid do |f|
+  f.guild_id 1
+  f.sequence(:title){|n| "TestRaid#{n}"} 
+  f.max_attendees 25
+  f.invite_start Time.now + 5.hour
+  f.start Time.now + 6.hour
+  f.end Time.now + 10.hour
+  f.description "Test the raid"
+  f.leader 1
+  f.closed false
+end
