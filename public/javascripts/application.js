@@ -55,5 +55,4 @@ function updateCDTime(kickoff) {
             hh + ' hours ' +
             mm + ' minutes ' +
             ss + ' seconds' ;
-
 }

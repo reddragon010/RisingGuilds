@@ -31,6 +31,30 @@
 <div id="description">
 	  <%=h @guild.description %>
 </div>
+<<<<<<< HEAD
+=======
+
+<div id="details">
+	<div>
+	  <b>Ail:</b>
+	  <%=h @guild.ail %>
+	</div>
+
+	<div>
+	  <b>Activity:</b>
+	  <%=h @guild.activity %>
+	</div>
+
+	<div>
+	  <b>Growth:</b>
+	  <%=h @guild.growth %>
+	</div>
+
+	<div>
+	  <b>Altratio:</b>
+	  <%=h @guild.altratio %>
+	</div>
+>>>>>>> drantum
 
 <div id="details">
 	<h3>Details</h3>
@@ -90,9 +114,38 @@
 </div>
 <% end %>
 
+<<<<<<< HEAD
 <h3>Newest Events</h3>
 <div id="events_box">
 	<%= render :partial => "events", :locals => {:events => @events}%>
+=======
+<% unless @online_characters.nil? %>
+<div id="onlinecharacers">
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Rank</th>
+		<th>Class</th>
+		<th>Race</th>
+		<th>Level</th>
+	</tr>
+	<% @online_characters.each do |character| %>
+	<tr>
+		<td><%= link_to character.name, character_path(character) %></td>
+		<td><%=h character.rank %></td>
+		<td><%= image_tag classicon_path(character),:size => "18x18" %></td>
+	    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+		<td><%=h character.level %></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+<% end %>
+
+<div id="events">
+	<h3>Newest Events</h3>
+	<%= render :partial => 'shared/event', :collection => @guild.events.last(20).reverse %>
+>>>>>>> drantum
 </div>
 
 <div style="position:relative; width:100%">
