@@ -9,20 +9,22 @@
   <%= javascript_include_tag :all %>
 </head>
 <body>
+  <!-- TopBar Div -->
+  <div id="topbar">
+	<div class="topbar-content">
+	<% if logged_in? %>
+	You are logged in as <%= link_to h(current_user.login.capitalize), account_path %> (<%= link_to "Logout", logout_path %>) |
+	<%= link_to "my Characters", "/users/#{current_user.id}/characters" %>
+	<% else %>
+	<%= link_to "Login", login_path %> |
+	<%= link_to "SignUp", signup_path %> 
+	<% end %>
+	</div>
+  </div>
   <div id="container">
 	<!-- Header Div -->
     <div id="header">
       <div id="title"></div>
-	  <div id="usermenu">
-		<% if logged_in? %>
-		<%= link_to "Logout", logout_path %> |
-		<%= link_to "Account", account_path %> |
-		<%= link_to "my Characters", "/users/#{current_user.id}/characters" %>
-		<% else %>
-		<%= link_to "Login", login_path %> |
-		<%= link_to "SignUp", signup_path %> 
-		<% end %>
-	  </div>
     </div>
 	<div id="ketten" </div>
 	<div class="clear">&nbsp;</div>
