@@ -4,7 +4,6 @@
 	<td><%=h user.last_login_at %></td>
 	<td>
 	<% user.characters.each do |character|%>
-<<<<<<< HEAD
 		<%= link_to image_tag(classicon_path(character)), character_path(character), :id => "tooltip_#{character.id}" %>
 	<% end %>
 	</td>

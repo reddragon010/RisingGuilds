@@ -72,7 +72,9 @@ div.bar-container > div {
 div.tooltip {
   padding: 5px;
   margin: 5px;
-  background-color: #F0F0F0;
+  background-color: #111;
+  color: #FFF;
+  border: 1px solid #666;
 }
 
 /* ---- Twitter Widget ---- */
