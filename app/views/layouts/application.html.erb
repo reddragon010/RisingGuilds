@@ -23,9 +23,12 @@
   <ul>
     <li><%= link_to 'Home', root_url %></li>
 	<li><%= link_to 'Rating', rating_path %></li>
+	<% unless current_user.nil? %>
 	<li><%= link_to 'My Guilds', guilds_path %></li>
 	<li><%= link_to 'My Raids', raids_path %></li>
 	<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
+	<li><%= link_to 'New Guild', new_guild_path %></li>
+	<% end %>
   </ul>
   </div>
   <div class="clear"></div>
