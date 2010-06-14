@@ -1,3 +1,18 @@
 == 0.1.0 ALPHA 11-05-2010
 
 * first public version
+
+== 0.2.0 ALPHA 14-06-2010
+
+* [Feature] Raidplanner
+* [Feature] Userrights managment
+* [Feature] New Design/Layout
+* [Feature] Guildmanagment page
+* [Feature] Log Pro/Demotions
+* [Feature] ToolTips
+* [Feature] show InGame-Members
+* [Feature] userlists
+* [Fix]		Levelup was triggered on every update
+* [Fix]		Join-Event spammed on rejoined members
+* [Fix]		raid-time validations
+* [Fix]		paperclip-VERSION error
