@@ -9,27 +9,14 @@ class RaidsController < ApplicationController
   # GET /raids
   # GET /raids.xml
   def index
-    params[:sort] = 'guild_id, start' if params[:sort].nil?
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    @raids = Raid.with_permissions_to(:view).find(:all, :order => "start") 
     
     @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
-    
-    filter_keys = ['guild_id', 'start', 'closed']
-    conditions = Hash.new
-    conditions.merge!(params)
-    conditions.delete_if {|key,value| !filter_keys.include? key}
-    
-    @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    
-    if conditions.empty? then
-      @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort])
-    else
-      @raids = Raid.with_permissions_to(:view).find(:all, :order => params[:sort], :conditions => conditions)
-    end
-    
-    @upcomming_raids = Raid.find(:all, :conditions => ['invite_start > ? AND guild_id = "?"',DateTime.now,@guild.id])
-    #really ugly fix!! "End" got a Timezone problem ... I've tried many things but nothing worked :(
-    @running_raids = Raid.find(:all, :conditions => ['invite_start <= ? AND ? <= end AND guild_id = "?"',DateTime.now,DateTime.now - 2.hours,@guild.id])
-    @past_raids = Raid.find(:all, :conditions => ['end < ? AND guild_id = "?"',DateTime.now - 2.hours,@guild.id])
+
+    @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
+    @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
+    @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
     
     respond_to do |format|
       format.html # index.html.erb
@@ -101,14 +88,30 @@ class RaidsController < ApplicationController
   # PUT /raids/1
   # PUT /raids/1.xml
   def update
-
+    #raise params[:raid].to_yaml
+    @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i,params[:raid][:"start(2i)"].to_i,params[:raid][:"start(3i)"].to_i,params[:raid][:"start(4i)"].to_i,params[:raid][:"start(5i)"].to_i)
+    @end_time = @start_time + params[:raid][:duration].to_i.hours
+    @invite_start_time =  @start_time - params[:raid][:invitation_window].to_i.minutes
+    
+    params[:raid][:"invite_start(1i)"] = @invite_start_time.year.to_s
+    params[:raid][:"invite_start(2i)"] = @invite_start_time.month.to_s
+    params[:raid][:"invite_start(3i)"] = @invite_start_time.day.to_s
+    params[:raid][:"invite_start(4i)"] = @invite_start_time.hour.to_s
+    params[:raid][:"invite_start(5i)"] = @invite_start_time.min.to_s
+    
+    params[:raid][:"end(1i)"] = @end_time.year.to_s
+    params[:raid][:"end(2i)"] = @end_time.month.to_s
+    params[:raid][:"end(3i)"] = @end_time.day.to_s
+    params[:raid][:"end(4i)"] = @end_time.hour.to_s
+    params[:raid][:"end(5i)"] = @end_time.min.to_s
+    
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
         flash[:notice] = 'Raid was successfully updated.'
         format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { head :ok }
       else
-        format.html { redirect_to edit_guild_raid(@raid.guild, @raid) }
+        format.html { redirect_to edit_guild_raid_path(@raid.guild, @raid) }
         format.xml  { render :xml => @raid.errors, :status => :unprocessable_entity }
       end
     end

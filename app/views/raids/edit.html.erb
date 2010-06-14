@@ -12,16 +12,16 @@
     <%= f.text_field :max_attendees %>
   </p>
   <p>
-    <%= f.label :invite_start %><br />
-    <%= f.datetime_select :invite_start %>
-  </p>
-  <p>
     <%= f.label :start %><br />
     <%= f.datetime_select :start %>
   </p>
   <p>
-    <%= f.label :end %><br />
-    <%= f.datetime_select :end %>
+    <%= f.label :invitation_window %><br />
+    <%= f.select :invitation_window, [15,30,45,60] %>
+  </p>
+  <p>
+    <%= f.label :duration %><br />
+    <%= f.select :duration, [1,2,3,4,5,6] %>
   </p>
   <p>
 	<%= image_tag("/images/icons/raid/nil.png", :size => "65x65", :id => "raidiconimg") %>
@@ -55,6 +55,3 @@
     <%= f.submit 'Update' %>
   </p>
 <% end %>
-
-<%= link_to 'Show', @raid %> |
-<%= link_to 'Back', raids_path %>

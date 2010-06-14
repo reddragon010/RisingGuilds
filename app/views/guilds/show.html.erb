@@ -1,33 +1,3 @@
-<div style="position:relative; width:100%">
-	<div id="guild_switcher">
-		<%= select("id", "name", @guilds.collect {|g| [g.name, g.id] }, 
-			{:selected => params[:id].to_i},  
-			{:onchange => "window.location='/guilds/'+this.value;"} ) %>
-	</div>
-</div>
-
-<div id="guildinfos">
-	<div class="guildlogo">
-		<%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>
-	</div>
-	<div class="guildname">
-	  <%=h @guild.name %>
-	</div>
-	<div id="guildmembers">
-	  <%=h @guild.characters.count %> members <%=h "(#{@online_characters.count} online)"%>
-	</div>
-	<div id="guildrealm">
-	  <%=h @guild.realm %>	
-	</div>
-	<% unless @guild.website.nil? %>
-	<div id="website">
-	  <%= link_to @guild.website, @guild.website, :popup => true %>
-	</div>
-	<% end %>
-</div>
-
-<div class="clear">&nbsp;</div>
-
 <div id="description">
 	  <%=h @guild.description %>
 </div>

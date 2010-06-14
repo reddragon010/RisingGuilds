@@ -19,18 +19,20 @@ class Raid < ActiveRecord::Base
   end
 
   def invitation_window
-    if start.nil? || invite_start.nil?
-      return @invitation_window
-    else
+    return 15 if new_record?
+    if @invitation_window.nil?
       return Integer((self.start.to_f - self.invite_start.to_f) / 60.to_f)
+    else
+      return @invitation_window
     end
   end
   
   def duration
-    if self.start.nil? || self.end.nil?
-      return @duration
-    else
+    return 1 if new_record?
+    if @duration.nil?
       return Integer((self.end - self.start).to_f / 3600.to_f)
+    else
+      return @duration
     end
   end
 

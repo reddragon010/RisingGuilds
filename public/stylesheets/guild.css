@@ -1,7 +1,6 @@
 .guildlogo {
 	float: left;
 	margin-right: 20px;
-	border: 1px solid #DDD;
 }
 
 .guildname {
@@ -13,7 +12,8 @@
 
 #guild_switcher {
 	position: absolute;
-	right:0px;
+	right:10px;
+	top:0px;
 }
 
 #guildinfos {
@@ -21,11 +21,11 @@
 }
 
 #description {
+	background-color: #666;
 	padding: 5px;
-	margin: 10px;
-	position: relative;
-	border: 1px solid #999;
-	background-color: #EEE;
+	border: 2px solid #333;
+	color: #FFF;
+	overflow: hidden;
 }
 
 .boxtext {

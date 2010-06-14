@@ -34,9 +34,9 @@ document.observe("dom:loaded", function() {
   }
 })
 
-function updateCDTime(kickoff) {
+function updateCDTime(end) {
 	now      = new Date();
-	diff = kickoff - now;
+	diff = end - now;
 
 	days  = Math.floor( diff / (1000*60*60*24) );
 	hours = Math.floor( diff / (1000*60*60) );
@@ -48,7 +48,6 @@ function updateCDTime(kickoff) {
 	mm = mins  - hours * 60;
 	ss = secs  - mins  * 60;
 
-	// document.getElementById("worldcup_countdown_time").innerHTML = dd + ' days<br/>' + hh + ' hours<br/>' + mm + ' minutes<br/>' + ss + ' seconds' ;
 	document.getElementById("countdown_time")
         .innerHTML =
             dd + ' days ' +

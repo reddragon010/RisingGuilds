@@ -1,3 +1,27 @@
+<% content_for :guild_header do %>
+<% 
+@guild ||= Guild.find(params[:guild_id]) 
+@online_characters ||= @guild.characters.find_all_by_online(true) unless @guild.nil?
+%>
+<div class="guildlogo">
+	<%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>
+</div>
+<div class="guildname">
+  <%=h @guild.name %>
+</div>
+<div id="guildmembers">
+  <%=h @guild.characters.count %> members <%=h "(#{@online_characters.count} online)"%>
+</div>
+<div id="guildrealm">
+  <%=h @guild.realm %>	
+</div>
+<% unless @guild.website.nil? %>
+<div id="website">
+  <%= link_to @guild.website, @guild.website, :popup => true %>
+</div>
+<% end %>
+<% end %>
+
 <% content_for :tabs do %>
 <%
 @tabs << link_to("Guild", guild_path(@guild))

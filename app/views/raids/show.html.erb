@@ -1,10 +1,14 @@
-<script type="text/javascript" charset="utf-8">kickoff=new Date(<%= "#{@raid.date.year}, #{@raid.date.month}, #{@raid.date.day}, #{@raid.start.hour}, #{@raid.start.min}" %>);setInterval('updateCDTime(kickoff)', 1000 );</script>
+<script type="text/javascript" charset="utf-8">end=new Date(<%= "#{@raid.start.year}, #{@raid.start.month}, #{@raid.start.day}, #{@raid.start.hour}, #{@raid.start.min}, #{@raid.start.sec}" %>);setInterval('updateCDTime(end)', 1000 );</script>
 
 <div style="position:relative; width:100%">
+	<%- @raid.icon = "nil.png" if @raid.icon == "" -%>
 	<div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
 </div>
 
 <h1><%= @raid.title %></h1>
+<% permitted_to? :edit, @raid do %>
+<span><%= params[:guild_id].nil? ? link_to("edit",edit_raid_path(@raid)) : link_to("edit",edit_guild_raid_path(Guild.find(params[:guild_id]),@raid))%></span>
+<% end %>
 
 <h4>Raid starts in <div id="countdown_time"></div></h4>
 
@@ -101,6 +105,3 @@
 <% else %>
 <%= render :partial => "update_attend_form", :object => @attendance%>
 <% end %>
-
-<%= link_to 'Edit', edit_raid_path(@raid) %> |
-<%= link_to 'Back', raids_path %>

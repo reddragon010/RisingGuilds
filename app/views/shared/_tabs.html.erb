@@ -2,12 +2,12 @@
 <% if tabs.is_a? Array then %>
 <!-- Tabs Div -->
 <div id="secnav">
-	<ul id="tabs">
+	<ul>
 	<% tabs.each do |tab| %>
 		<% unless tab.empty? %>
-		<%= "<li class=\"tab\">#{tab}</li>" %>
+		<%= "<li>#{tab}</li>" %>
 		<% else %>
-		<%= "<li class=\"tab\" id=\"spacer\">&nbsp;</li>" %>
+		<%= "<li id=\"spacer\">&nbsp;</li>" %>
 		<% end %>
 	<% end %>
 	</ul>

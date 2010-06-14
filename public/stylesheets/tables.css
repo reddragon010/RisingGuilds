@@ -1,0 +1,41 @@
+/* Tables */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-bottom: 1px solid #777;
+}
+
+thead {
+	background-color: #333;
+	border-top: 1px solid #777;
+	border-bottom: 1px solid #777;
+}
+
+tbody {
+
+}
+
+th {
+	padding: 0.25em 0.5em 0.25em 16px;
+	vertical-align: middle;
+}
+
+tr.header {
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #555;
+	background-color: #222;
+	text-align: left;
+}
+
+tr {
+	border-bottom: 1px solid #333;
+	height:30px;
+}
+
+td {
+	text-align: center;
+}
+
+.narrow {
+	width: 16px;
+}

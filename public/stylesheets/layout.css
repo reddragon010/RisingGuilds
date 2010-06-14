@@ -1,239 +1,141 @@
-div#ketten {
-	margin:0px auto;
-	background:url(../images/woltk_theme/ketten.png);
-	width:1008px;
-	height:205px;
-	margin-top:-15px;
-	margin-bottom: 10px;
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFF;
+	background-image: url(../images/rguilds-bg.jpg);
+	background-color: #000;
+	background-repeat: no-repeat;
 }
-
-ul#navbar {
-background:url(../images/woltk_theme/nav_normal.png);
-margin: 0px auto;
-list-style-type: none;
-width:983px;
-height:79px;
-margin-top:-158px;
-margin-bottom:70px;
-}
-
-ul#navbar li {
-font-size:18px;
-float: left;
-margin-left:4px;
-}
-
-ul#navbar li a {
-vertical-align:middle;
-padding: 50px 30px 0px;
-text-decoration: none;
-color:#5a5a5a;
-}
-
-ul#navbar li a:hover {
-padding-top:5px;
-padding-bottom:60px;
-color: white;
-}
-
-ul#navbar li a:active {
-padding-top:5px;
-padding-bottom:60px;
-color:#FFF;
-}
-
-ul#navbar li a#current {
-background: #EEE;
-color: #98CB00;
-}
-
-div#mainnav {
-	margin-bottom: 10px;
-}
-
-li#spacer {
-	padding-left: 20px;
-}
-
-/* begin css tabs - thanks to & copyright by Joshua Kaufman */
-
-ul#tabs { /* general settings */
-text-align: left; /* set to left, right or center */
-margin-bottom:-1px; /* set margins as desired */
-border-bottom: 1px solid #000; /* set border COLOR as desired */
-list-style-type: none;
-padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
-}
-
-ul#tabs li { /* do not change */
-display: inline;
-}
-
-body#tabs li.tab { /* settings for selected tab */
-border-bottom: 1px solid #fff; /* set border color to page background color */
-background-color: #fff; /* set background color to match above border color */
-}
-
-body#tabs li.tab a { /* settings for selected tab link */
-background-color: #fff; /* set selected tab background color as desired */
-color: #000; /* set selected tab link color as desired */
-position: relative;
-top: 1px;
-padding-top: 4px; /* must change with respect to padding (X) above and below */
-}
-
-ul#tabs li a { /* settings for all tab links */
-padding: 4px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
-border: 1px solid #000; /* set border COLOR as desired; usually matches border color specified in #tabnav */
-background-color: #666666; /* set unselected tab background color as desired */
-color: #000; /* set unselected tab link color as desired */
-margin-right: 0px; /* set additional spacing between tabs as desired */
-text-decoration: none;
-border-bottom: none;
-}
-
-ul#tabs a:hover { /* settings for hover effect */
-background: #CCC; /* set desired hover color */
-}
-
-/* end css tabs */
-
-div#footer {
-text-align: center;
-color:#4a8b9e;
-}
-
-div#footer div p {
-margin: 5px;
-}
-
-div#legal {
-clear: both;
-margin: 10px;
-}
-
-div#header {
-background:url(../images/woltk_theme/header.png);
-text-align: left;
-height:174px;
-width:1068px;
-margin-top: 30px;
-}
-
-div#title {
-background:url(../images/woltk_theme/logo.png) no-repeat;
-width:510px;
-height:99px;
-margin-top:20px;
-margin-left:30px;
-float: left;
-}
-
-div#usermenu {
-float: right;
-margin: 10px;
-font-size:16px;
-}
-
-div#content {
-background-color:#171717;
-text-align:center;
-border: black solid 1px;
-margin-bottom: 10px;
-padding: 10px;
-min-height: 400px;
-}
-
-div#center {
-width:1068px;
-min-height: 400px;
-}
-
-div#container {
-width: 1068px;
-margin: auto;
-}
-
-.clear {
-	float: none;
-	clear: both;
-	height: 0px;
-}
-
-#heading {
-	margin-top:20px;
-	margin-bottom:20px;
-	font-family:Verdana, Geneva, sans-serif;
-	font-size:16px;
-}
-
-/* Twitter Widget */
-#twitter {
-	text-align: center;
-	width: 100%;
-	margin-bottom:20px;
-}
-
-.twtr-doc {
-	margin:auto;
-}
-
-
-/* TopBar */
-#topbar {
-	position: absolute;
-	top: -10px;
-	width: 98%;
-	padding-right:20px;
-	text-align: center;
-}
-
-.topbar-content {
-	padding:10px;
-	height: 10px;
-	background-color: #111;
+#container {
+	padding: 0px;
+	width: 960px;
 	margin: auto;
-	text-align: right;
-	margin-left: 8px;
-	color: #666666;
-	margin-top: 5px;
-	font: bold 11px Arial, Helvetica, sans-serif;
+	min-height: 800px;
 }
-
-/* Tables */
-table {
+#topbar {
+	height: 24px;
 	width: 100%;
-	border-collapse: collapse;
-	border-bottom: 1px solid #777;
+	background-image: url(../images/content_bg.gif);
+	vertical-align: middle;
+	border: 2px solid #666;
 }
-
-thead {
-	background-color: #333;
-	border-top: 1px solid #777;
-	border-bottom: 1px solid #777;
+#fooder {
 }
-
-tbody {
-
+.topbar-content {
+	text-align: right;
+	height: 24px;
+	padding: 5px;
 }
-
-th {
-	padding: 0.25em 0.5em 0.25em 16px;
+#guild_header {
+	margin: 10px;
+	height: 100px;
+	border: 2px solid #666;
+	background-color: #1C1C1C;
+}
+#center {
+	width: 100%;
+	border: 2px solid #666;
+	background-image: url(../images/content_bg.gif);
+	min-height: 600px;
+}
+#fooder {
+	height: 60px;
+	width: 100%;
+	border: 2px solid #666;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-image: url(../images/content_bg.gif);
+	text-align: center;
 	vertical-align: middle;
 }
-
-tr.header {
-	border-top: 1px solid #555;
-	border-bottom: 1px solid #555;
-	background-color: #222;
-	text-align: left;
+.fooder_content {
+	margin-top: 15px;
+}
+#secnav {
+	margin: 10px;
+	height: 25px;
+}
+#secnav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#secnav li {
+	float: left;
+	margin-top: 0;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 10px;
+}
+#secnav li a {
+	height: 22px;
+	line-height: 22px;
+	float: none;
+	width: 102px;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	background-color: #1C1C1C;
+	border: 1px solid #CCC;
 }
 
-tr {
-	border-bottom: 1px solid #333;
-	height:30px;
+#tabnav {
+	margin-top: 5px;
+}
+#tabnav ul {
+	list-style: none;
+}
+#tabnav li {
+	float: left;
+	padding-top:5px;
+	margin-left: 10px;
+}
+#tabnav li a {
+	height: 25px;
+	line-height: 25px;
+	float: none;
+	width: 100px;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	background-color: #1C1C1C;
+	border: 2px solid #666;
+	margin-bottom: -2px;
 }
 
-.narrow {
-	width: 16px;
+#tabnav a:hover { /* settings for hover effect */
+	background: #333; /* set desired hover color */
+}
+
+#content {
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid #333;
+	background-color: #1C1C1C;
+}
+.box_small {
+	width: 438px;
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.box_big {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.box_headline  {
+	font-size: 16px;
+	color: #999;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #333;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.clear {
+	clear: both;
+	float: none;
 }
