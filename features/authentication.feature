@@ -26,7 +26,7 @@ Feature: Authentication
 	Scenario: access account
 		Given I am logged in
 		And I am on the homepage
-		When I follow "Account"
+		When I follow "User"
 		Then I should see my account
 		
 		

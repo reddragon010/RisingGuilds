@@ -4,10 +4,9 @@ one:
   guild_id: 1
   title: MyString
   max_attendees: 1
-  date: 2010-05-22
-  invite_start: 03:30:11
-  start: 03:45:11
-  end: 04:45:11
+  invite_start: 2010-05-22 03:30:11
+  start: 2010-05-22 03:45:11
+  end: 2010-05-22 04:45:11
   description: MyText
   leader: 1
   closed: false
@@ -16,10 +15,9 @@ two:
   guild_id: 1
   title: MyString
   max_attendees: 1
-  date: 2010-05-22
-  invite_start: 03:30:11
-  start: 03:45:11
-  end: 04:45:11
+  invite_start: 2010-05-22 03:30:11
+  start: 2010-05-22 03:45:11
+  end: 2010-05-22 04:45:11
   description: MyText
   leader: 1
   closed: false

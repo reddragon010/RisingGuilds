@@ -17,7 +17,11 @@ class GuildsController < ApplicationController
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
-    @guilds = current_user.assignments.collect{|a| a.guild }.uniq
+    if current_user.nil? || current_user.assignments.nil?
+      @guilds = [Guild.find(params[:id])]
+    else
+      @guilds = current_user.assignments.collect{|a| a.guild }.uniq
+    end
     @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
     @events = @guild.events.paginate :page => params[:page]
     respond_to do |format|

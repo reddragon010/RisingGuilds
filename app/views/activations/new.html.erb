@@ -1,4 +1,4 @@
-<h1>t('activations.activate_account')</h1>
+<h1><%=t('activations.activate_account')%></h1>
 
   <% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
   	<%= form.error_messages %>
