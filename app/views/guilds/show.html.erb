@@ -2,74 +2,78 @@
 	  <%=h @guild.description %>
 </div>
 
-<div id="details">
-	<h3>Details</h3>
+<div style="float:right">
+	<% unless @online_characters.nil? %>
+	<div class="box_small">
+	<div class="box_headline">Ingame Members</div>
 	<table>
 		<tr>
-			<td style="width:50%;"></td>
-			<td style="width:50%;"></td>
+			<th>Name</th>
+			<th>Rank</th>
+			<th>Class</th>
+			<th>Race</th>
+			<th>Level</th>
 		</tr>
-		<tr class="right">
-			<td><b>Ail:</b></td>
-			<td><%=h @guild.ail %></td>
+		<% @online_characters.each do |character| %>
+		<tr>
+			<td><%= link_to character.name, character_path(character) %></td>
+			<td><%=h character.rank %></td>
+			<td><%= image_tag classicon_path(character),:size => "18x18" %></td>
+		    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+			<td><%=h character.level %></td>
 		</tr>
-		<tr class="right">
-			<td><b>Activity:</b></td>
-			<td><%=h @guild.activity %></td>
-		</tr>
-		<tr class="right">
-			<td><b>Growth:</b></td>
-			<td><%=h @guild.growth %></td>
-		</tr class="right">
-		<tr class="right">
-			<td><b>Altratio:</b></td>
-			<td><%=h @guild.altratio %></td>
-		</tr>
-		<tr class="right">
-			<td><b>Classratio:</b></td>
-			<td><%=h @guild.classratio %></td>
-		</tr>
-		<tr class="right">
-			<td><b>Achivementpoints:</b></td>
-			<td><%=h @guild.achivementpoints %></td>
-		</tr>
+		<% end %>
 	</table>
-</div>
-
-<% unless @online_characters.nil? %>
-<div id="onlinecharacers">
-<h3>online Chars</h3>
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Rank</th>
-		<th>Class</th>
-		<th>Race</th>
-		<th>Level</th>
-	</tr>
-	<% @online_characters.each do |character| %>
-	<tr>
-		<td><%= link_to character.name, character_path(character) %></td>
-		<td><%=h character.rank %></td>
-		<td><%= image_tag classicon_path(character),:size => "18x18" %></td>
-	    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
-		<td><%=h character.level %></td>
-	</tr>
-	<% end %>
-</table>
-</div>
-<% end %>
-
-<h3>Newest Events</h3>
-<div id="events_box">
-	<%= render :partial => "events", :locals => {:events => @events}%>
-</div>
-
-<div style="position:relative; width:100%">
-<% if permitted_to? :change, @guild %>
-	<div id ="secret">
-  		<b>Token:</b>
-  		<%=h @guild.token %>
 	</div>
-<% end %>
+	<% end %>
 </div>
+
+<div style="floar:left">
+	<div class="box_small">
+		<div class="box_headline">Details</div>
+		<table>
+			<tr>
+				<td style="width:50%;"></td>
+				<td style="width:50%;"></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Ail:</b></td>
+				<td><%=h @guild.ail %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Activity:</b></td>
+				<td><%=h @guild.activity %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Growth:</b></td>
+				<td><%=h @guild.growth %></td>
+			</tr class="right">
+			<tr>
+				<td class="left"><b>Altratio:</b></td>
+				<td><%=h @guild.altratio %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Classratio:</b></td>
+				<td><%=h @guild.classratio %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Achivementpoints:</b></td>
+				<td><%=h @guild.achivementpoints %></td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="box_small">
+	  <div class="box_headline">Newest Events</div>
+	  <div id="events_box">
+		<%= render :partial => "events", :locals => {:events => @events}%>
+	  </div>
+	</div>
+
+</div>
+
+
+
+
+
+<div class="clear"></div>

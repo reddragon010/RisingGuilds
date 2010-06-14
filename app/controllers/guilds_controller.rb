@@ -103,17 +103,21 @@ class GuildsController < ApplicationController
     end
   end
   
+  def maintain
+    
+  end
+  
   def actualize
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if @guild.remoteQueries.find_all_by_action('update_guild').empty?
         @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
         flash[:notice] = 'Guild will be updated soon'
-        format.html { redirect_to(@guild) }
+        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
         format.xml  { head :ok }
       else
         flash[:error] = 'Update is in progress. Please be patient!'
-        format.html { redirect_to(@guild) }
+        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
         format.xml  { head :error }
       end
     end
@@ -134,6 +138,17 @@ class GuildsController < ApplicationController
     end
   end
   
-  
+  def reset_token
+    @guild = Guild.find(params[:id])
+    respond_to do |format|
+      if @guild.update_attribute(:token,ActiveSupport::SecureRandom::hex(8))
+        flash[:notice] = 'You have successfully generated a new guil-token'
+        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+      else
+        flash[:error] = 'Error! Please contact the support'
+        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+      end
+    end
+  end
   
 end

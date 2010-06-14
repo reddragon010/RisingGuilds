@@ -1,11 +1,12 @@
 .guildlogo {
 	float: left;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 .guildname {
-	margin-top: 5px;
+	margin-top: 10px;
 	font-size: 18pt;
+	margin-bottom: 10px;
 }
 
 /* --- show --- */

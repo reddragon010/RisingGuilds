@@ -1,0 +1,31 @@
+<h1>Settings</h1>
+
+<div class="entry">
+	<h3>Invite other people to your guild</h3>
+	<p>If you want to invite other people such as guildmember to the guild you have to give them the "join-link". They only have to signup to an account and follow the link. When they have joined the guild, they are able to connect there account to the characters.</p>
+	<p class="frame"><%= "http://#{configatron.notifier.default_url}/guilds/#{@guild.id}/join/#{@guild.token}"%></p>
+</div>
+
+<div class="entry">
+	<div class="entry-icon"></div>
+	<h3><%= link_to 'Edit guild information', edit_guild_path(@guild) %></h3>
+	<p>You can edit the guild name, description and your guild page URL</p>
+</div>
+
+<div class="entry">
+	<div class="entry-icon"></div>
+	<h3><%= link_to 'Request guild actualization (from arsenal)', :controller => 'guilds', :action => 'actualize',:id => @guild.id %></h3>
+	<p>Here you can request a complete guild actualization. It will fetch all informations from the arsenal and updates the member-list. (In normal case this isn't nessesary, the guild- and arsenal-infos gets automaticaly synced when new infos are available)'</p>
+</div>
+
+<div class="entry">
+	<div class="entry-icon"></div>
+	<h3><%= link_to 'Reset guild invitation tolken', :controller => 'guilds', :action => 'reset_token',:id => @guild.id  %></h3>
+	<p>The guild-token is primary needed to let people join the guild. If you reset it the old invatiation-link will become invalid!</p>
+</div>
+
+<div class="entry">
+	<div class="entry-icon"></div>
+	<h3><%= link_to 'Destroy guild', @guild, :confirm => 'Are you really sure? Destroyed guilds can\'t be restored!', :method => :delete %></h3>
+	<p>All Raids and Newsentrys will be destroyed. The users and characters get disconnected from the guild and will ramain "invisible" in the system. Please be carefull! Destroyed Guilds can't be restored'</p>
+</div>
