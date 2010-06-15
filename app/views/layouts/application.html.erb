@@ -55,15 +55,15 @@
 	  </div>
 	  <% end %>
 	</div>
-
-    <div id="content">
-      <% if flash[:notice] %>
+	<div id="popups">
+	  <% if flash[:notice] %>
 	  <p id="notice"><%= flash[:notice] %></p>
 	  <% end %>
 	  <% if flash[:error] %>
 	  <p id="error"><%= flash[:error] %></p>
 	  <% end %>
-		
+	</div>
+    <div id="content">
 	  <%= yield(:content) or yield %>
       <div class="clear"></div>
     </div>

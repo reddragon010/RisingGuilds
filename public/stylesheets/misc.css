@@ -41,6 +41,7 @@
 	border: 1px red solid;
 	background-color: #FDD;
 	padding: 10px;
+	margin-bottom: 0px;
 }
 
 #notice{
@@ -48,6 +49,7 @@
 	border: 1px green solid;
 	background-color: #DFD;
 	padding: 10px;
+	margin-bottom: 0px;
 }
 
 /* ---- Progress Bar ---- */

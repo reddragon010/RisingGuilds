@@ -1,6 +1,8 @@
 class CharactersController < ApplicationController
   filter_resource_access
   
+  layout :choose_layout
+  
   # GET /characters
   # GET /characters.xml
   def index
@@ -103,10 +105,10 @@ class CharactersController < ApplicationController
       redirect_to root_url
     elsif @character.user.nil?
         flash[:notice] = "Character is now yours" if @character.update_attribute(:user_id, current_user.id)
-        redirect_to(@character) 
+        redirect_to(guild_character_path(@character.guild,@character)) 
     else
       flash[:error] = "Character already marked! Please contact the support"
-      redirect_to(@character)
+      redirect_to(guild_character_path(@character.guild,@character))
     end
   end
   
@@ -120,7 +122,7 @@ class CharactersController < ApplicationController
     #error if char is not marked
     elsif @character.user.nil?
       flash[:error] = "Character not marked"
-      redirect_to(@character)
+      redirect_to(guild_character_path(@character.guild,@character))
     else
       @guild = @character.guild
       @user = @character.user
@@ -130,7 +132,7 @@ class CharactersController < ApplicationController
       #cleanup guild permissions
       @guild.reload
       flash[:notice] = "Character has been demarked"
-      redirect_to(@character)
+      redirect_to(guild_character_path(@character.guild,@character))
     end
   end
   
@@ -144,7 +146,7 @@ class CharactersController < ApplicationController
         format.xml  { head :ok }
       else
         flash[:error] = 'Update is in progress. Please be patient!'
-        format.html { redirect_to(@character) }
+        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end
     end
@@ -156,11 +158,11 @@ class CharactersController < ApplicationController
       if @character.remoteQueries.find_all_by_action('update_character_ail').empty?
         @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 10, :action => "update_character_ail")
         flash[:notice] = 'Character\'s AIL will be updated soon'
-        format.html { redirect_to(@character) }
+        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else
         flash[:error] = 'Update is in progress. Please be patient!'
-        format.html { redirect_to(@character) }
+        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end
     end
@@ -174,11 +176,11 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.update_attribute(:main,true)
         flash[:notice] =  @character.name + ' is now your new main'
-        format.html { redirect_to_target_or_default(character_path(@character)) }
+        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else
         flash[:error] = 'error - please contact the support'
-        format.html { redirect_to_target_or_default(character_path(@character)) }
+        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end
     end
@@ -195,5 +197,13 @@ class CharactersController < ApplicationController
       role = Role.find_by_name("guildmember")
     end
     return role
+  end
+  
+  def choose_layout
+    unless params[:guild_id].nil?
+      return 'guild_tabs'
+    else
+      return 'application'
+    end
   end
 end

@@ -24,6 +24,10 @@ module NavigationHelpers
       guild_characters_path @guild
     when /a new guild/
       new_guild_path
+    when /new_raid-form/
+      new_guild_raid_path @guild
+    when /the raidpage/
+      guild_raid_path @guild, @raid
     when /actualize guild/
       "/guilds/#{@guild.id}/actualize"
     when /edit guild/

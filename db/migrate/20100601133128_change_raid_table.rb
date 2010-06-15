@@ -1,7 +1,7 @@
 class ChangeRaidTable < ActiveRecord::Migration
   def self.up
 	change_table :raids do |t|
-		t.column :date, :date, :null => false
+		t.column :date, :date
     t.change :invite_start, :time
     t.change :start, :time
     t.change :end, :time

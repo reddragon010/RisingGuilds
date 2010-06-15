@@ -1,3 +1,18 @@
+<div id="content_menu">
+	<ul>
+		<% if permitted_to? :link, @character %>
+		<li><%= link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?')  %></li>
+		<% end %>
+		<% if permitted_to? :delink, @character %>
+		<li><%= link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink')  %></li>
+		<% end %>
+		<% if permitted_to? :actualize, @character %>
+		<li><%= link_to('Actualize', :action => 'actualize') %></li>
+		<li><%= link_to('Generate AIL', :action => 'generate_ail') %></li>
+		<% end %>
+	</ul>
+</div>
+
 <div id="charheader">
 	<div id="avatar">
 		<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
@@ -26,7 +41,7 @@
 		<% unless @character.user.nil? %>
 		<div id="owner">
 		  owned by <%=h @character.user.login  %>
-		</p>
+		</div>
 		<% end %>
 
 	</div>
@@ -36,10 +51,6 @@
 	</div>
 </div>
 
-<div>
-	<%= link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?') if permitted_to? :link, @character %>
-	<%= link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink') if permitted_to? :delink, @character %>
-</div>
 
 <div id="details">
 <h3>Details</h3>

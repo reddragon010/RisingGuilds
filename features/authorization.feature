@@ -58,7 +58,7 @@ Feature: Authorization
 		And I am a "leader" of the guild
 		And I am logged in
 		And I am on the guildpage
-		When I follow "Actualize"
+		When I go to actualize guild
 		Then I should see "Guild will be updated soon"
 
 	Scenario: Edit Guild as manager
