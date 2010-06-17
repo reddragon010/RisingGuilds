@@ -89,3 +89,29 @@ div.tooltip {
 .twtr-doc {
 	margin:auto;
 }
+
+/* ---- AutoComplete ---- */
+div.auto_complete {
+	width: 350px;
+	background: #111;
+	color: #fff;
+}
+div.auto_complete ul {
+	border:1px solid #666;
+	margin:0;
+	padding:0;
+	width:100%;
+	list-style-type:none;
+}
+div.auto_complete ul li {
+	margin:0;
+	padding:3px;
+}
+div.auto_complete ul li.selected {
+	background-color: #333;
+}
+div.auto_complete ul strong.highlight {
+	color: #eee; 
+	margin:0;
+	padding:0;
+}

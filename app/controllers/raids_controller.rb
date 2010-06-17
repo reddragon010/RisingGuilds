@@ -11,8 +11,6 @@ class RaidsController < ApplicationController
   def index
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     @raids = Raid.with_permissions_to(:view).find(:all, :order => "start") 
-    
-    @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
 
     @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
     @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
@@ -27,11 +25,10 @@ class RaidsController < ApplicationController
   # GET /raids/1
   # GET /raids/1.xml
   def show
-    
-    unless @raid.attendances.nil? || @raid.attendances.empty?
-      @attendance = @raid.attendances.find_by_character_id(current_user.characters.collect{|c| c.id})
-    else
+    if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.find_all_by_character_id(current_user.characters.collect{|c| c.id}).empty?
       @attendance = Attendance.new(:raid_id => @raid.id)
+    else
+      @attendance = @raid.attendances.find_by_character_id(current_user.characters.collect{|c| c.id})
     end 
     @guild = @raid.guild
     respond_to do |format|
@@ -72,6 +69,7 @@ class RaidsController < ApplicationController
   def create
     @raid.end = @raid.start + @raid.duration.to_i.hours
     @raid.invite_start = @raid.start - @raid.invitation_window.to_i.minutes
+    @raid.guilds << @raid.guild
     
     respond_to do |format|
       if @raid.save
@@ -88,7 +86,13 @@ class RaidsController < ApplicationController
   # PUT /raids/1
   # PUT /raids/1.xml
   def update
-    #raise params[:raid].to_yaml
+    unless params[:raid][:invited_guild].nil?
+      @raid.guilds << Guild.find_by_name(params[:raid][:invited_guild])
+      flash[:notice] = 'Guild was added to Raid'
+      redirect_to guild_raid_path(@raid.guild, @raid)
+      return true
+    end
+      
     @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i,params[:raid][:"start(2i)"].to_i,params[:raid][:"start(3i)"].to_i,params[:raid][:"start(4i)"].to_i,params[:raid][:"start(5i)"].to_i)
     @end_time = @start_time + params[:raid][:duration].to_i.hours
     @invite_start_time =  @start_time - params[:raid][:invitation_window].to_i.minutes
@@ -126,6 +130,20 @@ class RaidsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(guild_raids_path(@guild)) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def uninvite_guild
+    @guild = Guild.find(params[:uninvited_guild])
+    respond_to do |format|
+      unless @raid.guild == @guild
+        if @raid.guilds.delete(@guild)
+          flash[:notice] = 'Guild was uninvited.'
+        end
+      else
+        flash[:error] = 'Can\'t uninvite leading Guild'
+      end
+      format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
     end
   end
   

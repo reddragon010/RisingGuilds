@@ -8,7 +8,7 @@
     <td><%=h raid.invite_start.strftime(@timeformat) %></td>
     <td><%=h raid.start.strftime(@timeformat) %></td>
     <td><%=h raid.end.strftime(@timeformat) %></td>
-    <td><%= raid.leader.nil? ? "" : link_to(User.find(raid.leader.to_i).login,guild_users_path(raid.guild)) %></td>
+    <td><%= raid.leader.nil? ? "" : User.find(raid.leader.to_i).login %></td>
 	<td><%=h raid.max_attendees %></td>
 	<td><%=h raid.attendances.find_by_approved(true).nil? ? "0" : raid.attendances.find_all_by_approved(true).count %>
     <td><%= raid.closed? ? image_tag('icons/lock_closed.png') : image_tag('icons/lock_open.png') %></td>

@@ -47,7 +47,7 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       if @attendance.save
         flash[:notice] = 'Attendance was successfully created.'
-        format.html { redirect_to_target_or_default(@attendance.raid) }
+        format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
         format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
       else
         format.html { render :controller => "raid", :action => "show", :id => @attendance.raid.id }
@@ -64,7 +64,7 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       if @attendance.update_attributes(params[:attendance])
         flash[:notice] = 'Attendance was successfully updated.'
-        format.html { redirect_to_target_or_default(@attendance.raid) }
+        format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
         format.xml  { head :ok }
       else
         format.html {  render :controller => "raid", :action => "show", :id => @attendance.raid.id  }

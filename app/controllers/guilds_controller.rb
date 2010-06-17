@@ -6,11 +6,13 @@ class GuildsController < ApplicationController
   # GET /guilds
   # GET /guilds.xml
   def index
-    unless current_user.nil? || current_user.assignments.empty?
-      redirect_to guild_path(current_user.assignments.first.guild)
-    else
+    if !params[:search].nil?
+      @guilds = Guild.find(:all,:conditions => ['name LIKE ?',"#{params[:search]}%"])
+    elsif current_user.nil? || current_user.assignments.empty?
       flash[:error] = 'you are not logged in or haven\'t assigned to a guild, yet'
       redirect_to_target_or_default(root_path)
+    else
+      redirect_to guild_path(current_user.assignments.first.guild)
     end
   end
 

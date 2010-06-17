@@ -36,3 +36,26 @@ Feature: Character
 		And I press "Update"
 		Then I should see "Raid was successfully updated."
 		And I should see "FooBar"
+		
+	Scenario: Attend a Raid
+		Given a guild
+		And the guild have some members
+		And a raid
+		And I am a registered user
+		And I am a "leader" of the guild
+		And I am linked to a character
+		And I am logged in
+		When I am on the raidpage
+		And I select "TestBoon1" from "attendance_character_id"
+		And I select "dd" from "attendance_role"
+		And I select "signed" from "attendance_status"
+		And I fill in "attendance_message" with "TestAttendace"
+		And I press "Create"
+		Then I should see "Attendance was successfully created."
+		When I select "tank" from "attendance_role"
+		And I select "not_sure" from "attendance_status"
+		And I fill in "attendance_message" with "TestAttendaceUpdate"
+		And I press "Update"
+		Then I should see "Attendance was successfully updated."
+		
+	

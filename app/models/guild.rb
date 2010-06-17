@@ -4,6 +4,7 @@ class Guild < ActiveRecord::Base
   has_many :remoteQueries
   has_many :assignments
   has_many :users, :through => :assignments
+  has_and_belongs_to_many :raids
   
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"

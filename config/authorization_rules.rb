@@ -41,7 +41,7 @@ authorization do
   role :raidleader do
     includes :guildmember
     has_permission_on :raids, :to => :new
-    has_permission_on :raids, :to => :create do
+    has_permission_on :raids, :to => [:create,:uninvite_guild] do
       if_attribute :guild => { :raidleaders => contains { user } }
       if_attribute :guild => { :officers => contains { user } }
       if_attribute :guild => { :leaders => contains { user } }
@@ -65,8 +65,9 @@ authorization do
     has_permission_on :attendances, :to => :setup
     
     #Can view Raids of the own Guilds
-    has_permission_on :raids, :to => :view do
+    has_permission_on :raids, :to => :view, :join_by => :or do
       if_attribute :guild => { :users => contains{ user } }
+      if_attribute :guilds => { :users => contains{ user } }
     end
     
     #Can link chars if is a member of the guild

@@ -1,9 +1,10 @@
 class Raid < ActiveRecord::Base
-  belongs_to :guild
+  has_and_belongs_to_many :guilds
   has_many :attendances
   has_many :characters, :through => :attendances
+  belongs_to :guild
   
-  attr_accessor :invitation_window, :duration
+  attr_accessor :invitation_window, :duration, :invited_guild
 
   #only future Date/Time is valid
   validates_each(:invite_start,:start,:end) do |record, attr, value|
@@ -35,9 +36,21 @@ class Raid < ActiveRecord::Base
       return @duration
     end
   end
-
+  
   def date
     self.start.to_date
+  end
+  
+  def levelrange
+    if self.min_lvl.nil? && self.max_lvl.nil?
+      return "1 - 80"
+    elsif self.max_lvl.nil?
+      return self.min_lvl.to_s + " - 80"
+    elsif self.min_lvl.nil?
+      return "1 - " + self.max_lvl.to_s
+    else
+      return self.min_lvl.to_s + " - " + self.max_lvl.to_s
+    end
   end
   
   def closed?

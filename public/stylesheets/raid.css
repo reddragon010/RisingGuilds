@@ -28,6 +28,13 @@
 	padding: 0.25em 0.5em 0.25em 16px;
 }
 
+.guildslist {
+	list-style: none;
+	margin-bottom:0px;
+	margin-top:0px;
+	padding: 0px;
+}
+
 /* ---- Calendar ---- */
 #calendar table {  
   width: 100%;

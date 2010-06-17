@@ -25,4 +25,4 @@ configatron.onlinelist.url = 'http://www.rising-gods.de/components/com_onlinelis
 configatron.notifier.default_url = 'localhost:3000'
 
 #raidplanner
-configatron.raidplanner.status = {:not_sure => 1, :unsigned => 2, :signed => 3, :approved => 4}
+configatron.raidplanner.status = {:not_sure => 1, :unsigned => 2, :signed => 3}
