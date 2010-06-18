@@ -51,6 +51,7 @@ end
 Factory.define :Raid do |f|
   f.sequence(:title){|n| "TestRaid#{n}"} 
   f.max_attendees 25
+  f.guild_id 1
   f.invite_start Time.now + 5.hour
   f.start Time.now + 6.hour
   f.end Time.now + 10.hour

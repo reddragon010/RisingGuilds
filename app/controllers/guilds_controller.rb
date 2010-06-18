@@ -61,7 +61,7 @@ class GuildsController < ApplicationController
       if @guild.valid_name?
         if @guild.save
           @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => 1)
-          flash[:notice] = t(:created,:item => 'guild')
+          flash[:notice] = t(:created,:item => 'Guild')
           format.html { redirect_to(@guild) }
           format.xml  { render :xml => @guild, :status => :created, :location => @guild }
         else
@@ -82,7 +82,7 @@ class GuildsController < ApplicationController
 
     respond_to do |format|
       if @guild.update_attributes(params[:guild])
-        flash[:notice] = t(:updated, :item => 'guild')
+        flash[:notice] = t(:updated, :item => 'Guild')
         format.html { redirect_to(@guild) }
         format.xml  { head :ok }
       else
@@ -112,7 +112,7 @@ class GuildsController < ApplicationController
     respond_to do |format|
       if @guild.remoteQueries.find_all_by_action('update_guild').empty?
         @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
-        flash[:notice] = t(:updating, :item => 'guild')
+        flash[:notice] = t(:updating, :item => 'Guild')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
         format.xml  { head :ok }
       else

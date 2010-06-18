@@ -73,7 +73,7 @@ class RaidsController < ApplicationController
     
     respond_to do |format|
       if @raid.save
-        flash[:notice] = t(:created, :item => 'raid')
+        flash[:notice] = t(:created, :item => 'Raid')
         format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { render :xml => @raid, :status => :created, :location => @raid }
       else
@@ -111,7 +111,7 @@ class RaidsController < ApplicationController
     
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
-        flash[:notice] = t(:updated, :item => 'raid')
+        flash[:notice] = t(:updated, :item => 'Raid')
         format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { head :ok }
       else

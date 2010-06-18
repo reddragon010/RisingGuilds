@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     
     if @user.signup!(params)
       @user.deliver_activation_instructions!
-      flash[:notice] = t('users.create')
+      flash[:notice] = t("account.created")
       redirect_to root_url
     else
       render :action => :new
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
-      flash[:notice] = t("users.updated")
+      flash[:notice] = t("updated", :item => 'users')
       redirect_to account_url
     else
       render :action => :edit
