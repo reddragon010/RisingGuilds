@@ -46,7 +46,7 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        flash[:notice] = t(:created:item => 'Attendance')
+        flash[:notice] = t(:created, :item => 'Attendance')
         format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
         format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
       else
