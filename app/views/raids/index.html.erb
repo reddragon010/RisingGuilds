@@ -1,3 +1,11 @@
+<div id="content_menu">
+	<ul>
+		<% if !@guild.nil? && permitted_to?(:create, :raids) %>
+		<li><%= link_to 'New raid', new_guild_raid_path(@guild) %></li>
+		<% end %>
+	</ul>
+</div>
+
 <% unless @raids.nil? || @raids.empty? %>
 <div id="calendar">
 	<h2 id="month">
@@ -76,6 +84,3 @@
 <% else %>
 <p>There are no raids which could be attended by you</p>
 <% end %>
-<br />
-
-<%= link_to 'New raid', "/guilds/#{@guild.id}/raids/new" unless @guild.nil? %>
