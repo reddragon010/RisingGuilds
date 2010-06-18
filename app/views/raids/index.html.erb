@@ -15,15 +15,15 @@
 	</h2>
 	<% calendar_for @raids, :year => @date.year, :month => @date.month do |calendar| %>
 	  <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
-	  <% calendar.day(:day_method => :start) do |date, raids| %>
+	  <%- calendar.day(:day_method => :start) do |date, raids| -%>
 		<%= date.day %>
 		<ul>
-		  <% for raid in raids %>
-		    <li><%= link_to h(raid.title), guild_raid_path(raid.guild, raid) %></li>
-		  <% end %>
+		  <%- for raid in raids -%>
+		    <li><a href="<%= guild_raid_path(raid.guild, raid) %>" class="raidlink"><%= image_tag("icons/raid/#{raid.icon}", :size => "30x30", :class => "raidicon_small") %><%=h raid.title %></a></li>
+		  <%- end -%>
 		</ul>
-	  <% end %>
-	<% end %>
+	  <%- end -%>
+	<%- end -%>
 </div>
 
 <table>

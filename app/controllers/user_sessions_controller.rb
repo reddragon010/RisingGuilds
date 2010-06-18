@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = t('user_sessions.login_successful')
       redirect_to(root_url)
     else
-      flash[:error] = t'(user_sessions.login_incorrect')
+      flash[:error] = t('user_sessions.login_incorrect')
       render :action => :new
     end
   end
