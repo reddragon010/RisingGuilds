@@ -10,8 +10,12 @@ class ApplicationController < ActionController::Base
   before_filter { |c| Authorization.current_user = c.current_user}
   before_filter :write_return_to
   before_filter :setup_tabs
+  before_filter :set_user_language
   
   protected
+  def set_user_language
+    I18n.locale = current_user.language if logged_in?
+  end
   
   def setup_tabs
     @tabs = Array.new
