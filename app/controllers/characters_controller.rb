@@ -62,7 +62,7 @@ class CharactersController < ApplicationController
   def create
     respond_to do |format|
       if @character.save
-        flash[:notice] = 'Character was successfully created.'
+        flash[:notice] = t(:successfull,:item => 'Character',:a => 'created')
         format.html { redirect_to(@character) }
         format.xml  { render :xml => @character, :status => :created, :location => @character }
       else
@@ -77,7 +77,7 @@ class CharactersController < ApplicationController
   def update
     respond_to do |format|
       if @character.update_attributes(params[:character])
-        flash[:notice] = 'Character was successfully updated.'
+        flash[:notice] = t(:successfull,:item => 'Character',:a => 'updated')
         format.html { redirect_to(@character) }
         format.xml  { head :ok }
       else
@@ -101,13 +101,13 @@ class CharactersController < ApplicationController
   def link
     @character = Character.find(params[:id])
     if @character.nil?
-      flash[:error] = "Character not found"
+      flash[:error] = t(:not_found,:item => 'Character')
       redirect_to root_url
     elsif @character.user.nil?
-        flash[:notice] = "Character is now yours" if @character.update_attribute(:user_id, current_user.id)
+        flash[:notice] = t('characters.linked') if @character.update_attribute(:user_id, current_user.id)
         redirect_to(guild_character_path(@character.guild,@character)) 
     else
-      flash[:error] = "Character already marked! Please contact the support"
+      flash[:error] = t('characters.already_linked')
       redirect_to(guild_character_path(@character.guild,@character))
     end
   end
@@ -117,11 +117,11 @@ class CharactersController < ApplicationController
     @character = Character.find(params[:id])
     #error if char was not found
     if @character.nil?
-      flash[:error] = "Character not found"
+      flash[:error] = t(:not_found,:item => 'Character')
       redirect_to root_url
     #error if char is not marked
     elsif @character.user.nil?
-      flash[:error] = "Character not marked"
+      flash[:error] = t('characters.not_linked')
       redirect_to(guild_character_path(@character.guild,@character))
     else
       @guild = @character.guild
@@ -131,7 +131,7 @@ class CharactersController < ApplicationController
       @character.save
       #cleanup guild permissions
       @guild.reload
-      flash[:notice] = "Character has been demarked"
+      flash[:notice] = t('characters.delinked')
       redirect_to(guild_character_path(@character.guild,@character))
     end
   end
@@ -141,11 +141,11 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.remoteQueries.find_all_by_action('update_character').empty?
         @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 5, :action => "update_character")
-        flash[:notice] = 'Character will be updated soon'
+        flash[:notice] = t(:updating, :item => "Character")
         format.html { redirect_to(@character) }
         format.xml  { head :ok }
       else
-        flash[:error] = 'Update is in progress. Please be patient!'
+        flash[:error] = t(:update_in_progress)
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end
@@ -157,11 +157,11 @@ class CharactersController < ApplicationController
     respond_to do |format|
       if @character.remoteQueries.find_all_by_action('update_character_ail').empty?
         @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 10, :action => "update_character_ail")
-        flash[:notice] = 'Character\'s AIL will be updated soon'
+        flash[:notice] = t(:updating, :item => "Character's AIL")
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else
-        flash[:error] = 'Update is in progress. Please be patient!'
+        flash[:error] = t(:update_in_progress)
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end
@@ -179,7 +179,7 @@ class CharactersController < ApplicationController
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else
-        flash[:error] = 'error - please contact the support'
+        flash[:error] = t(:error)
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :error }
       end

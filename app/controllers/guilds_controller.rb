@@ -9,7 +9,7 @@ class GuildsController < ApplicationController
     if !params[:search].nil?
       @guilds = Guild.find(:all,:conditions => ['name LIKE ?',"#{params[:search]}%"])
     elsif current_user.nil? || current_user.assignments.empty?
-      flash[:error] = 'you are not logged in or haven\'t assigned to a guild, yet'
+      flash[:error] = t('guilds.not_assigned')
       redirect_to_target_or_default(root_path)
     else
       redirect_to guild_path(current_user.assignments.first.guild)
@@ -63,7 +63,7 @@ class GuildsController < ApplicationController
         @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => 1)
         if @guild.save
           
-          flash[:notice] = 'Guild was successfully created.'
+          flash[:notice] = t(:created,:item => 'guild')
           format.html { redirect_to(@guild) }
           format.xml  { render :xml => @guild, :status => :created, :location => @guild }
         else
@@ -71,7 +71,7 @@ class GuildsController < ApplicationController
           format.xml  { render :xml => @guild.errors, :status => :unprocessable_entity }
         end
       else
-        flash[:error] = 'Guild doesn\'t exist!'
+        flash[:error] = t(:not_found, :item => 'guild')
         format.html {render :action => "new"}
         format.xml  {render :xml => @guild.errors, :status => :unprocessable_entity }
       end
@@ -84,7 +84,7 @@ class GuildsController < ApplicationController
 
     respond_to do |format|
       if @guild.update_attributes(params[:guild])
-        flash[:notice] = 'Guild was successfully updated.'
+        flash[:notice] = t(:updated, :item => 'guild')
         format.html { redirect_to(@guild) }
         format.xml  { head :ok }
       else
@@ -114,11 +114,11 @@ class GuildsController < ApplicationController
     respond_to do |format|
       if @guild.remoteQueries.find_all_by_action('update_guild').empty?
         @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
-        flash[:notice] = 'Guild will be updated soon'
+        flash[:notice] = t(:updating, :item => 'guild')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
         format.xml  { head :ok }
       else
-        flash[:error] = 'Update is in progress. Please be patient!'
+        flash[:error] = t(:update_in_progress)
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
         format.xml  { head :error }
       end
@@ -131,10 +131,10 @@ class GuildsController < ApplicationController
       if params[:token] == @guild.token
         @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
         @guild.save
-        flash[:notice] = 'You have successfully joined this guild'
+        flash[:notice] = t('guilds.joined')
         format.html { redirect_to(@guild) }
       else
-        flash[:error] = 'invalid token! Please contact your guildmanager'
+        flash[:error] = t('guilds.invalid_token')
         format.html { redirect_to(@guild) }
       end
     end
@@ -144,10 +144,10 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if @guild.update_attribute(:token,ActiveSupport::SecureRandom::hex(8))
-        flash[:notice] = 'You have successfully generated a new guil-token'
+        flash[:notice] = t('guilds.new_token')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
       else
-        flash[:error] = 'Error! Please contact the support'
+        flash[:error] = t(:error)
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
       end
     end

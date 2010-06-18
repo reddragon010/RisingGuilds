@@ -52,7 +52,7 @@ class RaidsController < ApplicationController
   # GET /raids/1/edit
   def edit
     if @raid.closed?
-      flash[:error] = "You can't edit closed raids"
+      flash[:error] = t('raids.edit_closed_raid')
       redirect_to guild_raids_path(@raid.guild)
       return true
     end
@@ -73,7 +73,7 @@ class RaidsController < ApplicationController
     
     respond_to do |format|
       if @raid.save
-        flash[:notice] = 'Raid was successfully created.'
+        flash[:notice] = t(:created, :item => 'raid')
         format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { render :xml => @raid, :status => :created, :location => @raid }
       else
@@ -88,7 +88,7 @@ class RaidsController < ApplicationController
   def update
     unless params[:raid][:invited_guild].nil?
       @raid.guilds << Guild.find_by_name(params[:raid][:invited_guild])
-      flash[:notice] = 'Guild was added to Raid'
+      flash[:notice] = t('raids.guild_to_raid')
       redirect_to guild_raid_path(@raid.guild, @raid)
       return true
     end
@@ -111,7 +111,7 @@ class RaidsController < ApplicationController
     
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
-        flash[:notice] = 'Raid was successfully updated.'
+        flash[:notice] = t(:updated, :item => 'raid')
         format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
         format.xml  { head :ok }
       else
@@ -138,10 +138,10 @@ class RaidsController < ApplicationController
     respond_to do |format|
       unless @raid.guild == @guild
         if @raid.guilds.delete(@guild)
-          flash[:notice] = 'Guild was uninvited.'
+          flash[:notice] = t('raids.uninvited')
         end
       else
-        flash[:error] = 'Can\'t uninvite leading Guild'
+        flash[:error] = t('raids.cant_uninvite')
       end
       format.html { redirect_to guild_raid_path(@raid.guild, @raid) }
     end

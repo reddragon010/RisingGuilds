@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       if @guild.users.include?(current_user) then
         @users = @guild.users.find(:all, :order => params[:sort])
       else
-        flash[:error] = "Sorry, you are not allowed to access that page."
+        flash[:error] = t('no_access')
         redirect_to_target_or_default(root_path)
         return true
       end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     
     if @user.signup!(params)
       @user.deliver_activation_instructions!
-      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+      flash[:notice] = t('users.create')
       redirect_to root_url
     else
       render :action => :new
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
+      flash[:notice] = t("users.updated")
       redirect_to account_url
     else
       render :action => :edit
@@ -74,23 +74,23 @@ class UsersController < ApplicationController
   
   def kick
     if params[:guild_id].nil?
-      flash[:error] = "No guild specified!"
+      flash[:error] = t('users.no_guild')
       redirect_to root_url
     end
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.kickable_by?(current_user,@guild)
       @guild.assignments.find_all_by_user_id(@user.id).each {|a| a.destroy}
-      flash[:notice] = "User kicked!"
+      flash[:notice] = t('users.kicked')
     else
-      flash[:error] = "you have not enought rights to kick this user"
+      flash[:error] = t('users.not_enought_rights',:a => 'kick')
     end
     redirect_to guild_users_path(@guild)
   end
   
   def promote
     if params[:guild_id].nil?
-      flash[:error] = "No guild specified!"
+      flash[:error] = t('users.no_guild')
       redirect_to root_url
     end
     @user = User.find(params[:id])
@@ -98,19 +98,19 @@ class UsersController < ApplicationController
     if @user.promoteable_by?(current_user,@guild)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
-        flash[:notice] = "User promoted!"
+        flash[:notice] = t('users.promoted')
       else
-        flash[:error] = "ERROR!"
+        flash[:error] = t('error')
       end
     else
-      flash[:error] = "you have not enought rights to promote this user"
+      flash[:error] = t('users.not_enought_rights',:a => 'promote')
     end
     redirect_to guild_users_path(@guild)
   end
   
   def demote
     if params[:guild_id].nil?
-      flash[:error] = "No guild specified!"
+      flash[:error] = t('users.no_guild')
       redirect_to root_url
     end
     @user = User.find(params[:id])
@@ -118,12 +118,12 @@ class UsersController < ApplicationController
     if @user.demoteable_by?(current_user,@guild)
       asmt = @guild.assignments.find_by_user_id(@user.id)
       if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
-        flash[:notice] = "User demoted!"
+        flash[:notice] = t('users.demoted')
       else
-        flash[:error] = "ERROR!"
+        flash[:error] = t('error')
       end
     else
-      flash[:error] = "you have not enought rights to promote this user"
+      flash[:error] = t('users.not_enought_rights',:a => 'demote')
     end
     redirect_to guild_users_path(@guild)
   end
