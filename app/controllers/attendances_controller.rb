@@ -46,7 +46,7 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
-        flash[:notice] = t(:successfull,:item => 'Attendance',:a => 'created')
+        flash[:notice] = t(:created:item => 'Attendance')
         format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
         format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
       else
@@ -63,7 +63,7 @@ class AttendancesController < ApplicationController
 
     respond_to do |format|
       if @attendance.update_attributes(params[:attendance])
-        flash[:notice] = t(:successfull,:item => 'Attendance',:a => 'updated')
+        flash[:notice] = t(:updated,:item => 'Attendance')
         format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
         format.xml  { head :ok }
       else
@@ -89,11 +89,12 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     respond_to do |format|
       if @attendance.toggle!(:approved)
-        flash[:notice] = t(:successfull,:item => 'Attendance',:a => 'updated')
-        format.html { redirect_to_target_or_default(@attendance.raid) }
+        flash[:notice] = t(:updated,:item => 'Attendance')
+        format.html { redirect_to guild_raid_path(@attendance.raid.guild, @attendance.raid) }
         format.xml  { head :ok }
       else
-        format.html { render :controller => "raid", :action => "show", :id => @attendance.raid.id  }
+        flash[:error] = t(:error)
+        format.html { redirect_to guild_raid_path(@attendance.raid.guild, @attendance.raid)  }
         format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
       end
     end
