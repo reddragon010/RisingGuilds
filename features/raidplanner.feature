@@ -46,7 +46,7 @@ Feature: Character
 		And I am linked to a character
 		And I am logged in
 		When I am on the raidpage
-		And I select "TestBoon1" from "attendance_character_id"
+		And I select my character from "attendance_character_id"
 		And I select "dd" from "attendance_role"
 		And I select "signed" from "attendance_status"
 		And I fill in "attendance_message" with "TestAttendace"

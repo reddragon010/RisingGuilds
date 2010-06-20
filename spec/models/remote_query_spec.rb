@@ -144,4 +144,23 @@ describe RemoteQuery do
       @char.rank.should == 2
       @char.events.last.action == "demoted"
     end
+    
+    it "should calculate all guild-indicators" do
+      @guild = Factory.create(:Guild)
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      
+      @guild.characters.find(:all,:limit => 6).each{|char| char.update_attribute(:main,true)}
+      
+      @guild.characters.each_with_index{|char,i| char.update_attribute(:ail,200-i)}
+      
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild_indicators")
+      @guild.remoteQueries.each{|q| q.execute.should be_true}
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      
+      @guild.altratio.should == 80
+      @guild.ail.should == 182
+      
+    end
 end

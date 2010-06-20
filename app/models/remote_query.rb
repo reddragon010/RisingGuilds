@@ -53,6 +53,12 @@ class RemoteQuery < ActiveRecord::Base
 			end
 			db_char_names = self.guild.characters.collect {|c| c.name}
 			
+			if db_char_names.empty? && !configatron.arsenal.test then
+			  first_update = true
+			else
+			  first_update = false
+		  end
+			
 			# Calculate new/missing chars
       missing_char_names = db_char_names - arsenal_char_names
       new_char_names = arsenal_char_names - db_char_names
@@ -73,10 +79,12 @@ class RemoteQuery < ActiveRecord::Base
             char.save!
             
             #Trigger Join-Event
-            event = Event.new(:action => 'joined')
-            event.guild = self.guild
-            event.character = char
-            event.save
+            unless first_update
+              event = Event.new(:action => 'joined')
+              event.guild = self.guild
+              event.character = char
+              event.save
+            end
           end
         end
       end
@@ -85,10 +93,12 @@ class RemoteQuery < ActiveRecord::Base
       unless missing_char_names.empty?
         self.guild.characters.each do |char|
           if missing_char_names.include?(char.name) then
-            event = Event.new(:action => 'left')
-            event.character = char
-            event.guild = self.guild
-            event.save
+            unless first_update
+              event = Event.new(:action => 'left')
+              event.character = char
+              event.guild = self.guild
+              event.save
+            end
             attributes = {:guild_id => nil, :rank => nil}
             char.update_attributes(attributes)
           end
@@ -96,24 +106,26 @@ class RemoteQuery < ActiveRecord::Base
       end
       
       #rank update
-      self.guild.characters.each do |char|
-        if char.rank != arsenal_char_ranks[char.name]
-          content = char.rank
-          char.rank = arsenal_char_ranks[char.name]
-          if char.rank < arsenal_char_ranks[char.name]
-             event = Event.new(:action => 'promoted')
-             event.character = char
-             event.guild = self.guild
-             event.content = content
-             event.save
-          elsif char.rank < arsenal_char_ranks[char.name]
-            event = Event.new(:action => 'demoted')
-            event.character = char
-            event.guild = self.guild
-            event.content = content
-            event.save
+      unless first_update
+        self.guild.characters.each do |char|
+          if char.rank != arsenal_char_ranks[char.name]
+            content = char.rank
+            char.rank = arsenal_char_ranks[char.name]
+            if char.rank < arsenal_char_ranks[char.name]
+               event = Event.new(:action => 'promoted')
+               event.character = char
+               event.guild = self.guild
+               event.content = content
+               event.save
+            elsif char.rank < arsenal_char_ranks[char.name]
+              event = Event.new(:action => 'demoted')
+              event.character = char
+              event.guild = self.guild
+              event.content = content
+              event.save
+            end
+            char.save!
           end
-          char.save!
         end
       end
       
@@ -140,7 +152,7 @@ class RemoteQuery < ActiveRecord::Base
     unless self.guild.characters.find_by_main(true).nil? || self.guild.characters.find_by_main(false).nil?
       mains = self.guild.characters.find_all_by_main(true).count 
       alts = self.guild.characters.find_all_by_main(false).count
-      attributes[:altratio] = mains / alts
+      attributes[:altratio] = 100 - Integer(mains.to_f / alts.to_f * 100)
     end
     
     #Classratio
@@ -164,15 +176,7 @@ class RemoteQuery < ActiveRecord::Base
     #Achivementpoints
     achivementpoints = self.guild.characters.collect{|char| char.achivementpoints}
     achivementpoints.delete_if{|x| x.nil?}
-    unless achivementpoints.empty?
-      yourpoints = achivementpoints.sum / achivementpoints.size
-      allpoints = Guild.all.collect{|g| g.achivementpoints}
-      allpoints.delete_if{|x| x.nil?}
-      unless allpoints.empty?
-        bestpoints = allpoints.sort.last
-        attributes[:achivementpoints] = Integer(yourpoints.to_f / bestpoints.to_f)
-      end
-    end
+    attributes[:achivementpoints] = Integer(achivementpoints.sum / achivementpoints.size) unless achivementpoints.empty?
     
     self.guild.update_attributes(attributes) unless attributes.empty?
     
