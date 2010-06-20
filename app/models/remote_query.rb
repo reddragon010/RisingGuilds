@@ -135,51 +135,15 @@ class RemoteQuery < ActiveRecord::Base
     end
   end
   
-  def update_guild_indicators
-    attributes = {}
-    
-    #ail
-    ails = self.guild.characters.collect{|char| char.ail}
-    ails.delete_if{|x| x.nil?}
-    attributes[:ail] = ails.sum / ails.size unless ails.empty?
-      
-    #Activity
-    activities = self.guild.characters.collect{|char| char.netto_activity}
-    activities.delete_if{|x| x.nil?}
-    attributes[:activity] = activities.sum / activities.size unless activities.empty?
-    
-    #Alt Ratio
-    unless self.guild.characters.find_by_main(true).nil? || self.guild.characters.find_by_main(false).nil?
-      mains = self.guild.characters.find_all_by_main(true).count 
-      alts = self.guild.characters.find_all_by_main(false).count
-      attributes[:altratio] = 100 - Integer(mains.to_f / alts.to_f * 100)
+  def update_guild_rating
+    unless self.guild.ail.nil? || self.guild.activity.nil? || self.guild.growth.nil? || self.guild.altratio.nil? || self.guild.classratio.nil? || self.guild.achivementpoints.nil?
+      ail = self.guild.ail.to_f / 284.to_f #percentage to maximal itemlevel
+      aap = self.guild.achivementpoints.to_f / 10000.to_f #percentage to a high number
+      rating = Integer(((ail + aap + self.guild.activity + self.guild.growth + self.guild.mainratio + self.guild.classratio).to_f / 6.to_f)*100)
+      self.guild.update_attribute(:rating,rating)
+    else
+      self.guild.update_attribute(:rating,nil)
     end
-    
-    #Classratio
-    members = self.guild.characters.count
-    part = members.to_f / 9.to_f
-    sum = 0
-    (1..9).each do |i|
-      sum += (((self.guild.characters.find_all_by_class_id(i).count.to_f / members.to_f) - (1.to_f/9.to_f))*100).abs
-    end
-    attributes[:classratio] = Integer(sum)
-    
-    #Growth
-    unless self.guild.events.find_by_action("joined").nil?
-      joined = Event.find(:all, :conditions =>  ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id ,"joined",1.month.ago]).count
-      left = Event.find(:all, :conditions => ["guild_id = ? AND action = ? AND created_at > ?",self.guild_id,"left",1.month.ago]).count
-      growth = joined - left
-      attributes[:growth] = (growth.to_f / (members-growth).to_f)*100
-      attributes[:growth] = nil if attributes[:growth] == 1.0/0
-    end
-    
-    #Achivementpoints
-    achivementpoints = self.guild.characters.collect{|char| char.achivementpoints}
-    achivementpoints.delete_if{|x| x.nil?}
-    attributes[:achivementpoints] = Integer(achivementpoints.sum / achivementpoints.size) unless achivementpoints.empty?
-    
-    self.guild.update_attributes(attributes) unless attributes.empty?
-    
   end
   
   def update_guild_onlinelist
@@ -200,7 +164,7 @@ class RemoteQuery < ActiveRecord::Base
       attributes = Hash.new
       #if char stay online
       if char.online == true && newonline == true then
-        #If user was still 1 hour online adds 1 to activity
+        #If user was online in the last 12 hour => adds 1 to activity
         attributes[:activity] = char.activity + 1 unless (char.last_seen + 12.hour) >= Time.now 
       #if char has been gone offline
       elsif char.online == true && newonline == false then

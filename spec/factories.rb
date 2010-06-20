@@ -18,12 +18,6 @@ end
 
 Factory.define :Guild do |f|
   f.sequence(:name){|n| "BoonHordeNo#{n}"} 
-  f.ail 200
-  f.activity 1
-  f.growth 1
-  f.altratio 1
-  f.classratio 1
-  f.achivementpoints 1000
   f.rating 1
   f.realm "PvE-Realm"
   f.website("http://hordeofboons.com")

@@ -15,7 +15,7 @@
 	<tr>
 		<td><%= "#{i+1}." %></td>
 		<td><%= link_to h(guild.name), guild_path(guild) %></td>
-		<td><%= guild.rating %></td>
+		<td><% unless guild.rating.nil? %><%= guild.rating %><% else %>n/a<% end %></td>
 		<td><%= guild.characters.count %></td>
 		<td><%= link_to guild.website, guild.website %></td>
 	</tr>	

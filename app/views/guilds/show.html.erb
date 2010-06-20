@@ -38,27 +38,31 @@
 			</tr>
 			<tr>
 				<td class="left"><b>Average ItemLevel:</b></td>
-				<td><%=h @guild.ail %></td>
+				<td><% unless @guild.ail.nil? then %><%=h @guild.ail %><% else %>n/a<% end %></td>
 			</tr>
 			<tr>
 				<td class="left"><b>Activity:</b></td>
-				<td><%=h @guild.activity %></td>
+				<td><% unless @guild.activity.nil? then %><%=h @guild.activity %>%<% else %>n/a<% end %></td>
 			</tr>
 			<tr>
 				<td class="left"><b>Growth Per Month:</b></td>
-				<td><%=h @guild.growth %>%</td>
+				<td><% unless @guild.growth.nil? then %><%=h @guild.growth %>%<% else %>n/a<% end %></td>
 			</tr class="right">
 			<tr>
 				<td class="left"><b>Main Character Ratio:</b></td>
-				<td><%=h @guild.altratio %>%</td>
+				<td><% unless @guild.mainratio.nil? then %><%=h @guild.mainratio %>%<% else %>n/a<% end %></td>
 			</tr>
 			<tr>
 				<td class="left"><b>Class Homogeneous Ratio:</b></td>
-				<td><%=h @guild.classratio %>%</td>
+				<td><% unless @guild.classratio.nil? then %><%=h @guild.classratio %>%<% else %>n/a<% end %></td>
 			</tr>
 			<tr>
 				<td class="left"><b>Average Achivement Points:</b></td>
-				<td><%=h @guild.achivementpoints %></td>
+				<td><% unless @guild.achivementpoints.nil? then %><%=h @guild.achivementpoints %><% else %>n/a<% end %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Rating:</b></td>
+				<td><% unless @guild.rating.nil? then %><%=h @guild.rating %><% else %>n/a<% end %></td>
 			</tr>
 		</table>
 	</div>
