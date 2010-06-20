@@ -1,40 +1,84 @@
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
+<div id="content_menu">
+	<ul>
+		<% if current_user == @user %>
+		<li><%= link_to 'Edit', edit_account_path %></li>
+		<% end %>
+	</ul>
+</div>
 
-<p>
-  <b>Login count:</b>
-  <%=h @user.login_count %>
-</p>
+<div style="position:relative; width:100%">
+	<div id="gravatar"><%= gravatar_for @user %></div>
+</div>
 
-<p>
-  <b>Last request at:</b>
-  <%=h @user.last_request_at %>
-</p>
+<h1><%=h @user.login %></h1>
 
-<p>
-  <b>Last login at:</b>
-  <%=h @user.last_login_at %>
-</p>
+<div class="box_small">
+	<div class="box_headline">Login</div>
+	<table>
+		<tr>
+			<td class="left"><b>Login count:</b></td>
+			<td class="left"><%=h @user.login_count %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Last request at:</b></td>
+			<td class="left"><%=h @user.last_request_at %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Last login at:</b></td>
+			<td class="left"><%=h @user.last_login_at %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Current login at:</b></td>
+			<td class="left"><%=h @user.current_login_at %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Last login ip:</b></td>
+			<td class="left"><%=h @user.last_login_ip %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Current login ip:</b></td>
+			<td class="left"><%=h @user.current_login_ip %></td>
+		</tr>
+		<% if @user == current_user %>
+		<tr>
+			<td class="left">API-Key</td>
+			<td class="left"><%=h @user.single_access_token %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
 
-<p>
-  <b>Current login at:</b>
-  <%=h @user.current_login_at %>
-</p>
+<div class="box_small">
+	<div class="box_headline">Contakt</div>
+	<table>
+		<tr>
+			<td class="left"><b>E-Mail:</b></td>
+			<td class="left"><%=h @user.email %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>ICQ/AIM:</b></td>
+			<td class="left"><%=h @user.icq %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>MSN:</b></td>
+			<td class="left"><%=h @user.msn %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Skype:</b></td>
+			<td class="left"><%=h @user.skype %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Jabber:</b></td>
+			<td class="left"><%=h @user.jabber %></td>
+		</tr>
+	</table>
+</div>
 
-<p>
-  <b>Last login ip:</b>
-  <%=h @user.last_login_ip %>
-</p>
+<div class="clear"></div>
 
-<p>
-  <b>Current login ip:</b>
-  <%=h @user.current_login_ip %>
-</p>
-
-<p>
-  <%=h @user.single_access_token %>
-</p>
-
-<%= link_to 'Edit', edit_account_path %>
+<div class="box_big">
+	<div class="box_headline">Signature</div>
+	<p class="signature">
+		<%= @user.signature %>
+	</p>
+</div>

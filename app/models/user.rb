@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :assignments
   has_many :guilds, :through => :assignments
   
-  attr_accessible :login, :language, :email, :password, :password_confirmation
+  attr_accessible :login, :language, :email, :icq, :jabber, :msn, :skype, :signature, :password, :password_confirmation
   
   # we need to make sure that either a password or openid gets set
   # when the user activates his account

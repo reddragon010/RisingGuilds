@@ -2,6 +2,12 @@
 
 <% form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
+  <br />
+  <%= f.label :login %><br />
+  <%= f.text_field :login %><br />  
+  <br />
+  <%= f.label :email %><br />
+  <%= f.text_field :email %><br />
+  <br />
   <%= f.submit "Register" %>
 <% end %>
