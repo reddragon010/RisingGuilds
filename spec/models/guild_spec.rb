@@ -72,4 +72,39 @@ describe Guild do
     @guild.members.first.should == member
   end
   
+  it "should can be destroyed cleanly" do
+    guild = Factory(:Guild)
+    guild2 = Factory(:Guild)
+    guild_id = guild.id
+    
+    member = Factory(:User)
+    Factory(:Role,:name => 'leader')
+    guild.assignments << Assignment.create(:user_id => member.id, :guild_id => guild.id, :role_id => Role.find_by_name('leader'))
+    
+    raid = Factory(:Raid, :guild_id => guild.id)
+    raid.guilds << guild
+    raid2 = Factory(:Raid, :guild_id => guild2.id)
+    raid2.guilds << guild2
+    raid2.guilds << guild
+    
+    event = Factory(:Event)
+    guild.events << event
+    
+    rq = Factory(:RemoteQuery)
+    guild.remoteQueries << rq
+    
+    guild.reload
+    guild.users.count.should == 1
+    guild.raids.count.should == 2
+    Raid.find_all_by_guild_id(guild_id).count.should == 1
+    guild.events.count.should == 1
+    guild.remoteQueries.count.should == 1
+    
+    guild.destroy
+    
+    Assignment.all.count.should == 0
+    Raid.find_all_by_guild_id(guild_id).count.should == 0
+    Event.all.count.should == 0
+    RemoteQuery.all.count.should == 0
+  end
 end

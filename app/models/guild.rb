@@ -1,8 +1,8 @@
 class Guild < ActiveRecord::Base
-  has_many :events
-  has_many :characters
-  has_many :remoteQueries
-  has_many :assignments
+  has_many :events, :dependent => :destroy
+  has_many :characters, :dependent => :nullify
+  has_many :remoteQueries, :dependent => :destroy
+  has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   has_and_belongs_to_many :raids
   
@@ -154,6 +154,10 @@ class Guild < ActiveRecord::Base
   protected
   def before_validation_on_create
     self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
+  end
+  
+  def before_destroy
+    Raid.find_all_by_guild_id(self.id).each(&:destroy)
   end
   
   #get the preprocessed XML-Code from URI

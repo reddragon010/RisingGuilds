@@ -53,3 +53,10 @@ Factory.define :Raid do |f|
   f.leader 1
   f.closed false
 end
+
+Factory.define :Event do |f|
+  f.action "joined"
+  f.content "test"
+  f.guild_id 1
+  f.character_id 1
+end
