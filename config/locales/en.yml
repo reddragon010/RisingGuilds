@@ -46,7 +46,10 @@ en:
     verified: "The guildname is successfully verified"
     no_valid_name: "The guild wasn't found! Please check to guildname. It is very importent that the name is exactly equal to the arsenal's guildname. If you got a typo please destroy this guild and create a new one"
     no_arsenal_connection: "The arsenal is currently unavailable. Please check the arsenal-status and retry a little bit later.\n If the arsenal is online and you still getting this error please contact the support"
+    recruit_level: "Level {{level}}"
     edit:
+      recruit_text: "Recruitment conditions"
+      recruit_level: "Minimum Level"
       recruit_open: "Recruting"
       recruit_dk: "Death Knight"
       recruit_druid: "Druid"

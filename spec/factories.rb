@@ -22,6 +22,7 @@ Factory.define :Guild do |f|
   f.realm "PvE-Realm"
   f.website("http://hordeofboons.com")
   f.description("The HordeOfBoons Guild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")
+  f.verified true
 end
 
 Factory.define :RemoteQuery do |f|

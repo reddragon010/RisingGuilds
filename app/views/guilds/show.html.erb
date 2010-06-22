@@ -5,6 +5,7 @@
 <% RAIDTYPES.each_key do |c|%>
 <% tooltip("recruit_#{c}") do %><%=h t("guilds.edit.recruit_#{c}") %><% end %>
 <% end %>
+<% tooltip("recruit_level") do %><%=h t("guilds.recruit_level", :level => @guild.recruit_level) %><% end %>
 <% end %>
 
 <div id="description">
@@ -22,6 +23,9 @@
 		<% RAIDTYPES.each_key do |c|%>
 			<%= get_recruit_icon(@guild,c) %>
 		<% end %>
+		</span>
+		<span style="margin-left:25px">
+			<%= get_recruit_level_icon(@guild) %>
 		</span>
 	</div>
 	<div class="box_text">

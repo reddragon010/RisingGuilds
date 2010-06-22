@@ -11,6 +11,7 @@ CLASSES = {"warrior" => 1, "paladin" => 2, "hunter" => 3, "rogue" => 4, "priest"
 FACTION = {"alliance" => 0, "horde" => 1}
 RAIDTYPES = {"tank" => 1, "damage" => 2, "healer" => 3}
 GENDER  = {"male" => 0, "female" => 1}
+LEVELS = {"10" => 10, "20" => 20, "30" => 30, "40" => 40, "50" => 50, "60" => 60, "70" => 70, "80" => 80}
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
