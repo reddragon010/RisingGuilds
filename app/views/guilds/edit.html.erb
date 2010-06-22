@@ -1,10 +1,7 @@
+<h1><%=h @guild.name %></h1>
+
 <% form_for @guild, :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label t('guilds.name') %><br />
-    <%= f.text_field :name, :disabled => true %>
-  </p>
   <p>
     <%= f.label t('guilds.logo')%><br />
     <%= f.file_field :logo %>
