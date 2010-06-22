@@ -12,7 +12,19 @@
 * [Feature] ToolTips
 * [Feature] show InGame-Members
 * [Feature] userlists
-* [Fix]		Levelup was triggered on every update
-* [Fix]		Join-Event spammed on rejoined members
-* [Fix]		raid-time validations
-* [Fix]		paperclip-VERSION error
+* [Fix]			Levelup was triggered on every update
+* [Fix]			Join-Event spammed on rejoined members
+* [Fix]			raid-time validations
+* [Fix]			paperclip-VERSION error
+
+== 0.3.0 ALPHA 22-06-2010
+
+* [Feature] 	nice-looking userpages
+* [Feature] 	recruiting options for guilds
+* [Feature] 	mixed raids (many-guilds raids)
+* [Feature] 	basic (unfinal) guild-rating
+* [Fix]				no correct error-message on invalid guildname
+* [Fix]				corrected some misspellings
+* [Fix]				changed "new raid"-link position
+* [Improved]	added Raidicons to Raidcalendar
+* [Improved]	guilds can be created if the arsenal is unavailable
