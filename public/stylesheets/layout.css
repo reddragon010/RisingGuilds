@@ -39,7 +39,6 @@ body {
 	min-height: 600px;
 }
 #fooder {
-	height: 60px;
 	width: 100%;
 	border: 2px solid #666;
 	margin-top: 10px;
@@ -47,9 +46,11 @@ body {
 	background-image: url(../images/content_bg.gif);
 	text-align: center;
 	vertical-align: middle;
+	padding-top:10px;
+	padding-bottom:10px;
 }
 .fooder_content {
-	margin-top: 15px;
+
 }
 #secnav {
 	margin: 10px;

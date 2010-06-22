@@ -69,9 +69,12 @@
     </div>
   </div>
   <div id="fooder">
-    <div class="fooder_content"> produced, managed and hosted by DreamBlaze<br/>
-      powerd by Ruby On Rails </div>
-  </div>
+    <div class="fooder_content">
+			<%- concat configatron.version -%><br />
+			<a href="http://code.dreamblaze.net/projects/risingguilds/">Rising-Guilds</a> is maintained and hosted by <a href="http://www.dreamblaze.net/">DreamBlaze</a><br/>
+			powered by <a href="http://www.rubyonrails.org/">Ruby On Rails</a>
+		</div>
+	</div>
 </div>
 <div id="tooltips">
 	<%= yield(:tooltip) %>
