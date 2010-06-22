@@ -1,20 +1,20 @@
 class AddRecruitmentToGuild < ActiveRecord::Migration
   def self.up
     add_column :guilds, :recruit_text, :text
-    add_column :guilds, :recruit_open, :boolean
-    add_column :guilds, :recruit_dk, :boolean
-    add_column :guilds, :recruit_druid, :boolean
-    add_column :guilds, :recruit_hunter, :boolean
-    add_column :guilds, :recruit_mage, :boolean
-    add_column :guilds, :recruit_paladin, :boolean
-    add_column :guilds, :recruit_priest, :boolean
-    add_column :guilds, :recruit_rogue, :boolean
-    add_column :guilds, :recruit_shaman, :boolean
-    add_column :guilds, :recruit_warlock, :boolean
-    add_column :guilds, :recruit_warrior, :boolean
-    add_column :guilds, :recruit_healer, :boolean
-    add_column :guilds, :recruit_damage, :boolean
-    add_column :guilds, :recruit_tank, :boolean
+    add_column :guilds, :recruit_open, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_dk, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_druid, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_hunter, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_mage, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_paladin, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_priest, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_rogue, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_shaman, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_warlock, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_warrior, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_healer, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_damage, :boolean, :nil => false, :default => false
+    add_column :guilds, :recruit_tank, :boolean, :nil => false, :default => false
   end
 
   def self.down
