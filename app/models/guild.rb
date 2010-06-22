@@ -86,6 +86,10 @@ class Guild < ActiveRecord::Base
     end
   end
   
+  def verified?
+    self.verified
+  end
+  
   def ail
     ails = self.characters.find_all_by_level(80).collect{|char| char.ail}
     size = ails.size

@@ -29,15 +29,6 @@
 	overflow: hidden;
 }
 
-.boxtext {
-	position:absolute;
-	top: -20px;
-	left: 10px;
-	border: 1px solid #999;
-	background-color: #EEE;
-	padding: 0px 5px 0px 5px;
-}
-
 #secret {
 	position: absolute;
 	bottom: 0;

@@ -37,7 +37,7 @@ namespace :queryqueue do
   
   desc "fill the queryqueue with update-guild-requests"
   task :update_guilds => :environment do
-    Guild.all.each do |guild|
+    Guild.find_all_by_verified(true).each do |guild|
       guild.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 5, :action => 'update_guild')
       guild.remoteQueries << RemoteQuery.create(:priority => 10, :efford => 1, :action => 'update_guild_rating')
     end

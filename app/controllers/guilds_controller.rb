@@ -58,20 +58,14 @@ class GuildsController < ApplicationController
   # POST /guilds.xml
   def create
     respond_to do |format|
-      if @guild.valid_name?
-        if @guild.save
-          @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => 1)
-          flash[:notice] = t(:created,:item => 'Guild')
-          format.html { redirect_to(@guild) }
-          format.xml  { render :xml => @guild, :status => :created, :location => @guild }
-        else
-          format.html { render :action => "new", :layout => "application"}
-          format.xml  { render :xml => @guild.errors, :status => :unprocessable_entity }
-        end
+      if @guild.save
+        @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => 1)
+        flash[:notice] = t(:created,:item => 'Guild')
+        format.html { redirect_to(@guild) }
+        format.xml  { render :xml => @guild, :status => :created, :location => @guild }
       else
-        flash[:error] = t(:not_found, :item => 'guild')
-        format.html {render :action => "new", :layout => "application"}
-        format.xml  {render :xml => @guild.errors, :status => :unprocessable_entity }
+        format.html { render :action => "new", :layout => "application"}
+        format.xml  { render :xml => @guild.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -110,15 +104,20 @@ class GuildsController < ApplicationController
   def actualize
     @guild = Guild.find(params[:id])
     respond_to do |format|
-      if @guild.remoteQueries.find_all_by_action('update_guild').empty?
-        @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
-        flash[:notice] = t(:updating, :item => 'Guild')
-        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
-        format.xml  { head :ok }
+      if @guild.verified?
+        if @guild.remoteQueries.find_all_by_action('update_guild').empty?
+          @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
+          flash[:notice] = t(:updating, :item => 'Guild')
+          format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+          format.xml  { head :ok }
+        else
+          flash[:error] = t(:update_in_progress)
+          format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+          format.xml  { head :error }
+        end
       else
-        flash[:error] = t(:update_in_progress)
+        flash[:error] = t('guilds.not_verified')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
-        format.xml  { head :error }
       end
     end
   end
@@ -126,13 +125,18 @@ class GuildsController < ApplicationController
   def join
     @guild = Guild.find(params[:id])
     respond_to do |format|
-      if params[:token] == @guild.token
-        @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
-        @guild.save
-        flash[:notice] = t('guilds.joined')
-        format.html { redirect_to(@guild) }
+      if @guild.verified?
+        if params[:token] == @guild.token
+          @guild.assignments << Assignment.new(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
+          @guild.save
+          flash[:notice] = t('guilds.joined')
+          format.html { redirect_to(@guild) }
+        else
+          flash[:error] = t('guilds.invalid_token')
+          format.html { redirect_to(@guild) }
+        end
       else
-        flash[:error] = t('guilds.invalid_token')
+        flash[:error] = t('guilds.not_verified')
         format.html { redirect_to(@guild) }
       end
     end
@@ -146,6 +150,25 @@ class GuildsController < ApplicationController
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
       else
         flash[:error] = t(:error)
+        format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+      end
+    end
+  end
+  
+  def verify
+    @guild = Guild.find(params[:id])
+    respond_to do |format|
+      begin
+        if true#@guild.valid_name?
+          @guild.update_attribute(:verified, true)
+          flash[:notice] = t('guilds.verified')
+          format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+        else
+          flash[:error] = t('guilds.no_valid_name')
+          format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
+        end
+      rescue
+        flash[:error] = t('guilds.no_arsenal_connection')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
       end
     end

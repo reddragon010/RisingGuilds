@@ -115,3 +115,23 @@ div.auto_complete ul strong.highlight {
 	margin:0;
 	padding:0;
 }
+
+/* ---- verify guild warning ---- */
+div#verify_guild {
+	float: right;
+	position:relative;
+	top: -78px;
+	right: -2px;
+	padding: 5px;
+	border: 2px solid #900;
+	background-color: #511;
+}
+
+#verify_guild p {
+	margin: 0px;
+	font: 9pt "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+}
+
+#verify_guild a {
+	color:#FFF;
+}

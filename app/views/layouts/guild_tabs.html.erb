@@ -19,6 +19,11 @@
 <div id="website">
   <%= link_to @guild.website, @guild.website, :popup => true %>
 </div>
+<% unless @guild.verified? %>
+<div id="verify_guild">
+  <p><%= link_to 'Please verify the guildname!', :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
+</div>
+<% end %>
 <% end %>
 <% end %>
 

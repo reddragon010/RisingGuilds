@@ -1,6 +1,6 @@
 <h1><%=h @guild.name %></h1>
 
-<% form_for @guild, :html => { :multipart => true } do |f| %>
+<% form_for @guild, :html => { :multipart => true}  do |f| %>
   <%= f.error_messages %>
   <p>
     <%= f.label t('guilds.logo')%><br />
@@ -12,8 +12,76 @@
   </p>
   <p>
     <%= f.label t('guilds.description') %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :rows => 10, :cols => 80 %>
   </p>
+	<p>
+		
+	</p>
+	
+	<div class="box_big">
+		<div class="box_headline"><%= f.label t('.recruit_open') %> <%= f.check_box :recruit_open, {:onClick => visual_effect(:toggle_slide, :recruit_form, :duration => 0.5)} %></div>
+		<div id="recruit_form" <% unless @guild.recruit_open %>style="display:none;"<% end %> >
+		<p>
+			<%= f.label t('.recruit_text') %><br />
+			<%= f.text_area :recruit_text, :rows => 5, :cols => 80 %>
+		<table>
+			<thead>
+				<tr>
+					<th class="narrow"></th>
+					<th class="narrow"><%= f.label t('.recruit_dk') %></th>
+					<th class="narrow"><%= f.label t('.recruit_druid') %></th>
+					<th class="narrow"><%= f.label t('.recruit_hunter') %></th>
+					<th class="narrow"><%= f.label t('.recruit_mage') %></th>
+					<th class="narrow"><%= f.label t('.recruit_paladin') %></th>
+					<th class="narrow"><%= f.label t('.recruit_priest') %></th>
+					<th class="narrow"><%= f.label t('.recruit_rogue') %></th>
+					<th class="narrow"><%= f.label t('.recruit_shaman') %></th>
+					<th class="narrow"><%= f.label t('.recruit_warlock') %></th>
+					<th class="narrow"><%= f.label t('.recruit_warrior') %></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= link_to_function 'all', "$$('#edit_guild_" + @guild.id.to_s + " input.checkclass').each(function(box){box.checked=true});" %></td>
+					<td><%= f.check_box :recruit_dk, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_druid, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_hunter, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_mage, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_paladin, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_priest, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_rogue, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_shaman, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_warlock, :class => 'checkclass' %></td>
+					<td><%= f.check_box :recruit_warrior, :class => 'checkclass' %></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	
+		<table>
+			<thead>
+				<tr>
+					<th class="narrow"></th>
+					<th class="narrow"><%= f.label t('.recruit_healer') %></th>
+					<th class="narrow"><%= f.label t('.recruit_damage') %></th>
+					<th class="narrow"><%= f.label t('.recruit_tank') %></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><%= link_to_function 'all', "$$('#edit_guild_" + @guild.id.to_s + " input.checktype').each(function(box){box.checked=true});" %></td>
+					<td><%= f.check_box :recruit_healer, :class => 'checktype' %></td>
+					<td><%= f.check_box :recruit_damage, :class => 'checktype' %></td>
+					<td><%= f.check_box :recruit_tank, :class => 'checktype' %></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+	
   <p>
     <%= f.submit 'update' %>
   </p>

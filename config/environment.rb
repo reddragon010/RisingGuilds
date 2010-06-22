@@ -6,10 +6,11 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-RACES   = {"Menschen" => 1, "Orcs" => 2 , "Zwerge" => 3, "Nachtelfen" => 4, "Untote" => 5, "Tauren" => 6, "Gnome" => 7,"Trolle" => 8,"Blutelfen" => 10, "Draenei" => 11}
-CLASSES = {"Krieger" => 1, "Paladin" => 2, "Jäger" => 3, "Schurke" => 4, "Priester" => 5, "Todesritter" => 6, "Schamane" => 7, "Magier" => 8, "Hexenmeister" => 9, "Druide" => 11} 
-FACTION = {"Allianz" => 0, "Horde" => 1}
-GENDER  = {"Männlich" => 0, "Weiblich" => 1}
+RACES   = {"human" => 1, "orc" => 2 , "dwarf" => 3, "nightelve" => 4, "undead" => 5, "tauren" => 6, "gnome" => 7,"troll" => 8,"bloodelve" => 10, "draenei" => 11}
+CLASSES = {"warrior" => 1, "paladin" => 2, "hunter" => 3, "rogue" => 4, "priest" => 5, "dk" => 6, "shaman" => 7, "mage" => 8, "warlock" => 9, "druid" => 11} 
+FACTION = {"alliance" => 0, "horde" => 1}
+RAIDTYPES = {"tank" => 1, "damage" => 2, "healer" => 3}
+GENDER  = {"male" => 0, "female" => 1}
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -50,4 +51,7 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
+  
+  config.action_view.sanitized_allowed_tags = 'table', 'tr', 'td', 'a', 'b', 'span', 'h1', 'h2', 'h3'
 end

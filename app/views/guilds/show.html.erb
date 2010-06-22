@@ -1,6 +1,36 @@
+<% content_for :tooltip do %>
+<% CLASSES.each_key do |c|%>
+<% tooltip("recruit_#{c}") do %><%=h t("guilds.edit.recruit_#{c}") %><% end %>
+<% end %>
+<% RAIDTYPES.each_key do |c|%>
+<% tooltip("recruit_#{c}") do %><%=h t("guilds.edit.recruit_#{c}") %><% end %>
+<% end %>
+<% end %>
+
 <div id="description">
-	  <%=h @guild.description %>
+	  <%= sanitize @guild.description %>
 </div>
+
+<% if @guild.recruit_open %>
+<div class="box_big">
+	<div class="box_headline"><%=h t('guilds.recruitment')%></div>
+	<div>
+		<% CLASSES.each_key do |c|%>
+			<%= get_recruit_icon(@guild,c) %>
+		<% end %>
+		<span style="margin-left:25px">
+		<% RAIDTYPES.each_key do |c|%>
+			<%= get_recruit_icon(@guild,c) %>
+		<% end %>
+		</span>
+	</div>
+	<div class="box_text">
+		<%= sanitize @guild.recruit_text %>
+	</div>
+</div>
+
+<div class="clear"></div>
+<% end %>
 
 <div style="float:right">
 	<% unless @online_characters.nil? %>
