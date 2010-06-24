@@ -29,4 +29,4 @@ config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
 
-config.action_controller.session[:domain] = 'risingguilds.dreamblaze.net'
+config.action_controller.session = {:domain => 'risingguilds.dreamblaze.net'} 
