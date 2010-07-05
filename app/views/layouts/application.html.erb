@@ -10,14 +10,20 @@
 <body>
 <div id="container">
   <div id="topbar">
-    <div class="topbar-content"> 
-	<% if logged_in? %>
-	You are logged in as <%= link_to h(current_user.login.capitalize), account_path %> | <%= link_to "Logout", logout_path %>
-	<% else %>
-	<%= link_to "Login", login_path %> |
-	<%= link_to "SignUp", signup_path %> 
-	<% end %>
-	</div>
+    <div class="topbar-content">
+			<div style="float:left">
+				<%= link_to "Help", "pages/help"%>
+			</div>
+			<div style="float:rigth">
+			<% if logged_in? %>
+				<% t("logged_in_as") %> <%= link_to h(current_user.login.capitalize), account_path %> | <%= link_to "Logout", logout_path %>
+			<% else %>
+				<%= link_to "Login", login_path %> |
+				<%= link_to "SignUp", signup_path %> 
+			<% end %>
+			</div>
+			
+		</div>
   </div>
   <div id="tabnav">
   <ul>

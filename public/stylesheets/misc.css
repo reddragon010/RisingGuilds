@@ -52,6 +52,15 @@
 	margin-bottom: 0px;
 }
 
+div.dialog {
+	width: 25em;
+	padding: 0 4em;
+	margin: 4em auto 0 auto;
+	border: 1px solid #ccc;
+	border-right-color: #999;
+	border-bottom-color: #999;
+}
+
 /* ---- Progress Bar ---- */
 
 div.bar-container {

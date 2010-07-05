@@ -1,6 +1,8 @@
 authorization do
   role :admin do
     has_permission_on [:guilds, :characters, :raids], :to => [:setup, :change, :view]
+    has_permission_on :authorization_rules, :to => [:read]
+    has_permission_on :authorization_usages, :to => [:read]
   end
   
   role :user do

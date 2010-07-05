@@ -19,6 +19,4 @@ config.action_mailer.raise_delivery_errors = false
 # set delivery method to :smtp, :sendmail or :test
 config.action_mailer.delivery_method = :test
 
-config.middleware.use "Rack::Bug", 
-  :secret_key => "someverylongandveryhardtoguesspreferablyrandomstring",
-  :password   => "secret"
+config.gem "ruby_parser"

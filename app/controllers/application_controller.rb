@@ -11,7 +11,28 @@ class ApplicationController < ActionController::Base
   before_filter :write_return_to
   before_filter :setup_tabs
   before_filter :set_user_language
+
+  def render_optional_error_file(status_code)
+    case status_code 
+      when :not_found
+        render_error(404)
+      when 500
+        render_error(500)
+      when 422
+        render_error(422)
+      else
+        super
+    end
+  end
   
+  def render_error(status_code)
+    respond_to do |type| 
+      type.html { render :template => "application/#{status_code}", :layout => 'application', :status => status_code } 
+      type.all  { render :nothing => true, :status => 404 } 
+    end
+    true
+  end
+
   protected
   def set_user_language
     I18n.locale = current_user.language if logged_in?

@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  loggend_in_as: "You are logged in as"
+  
   home:
     title: "Welcome to Rising-Guilds"
 
