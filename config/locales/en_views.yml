@@ -1,0 +1,37 @@
+en:
+  views:
+    labels:
+      guild:
+        description: "TestIt!"
+        
+  layouts:
+    logged_in_as: "You are logged in as"
+    
+  guilds:
+    update: "Update"
+    show: "Show"
+    back: "Back"
+    logo: "Logo"
+    name: "Name"
+    website: "Website"
+    description: "Description"
+    new: "New guild"
+    recruitment: "Recruitment"
+    recruit_level: "Level {{level}} and above"
+    edit:
+      recruit_text: "Recruitment conditions"
+      recruit_level: "Minimum Level"
+      recruit_open: "Recruting"
+      recruit_dk: "Death Knight"
+      recruit_druid: "Druid"
+      recruit_hunter: "Hunter"
+      recruit_mage: "Mage"
+      recruit_paladin: "Paladin"
+      recruit_priest: "Priest"
+      recruit_rogue: "Rogue"
+      recruit_shaman: "Shaman"
+      recruit_warlock: "Warlock"
+      recruit_warrior: "Warrior"
+      recruit_healer: "Healer"
+      recruit_damage: "Damage"
+      recruit_tank: "Tank"
