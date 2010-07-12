@@ -22,6 +22,8 @@ class Guild < ActiveRecord::Base
                                           :format => 'PNG'
                                           }}
   
+  attr_accessor :serial
+  
   def leaders
     @leaders = Array.new
     @leaders_role_id ||= Role.find_by_name("leader").id
@@ -158,6 +160,10 @@ class Guild < ActiveRecord::Base
   protected
   def before_validation_on_create
     self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
+  end
+  
+  def validate
+    errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial
   end
   
   def before_destroy

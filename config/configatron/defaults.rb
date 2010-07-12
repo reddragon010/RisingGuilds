@@ -22,3 +22,6 @@ configatron.notifier.default_url = 'localhost:3000'
 
 #raidplanner
 configatron.raidplanner.status = {:not_sure => 1, :unsigned => 2, :signed => 3}
+
+#guild serials password
+configatron.guilds.serial_salt = "ChangeMe-seriously!!-CHANGEMEEE"
