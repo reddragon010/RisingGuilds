@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  user_id: 1
+  body: MyText
+  public: false
+  sticky: false
+  guild_id: 1
+
+two:
+  title: MyString
+  user_id: 1
+  body: MyText
+  public: false
+  sticky: false
+  guild_id: 1

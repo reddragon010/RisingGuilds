@@ -123,8 +123,10 @@ body {
 	margin-left: 10px;
 }
 .box_big {
+	position: relative;
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-bottom: 20px;
 }
 .box_headline  {
 	font-size: 16px;
@@ -145,6 +147,12 @@ body {
 	border: 2px solid #666;
 	color: #FFF;
 	overflow: hidden;
+}
+
+.box_menu {
+	position:absolute;
+	top:0px;
+	right:0px;
 }
 
 .clear {

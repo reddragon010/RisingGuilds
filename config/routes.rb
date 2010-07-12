@@ -1,13 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  
   map.connect 'pages/*id', :controller => 'pages', :action => 'show'
   
+  map.resources :newsentries
   map.resources :events
-  
   map.resource :user_session
-  
   map.resources :password_resets
-  
   map.resource :account, :controller => "users"
   
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
@@ -20,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
   map.activate '/activate/:id', :controller => 'activations', :action => 'create'
   
-  map.resources :guilds, :has_many => [:characters, :users, :raids]
+  map.resources :guilds, :has_many => [:characters, :users, :raids, :newsentries]
   map.resources :characters
   map.resources :users, :has_many => [:characters, :guilds]
   map.resources :raids, :has_many => [:attendances]

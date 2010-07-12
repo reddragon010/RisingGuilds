@@ -150,7 +150,7 @@ describe RemoteQuery do
     #don't trigger join-event on guild-creation
     it "shouldn't trigger the join-event on guild creation" do
       configatron.arsenal.test = false
-      @guild = Factory.create(:Guild)
+      @guild = Factory.create(:Guild, :name => "tguild", :serial => Digest::SHA1.hexdigest("tguild:#{configatron.guilds.serial_salt}"))
       @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
       @guild.remoteQueries.first.execute.should be_true
       @guild.remoteQueries.count.should == 0
@@ -159,6 +159,7 @@ describe RemoteQuery do
     end
     
     it "should trigger the join-event on normal update" do
+      configatron.arsenal.test = true
       @guild = Factory.create(:Guild)
       @guild.characters << Factory.create(:Character)
       @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")

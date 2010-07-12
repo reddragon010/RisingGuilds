@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :roles, :through => :assignments
   has_many :guilds, :through => :assignments
+  has_many :newsentries
   
   attr_accessible :login, :language, :email, :icq, :jabber, :msn, :skype, :signature, :password, :password_confirmation
   

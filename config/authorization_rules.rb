@@ -25,6 +25,9 @@ authorization do
   role :guest do
     has_permission_on [:home, :guilds, :characters, :events], :to => [:view]
     has_permission_on :guilds, :to => :join #permission not handled by d-auth
+    has_permission_on :newsentries, :to => :view do
+      if_attribute :public => is { true }
+    end
   end
   
   role :leader do
@@ -61,6 +64,21 @@ authorization do
     has_permission_on :raids, :to => :change do
       if_attribute :leader => is { user.id }
     end
+    
+    #Can change newsentries
+    has_permission_on :newsentries, :to => :change, :join_by => :or do
+      if_attribute :guild => { :raidleaders => contains { user } }
+      if_attribute :guild => { :officers => contains { user } }
+      if_attribute :guild => { :leaders => contains { user } }
+      if_attribute :user_id => is { user.id }
+    end
+    
+    has_permission_on :newsentries, :to => :new
+    has_permission_on :newsentries, :to => [:create] do
+      if_attribute :guild => { :raidleaders => contains { user } }
+      if_attribute :guild => { :officers => contains { user } }
+      if_attribute :guild => { :leaders => contains { user } }
+    end
   end
   
   role :member do
@@ -77,6 +95,11 @@ authorization do
     has_permission_on :characters, :to => [:link], :join_by => :and  do
       if_attribute :guild => { :users => contains { user } }
       if_attribute :user_id => is_not { user.id }
+    end
+    
+    has_permission_on :newsentries, :to => :view, :join_by => :or do
+      if_attribute :public => is { true }
+      if_attribute :guild => { :users => contains{ user } }
     end
   end
   

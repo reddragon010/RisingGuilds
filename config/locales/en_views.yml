@@ -18,6 +18,9 @@ en:
     new: "New guild"
     recruitment: "Recruitment"
     recruit_level: "Level {{level}} and above"
+    news: "News"
+    show:
+      no_news: "No News Available"
     edit:
       recruit_text: "Recruitment conditions"
       recruit_level: "Minimum Level"

@@ -26,6 +26,7 @@ class GuildsController < ApplicationController
     end
     @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
     @events = @guild.events.paginate :page => params[:page]
+    @newsentries = Newsentry.find(:all, :limit => 10, :order => "sticky DESC, updated_at DESC")
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }

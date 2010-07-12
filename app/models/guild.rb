@@ -5,6 +5,7 @@ class Guild < ActiveRecord::Base
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   has_and_belongs_to_many :raids
+  has_many :newsentries
   
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"
@@ -163,7 +164,7 @@ class Guild < ActiveRecord::Base
   end
   
   def validate
-    errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial
+    errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial || configatron.arsenal.test == true
   end
   
   def before_destroy

@@ -16,6 +16,18 @@
 	  <%= sanitize @guild.description %>
 </div>
 
+<div class="box_big">
+	<div class="box_headline"><%=h t('guilds.news')%></div>
+	<div class="box_menu"><%= link_to "new", new_guild_newsentry_path(@guild) if permitted_to?(:new, :newsentries) %></div>
+	<% unless @newsentries.empty? %>
+		<%= render :partial => "shared/newsentry", :collection => @newsentries, :locals => {:guild => @guild} %>
+	<% else %>
+		<span><%=t(".no_news")%></span>
+	<% end %>	
+</div>
+
+<div class="clear"></div>
+
 <% if @guild.recruit_open %>
 <div class="box_big">
 	<div class="box_headline"><%=h t('guilds.recruitment')%></div>

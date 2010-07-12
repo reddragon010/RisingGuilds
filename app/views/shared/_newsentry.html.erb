@@ -1,0 +1,18 @@
+<div class="newsentry">
+	<div class="news_header">
+		<span><%= link_to_function h(newsentry.title), visual_effect(:toggle_slide, "news#{newsentry.id}", {:duration => 0.5}) %></span>
+		<div class="news_menu">
+			<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_newsentry_path(guild,newsentry) %>
+			<%= link_to image_tag("icons/kick.png", :alt => "delete", :size => "16x16"), newsentry, :confirm => 'Are you really sure?', :method => :delete %>
+		</div>
+		<div class="news_details">
+			<%= link_to(newsentry.user.login, user_path(newsentry.user)) %><br/>
+			<%=h newsentry.updated_at %>
+		</div>
+	</div>
+	<div id="news<%=h newsentry.id%>" class="news_body" style="display:none;">
+		<div>
+			<%= sanitize newsentry.body  %>
+		</div>
+	</div>
+</div>

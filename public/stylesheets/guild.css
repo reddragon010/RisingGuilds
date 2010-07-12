@@ -58,9 +58,44 @@
 
 .description {
 	margin-top:5px;
+	margin-bottom:20px;
 	max-width:100% ;
 	height: auto;
 	overflow: hidden;
 	border: 2px solid #575656;
 	background-color: #bbbaba;
+}
+
+/* news */
+.newsentry {
+	border: 1px solid #666;
+	background-color: #333;
+	padding: 5px;
+	margin-bottom: 1px;
+}
+
+.news_header {
+	position:relative;
+}
+
+.news_header span {
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.news_menu {
+	position: absolute;
+	top:0px;
+	right:160px;
+}
+
+.news_details {
+	position: absolute;
+	top:-2px;
+	right:0px;
+}
+
+.news_body{
+	margin-top: 10px;
+	text-align: justify;
 }
