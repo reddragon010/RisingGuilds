@@ -1,7 +1,7 @@
 class RaidsController < ApplicationController
   filter_resource_access
   
-  before_filter :setup_raidicons, :only => [:edit, :new]
+  before_filter :setup_raidicons, :only => [:edit, :new, :create, :update]
   before_filter :setup_guild_id
   
   layout :choose_layout
@@ -52,7 +52,7 @@ class RaidsController < ApplicationController
   # GET /raids/1/edit
   def edit
     if @raid.closed?
-      flash[:error] = t('raids.edit_closed_raid')
+      flash[:error] = t('raids.closed')
       redirect_to guild_raids_path(@raid.guild)
       return true
     end

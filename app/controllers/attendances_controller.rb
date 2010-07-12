@@ -45,6 +45,7 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new(params[:attendance])
 
     respond_to do |format|
+      unless @attendance.raid.closed?
       if @attendance.save
         flash[:notice] = t(:created, :item => 'Attendance')
         format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
@@ -52,6 +53,10 @@ class AttendancesController < ApplicationController
       else
         format.html { render :controller => "raid", :action => "show", :id => @attendance.raid.id }
         format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
+      end
+      else
+        flash[:error] = t("raids.closed")
+        format.html { redirect_to guild_raids_path(@attendance.raid.guild) }
       end
     end
   end
@@ -62,13 +67,18 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
 
     respond_to do |format|
-      if @attendance.update_attributes(params[:attendance])
-        flash[:notice] = t(:updated,:item => 'Attendance')
-        format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
-        format.xml  { head :ok }
+      unless @attendance.raid.closed?
+        if @attendance.update_attributes(params[:attendance])
+          flash[:notice] = t(:updated,:item => 'Attendance')
+          format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
+          format.xml  { head :ok }
+        else
+          format.html {  render :controller => "raid", :action => "show", :id => @attendance.raid.id  }
+          format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html {  render :controller => "raid", :action => "show", :id => @attendance.raid.id  }
-        format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
+        flash[:error] = t("raids.closed")
+        format.html {  redirect_to guild_raids_path(@attendance.raid.guild) }
       end
     end
   end
