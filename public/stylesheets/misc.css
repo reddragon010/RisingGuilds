@@ -1,9 +1,11 @@
 /* ---- Error/Flash Fields ---- */
 
 .fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+	color: #E00;
+}
+
+.fieldWithErrors input {
+	border: 2px solid #E00;
 }
 
 #errorExplanation {
@@ -12,11 +14,11 @@
   padding: 7px;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 #errorExplanation h2 {
-  text-align: left;
   font-weight: bold;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
@@ -26,7 +28,7 @@
 }
 
 #errorExplanation p {
-  color: #333;
+  color: #DDD;
   margin-bottom: 0;
   padding: 5px;
 }
