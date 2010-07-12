@@ -17,7 +17,7 @@ en:
     created: "Your account has been created. Please check your e-mail for your account activation instructions!"
   
   guilds:
-    not_assigned: "you are not logged in or haven\'t assigned to a guild, yet"
+    not_assigned: "you are not logged in or haven't assigned to a guild, yet"
     joined: 'You have successfully joined this guild'
     invalid_token: 'invalid token! Please contact your guildmanager'
     new_token: 'You have successfully generated a new guild-token'

@@ -35,3 +35,12 @@ en:
       recruit_healer: "Healer"
       recruit_damage: "Damage"
       recruit_tank: "Tank"
+      
+  events:
+    actiontexts:
+      joined: "has joined the Guild {{content}}"
+      left: "has left the Guild {{content}}"
+      promoted: "was promoted from rank {{content}}"
+      demoted: "was demoted from rank {{content}}"
+      levelup: "has got level {{content}}"
+      guild_created: "guild was created by {{content}}"
