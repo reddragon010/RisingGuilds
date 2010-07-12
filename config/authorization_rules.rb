@@ -9,7 +9,7 @@ authorization do
     includes :guest
     
     #Can create and join guilds
-    has_permission_on :guilds, :to => [ :setup, :join]
+    has_permission_on :guilds, :to => [:setup]
     #Can delink own chars
     has_permission_on :characters, :to => [:delink, :actualize, :generate_ail,:make_main] do
       if_attribute :user_id => is { user.id }
@@ -24,6 +24,7 @@ authorization do
   
   role :guest do
     has_permission_on [:home, :guilds, :characters, :events], :to => [:view]
+    has_permission_on :guilds, :to => :join #permission not handled by d-auth
   end
   
   role :leader do

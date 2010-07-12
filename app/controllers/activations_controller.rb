@@ -14,7 +14,11 @@ class ActivationsController < ApplicationController
     if @user.activate!(params)
       @user.deliver_activation_confirmation!
       flash[:notice] = t('activations.account_activated')
-      redirect_to account_url
+      if !cookies[:rguilds_jg_token].nil? && !cookies[:rguilds_jg_gid].nil?
+        redirect_to("/guilds/#{cookies[:rguilds_jg_gid]}/join/#{cookies[:rguilds_jg_token]}")
+      else
+        redirect_to account_url
+      end
     else
       render :action => :new
     end

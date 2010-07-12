@@ -1,14 +1,41 @@
-<h1>Login</h1>
- 
-<% form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.error_messages %>
-  <%= f.label :login %><br />
-  <%= f.text_field :login %><br />
-  <br />
-  <%= f.label :password %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <br />
-  <%= f.submit "Login" %>
-<% end %>
+<table style="border-collapse: inherit; border-bottom: none">
+	<tr>
+		<td><h1>Login</h1></td>
+		<% unless @user.nil? %>
+		<td><h1>or</h1></td>
+		<td><h1>Register</h1></td>
+		<% end %>
+	</tr>
+	<tr>
+		<td>
+			<% form_for @user_session, :url => user_session_path do |f| %>
+			  <%= f.error_messages %>
+			  <%= f.label :login %><br />
+			  <%= f.text_field :login %><br />
+			  <br />
+			  <%= f.label :password %><br />
+			  <%= f.password_field :password %><br />
+			  <br />
+			  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
+			  <br />
+			  <%= f.submit "Login" %>
+			<% end %>
+		</td>
+		<% unless @user.nil? %>
+		<td></td>
+		<td>
+			<% form_for @user, :url => account_path do |f| %>
+			  <%= f.error_messages %>
+			  <br />
+			  <%= f.label :login %><br />
+			  <%= f.text_field :login %><br />  
+			  <br />
+			  <%= f.label :email %><br />
+			  <%= f.text_field :email %><br />
+			  <br />
+			  <%= f.submit "Register" %>
+			<% end %>
+		</td>
+		<% end %>
+	</tr>
+</table>
