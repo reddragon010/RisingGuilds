@@ -100,7 +100,7 @@ describe RemoteQuery do
     end
     
     #test for Error #13 ... double-levelup-events
-    it "shoud update the level and trigger the event ONCE" do
+    it "should update the level and trigger the event ONCE" do
       @char = Factory.create(:Character,:name => "Nerox")
       @char.remoteQueries << Factory.create(:RemoteQuery, :action => "update_character")
       @char.remoteQueries.first.execute.should be_true
@@ -120,8 +120,9 @@ describe RemoteQuery do
     end
     
     #pro/demote on guild_update
-    it "shoud update the rank and trigger the pro/demote-event" do
+    it "should update the rank and trigger the pro/demote-event" do
       @guild = Factory.create(:Guild)
+      @guild.characters << Factory.create(:Character)
       @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
       @guild.remoteQueries.first.execute.should be_true
       @guild.remoteQueries.count.should == 0
@@ -134,6 +135,7 @@ describe RemoteQuery do
       @guild.remoteQueries.first.execute.should be_true
       @guild.remoteQueries.count.should == 0
       @guild.reload
+      @guild.events.count.should > 0
       @char = @guild.characters.find_by_name("Kohorn")
       @char.rank.should == 1
       @char.events.last.action == "demoted"
@@ -143,5 +145,26 @@ describe RemoteQuery do
       @char = @guild.characters.find_by_name("Liezzy")
       @char.rank.should == 2
       @char.events.last.action == "demoted"
+    end
+    
+    #don't trigger join-event on guild-creation
+    it "shouldn't trigger the join-event on guild creation" do
+      configatron.arsenal.test = false
+      @guild = Factory.create(:Guild)
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @guild.events.count.should == 0
+    end
+    
+    it "should trigger the join-event on normal update" do
+      @guild = Factory.create(:Guild)
+      @guild.characters << Factory.create(:Character)
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @guild.events.count.should > 0
     end
 end

@@ -53,12 +53,6 @@ class RemoteQuery < ActiveRecord::Base
 			end
 			db_char_names = self.guild.characters.collect {|c| c.name}
 			
-			if db_char_names.empty? && !configatron.arsenal.test then
-			  first_update = true
-			else
-			  first_update = false
-		  end
-			
 			# Calculate new/missing chars
       missing_char_names = db_char_names - arsenal_char_names
       new_char_names = arsenal_char_names - db_char_names
@@ -79,7 +73,7 @@ class RemoteQuery < ActiveRecord::Base
             char.save!
             
             #Trigger Join-Event
-            unless first_update
+            unless db_char_names.empty?
               event = Event.new(:action => 'joined')
               event.guild = self.guild
               event.character = char
@@ -93,12 +87,10 @@ class RemoteQuery < ActiveRecord::Base
       unless missing_char_names.empty?
         self.guild.characters.each do |char|
           if missing_char_names.include?(char.name) then
-            unless first_update
-              event = Event.new(:action => 'left')
-              event.character = char
-              event.guild = self.guild
-              event.save
-            end
+            event = Event.new(:action => 'left')
+            event.character = char
+            event.guild = self.guild
+            event.save
             attributes = {:guild_id => nil, :rank => nil}
             char.update_attributes(attributes)
           end
@@ -106,7 +98,7 @@ class RemoteQuery < ActiveRecord::Base
       end
       
       #rank update
-      unless first_update
+      unless db_char_names.empty?
         self.guild.characters.each do |char|
           if char.rank != arsenal_char_ranks[char.name]
             content = char.rank
