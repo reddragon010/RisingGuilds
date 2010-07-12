@@ -18,6 +18,7 @@ class UserSessionsController < ApplicationController
       
     else
       flash[:error] = t('user_sessions.login_incorrect')
+      @user_session.errors.clear
       render :action => :new
     end
   end
