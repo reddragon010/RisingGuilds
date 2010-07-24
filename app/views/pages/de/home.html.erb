@@ -1,1 +1,75 @@
-TEST
+<h1 class="nomargin" style="font-size:20pt">Willkommen bei RisingGuilds ...</h1>
+<h2 class="right"style="font-size:16pt">... dem Gilden Management- und Ratingsystem für den WoW-PrivateServer RisingGods</h2>
+
+<p class="notice">RisingGuilds befindet sich zur Zeit noch in Entwicklung und kann im Moment nur von eingeladenen Testern benutzt werden. Solltest du Interesse an einem Testaccount haben wende dich bitte an das Supportteam.<br />Für alle Tester: Ihr benötigt einen Code um neue Gilden anzulegen, solltest du noch keinen erhalten haben wende dich an einen DEV deines Vertrauens ^^</p>
+
+<div class="box_small" style="text-align:justify; font-size:11pt">
+<div class="box_headline">Was ist das hier genau?</div>
+<p>RisingGuilds ist ein Gilden Management- und Ratingsystem das seine Daten direkt aus der Asenal/Armory ziehen kann. Das Projekt wurde für das P-Server Projekt "Rising-Gods" entwickelt ist aber OpenSource und sollte zur WOWArmory kompatibel sein. Das Projekt ist wie Rising-Gods ein Hobbyprojekt ohne Gewinnabsichten. Trotzdem sind wir bemüht den bestmöglichen Standart und eine lückenfreie Sicherheit zu bieten (was nicht immer Gewährleistet sein kann). Zur jetzigen Zeit können wir leiden nicht garantieren das die hier gespeicherten Daten zu 100% sicher sind. Die Login-Daten sind hierbei eine Ausnahme. Sie werden mit SHA (inklusive random-salt) verschlüsselt und sind somit weder für die Betreiber noch für außenstehende Lesbar.</p>
+</div>
+
+<div class="box_small" style="text-align:justify; font-size:11pt">
+<div class="box_headline">Wie lege ich los?</div>
+<p>Erstmal benötigst du einen <b>Account</b>, diesen kannst du dir unter <b>Login / Signup</b> holen oder warten bis dich dein Gildenleader in das System einlädt. Wenn du einen <b>neue Gilde</b> erstellen willst wähle bitte <b>"New Guild"</b> wenn du eingeloggt bist und trage alle notwendigen Daten ein. Solltest du einer Gilde <b>beitreten</b> wollen warte bis dir der Gildenleader einen <b>"Join-Link"</b> zukommen lässt.</p>
+<p>Die normale Handhabung das Systems sollt eigentlich selbsterklärend sein. Solltest du dennoch Fragen haben schau als erstes in die Hilfe (Help) oben Links. Solltest du auch hier keine Lösung für dein Problem finden kannst du dich gern an den Support wenden. Kontaktinfos findest du in der Hilfe</p>
+</div>
+
+<div class="clean"></div>
+
+<div class="box_small">
+<div class="box_headline">Heiße Neuigkeiten</div>
+<div class="newsentry">
+	<div class="news_header">
+		<span>Erste Open-Alpha geht an den Start</span>
+	</div>
+	<div class="news_body">
+		<div>
+			<p>Freudig darf ich euch hiermit die erste Closed-Beta von RisingGuilds vorstellen.</p> 
+			<p>Doch was genau heißt dieses Beta und warum ist es Closed? Beta bedeutet für mich (uns somit für dieses Projekt), dass noch nicht alles so läuft wie es für die erste vollständige Version benötigt wird. Closed ist diese Version deswegen, weil sie noch nicht für die Öffentlichkeit zugänglich ist. Zur Zeit können nur ausgewählte Gilden das System nutzen.</p>
+			<p>Ich erhoffe mir daraus ein paar Daten, die mir speziell bei der Optimierung des Codes behilflich sein könnten. Da es eine sehr frühe Beta-Version ist kann es aber immer noch vorkommen, dass ich grobe Änderungen an der Datenbank vornehmen muss und so teile der Daten unbrauchbar werden könnten. Meiner Einschätzung nach ist dies unwahrscheinlich aber durchaus möglich. Weiters ist diese Version (wie erwähnt) nicht Performance-Optimiert und könnte schon bei wenigen Usern in die Knie gehen. Genau um das zu testen ist diese Version da. Ich bitte alle Tester um Geduld und Verständis.</p>
+		</div>
+	</div>
+	<div class="news_footer">
+		<div class="news_author">RedDragon</div>
+		<div class="news_time">15-07-2010</div>
+	</div>
+</div>
+</div>
+
+<div class="box_small">
+<div class="box_headline">Features</div>
+<ul>
+	<li>Direkte Anbindung an die RG-XMLArsenal
+		<ul>
+			<li>Charaktere werden direkt mit dem Arsenal synchronisiert</li>
+			<li>Alle wichtigen Daten (Berufe, Skillungen) werden übernommen</li>
+			<li>Bei-/Austritte sowie Befürderungen/Degradierungen werden Aufgezeichnet</li>
+			<li class="disabled">Es werden Gildenerrungenschaften aus den Mitgliedererrungenschaften errechnet (noch nicht implementiert)</li>
+		</ul>
+	</li>
+	<li>Einfache Gildenerstellung/Verwaltung
+		<ul>
+			<li>Gilden können einfach vom Gildenleader angelegt werden (zur Zeit nur mit gültigem Code)</li>
+			<li>Es können die Aufnehmebedingungen eingestellt und übersichtlich angezeigt werden</li>
+			<li>Jede Gilde kann ihr eigenen Gildennachrichten (öffentlich oder nur intern zugänglich) erstellen</li>
+		</ul>
+	</li>
+	<li>Ratingfunktion (noch nicht final)
+		<ul>
+		</ul>
+	</li>
+	<li>Raidplanner
+		<ul>
+			<li>Es können Raids mit Titel, Icon, Startzeitpunkt, Einladungsdauer, Levelbegrenzung, etc. erstellt werden</li>
+			<li>Übersichtliche Kalenderansicht</li>
+			<li>Einladen anderer Gilden zum Raid</li>
+			<li>An-/Abmelden der Mitglieder am Raid</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div id="linkicons">
+	<%= link_to image_tag('icons/facebook.png', :alt => "facebook",:size => "60x60"), 'http://www.facebook.com/pages/RisingGuilds/128886163820546', :popup => true %>
+	<%= link_to image_tag('icons/twitter.png', :alt => "twitter",:size => "60x60"), 'http://twitter.com/RisingGuilds', :popup => true %>
+</div>

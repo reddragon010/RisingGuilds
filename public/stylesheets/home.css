@@ -1,0 +1,15 @@
+#linkicons {
+	float: right;
+}
+
+#linkicons img {
+	margin: 5px;
+}
+
+.notice {
+	padding: 5px;
+	margin: 20px 5px;
+	border: 1px solid #990;
+	background-color: #330;
+	font-weight: bold;
+}

@@ -70,12 +70,38 @@
 .newsentry {
 	border: 1px solid #666;
 	background-color: #333;
-	padding: 5px;
+	padding: 5px 5px 20px 5px;
 	margin-bottom: 1px;
+}
+
+.newsentry p {
+	margin-bottom:5px;
 }
 
 .news_header {
 	position:relative;
+}
+
+.news_footer {
+	position:relative;
+}
+
+.news_author {
+	position: absolute;
+	top:0px;
+	right:0px;
+}
+
+.news_time{
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+
+.news_details{
+	position: absolute;
+	top:-5px;
+	right:0px;
 }
 
 .news_header span {
@@ -87,12 +113,6 @@
 	position: absolute;
 	top:0px;
 	right:160px;
-}
-
-.news_details {
-	position: absolute;
-	top:-2px;
-	right:0px;
 }
 
 .news_body{

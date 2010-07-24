@@ -37,5 +37,19 @@ h2 {
 }
 
 p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset {
-margin-bottom: 20px
+margin-bottom: 20px;
+}
+
+ul {
+	list-style-type: square;
+	margin-left: 0px;
+	padding-left: 15px;
+}
+
+li {
+	padding: 1px;
+}
+
+.disabled {
+	color: #777;
 }
