@@ -1,6 +1,6 @@
 # Put all your default configatron settings here.
 
-configatron.version = 'v0.3.0 alpha'
+configatron.version = 'v0.4.0 closed-beta'
 
 configatron.arsenal.url.base = 'http://arsenal.rising-gods.de/'
 configatron.arsenal.url.realm = 'r='
