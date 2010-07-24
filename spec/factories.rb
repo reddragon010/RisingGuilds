@@ -61,3 +61,12 @@ Factory.define :Event do |f|
   f.guild_id 1
   f.character_id 1
 end
+
+Factory.define :Newsentry do |f|
+  f.sequence(:title){|n| "TestNews#{n}"}
+  f.user_id  1
+  f.body     "TestEntry"
+  f.public   true
+  f.sticky   false
+  f.guild_id 1
+end
