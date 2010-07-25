@@ -28,3 +28,18 @@
 * [Fix]				changed "new raid"-link position
 * [Improved]	added Raidicons to Raidcalendar
 * [Improved]	guilds can be created if the arsenal is unavailable
+
+== 0.4.0 CLOSED-BETA 25-07-2010
+
+* [Feature]		guild-creation-code implemented
+* [Feature]		micro-blog for every guild
+* [Feature]		nice home- and helppage
+* [Feature]		static pages
+* [Fix]				'attend closed raids'-bug
+* [Fix]				to much infos on failed login
+* [Fix]				join-events on guild-creation
+* [Fix]				ugly formerror messages
+* [Fix]				wrong guild-events order
+* [Improved]	events partial
+* [Improved]	join-guild workflow
+* [Improved]	translation (only code, no ui improvement)  
