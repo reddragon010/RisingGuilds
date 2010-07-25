@@ -32,13 +32,15 @@ authorization do
   
   role :leader do
     includes :officer
+    
+    has_permission_on :guilds, :to => :destroy
   end
   
   role :officer do
     includes :raidleader
     
     #Can administrate Guilds if is a officer or leader
-    has_permission_on :guilds, :to => [:change, :maintain, :reset_token, :actualize, :verify], :join_by => :or do
+    has_permission_on :guilds, :to => [:edit, :update, :maintain, :reset_token, :actualize, :verify], :join_by => :or do
       if_attribute :leaders => contains { user }
       if_attribute :officers => contains { user }
     end
