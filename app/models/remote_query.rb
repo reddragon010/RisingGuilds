@@ -76,6 +76,7 @@ class RemoteQuery < ActiveRecord::Base
             unless db_char_names.empty?
               event = Event.new(:action => 'joined')
               event.guild = self.guild
+              event.content = self.guild.name
               event.character = char
               event.save
             end
@@ -90,6 +91,7 @@ class RemoteQuery < ActiveRecord::Base
             event = Event.new(:action => 'left')
             event.character = char
             event.guild = self.guild
+            event.content = self.guild.name
             event.save
             attributes = {:guild_id => nil, :rank => nil}
             char.update_attributes(attributes)

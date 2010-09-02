@@ -168,4 +168,26 @@ describe RemoteQuery do
       @guild.reload
       @guild.events.count.should > 0
     end
+    
+    #add guild-name as content on join- and left-events
+    it "should add guild-name to event-content on join" do
+      @guild = Factory.create(:Guild)
+      @guild.characters << Factory.create(:Character)
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @guild.events.first.content.should == @guild.name
+    end
+    
+    it "should add guild-name to event-content on left" do
+      @guild = Factory.create(:Guild)
+      @character = Factory.create(:Character)
+      @guild.characters << @character
+      @guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      @guild.remoteQueries.first.execute.should be_true
+      @guild.remoteQueries.count.should == 0
+      @guild.reload
+      @character.events.last.content.should == @guild.name
+    end
 end
