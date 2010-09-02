@@ -12,7 +12,7 @@
   <div id="topbar">
     <div class="topbar-content">
 			<div style="float:left">
-				<%= link_to "Help", "pages/help"%>
+				<%= link_to "Help", :controller => 'pages', :id => 'help' %>
 			</div>
 			<div style="float:rigth">
 			<% if logged_in? %>
