@@ -54,3 +54,8 @@ img#avatar {
 	right:0;
 	margin: 5px;
 }
+
+#main {
+	font-size: 10pt;
+	color: #999;
+}
