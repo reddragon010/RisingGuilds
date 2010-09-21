@@ -59,3 +59,11 @@ img#avatar {
 	font-size: 10pt;
 	color: #999;
 }
+
+.talentspec {
+	float: left;
+}
+
+.profession {
+	float: right;
+}

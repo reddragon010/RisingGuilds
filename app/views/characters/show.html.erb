@@ -51,73 +51,63 @@
 	</div>
 </div>
 
-
-<div id="details">
-<h3>Details</h3>
-
-<p>
-  <b>Last seen:</b>
-  <%=h @character.last_seen %>
-</p>
-
-
-<p>
-  <b>Activity:</b>
-  <%=h @character.activity %>
-</p>
-
-<p>
-  <b>Achivementpoints:</b>
-  <%=h @character.achivementpoints %>
-</p>
-
-<% unless @character.ail.nil? || @character.ailstddev.nil? %>
-<p>
-  <b>Ail:</b>
-  <%=h @character.ail %> &plusmn; <%=h @character.ailstddev %>
-</p>
-<% end %>
-
-	<% if @character.profession1 && @character.profession2 then %>
-	<div id="prefessions">
-	  <h3>Professions:</h3>
-	
-	    <% if @character.profession1 then %>
-	    <div class="profession">
-		  <%= image_tag(professionicon_path(@character.profession1))  %>
-	      <%= profession_progressbar(@character.profession1) %>
-		</div>
-	    <% end %>
-	
-	    <% if @character.profession2 then %>
-	    <div class="profession">
-		  <%= image_tag(professionicon_path(@character.profession2)) %>
-	      <%= profession_progressbar(@character.profession2) %>
-		</div>
-	    <% end %>
-	  </table>
-	</div>
-	<% end %>
-
-	<% if @character.talentspec1 && @character.talentspec1 %>
-	<div id="talentspecs">
-	  <h3>Talentspecs:</h3>
-	
-	  <% if @character.talentspec1 %>
-	  <%= image_tag(talentspecicon_path(@character.talentspec1,@character.class_id)) %> <%=h @character.talentspec1.prim %> 
-	  [<%=h @character.talentspec1.trees[1] %>,<%=h @character.talentspec1.trees[2] %>,<%=h @character.talentspec1.trees[3] %>]<br />
-	  <% end %>
-	
-	  <% if @character.talentspec2 %>
-	  <%= image_tag(talentspecicon_path(@character.talentspec2,@character.class_id)) %><%=h @character.talentspec2.prim %> 
-	  [<%=h @character.talentspec2.trees[1] %>,<%=h @character.talentspec2.trees[2] %>,<%=h @character.talentspec2.trees[3] %>]
-	  <% end %>
-	</div>
-	<% end %>
-
+<div class="clear"></div>
+<div class="box_small" style="min-height:200px;float:right">
+	<div class="box_headline">Events</div>
+	<div id="events_box">
+	<%= render :partial => "events", :locals => {:events => @character.events}%>
+  </div>
+</div>
+<div class="box_small">
+	<div class="box_headline">Details</div>
+	<table>
+		<tr>
+			<td class="left" style="width:50%;"><b>Last Seen:</b></td>
+			<td style="width:50%;"><%=h @character.last_seen %></td>
+		</tr>
+		<tr>
+			<td class="left"><b>Activity:</b></td>
+			<td><%=h @character.activity %></td>
+		</tr>
+		</tr>
+		<tr>
+			<td class="left"><b>Achivement Points:</b></td>
+			<td><%=h @character.achivementpoints %></td>
+		</tr>
+		<% unless @character.ail.nil? || @character.ailstddev.nil? %>
+		<tr>
+			<td class="left"><b>AverageItemLevel:</b></td>
+			<td><%=h @character.ail %> &plusmn; <%=h @character.ailstddev %></td>
+		</tr>
+		<% end %>
+	</table>			
 </div>
 
-<div id="events">
-	<h3>Newest Events</h3>
-	<%= render :partial => 'shared/event', :collection => @character.events.last(10).reverse %>
+<div class="box_small">
+  <div class="box_headline">Professions & Talentspecs</div>
+    <table>
+			<tr>
+			<% if @character.talentspec1 then %>
+				<td style="text-align:right"><%=h @character.talentspec1.prim %> [<%=h @character.talentspec1.trees[1] %>/<%=h @character.talentspec1.trees[2] %>/<%=h @character.talentspec1.trees[3] %>]</td>
+				<td class="narrow"><%= image_tag(talentspecicon_path(@character.talentspec1,@character.class_id)) if @character.talentspec1 %></td>
+			<% end %>
+			<% if @character.profession1 then %>
+				<td class="narrow"><%= image_tag(professionicon_path(@character.profession1))  %></td>
+				<td><%= profession_progressbar(@character.profession1) %></td>
+			<% end %>
+			</tr>
+      <tr>
+			<% if @character.talentspec2 then %>
+				<td style="text-align:right"><%=h @character.talentspec2.prim %> [<%=h @character.talentspec2.trees[1] %>/<%=h @character.talentspec2.trees[2] %>/<%=h @character.talentspec2.trees[3] %>]</td>
+				<td class="narrow"><%= image_tag(talentspecicon_path(@character.talentspec2,@character.class_id)) if @character.talentspec2 %></td>
+			<% end %>
+			<% if @character.profession2 then %>
+				<td class="narrow"><%= image_tag(professionicon_path(@character.profession2))  %></td>
+				<td><%= profession_progressbar(@character.profession2) %></td>
+			<% end %>
+			</tr>
+    </table>
 </div>
+
+
+                  
