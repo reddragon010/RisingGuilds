@@ -4,10 +4,9 @@
 
 == Core
 
-* Drantum
-
 == Inactive Members
-	
+
+* Drantum	
 * FeuerJinn
 
 == Special Thanks To

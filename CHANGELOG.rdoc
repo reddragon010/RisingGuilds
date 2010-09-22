@@ -42,4 +42,13 @@
 * [Fix]				wrong guild-events order
 * [Improved]	events partial
 * [Improved]	join-guild workflow
-* [Improved]	translation (only code, no ui improvement)  
+* [Improved]	translation (only code, no ui improvement)
+
+== 0.5.0 BETA 22-09-2010
+
+* [Fix]				No guildname in character events
+* [Fix]				Error on help-link
+* [Fix]				Mainchar indicator to big
+* [Fix]				No raidleader icon
+* [Improved]	Char-views
+* [Improved]	Member-view 
