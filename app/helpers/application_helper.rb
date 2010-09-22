@@ -14,14 +14,12 @@ module ApplicationHelper
     "http://www.wowarmory.com/_images/icons/faction/icon-#{char.faction_id}.gif"
   end
   
-  def professionicon_path(profession)
-    "http://arsenal.rising-gods.de/images/icons/professions/#{profession.key}-sm.gif"
+  def professionicon(profession)
+    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :alt => profession.key})
   end
   
-  def talentspecicon_path(talentspec,class_id)
-    talentspec.trees[0] = 0
-    spec_id = talentspec.trees.index(talentspec.trees.sort.last)
-    "http://arsenal.rising-gods.de/images/icons/class/#{class_id}/talents/#{spec_id}.gif"
+  def talentspecicon(talentspec)
+    image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:alt => talentspec.prim})
     #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
   end
   
@@ -71,12 +69,15 @@ module ApplicationHelper
   end
   
   #Tablesort helper
-  def sort_td_class_helper(param)
+  def sort_td_class_helper(param, addclasses=nil)
+    classes = []
+    classes << addclasses unless addclasses.nil?
     if params[:sort] == param then
-      'class="sortup"' 
+      classes << 'sortup' 
     elsif params[:sort] == param + " DESC"
-      'class="sortdown"'
+      classes << 'sortdown'
     end
+    "class=\"#{classes.join(' ')}\""
   end
   
   def sort_link_helper(text, param)

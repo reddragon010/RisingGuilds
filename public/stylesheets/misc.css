@@ -66,18 +66,18 @@ div.dialog {
 /* ---- Progress Bar ---- */
 
 div.bar-container {
-  border: 1px solid #ccc; 
+  /*border: 1px solid #ccc;*/ 
   width: 100px; 
   margin: 2px 5px 2px 0; 
   padding: 1px; 
-  float: left; 
-  background: white;
+  /*float: left;*/ 
+  background: #777;
   line-height: 14px;
 }
 
 div.bar-container > div {
   background-color: #16b; 
-  height: 16px;
+  /*height: 16px;*/
   text-align: center;
 }
 

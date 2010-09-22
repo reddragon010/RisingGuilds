@@ -52,7 +52,7 @@
 </div>
 
 <div class="clear"></div>
-<div class="box_small" style="min-height:200px;float:right">
+<div class="box_small" style="min-height:300px;float:right">
 	<div class="box_headline">Events</div>
 	<div id="events_box">
 	<%= render :partial => "events", :locals => {:events => @character.events}%>
@@ -83,31 +83,42 @@
 	</table>			
 </div>
 
-<div class="box_small">
-  <div class="box_headline">Professions & Talentspecs</div>
+<div class="box_small" style="width:210px">
+  <div class="box_headline">Professions</div>
     <table>
 			<tr>
-			<% if @character.talentspec1 then %>
-				<td style="text-align:right"><%=h @character.talentspec1.prim %> [<%=h @character.talentspec1.trees[1] %>/<%=h @character.talentspec1.trees[2] %>/<%=h @character.talentspec1.trees[3] %>]</td>
-				<td class="narrow"><%= image_tag(talentspecicon_path(@character.talentspec1,@character.class_id)) if @character.talentspec1 %></td>
-			<% end %>
 			<% if @character.profession1 then %>
-				<td class="narrow"><%= image_tag(professionicon_path(@character.profession1))  %></td>
+			  <td class="narrow"><%= professionicon(@character.profession1) %></td>   
 				<td><%= profession_progressbar(@character.profession1) %></td>
 			<% end %>
 			</tr>
-      <tr>
-			<% if @character.talentspec2 then %>
-				<td style="text-align:right"><%=h @character.talentspec2.prim %> [<%=h @character.talentspec2.trees[1] %>/<%=h @character.talentspec2.trees[2] %>/<%=h @character.talentspec2.trees[3] %>]</td>
-				<td class="narrow"><%= image_tag(talentspecicon_path(@character.talentspec2,@character.class_id)) if @character.talentspec2 %></td>
-			<% end %>
+			<tr>
 			<% if @character.profession2 then %>
-				<td class="narrow"><%= image_tag(professionicon_path(@character.profession2))  %></td>
+				<td class="narrow"><%= professionicon(@character.profession2) %></td>
 				<td><%= profession_progressbar(@character.profession2) %></td>
 			<% end %>
 			</tr>
     </table>
 </div>
+
+<div class="box_small" style="width:208px">
+  <div class="box_headline">Talentspecs</div>
+    <table>
+			<tr>
+			<% if @character.talentspec1 then %>
+				<td class="narrow"><%= talentspecicon(@character.talentspec1) if @character.talentspec1 %></td>
+				<td><%=h @character.talentspec1.prim %> [<%=h @character.talentspec1.trees[1] %>/<%=h @character.talentspec1.trees[2] %>/<%=h @character.talentspec1.trees[3] %>]</td>
+			<% end %>
+			</tr>
+			<tr>
+			<% if @character.talentspec2 then %>
+			  <td class="narrow"><%= talentspecicon(@character.talentspec2) if @character.talentspec2 %></td>
+				<td><%=h @character.talentspec2.prim %> [<%=h @character.talentspec2.trees[1] %>/<%=h @character.talentspec2.trees[2] %>/<%=h @character.talentspec2.trees[3] %>]</td>
+			<% end %>
+			</tr>
+    </table>
+</div>
+
 
 
                   

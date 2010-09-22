@@ -38,10 +38,12 @@ img#avatar {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 10px;
+	width: 15px;
 	font-size: 10pt;
-	color: #EEE;
+	color: #000;
 	font-weight: bold;
+	background: #FFF;
+	opacity: 0.8;
 }
 
 #owner {
