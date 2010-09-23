@@ -16,12 +16,10 @@ class CharactersController < ApplicationController
     conditions.delete_if {|key,value| !filter_keys.include? key}
     
     if conditions.empty? then
-      #@characters = Character.paginate(:all, :order => params[:sort], :page => params[:page])
-      @characters = Character.find(:all, :order => params[:sort])
+      @characters = Character.order(params[:sort])
     else
-      #@characters = Character.paginate(:all, :order => params[:sort], :page => params[:page], :conditions => conditions)
-      @characters = Character.find(:all, :order => params[:sort], :conditions => conditions)
-    end
+      @characters = Character.where(conditions).order(params[:sort])
+    end                                       
    
     respond_to do |format|
       format.html do
@@ -190,11 +188,11 @@ class CharactersController < ApplicationController
   def guildrank_to_role(rank)
     case rank
     when 0
-      role = Role.find_by_name("guildleader")
+      role = Role.where(:name => "guildleader")
     when 1
-      role = Role.find_by_name("guildofficer")
+      role = Role.where(:name => "guildofficer")
     else
-      role = Role.find_by_name("guildmember")
+      role = Role.where(:name => "guildmember")
     end
     return role
   end

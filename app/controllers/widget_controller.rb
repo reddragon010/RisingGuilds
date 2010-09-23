@@ -14,7 +14,7 @@ class WidgetController < ApplicationController
     #prevent a nil error
     @characters = Array.new
     #find all online guildmembers unless there are no members
-    @characters = @guild.characters.find(:all,:conditions => {:online => true}) unless @guild.characters.nil? || @guild.characters.empty?
+    @characters = @guild.characters.where(:online => true) unless @guild.characters.nil? || @guild.characters.empty?
     
     respond_to do |format|
       format.html { render "onlinemembers.js"}
@@ -26,7 +26,7 @@ class WidgetController < ApplicationController
   protected
   
   def validate_token
-    @user = User.find_by_single_access_token(params[:token])
+    @user = User.where(:single_access_token => params[:token])
     return render(:text => t('widget.invalid_key')) if @user.nil?
   end
 end

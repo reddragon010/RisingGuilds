@@ -13,14 +13,14 @@ class UsersController < ApplicationController
     
     unless @guild.nil? then
       if @guild.users.include?(current_user) then
-        @users = @guild.users.find(:all, :order => params[:sort])
+        @users = @guild.users.order(params[:sort])
       else
         flash[:error] = t('no_access')
         redirect_to_target_or_default(root_path)
         return true
       end
     else
-      @users = User.find(:all, :order => params[:sort])
+      @users = User.order(params[:sort])
     end
    
     respond_to do |format|
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.kickable_by?(current_user,@guild)
-      @guild.assignments.find_all_by_user_id(@user.id).each {|a| a.destroy}
+      @guild.assignments.where(:user_id => @user.id).each {|a| a.destroy}
       flash[:notice] = t('users.kicked')
     else
       flash[:error] = t('users.not_enought_rights',:a => 'kick')
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.promoteable_by?(current_user,@guild)
-      asmt = @guild.assignments.find_by_user_id(@user.id)
+      asmt = @guild.assignments.where(:user_id => @user.id)
       if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
         flash[:notice] = t('users.promoted')
       else
@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.demoteable_by?(current_user,@guild)
-      asmt = @guild.assignments.find_by_user_id(@user.id)
+      asmt = @guild.assignments.where(user_id => @user.id)
       if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
         flash[:notice] = t('users.demoted')
       else

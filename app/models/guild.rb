@@ -33,29 +33,29 @@ class Guild < ActiveRecord::Base
   
   def leaders
     @leaders = Array.new
-    @leaders_role_id ||= Role.find_by_name("leader").id
-    assignments.find_all_by_role_id(@leaders_role_id).each{|a| @leaders << a.user}
+    @leaders_role_id ||= Role.where(:name => "leader").id
+    assignments.where(:role_id => @leaders_role_id).each{|a| @leaders << a.user}
     @leaders
   end
   
   def officers
     @officers = Array.new
-    @officers_role_id ||= Role.find_by_name("officer").id
-    assignments.find_all_by_role_id(@officers_role_id).each{|a| @officers << a.user}
+    @officers_role_id ||= Role.where(:name => "officer").id
+    assignments.where(:role_id => @officers_role_id).each{|a| @officers << a.user}
     @officers
   end
   
   def raidleaders
     @raidleaders = Array.new
-    @raidleaders_role_id ||= Role.find_by_name("raidleader").id
-    assignments.find_all_by_role_id(@raidleaders_role_id).each{|a| @raidleaders << a.user}
+    @raidleaders_role_id ||= Role.where(:name => "raidleader").id
+    assignments.where(:role_id => @raidleaders_role_id).each{|a| @raidleaders << a.user}
     @raidleaders
   end
   
   def members
     @members = Array.new
-    @members_role_id ||= Role.find_by_name("member").id
-    assignments.find_all_by_role_id(@members_role_id).each{|a| @members << a.user}
+    @members_role_id ||= Role.where(:name => "member").id
+    assignments.where(:role_id => @members_role_id).each{|a| @members << a.user}
     @members
   end
   
@@ -100,7 +100,7 @@ class Guild < ActiveRecord::Base
   end
   
   def ail
-    ails = self.characters.find_all_by_level(80).collect{|char| char.ail}
+    ails = self.characters.where(:level => 80).collect{|char| char.ail}
     size = ails.size
     ails.delete_if{|x| x.nil?}
     unless ails.empty?
@@ -111,7 +111,7 @@ class Guild < ActiveRecord::Base
   end
     
   def activity
-    activities = self.characters.find_all_by_level_and_main(80,true).collect{|char| char.netto_activity}
+    activities = self.characters.where(:level => 80,:main => true).collect{|char| char.netto_activity}
     activities.delete_if{|x| x.nil?}
     unless activities.empty?
       return activities.sum / activities.size
@@ -122,9 +122,9 @@ class Guild < ActiveRecord::Base
   
   def mainratio
     return nil if self.characters.empty?
-    unless self.characters.find_by_main(true).nil? || self.characters.find_by_main(false).nil?
-      mains = self.characters.find_all_by_main(true).count 
-      alts = self.characters.find_all_by_main(false).count
+    unless self.characters.where(:main => true).nil? || self.characters.where(:main => false).nil?
+      mains = self.characters.where(:main => true).count 
+      alts = self.characters.where(:main => false).count
       return Integer(mains.to_f / alts.to_f * 100)
     else
       return nil
@@ -136,7 +136,7 @@ class Guild < ActiveRecord::Base
     members = self.characters.count
     sum = 0
     (1..9).each do |i|
-      sum += (((self.characters.find_all_by_class_id_and_level(i,80).count.to_f / members.to_f) - (1.to_f/9.to_f))*100).abs
+      sum += (((self.characters.where(:class_id => i, :level => 80).count.to_f / members.to_f) - (1.to_f/9.to_f))*100).abs
     end
     return Integer(sum)
   end
@@ -144,8 +144,8 @@ class Guild < ActiveRecord::Base
   def growth
     return nil if self.characters.empty?
     members = self.characters.count
-    joined = Event.find(:all, :conditions =>  ["guild_id = ? AND action = ? AND created_at > ?",self.id ,"joined",1.month.ago]).count
-    left = Event.find(:all, :conditions => ["guild_id = ? AND action = ? AND created_at > ?",self.id,"left",1.month.ago]).count
+    joined = Event.where("guild_id = ? AND action = ? AND created_at > ?",self.id ,"joined",1.month.ago).count
+    left = Event.where("guild_id = ? AND action = ? AND created_at > ?",self.id,"left",1.month.ago).count
     growth = joined - left
     unless (members - growth) == 0
       return Integer((growth.to_f / (members-growth).to_f)*100)
@@ -155,7 +155,7 @@ class Guild < ActiveRecord::Base
   end
   
   def achivementpoints
-    achivementpoints = self.characters.find_all_by_level(80).collect{|char| char.achivementpoints}
+    achivementpoints = self.characters.where(:level => 80).collect{|char| char.achivementpoints}
     achivementpoints.delete_if{|x| x.nil?}
     unless achivementpoints.empty?
       return Integer(achivementpoints.sum / achivementpoints.size)
@@ -172,7 +172,7 @@ class Guild < ActiveRecord::Base
   end
   
   def before_destroy
-    Raid.find_all_by_guild_id(self.id).each(&:destroy)
+    Raid.where(:guild_id => self.id).each(&:destroy)
   end
   
   #get the preprocessed XML-Code from URI

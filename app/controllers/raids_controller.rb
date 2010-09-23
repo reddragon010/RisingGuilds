@@ -10,7 +10,7 @@ class RaidsController < ApplicationController
   # GET /raids.xml
   def index
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    @raids = Raid.with_permissions_to(:view).find(:all, :order => "start") 
+    @raids = Raid.with_permissions_to(:view).order("start") 
 
     @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
     @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
@@ -25,10 +25,10 @@ class RaidsController < ApplicationController
   # GET /raids/1
   # GET /raids/1.xml
   def show
-    if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.find_all_by_character_id(current_user.characters.collect{|c| c.id}).empty?
+    if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id}).all.empty?
       @attendance = Attendance.new(:raid_id => @raid.id)
     else
-      @attendance = @raid.attendances.find_by_character_id(current_user.characters.collect{|c| c.id})
+      @attendance = @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id})
     end 
     @guild = @raid.guild
     respond_to do |format|
@@ -87,7 +87,7 @@ class RaidsController < ApplicationController
   # PUT /raids/1.xml
   def update
     unless params[:raid][:invited_guild].nil?
-      @raid.guilds << Guild.find_by_name(params[:raid][:invited_guild])
+      @raid.guilds << Guild.where(:name => params[:raid][:invited_guild])
       flash[:notice] = t('raids.guild_to_raid')
       redirect_to guild_raid_path(@raid.guild, @raid)
       return true

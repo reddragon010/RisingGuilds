@@ -7,7 +7,7 @@ class GuildsController < ApplicationController
   # GET /guilds.xml
   def index
     if !params[:search].nil?
-      @guilds = Guild.find(:all,:conditions => ['name LIKE ?',"#{params[:search]}%"])
+      @guilds = Guild.where('name LIKE ?',"#{params[:search]}%")
     elsif current_user.nil? || current_user.assignments.empty?
       flash[:error] = t('guilds.not_assigned')
       redirect_to_target_or_default(root_path)
@@ -24,12 +24,12 @@ class GuildsController < ApplicationController
     else
       @guilds = current_user.assignments.collect{|a| a.guild }.uniq
     end
-    @online_characters = @guild.characters.find_all_by_online(true, :order => "rank") unless @guild.nil?
+    @online_characters = @guild.characters.where(:online => true).order("rank") unless @guild.nil?
     @events = @guild.events.paginate(:page => params[:page], :order => 'created_at DESC')
     if @guild.users.include?(current_user)
-      @newsentries = Newsentry.find(:all, :limit => 10, :order => "sticky DESC, updated_at DESC")
+      @newsentries = Newsentry.order("sticky DESC, updated_at DESC").limit(10)
     else
-      @newsentries = Newsentry.find(:all, :limit => 10, :order => "sticky DESC, updated_at DESC", :conditions => {:public => true})
+      @newsentries = Newsentry.where(:public => true).order("sticky DESC, updated_at DESC").limit(10)
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -111,7 +111,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if @guild.verified?
-        if @guild.remoteQueries.find_all_by_action('update_guild').empty?
+        if @guild.remoteQueries.where(:action => 'update_guild').all.empty?
           @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
           flash[:notice] = t(:updating, :item => 'Guild')
           format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
