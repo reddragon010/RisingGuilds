@@ -1,0 +1,13 @@
+nbproject
+log/*.log
+tmp/**/*
+config/database.yml
+db/schema.rb
+db/*.sqlite3
+public/javascripts/all.js
+public/stylesheets/all.css
+*.orig
+.DS_Store
+doc/api
+doc/app
+public/system
