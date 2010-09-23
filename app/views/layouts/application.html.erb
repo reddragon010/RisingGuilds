@@ -38,7 +38,7 @@
   </div>
   <div class="clear"></div>
   <div id="center">
-	<% if yield(:guild_header)%>
+	<% if content_for?(:guild_header)%>
 	<div id="guild_header"> 
 	  <%= yield(:guild_header)%>
 	</div>
@@ -69,7 +69,7 @@
 	  <% end %>
 	</div>
     <div id="content">
-	  <%= yield(:content) or yield %>
+	  <%= content_for?(:content) ? yield(:content) : yield %>
       <div class="clear"></div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-RisingGuilds::Application.routes.draw do
+RisingGuilds::Application.routes.draw do |map|
    map.connect 'pages/*id', :controller => 'pages', :action => 'show'
 
    map.resources :newsentries

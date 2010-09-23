@@ -1,3 +1,4 @@
+=begin
 namespace :queryqueue do
   desc "execute the queryqueue"
   task :run => :environment do
@@ -123,3 +124,4 @@ namespace :serial do
     puts Digest::SHA1.hexdigest("#{ENV['guild_name']}:#{configatron.guilds.serial_salt}")
   end
 end
+=end

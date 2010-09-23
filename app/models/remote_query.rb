@@ -260,26 +260,22 @@ def get_html(url)
 	
 	http = Net::HTTP.new(uri.host, uri.port)
   
+  tries = 10 
 	begin
 	  http.start do
 	    res = http.request req
 			# response = res.body
 			
-			tries = 0
 			case res
 				when Net::HTTPSuccess, Net::HTTPRedirection
 					res.body
 				else
-					tries += 1
-					if tries > 10
-						raise 'Timed out'
-					else
-						retry
-					end
-				end
+					tries -= 1
+			end
 	  end
 	rescue
-		raise 'Specified server at ' + url + ' does not exist.'
+	  retry if tries > 0
+		raise 'Specified server at ' + url + ' does not exist or timed out.'
 	end
 end
 

@@ -7,6 +7,10 @@ class Guild < ActiveRecord::Base
   has_and_belongs_to_many :raids
   has_many :newsentries
   
+  before_validation(:on => :create) do
+    self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
+  end
+  
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"
   validates_length_of :description, :maximum => 1000, :message => "ok thats to much. Please keep a little bit shorter"
@@ -22,6 +26,8 @@ class Guild < ActiveRecord::Base
                                           :quality => 80,
                                           :format => 'PNG'
                                           }}
+  
+    
   
   attr_accessor :serial
   
@@ -159,9 +165,7 @@ class Guild < ActiveRecord::Base
   end
   
   protected
-  def before_validation_on_create
-    self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
-  end
+  
   
   def validate
     errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial || configatron.arsenal.test == true

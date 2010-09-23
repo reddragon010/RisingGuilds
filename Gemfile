@@ -35,3 +35,13 @@ gem "declarative_authorization"
 gem 'paperclip'
 gem 'configatron'
 gem 'will_paginate'
+
+gem 'test-unit'
+gem 'hoe'
+gem 'rubyforge'
+
+group :development, :test do
+  gem "mocha"
+  gem "rspec-rails", ">= 2.0.0.beta.19"
+  gem "factory_girl_rails"
+end
