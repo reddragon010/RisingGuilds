@@ -44,6 +44,7 @@ group :development, :test do
   gem "mocha"
   gem "rspec-rails", ">= 2.0.0.beta.19"
   gem "factory_girl_rails"
+  gem "email_spec"
 end
 
 group :cucumber do
