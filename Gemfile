@@ -30,7 +30,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # end
 
 gem "hpricot"
-gem "authlogic"
+gem "authlogic", :git => "http://github.com/odorcicd/authlogic.git", :branch => "rails3"
 gem "declarative_authorization"
 gem 'paperclip'
 gem 'configatron'
@@ -44,4 +44,13 @@ group :development, :test do
   gem "mocha"
   gem "rspec-rails", ">= 2.0.0.beta.19"
   gem "factory_girl_rails"
+end
+
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber', '0.7.3'
+  gem 'spork'
+  gem 'launchy'    # So you can do Then show me the page
 end
