@@ -7,9 +7,11 @@ class Attendance < ActiveRecord::Base
   validates_presence_of :character_id
   validates_presence_of :status
   
+  #validate :max_attendances
+  
   protected
   
-  def validate
-    #errors.add_to_base "Max attendances are reached! Sorry" unless self.raid.attendances.count < self.raid.max_attendances
+  def max_attendances
+    errors.add_to_base "Max attendances are reached! Sorry" unless self.raid.attendances.count < self.raid.max_attendances
   end
 end

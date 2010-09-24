@@ -11,6 +11,10 @@ class Guild < ActiveRecord::Base
     self.token = ActiveSupport::SecureRandom::hex(8) if self.new_record? and self.token.nil?
   end
   
+  before_destroy do
+    Raid.where(:guild_id => self.id).each(&:destroy)
+  end
+  
   validates_presence_of :name
   validates_length_of :description, :minimum => 100, :message => "please write some more words"
   validates_length_of :description, :maximum => 1000, :message => "ok thats to much. Please keep a little bit shorter"
@@ -20,6 +24,8 @@ class Guild < ActiveRecord::Base
   validates_uniqueness_of :token
   
   validates_presence_of :realm
+  
+  validate :serial_check
   
   has_attached_file :logo, :default_url => "defaults/:attachment/:style/missing.png", :default_style => :formatted, :styles => { :formatted => {
                                           :geometry => '100x100#',
@@ -167,12 +173,8 @@ class Guild < ActiveRecord::Base
   protected
   
   
-  def validate
+  def serial_check
     errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial || configatron.arsenal.test == true
-  end
-  
-  def before_destroy
-    Raid.where(:guild_id => self.id).each(&:destroy)
   end
   
   #get the preprocessed XML-Code from URI
