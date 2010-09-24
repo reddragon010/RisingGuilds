@@ -150,7 +150,7 @@ class RaidsController < ApplicationController
   protected
   
   def setup_raidicons
-    raid_icons_files = Dir.entries(RAILS_ROOT + "/public/images/icons/raid").reject {|f| f[0,1] == "." || f == "nil.png"} 
+    raid_icons_files = Dir.entries(Rails.root.to_s + "/public/images/icons/raid").reject {|f| f[0,1] == "." || f == "nil.png"} 
   	@raid_icons = {}
   	raid_icons_files.each{|f| @raid_icons[f.chomp(".png")] = f}
   end
