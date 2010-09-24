@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.new
     
     if @user.signup!(params)
-      @user.deliver_activation_instructions!
+      Notifier.activation_instructions(@user).deliver
       flash[:notice] = t("account.created")
       redirect_to root_url
     else

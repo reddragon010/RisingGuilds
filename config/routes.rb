@@ -5,7 +5,6 @@ RisingGuilds::Application.routes.draw do
    match 'pages/*id' => 'pages#show'
    
    # Authentication Routes
-   match "/account" => "users#show", :as => :account
    match '/logout' => 'user_sessions#destroy', :as => :logout
    match '/login' => 'user_sessions#new', :as => :login
    match '/register' => 'users#create', :as => :register
@@ -15,6 +14,7 @@ RisingGuilds::Application.routes.draw do
    match '/activate/:id' => 'activations#create', :as => :activate
    
    #Resources
+   resource :account, :controller => "users"
    resources :password_resets
    resource :user_session
    resources :users do

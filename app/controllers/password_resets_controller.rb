@@ -7,9 +7,9 @@ class PasswordResetsController < ApplicationController
   end  
   
   def create  
-    @user = User.find_by_email(params[:email])  
+    @user = User.where(email => params[:email])  
     if @user  
-      @user.deliver_password_reset_instructions!  
+      Notifier.password_reset_instructions(@user).deliver  
       flash[:notice] = t('password_resets.instructions_sent')  
       redirect_to root_url  
     else  
