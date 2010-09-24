@@ -73,6 +73,10 @@ When /^(?:|I )select "([^\"]*)" from "([^\"]*)"(?: within "([^\"]*)")?$/ do |val
   end
 end
 
+When /^(?:|I )select "([^\"]*)" as the "([^\"]*)" date and time$/ do |datetime, datetime_label|
+  select_datetime(datetime, :from => datetime_label)
+end
+
 When /^(?:|I )check "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, selector|
   with_scope(selector) do
     check(field)

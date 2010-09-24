@@ -26,7 +26,7 @@ class WidgetController < ApplicationController
   protected
   
   def validate_token
-    @user = User.where(:single_access_token => params[:token])
+    @user = User.where(:single_access_token => params[:token]).first
     return render(:text => t('widget.invalid_key')) if @user.nil?
   end
 end

@@ -10,17 +10,17 @@ Feature: WidgetApi
 	
 	Scenario: Access with wrong API-Token
 		Given I got an wrong apikey
-		When I go to Divine´s onlinemembers-widget
+		When I go to Divine's onlinemembers-widget
 		Then I should see "Invalid API Key"
 		
 	Scenario: Access with valid API-Token
 		Given I got an apikey
-		When I go to Divine´s onlinemembers-widget
+		When I go to Divine's onlinemembers-widget
 		Then I should not see "Invalid API Key"
 		
 	Scenario: Get onlinemember-widget
 		Given I got an apikey
 		And I am a "leader" of the guild
-		When I go to Divine´s onlinemembers-widget
+		When I go to Divine's onlinemembers-widget
 		Then I should see "document.write("
 		

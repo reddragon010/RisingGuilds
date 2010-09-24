@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td>
-			<% form_for @user_session, :url => user_session_path do |f| %>
+			<%= form_for @user_session, :url => user_session_path do |f| %>
 			  <%= f.label :login %><br />
 			  <%= f.text_field :login %><br />
 			  <br />
@@ -23,7 +23,7 @@
 		<% unless @user.nil? %>
 		<td></td>
 		<td>
-			<% form_for @user, :url => account_path do |f| %>
+			<%= form_for @user, :url => account_path do |f| %>
 			  <br />
 			  <%= f.label :login %><br />
 			  <%= f.text_field :login %><br />  

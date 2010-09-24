@@ -3,7 +3,7 @@
 # Example:
 #   configatron.file.storage = :local
 
-configatron.arsenal.url.base = RAILS_ROOT + "/test/files/"
+configatron.arsenal.url.base = Rails.root.to_s + "/test/files/"
 configatron.arsenal.url.realm = nil
 configatron.arsenal.test = true
 
@@ -11,7 +11,7 @@ configatron.arsenal.url.character.sheet = 'char.xml'
 
 configatron.arsenal.url.guild.info = 'guild.xml'
 
-configatron.wowarmory.url.base = RAILS_ROOT + '/test/files/'
+configatron.wowarmory.url.base = Rails.root.to_s + '/test/files/'
 configatron.wowarmory.url.item.info = 'items/'
 
-configatron.onlinelist.url =  RAILS_ROOT + '/test/files/onlinelist.html'
+configatron.onlinelist.url =  Rails.root.to_s + '/test/files/onlinelist.html'
