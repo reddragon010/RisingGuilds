@@ -33,28 +33,28 @@ class Guild < ActiveRecord::Base
   
   def leaders
     @leaders = Array.new
-    @leaders_role_id ||= Role.where(:name => "leader").id
+    @leaders_role_id ||= Role.where(:name => "leader").first.id
     assignments.where(:role_id => @leaders_role_id).each{|a| @leaders << a.user}
     @leaders
   end
   
   def officers
     @officers = Array.new
-    @officers_role_id ||= Role.where(:name => "officer").id
+    @officers_role_id ||= Role.where(:name => "officer").first.id
     assignments.where(:role_id => @officers_role_id).each{|a| @officers << a.user}
     @officers
   end
   
   def raidleaders
     @raidleaders = Array.new
-    @raidleaders_role_id ||= Role.where(:name => "raidleader").id
+    @raidleaders_role_id ||= Role.where(:name => "raidleader").first.id
     assignments.where(:role_id => @raidleaders_role_id).each{|a| @raidleaders << a.user}
     @raidleaders
   end
   
   def members
     @members = Array.new
-    @members_role_id ||= Role.where(:name => "member").id
+    @members_role_id ||= Role.where(:name => "member").first.id
     assignments.where(:role_id => @members_role_id).each{|a| @members << a.user}
     @members
   end
