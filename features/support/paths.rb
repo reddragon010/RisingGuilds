@@ -33,7 +33,7 @@ module NavigationHelpers
     when /edit guild/
       edit_guild_path @guild
     when /^(.*)'s onlinemembers-widget/
-      "/widget/onlinemembers/#{Guild.find_by_name($1).id}/#{@apikey}"
+      "/widget/onlinemembers/#{Guild.where(:name => $1).first.id}/#{@apikey}"
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

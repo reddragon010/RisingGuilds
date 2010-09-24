@@ -5,10 +5,10 @@ end
 def login(username="user",password="password")
   user
   visit path_to("the homepage")
-  response.should contain("Login")
+  page.should have_content("Login")
   click_link "Login"
-  fill_in "login", :with => username 
-  fill_in "password", :with => password
+  fill_in "user_session_login", :with => username 
+  fill_in "user_session_password", :with => password
   click_button "Login"
 end
 
@@ -39,7 +39,7 @@ Then /^I should be on ([^\"]*)$/ do |page_name| #"
 end
 
 Then /^I should see my account$/ do
-  response.should contain(@user.login)
+  page.should have_content(@user.login)
 end
 
 Given /^I am a "([^\"]*)"$/ do |role|

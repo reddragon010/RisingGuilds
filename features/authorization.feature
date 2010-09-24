@@ -49,7 +49,7 @@ Feature: Authorization
 		And I am logged in
 		When I go to a new guild
 		And fill in some guildinfos
-		And I press "create"
+		And I press "guild_submit"
 		Then I should see "Guild was successfully created."
 		
 	Scenario: Sync Guild as manager
