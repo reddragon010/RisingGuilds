@@ -34,7 +34,7 @@ gem "authlogic"
 gem "declarative_authorization"
 gem 'paperclip'
 gem 'configatron'
-gem 'will_paginate'
+gem 'will_paginate', :git => "git://github.com/mislav/will_paginate.git", :branch => "rails3"
 
 gem 'test-unit'
 gem 'hoe'

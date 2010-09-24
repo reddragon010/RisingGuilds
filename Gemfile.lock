@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/mislav/will_paginate.git
+  revision: 36159385c8a5837fc63fe901ebe0a88205b5ce8d
+  branch: rails3
+  specs:
+    will_paginate (3.0.pre2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -99,7 +106,6 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
-    will_paginate (2.3.15)
     yamler (0.1.0)
 
 PLATFORMS
@@ -119,4 +125,4 @@ DEPENDENCIES
   rubyforge
   sqlite3-ruby
   test-unit
-  will_paginate
+  will_paginate!
