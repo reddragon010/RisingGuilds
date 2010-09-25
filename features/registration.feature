@@ -11,8 +11,7 @@ Feature: Registration
 		Then I should see "Your account has been created. Please check your e-mail for your account activation instructions!"
 		And I should receive an activation email
 		When I click the activation email link
-		Then I should see "Activate your account"
-		When I fill in "user_password" with "test"
+		And I fill in "user_password" with "test"
 		And I fill in "user_password_confirmation" with "test"
 		And I press "Activate"
-		Then I should see "Your account has been activated."
+		Then I should see a notice message

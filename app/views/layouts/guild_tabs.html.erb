@@ -17,7 +17,7 @@
 </div>
 <% unless @guild.website.nil? %>
 <div id="website">
-  <%= link_to @guild.website, @guild.website, :popup => true %>
+  <%= link_to @guild.website, @guild.website, {'data-popup' => true} %>
 </div>
 <% unless @guild.verified? %>
 <div id="verify_guild">

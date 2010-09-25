@@ -5,6 +5,7 @@
 <title>RisingGuilds - <%= controller.controller_name %> - <%= controller.action_name %></title>
 <%= stylesheet_link_tag 'style' %>
 <%= javascript_include_tag :all %>
+<%= csrf_meta_tag %>
 </head>
 
 <body>
@@ -27,12 +28,12 @@
   <div id="tabnav">
   <ul>
     <li><%= link_to 'Home', root_url %></li>
-	<li><%= link_to 'Rating', rating_path %></li>
+		<li><%= link_to 'Rating', rating_path %></li>
 	<% unless current_user.nil? %>
-	<li><%= link_to 'My Guilds', guilds_path %></li>
-	<li><%= link_to 'My Raids', raids_path %></li>
-	<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
-	<li><%= link_to 'New Guild', new_guild_path %></li>
+		<li><%= link_to 'My Guilds', guilds_path %></li>
+		<li><%= link_to 'My Raids', raids_path %></li>
+		<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
+		<li><%= link_to 'New Guild', new_guild_path %></li>
 	<% end %>
   </ul>
   </div>
@@ -62,10 +63,10 @@
 	</div>
 	<div id="popups">
 	  <% if flash[:notice] %>
-	  <p id="notice"><%= flash[:notice] %></p>
+	  <p id="flash" class="notice"><%= flash[:notice] %></p>
 	  <% end %>
 	  <% if flash[:error] %>
-	  <p id="error"><%= flash[:error] %></p>
+	  <p id="flash" class="error"><%= flash[:error] %></p>
 	  <% end %>
 	</div>
     <div id="content">

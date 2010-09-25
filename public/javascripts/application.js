@@ -55,3 +55,9 @@ function updateCDTime(end) {
             mm + ' minutes ' +
             ss + ' seconds' ;
 }
+
+document.on("click", "a[data-popup]", function(event, element) { 
+     if (event.stopped) return; 
+     window.open($(element).href); 
+     event.stop(); 
+   });

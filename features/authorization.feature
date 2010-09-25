@@ -50,7 +50,7 @@ Feature: Authorization
 		When I go to a new guild
 		And fill in some guildinfos
 		And I press "guild_submit"
-		Then I should see "Guild was successfully created."
+		Then I should see a notice message
 		
 	Scenario: Sync Guild as manager
 		Given a guild
@@ -59,7 +59,7 @@ Feature: Authorization
 		And I am logged in
 		And I am on the guildpage
 		When I go to actualize guild
-		Then I should see "Guild will be updated soon"
+		Then I should see a notice message
 
 	Scenario: Edit Guild as manager
 		Given a guild
@@ -77,15 +77,14 @@ Feature: Authorization
 		And I am a registered user
 		And I am logged in
 		When I join the guild with a valid token
-		Then I should see "You have successfully joined this guild"
-		And I should be a member of the guild
+		Then I should be a member of the guild 
 		
 	Scenario: Join a guild with invalid token
 		Given a guild
 		And I am a registered user
 		And I am logged in
 		When I join the guild with a invalid token
-		Then I should see "invalid token! Please contact your guildmanager"
+		Then I should see a error message
 		And I should not be a member of the guild
 		
 	

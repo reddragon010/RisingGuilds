@@ -25,7 +25,7 @@ class Guild < ActiveRecord::Base
   
   validates_presence_of :realm
   
-  validate :serial_check
+  validate :serial_check, :on => :create
   
   has_attached_file :logo, :default_url => "defaults/:attachment/:style/missing.png", :default_style => :formatted, :styles => { :formatted => {
                                           :geometry => '100x100#',

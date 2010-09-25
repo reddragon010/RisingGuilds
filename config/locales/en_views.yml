@@ -17,7 +17,7 @@ en:
     description: "Description"
     new: "New guild"
     recruitment: "Recruitment"
-    recruit_level: "Level {{level}} and above"
+    recruit_level: "Level %{level} and above"
     news: "News"
     show:
       no_news: "No News Available"
@@ -41,9 +41,9 @@ en:
       
   events:
     actiontexts:
-      joined: "has joined the Guild {{content}}"
-      left: "has left the Guild {{content}}"
-      promoted: "was promoted from rank {{content}}"
-      demoted: "was demoted from rank {{content}}"
-      levelup: "has got level {{content}}"
-      guild_created: "guild was created by {{content}}"
+      joined: "has joined the Guild %{content}"
+      left: "has left the Guild %{content}"
+      promoted: "was promoted from rank %{content}"
+      demoted: "was demoted from rank %{content}"
+      levelup: "has got level %{content}"
+      guild_created: "guild was created by %{content}"

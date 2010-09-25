@@ -43,9 +43,9 @@ module ApplicationHelper
   #Online-Text helper
   def online_text(online)
     if online
-      "<span style=\"color:green\">Yes</span>"
+      raw("<span style=\"color:green\">Yes</span>")
     else
-      "<span style=\"color:red\">No</span>"
+      raw("<span style=\"color:red\">No</span>")
     end
   end
   
@@ -98,6 +98,7 @@ module ApplicationHelper
     op =  "<div class=\"bar-container\">\n"    
     op += "<div style=\"width: #{value}%;\">#{text}</div>\n"
     op += "</div>\n"
+    raw(op)
   end
   
   def profession_progressbar(profession)

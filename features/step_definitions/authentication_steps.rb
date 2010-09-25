@@ -53,7 +53,7 @@ When /^I join the guild with a valid token$/ do
 end
 
 When /^I join the guild with a invalid token$/ do
-  visit "guilds/#{@guild.id}/join/#{@guild.token + "invalid"}"
+  visit "guilds/#{@guild.id}/join/#{"Inv" + @guild.token + "alid"}"
 end
 
 

@@ -38,20 +38,29 @@
   list-style: square;
 }
 
-#error {
-	color: red;
-	border: 1px red solid;
-	background-color: #FDD;
+#flash {
 	padding: 10px;
 	margin-bottom: 0px;
 }
 
-#notice{
+.error {
+	color: red;
+	border: 1px red solid;
+	background-color: #FDD;
+}
+
+.notice{
 	color: green;
 	border: 1px green solid;
 	background-color: #DFD;
-	padding: 10px;
-	margin-bottom: 0px;
+}
+
+.info {
+	padding: 5px;
+	margin: 20px 5px;
+	border: 1px solid #990;
+	background-color: #330;
+	font-weight: bold;
 }
 
 div.dialog {

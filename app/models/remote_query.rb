@@ -194,18 +194,18 @@ class RemoteQuery < ActiveRecord::Base
     attributes['achivementpoints']  = (xml%'characterInfo'%'character')[:points]
     
     (xml%'professions'/:skill).each_with_index do |skill,i|
-		  attributes["profession#{i+1}"] = Character::Profession.new(skill)
+		  attributes["profession#{i+1}"] = Arsenal::Profession.new(skill)
 		end
 		
 		unless (xml%'talentSpecs').nil?
       (xml%'talentSpecs'/:talentSpec).each_with_index do |talentSpec,i|
-        attributes["talentspec#{i+1}"] = Character::TalentSpec.new(talentSpec)
+        attributes["talentspec#{i+1}"] = Arsenal::TalentSpec.new(talentSpec)
       end
     end
     
     items = Array.new
     (xml%'items'/:item).each do |item|
-			items << Character::Item.new(item)
+			items << Arsenal::Item.new(item)
 		end
 		attributes["items"] = items unless items.empty?
     

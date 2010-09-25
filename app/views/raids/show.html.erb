@@ -38,8 +38,8 @@
 		</ul>
 	<% end %></div></td>
 	<td colspan="2"><div style="float:left;"><%= link_to_function(image_tag("icons/add.png"), visual_effect(:toggle_slide, :invite_form, :duration => 0.5))%></div><div id="invite_form" style="display:none;">
-			<% form_for(@raid) do |f| %>
-				<%= text_field_with_auto_complete :raid, :invited_guild, {}, { :url => formatted_guilds_path(:js), :method => :get, :param_name => 'search' }  %>
+			<%= form_for(@raid) do |f| %>
+				<%= text_field_with_auto_complete :raid, :invited_guild, {}, { :url => guilds_path(:format => :js), :method => :get, :param_name => 'search' }  %>
 				<%= f.submit 'Invite' %>
 			<% end %>
 	</div></td>
@@ -100,7 +100,7 @@
 	<tbody>
 	  <tr valign="top" class="header">
 		<th></th>
-	    <th colspan="6"><%=h configatron.raidplanner.status.index(i).to_s.sub("_"," ") %></th>
+	    <th colspan="6"><%=h configatron.raidplanner.status.key(i).to_s.sub("_"," ") %></th>
 		<th></th>
 	  </tr>
 	  <% @raid.attendances.find_all_by_status(i).each do |attendance|%>

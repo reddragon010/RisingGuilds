@@ -68,11 +68,11 @@ describe RemoteQuery do
       @char = Character.find(@char.id)
       @char.achivementpoints.should == 1425
       @char.level.should == 77
-      @char.talentspec1.class.should == Character::TalentSpec
-      @char.talentspec2.class.should == Character::TalentSpec
-      @char.items.first.class.should == Character::Item
-      @char.profession1.class.should == Character::Profession
-      @char.profession2.class.should == Character::Profession
+      @char.talentspec1.class.should == Arsenal::TalentSpec
+      @char.talentspec2.class.should == Arsenal::TalentSpec
+      @char.items.first.class.should == Arsenal::Item
+      @char.profession1.class.should == Arsenal::Profession
+      @char.profession2.class.should == Arsenal::Profession
     end
     
     it "should update the ail of a character" do

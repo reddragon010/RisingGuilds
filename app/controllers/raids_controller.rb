@@ -10,11 +10,17 @@ class RaidsController < ApplicationController
   # GET /raids.xml
   def index
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    @raids = Raid.with_permissions_to(:view).order("start") 
+    if @guild.nil?
+      @raids = current_user.guilds.collect{|g| g.raids}.flatten
+    else
+      @raids = @guild.raids
+    end
 
-    @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
-    @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
-    @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
+    unless @raids.empty?
+      @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
+      @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
+      @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
+    end
     
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +34,7 @@ class RaidsController < ApplicationController
     if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id}).all.empty?
       @attendance = Attendance.new(:raid_id => @raid.id)
     else
-      @attendance = @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id})
+      @attendance = @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id}).first
     end 
     @guild = @raid.guild
     respond_to do |format|

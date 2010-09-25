@@ -1,10 +1,10 @@
 en:
   error: "error - please contact the support"
   no_access: "Sorry, you are not allowed to access that page."
-  created: "{{item}} was successfully created."
-  updated: "{{item}} was successfully updated."
-  not_found: "{{item}} not found."
-  updating: '{{item}} will be updated soon'
+  created: "%{item} was successfully created."
+  updated: "%{item} was successfully updated."
+  not_found: "%{item} not found."
+  updating: '%{item} will be updated soon'
   update_in_progress: 'Update is in progress. Please be patient!'
   have_to_be_logged_in: "Sorry but you have to be logged in to access this page"
   
@@ -31,7 +31,7 @@ en:
   users:
     no_guild: "No guild specified!"
     kicked: "User kicked!"
-    not_enought_rights: "you have not enought rights to {{a}} this user"
+    not_enought_rights: "you have not enought rights to %{a} this user"
     promoted: "User promoted!"
     created: "Your account has been created. Please check your e-mail for your account activation instructions!"
     updated: "Account updated!"

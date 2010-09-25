@@ -1,4 +1,5 @@
 When /^fill in some guildinfos$/ do
+  fill_in "guild_name", :with => "Divine"
   fill_in "guild_website", :with => "http://divine.dreamblaze.net"
   fill_in "guild_description", :with => "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla "
 end
@@ -14,4 +15,8 @@ end
 
 Given /^there is a role named "([^\"]*)"$/ do |role_name|
   Factory(:Role, :name => role_name)
+end      
+
+Then /^I should see a (.+) message$/ do |type|
+  page.should have_css("#flash.#{type}")
 end

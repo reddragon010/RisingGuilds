@@ -2,7 +2,7 @@ RisingGuilds::Application.routes.draw do
    root :to =>"pages#show", :id => "home"
    
    # Static Pages Route
-   match 'pages/*id' => 'pages#show'
+   match 'pages/:id' => 'pages#show'
    
    # Authentication Routes
    match '/logout' => 'user_sessions#destroy', :as => :logout
@@ -42,10 +42,10 @@ RisingGuilds::Application.routes.draw do
 
    
    #Guild Join Route
-   match '/guilds/:id/join/:token', :controller => 'guilds', :action => 'join'
+   match '/guilds/:id/join/:token' => 'guilds#join'
    
    #Widget Auth Route
-   match '/widget/:action/:id/:token', :controller => 'widget'
+   match '/widget/:action/:id/:token' => 'widget'
    
    #Default Route
    match ':controller/:id/:action(.:format)'
