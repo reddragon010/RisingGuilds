@@ -7,7 +7,7 @@
 </div>
 
 <div style="position:relative; width:100%">
-	<div id="gravatar"><%= gravatar_for @user %></div>
+	<div id="gravatar"><%= image_tag @user.gravatar_url %></div>
 </div>
 
 <h1><%=h @user.login %></h1>

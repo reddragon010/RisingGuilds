@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
   
+  is_gravtastic!
+  
   has_many :characters
   has_many :assignments
   has_many :roles, :through => :assignments
@@ -34,7 +36,7 @@ class User < ActiveRecord::Base
     self.password = params[:user][:password]
     self.password_confirmation = params[:user][:password_confirmation]
     save
-  end
+  end  
   
   def active?
     self.active
