@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.0.rc'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -39,6 +39,8 @@ gem 'will_paginate', :git => "git://github.com/mislav/will_paginate.git", :branc
 gem 'test-unit'
 gem 'hoe'
 gem 'rubyforge'
+
+gem 'gravtastic'
 
 group :development, :test do
   gem "mocha"
