@@ -1,0 +1,10 @@
+require "autotest/growl"
+require 'autotest/fsevent'
+
+Autotest.add_hook(:initialize) do |at|
+  at.add_exception %r{^\.git}  # ignore Version Control System
+	at.add_mapping(%r%^spec/(integration)/.*rb$%) {|filename, _|
+    filename
+  } 
+  nil
+end
