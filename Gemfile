@@ -51,6 +51,8 @@ group :development, :test do
   gem "ZenTest"
 end
 
+gem 'cover_me', '>= 1.0.0.pre2', :require => false, :group => :test
+
 group :cucumber do
   gem 'capybara'
   gem 'database_cleaner'
