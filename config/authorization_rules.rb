@@ -1,9 +1,11 @@
 authorization do
-  role :admin do
-    has_permission_on [:guilds, :characters, :raids], :to => [:setup, :change, :view]
-    has_permission_on :authorization_rules, :to => [:read]
-    has_permission_on :authorization_usages, :to => [:read]
-  end
+  role :guest do
+    has_permission_on [:home, :guilds, :characters, :events], :to => [:view]
+    has_permission_on :guilds, :to => :join #permission not handled by d-auth
+    has_permission_on :newsentries, :to => :view do
+      if_attribute :public => is { true }
+    end
+  end  
   
   role :user do
     includes :guest
@@ -22,27 +24,25 @@ authorization do
     
   end
   
-  role :guest do
-    has_permission_on [:home, :guilds, :characters, :events], :to => [:view]
-    has_permission_on :guilds, :to => :join #permission not handled by d-auth
-    has_permission_on :newsentries, :to => :view do
-      if_attribute :public => is { true }
+  role :member do
+    #Can attend Raids
+    has_permission_on :attendances, :to => :setup
+    
+    #Can view Raids of the own Guilds
+    has_permission_on :raids, :to => :view, :join_by => :or do
+      if_attribute :guild => { :users => contains{ user } }
+      if_attribute :guilds => { :users => contains{ user } }
     end
-  end
-  
-  role :leader do
-    includes :officer
     
-    has_permission_on :guilds, :to => :destroy
-  end
-  
-  role :officer do
-    includes :raidleader
+    #Can link chars if is a member of the guild
+    has_permission_on :characters, :to => [:link], :join_by => :and  do
+      if_attribute :guild => { :users => contains { user } }
+      if_attribute :user_id => is_not { user.id }
+    end
     
-    #Can administrate Guilds if is a officer or leader
-    has_permission_on :guilds, :to => [:edit, :update, :maintain, :reset_token, :actualize, :verify], :join_by => :or do
-      if_attribute :leaders => contains { user }
-      if_attribute :officers => contains { user }
+    has_permission_on :newsentries, :to => :view, :join_by => :or do
+      if_attribute :public => is { true }
+      if_attribute :guild => { :users => contains{ user } }
     end
   end
   
@@ -83,28 +83,27 @@ authorization do
     end
   end
   
-  role :member do
-    #Can attend Raids
-    has_permission_on :attendances, :to => :setup
+  role :officer do
+    includes :raidleader
     
-    #Can view Raids of the own Guilds
-    has_permission_on :raids, :to => :view, :join_by => :or do
-      if_attribute :guild => { :users => contains{ user } }
-      if_attribute :guilds => { :users => contains{ user } }
-    end
-    
-    #Can link chars if is a member of the guild
-    has_permission_on :characters, :to => [:link], :join_by => :and  do
-      if_attribute :guild => { :users => contains { user } }
-      if_attribute :user_id => is_not { user.id }
-    end
-    
-    has_permission_on :newsentries, :to => :view, :join_by => :or do
-      if_attribute :public => is { true }
-      if_attribute :guild => { :users => contains{ user } }
+    #Can administrate Guilds if is a officer or leader
+    has_permission_on :guilds, :to => [:edit, :update, :maintain, :reset_token, :actualize, :verify], :join_by => :or do
+      if_attribute :leaders => contains { user }
+      if_attribute :officers => contains { user }
     end
   end
   
+  role :leader do
+    includes :officer
+    
+    has_permission_on :guilds, :to => :destroy
+  end
+  
+  role :admin do
+    has_permission_on [:guilds, :characters, :raids], :to => [:setup, :change, :view]
+    has_permission_on :authorization_rules, :to => [:read]
+    has_permission_on :authorization_usages, :to => [:read]
+  end
 end
 
 privileges do
