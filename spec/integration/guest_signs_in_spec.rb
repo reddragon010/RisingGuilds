@@ -27,6 +27,12 @@ describe 'as a guest on the sign in page' do
     it 'knows who I am' do
       page.should have_content("You are logged in as #{user.login.capitalize}")
     end
+    
+    it 'can acces the account page' do
+      click "#{user.login.capitalize}" 
+      page.status_code.should == 200 
+      current_path.should == account_path
+    end
 
   end
 

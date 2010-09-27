@@ -17,11 +17,11 @@ Factory.define :Character do |f|
 end
 
 Factory.define :Guild do |f|
-  f.sequence(:name){|n| "BoonHordeNo#{n}"} 
+  f.sequence(:name){|n| "TestGuild#{n}"} 
   f.rating 1
   f.realm "PvE-Realm"
-  f.website("http://hordeofboons.com")
-  f.description("The HordeOfBoons Guild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")
+  f.website("http://testguild.com")
+  f.description("The TestGuild is a horde of boons. Each member is a boon and nothing more then that. Boons are little, sick beings with no life or future! ...")
   f.verified true
 end
 

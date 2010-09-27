@@ -9,7 +9,7 @@ describe Character do
   end
   
   it "should can be linked to a guild" do
-    @guild = Factory.create(:Guild)
+    @guild = Guild.first || Factory.create(:Guild)
     @character = Factory.create(:Character)
     @character.guild = @guild
     @character.guild.name.should == @guild.name
