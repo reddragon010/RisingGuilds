@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/mislav/will_paginate.git
-  revision: 36159385c8a5837fc63fe901ebe0a88205b5ce8d
-  branch: rails3
-  specs:
-    will_paginate (3.0.pre2)
-
-GIT
   remote: http://github.com/odorcicd/authlogic.git
   revision: a087ad0cba3c165ba22fcf176c28b6f7517931e8
   branch: rails3
@@ -158,6 +151,7 @@ GEM
       polyglot (>= 0.3.1)
     trollop (1.16.2)
     tzinfo (0.3.23)
+    will_paginate (3.0.pre2)
     yamler (0.1.0)
 
 PLATFORMS
@@ -188,4 +182,4 @@ DEPENDENCIES
   spork
   sqlite3-ruby
   test-unit
-  will_paginate!
+  will_paginate (~> 3.0.pre2)
