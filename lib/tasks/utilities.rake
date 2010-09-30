@@ -1,4 +1,3 @@
-=begin
 namespace :queryqueue do
   desc "execute the queryqueue"
   task :run => :environment do
@@ -85,39 +84,35 @@ namespace :onlinestatus do
   end
   
   def get_html(url)
-    return open(url).read unless url.include?("http://")
-    
+    return open(url).read if !url.include?("http://")
+
     req = Net::HTTP::Get.new(url)
-		req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
-		
-		uri = URI.parse(url)
-		
-		http = Net::HTTP.new(uri.host, uri.port)
-	  
-		begin
-		  http.start do
-		    res = http.request req
-				# response = res.body
-				
-				tries = 0
-				response = case res
-					when Net::HTTPSuccess, Net::HTTPRedirection
-						res.body
-					else
-						tries += 1
-						if tries > 10
-							raise 'Timed out'
-						else
-							retry
-						end
-					end
-		  end
-		rescue
-			raise 'Specified server at ' + url + ' does not exist.'
-		end
+  	req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
+
+  	uri = URI.parse(url)
+
+  	http = Net::HTTP.new(uri.host, uri.port)
+
+    tries = 10 
+  	begin
+  	  http.start do
+  	    res = http.request req
+  			# response = res.body
+
+  			case res
+  				when Net::HTTPSuccess, Net::HTTPRedirection
+  					res.body
+  				else
+  					tries -= 1
+  			end
+  	  end
+  	rescue
+  	  retry if tries > 0
+  		raise 'Specified server at ' + url + ' does not exist or timed out.'
+  	end
   end
 end
-
+=begin 
 namespace :serial do
   desc "generate a valid serial"
   task :generate => :environment do
