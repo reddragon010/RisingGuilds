@@ -39,13 +39,11 @@
 	<%= image_tag("/images/icons/raid/nil.png", :size => "65x65", :id => "raidiconimg") %>
 	<%= select(:raid, :icon, @raid_icons, {:prompt => "select an icon"}) %>
 	<script type="text/javascript" charset="utf-8">
-	var img = $("raidiconimg")
-	Event.observe($("raid_icon"),'change',function(){
-		var select = $F("raid_icon")
-		if(select != ""){
-		  img.writeAttribute("src","/images/icons/raid/" + select);
+	$("#raid_icon").live('change',function(){
+		if($("#raid_icon").val() != ""){
+		  $("#raidiconimg").attr("src","/images/icons/raid/" + $("#raid_icon").val());
 		} else {
-		  img.writeAttribute("src","/images/icons/raid/nil.png");	
+		  $("#raidiconimg").attr("src","/images/icons/raid/nil.png");	
 		}
 		}); 
 	</script>
