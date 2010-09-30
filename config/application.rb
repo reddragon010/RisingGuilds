@@ -54,5 +54,7 @@ module RisingGuilds
 
     config.action_view.sanitized_allowed_tags = 'table', 'tr', 'td', 'a', 'b', 'span', 'h1', 'h2', 'h3'
     
+    # jquery-ujs 
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails application)
   end
 end

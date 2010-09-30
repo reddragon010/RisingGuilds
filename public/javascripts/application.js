@@ -1,6 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-
+/*
 Event.observe(window,"load",function() {
        $$("*").findAll(function(node){
          return node.getAttribute('title');
@@ -33,31 +33,17 @@ document.observe("dom:loaded", function() {
     })
   }
 })
+*/
 
-function updateCDTime(end) {
-	now      = new Date();
-	diff = end - now;
+$(function() {
+  $(".pagination .ajax a").live("click", function() {
+    $(".pagination .ajax").html("Page is loading...");
+    $.get(this.href, null, null, "script");
+    return false;
+  });
+});
 
-	days  = Math.floor( diff / (1000*60*60*24) );
-	hours = Math.floor( diff / (1000*60*60) );
-	mins  = Math.floor( diff / (1000*60) );
-	secs  = Math.floor( diff / 1000 );
-
-	dd = days;
-	hh = hours - days  * 24;
-	mm = mins  - hours * 60;
-	ss = secs  - mins  * 60;
-
-	document.getElementById("countdown_time")
-        .innerHTML =
-            dd + ' days ' +
-            hh + ' hours ' +
-            mm + ' minutes ' +
-            ss + ' seconds' ;
-}
-
-document.on("click", "a[data-popup]", function(event, element) { 
-     if (event.stopped) return; 
-     window.open($(element).href); 
-     event.stop(); 
-   });
+$('a[data-popup]').live('click', function(e) {
+      window.open($(this).attr('href'));
+			return false;
+   }); 
