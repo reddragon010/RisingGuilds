@@ -25,7 +25,7 @@ class GuildsController < ApplicationController
       @guilds = current_user.assignments.collect{|a| a.guild }.uniq
     end
     @online_characters = @guild.characters.where(:online => true).order("rank") unless @guild.nil?
-    @events = @guild.events.paginate(:page => params[:page], :order => 'created_at DESC')
+    @events = @guild.events.paginate(:per_page => 10, :page => params[:page], :order => 'created_at DESC')
     if @guild.users.include?(current_user)
       @newsentries = Newsentry.order("sticky DESC, updated_at DESC").limit(10)
     else
@@ -34,13 +34,7 @@ class GuildsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
-      format.js do    
-        unless params[:page].nil?      
-          render :update do |page|
-            page.replace 'events', :partial => 'events'
-          end
-        end
-      end
+      format.js
     end
   end
 

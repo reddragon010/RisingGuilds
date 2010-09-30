@@ -1,10 +1,16 @@
 class EventsController < ApplicationController
   filter_resource_access
+  
+  layout :choose_layout
+  
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.all
-
+    @events = Event
+    @events.where(:guild_id => params[:guild_id]) unless params[:guild_id].nil?
+    @events.where(:character_id => params[:character_id]) unless params[:character_id].nil?
+    @events.order("created_at DESC")
+    @events = @events.paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
@@ -76,6 +82,14 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(events_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  def choose_layout
+    unless params[:guild_id].nil?
+      return 'guild_tabs'
+    else
+      return 'application'
     end
   end
 end
