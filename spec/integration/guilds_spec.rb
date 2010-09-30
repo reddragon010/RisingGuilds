@@ -18,7 +18,7 @@ describe GuildsController do
   end
   
   before(:each) do
-    @guild = Guild.first || Factory(:Guild).build 
+    @guild = Guild.first || Factory(:Guild) 
     visit root_path 
   end
   
@@ -68,15 +68,12 @@ describe GuildsController do
     end
     
     it "should be able to join a guild with a valid token" do
-      visit new_guild_path
-      current_path.should == new_guild_path
       visit "guilds/#{@guild.id}/join/#{@guild.token}"
       @guild.members.include?(@user.login).should be_true
       page.should have_css(".notice")
     end
     
     it "shouldn't be able to join a guild with a invalid token" do
-      login
       visit "guilds/#{@guild.id}/join/#{@guild.token+"invalid"}"
       @guild.members.include?(@user.login).should be_false
       page.should have_css(".error")
@@ -102,9 +99,9 @@ describe GuildsController do
     end
     
     it "should be able to sync the guild" do
-      #visit "guilds/#{@guild.id}/actualize"
-      #page.should have_css(".notice")
-      #Guild.first.remoteQueries.count.should == 1
+      visit "guilds/#{@guild.id}/actualize"
+      page.should have_css(".notice")
+      Guild.first.remoteQueries.count.should == 1
     end
     
     it "should be able to edit the guild" do
