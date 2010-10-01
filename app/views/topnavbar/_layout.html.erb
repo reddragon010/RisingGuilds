@@ -1,0 +1,19 @@
+<div id="topnavbar">
+	<ul>
+		<% items.each do |item| %>
+		<%= render(:partial => "topnavbar/item", :locals => {:item => item}) %>
+		<% end %>
+		<% if logged_in?%>
+		<li class="topnavbar-action">
+			<a href="<%= account_path %>"><%= current_user.login %></a>
+		</li>
+		<% end %>
+		<li class="topnavbar-action">
+			<% if logged_in?%>
+			<a href="<%= logout_path %>">Logout</a>
+			<% else %>
+			<a href="<%= login_path %>">Login / SignUp</a>
+			<% end %>
+		</li>
+	</ul>
+</div>

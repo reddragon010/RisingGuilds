@@ -1,0 +1,10 @@
+<li <% if item[1].class == Hash %>class="expandable"<% end %>>
+	<a  <% if item[1].class == String %>href="<%= item[1] %>"<% end %>><%= item[0].to_s %></a>
+	<% if item[1].class == Hash %>
+	<ul style="left: -999em; display: none;">
+	<% item[1].each do |subitem| %>	
+		<%= render :partial => "topnavbar/item", :locals => {:item => subitem} %>
+	<% end %>
+	</ul>
+	<% end %>
+</li>

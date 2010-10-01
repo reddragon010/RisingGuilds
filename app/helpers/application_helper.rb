@@ -112,4 +112,9 @@ module ApplicationHelper
     content = capture(&block)
     concat render(:partial => "shared/tooltip", :locals => {:id => id, :style => style, :text => content})
   end
+  
+  #tnb helper
+  def topnavbar(items={})
+    render(:partial => "topnavbar/layout", :locals => {:items => items})
+  end
 end

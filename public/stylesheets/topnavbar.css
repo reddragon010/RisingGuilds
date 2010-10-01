@@ -1,0 +1,179 @@
+#topnavbar {
+position: absolute;
+top: 0px;
+left: 0px;
+font-size: 9px;
+font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+background: url(/images/topnavbar/bkg.png) bottom left repeat-x #101010;
+width: 100%;
+text-align: left;
+}
+#topnavbar li.topnavbar-icon a {
+padding: 1px 8px 4px;
+}
+#topnavbar li.topnavbar-icon ul a {
+padding: 4px 8px;
+}
+#topnavbar li.topnavbar-icon img {
+vertical-align: bottom;
+}
+#topnavbar li.topnavbar-users img {
+margin-top: 1px;
+}
+#topnavbar li.topnavbar-action {
+float: right;
+}
+#topnavbar li.topnavbar-action a {
+border-left: 1px solid #323232;
+border-right: none;
+}
+body.topnavbar {
+margin-top: 20px !important;
+}
+
+/* all lists */
+#topnavbar, #topnavbar ul {
+padding: 0;
+margin: 0;
+list-style: none;
+line-height: 1.4em;
+z-index: 999;
+}
+#topnavbar ul {
+position: static;
+}
+#topnavbar ul a {
+display: block;
+border-right: 1px solid #323232;
+border-bottom: none;
+padding: 4px 8px;
+font-weight: normal;
+color: #eee;
+text-decoration: none;
+text-align: left;
+}
+#topnavbar ul li.topnavbar-tab a {
+border-right: 1px solid #52565e;
+}
+#topnavbar li li a {
+border-right: none;
+border-top: 1px solid #323232;
+}
+
+/* all list items */
+/* width needed or else Opera goes nuts */
+#topnavbar li {
+float: left;
+height: 100%;
+margin: 0 !important;
+padding: 0;
+list-style-image: none;
+list-style-type: none;
+background-image: none;
+}
+#topnavbar li.topnavbar-tab {
+padding-bottom: 1px;
+background: url(/images/topnavbar/bkg_tab.png) repeat-x left bottom;
+}
+#topnavbar li li {
+width: 160px;
+background: #202020;
+filter: Alpha(opacity=88);
+opacity: 0.88;
+}
+
+/* second-level lists */
+/* Note: Use left instead of display to hide publicly visible menus because display: none isn't read by screen readers */
+#topnavbar li ul {
+position: absolute;
+background: none;
+margin: 0;
+width: 160px;
+left: -999em;
+display: none;
+line-height: 1.2em;
+}
+
+/* third-and-above-level lists */
+#topnavbar li li.expandable ul {
+margin: -20px 0 0 160px;
+}
+
+#topnavbar li:hover ul ul,
+#topnavbar li:hover ul ul ul,
+#topnavbar li:hover ul ul ul ul,
+#topnavbar li:hover ul ul ul ul ul,
+#topnavbar li.iehover ul ul,
+#topnavbar li.iehover ul ul ul,
+#topnavbar li.iehover ul ul ul ul,
+#topnavbar li.iehover ul ul ul ul ul {
+left: -999em;
+display: none;
+}
+
+/* lists nested under hovered list items */
+#topnavbar li:hover ul,
+#topnavbar li li:hover ul,
+#topnavbar li li li:hover ul,
+#topnavbar li li li li:hover ul,
+#topnavbar li li li li li:hover ul,
+#topnavbar li.iehover ul,
+#topnavbar li li.iehover ul,
+#topnavbar li li li.iehover ul,
+#topnavbar li li li li.iehover ul,
+#topnavbar li li li li li.iehover ul {
+left: auto;
+display: block;
+}
+#topnavbar li.topnavbar-action:hover ul {
+right: 0;
+}
+
+/* second-and-more-level hovering */
+#topnavbar li li.expandable {
+background: #45454a url(/images/topnavbar/arrow.png) no-repeat 145px 7px;
+}
+#topnavbar li li:hover,
+#topnavbar li li.iehover {
+background-color: #111;
+}
+#topnavbar li li:hover a,
+#topnavbar li li:hover li:hover a,
+#topnavbar li li:hover li:hover li:hover a {
+color: #fff;
+}
+#topnavbar li li.expandable:hover a,
+#topnavbar li li.expandable:hover li.expandable:hover a {
+border-color: #666666;
+color: #eee;
+}
+#topnavbar li li.expandable:hover li a,
+#topnavbar li li.expandable:hover li.expandable:hover li a {
+border-color: #323232;
+}
+#topnavbar li li:hover li a,
+#topnavbar li li.iehover li a,
+#topnavbar li li.iehover li.iehover li a {
+color: #eee;
+}
+#topnavbar li li.iehover a,
+#topnavbar li li.iehover li.iehover a,
+#topnavbar li li.iehover li.iehover li.iehover a {
+color: #fff;
+width: 90%; /* IE */
+}
+
+/* #210615: Mozilla on Mac fix */
+html.js fieldset.collapsible div.fieldset-wrapper {
+overflow: visible;
+}
+
+@media print {
+  #topnavbar {
+display: none;
+}
+  body.topnavbar {
+margin-top: 0 !important;
+}
+
+}
