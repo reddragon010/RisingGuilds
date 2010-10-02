@@ -18,6 +18,7 @@ body {
 	background-image: url(../images/content_bg.gif);
 	vertical-align: middle;
 	border: 2px solid #666;
+	margin-bottom: 5px;
 }
 #fooder {
 }

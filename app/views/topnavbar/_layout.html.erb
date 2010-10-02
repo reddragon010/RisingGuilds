@@ -1,13 +1,38 @@
 <div id="topnavbar">
 	<ul>
-		<% items.each do |item| %>
-		<%= render(:partial => "topnavbar/item", :locals => {:item => item}) %>
-		<% end %>
+		<li><%= link_to 'Home', root_url %></li>
 		<% if logged_in?%>
-		<li class="topnavbar-action">
-			<a href="<%= account_path %>"><%= current_user.login %></a>
+		<li class="expandable">
+			<%= link_to 'Guilds', rating_path %>
+			<ul style="left: -999em; display: none;">
+				<li><%= link_to 'Index', rating_path %></li>
+				<li class="expandable"><%= link_to 'My Guilds', guilds_path %>
+					<ul>
+						<% current_user.guilds.each do |guild| %>
+							<li><%= link_to guild.name, guild_path(guild) %></li>
+						<% end %>
+					</ul>
+				</li>
+				<li><a>Join Guild</a></li>
+				<li><%= link_to 'New Guild', new_guild_path %></li>
+			</ul>
+		</li>
+		<li class="expandable">
+			<a>Characters</a>
+			<ul style="left: -999em; display: none;">
+				<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
+				<li><a>Add Character</a></li>
+			</ul>
+		</li>
+		<li class="expandable">
+			<a>Raids</a>
+			<ul style="left: -999em; display: none;">
+				<li><%= link_to 'My Raids', raids_path %></li>
+				<li><a>New Raid</a></li>
+			</ul>
 		</li>
 		<% end %>
+		<li><%= link_to "Help", :controller => 'pages', :id => 'help' %></li>
 		<li class="topnavbar-action">
 			<% if logged_in?%>
 			<a href="<%= logout_path %>">Logout</a>
@@ -15,5 +40,19 @@
 			<a href="<%= login_path %>">Login / SignUp</a>
 			<% end %>
 		</li>
+		<% if logged_in? %>
+			<li class="topnavbar-action"><%= link_to 'Account', account_path %></li> 
+		  <li class="topnavbar-action"><a><%= t("layouts.logged_in_as") %> <%= current_user.login.capitalize %></a></li>
+		<% end %>
 	</ul>
-</div>
+</div> 
+
+<ul>
+  
+<% unless current_user.nil? %>
+	
+	
+	<li></li>
+	
+<% end %>
+</ul>

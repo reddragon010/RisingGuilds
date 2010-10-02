@@ -114,7 +114,7 @@ module ApplicationHelper
   end
   
   #tnb helper
-  def topnavbar(items={})
-    render(:partial => "topnavbar/layout", :locals => {:items => items})
+  def tnb
+    render(:partial => "topnavbar/layout")
   end
 end

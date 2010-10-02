@@ -10,47 +10,13 @@
 </head>
 
 <body>
-<%
-navitems = {
-	:test1 => "/t1_l1", 
-	:test2 => "/t2_l1",
-	:test3 => {
-		:test4 => "/t4_l2",
-		:test5 => "/t5_l2",
-	}
-}
-%>
-<%= topnavbar(navitems) %>	
+<%= tnb %>	
 
 <div id="container">
   <div id="topbar">
-    <div class="topbar-content">
-			<div style="float:left">
-				<%= link_to "Help", :controller => 'pages', :id => 'help' %>
-			</div>
-			<div style="float:rigth">
-			<% if logged_in? %>
-				<%= t("layouts.logged_in_as") %> <%= link_to h(current_user.login.capitalize), account_path %> | <%= link_to "Logout", logout_path %>
-			<% else %>
-				<%= link_to "Login / SignUp", login_path %>
-			<% end %>
-			</div>
-			
-		</div>
+   
   </div>
-  <div id="tabnav">
-  <ul>
-    <li><%= link_to 'Home', root_url %></li>
-		<li><%= link_to 'Rating', rating_path %></li>
-	<% unless current_user.nil? %>
-		<li><%= link_to 'My Guilds', guilds_path %></li>
-		<li><%= link_to 'My Raids', raids_path %></li>
-		<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
-		<li><%= link_to 'New Guild', new_guild_path %></li>
-	<% end %>
-  </ul>
-  </div>
-  <div class="clear"></div>
+
   <div id="center">
 	<% if content_for?(:guild_header)%>
 	<div id="guild_header"> 
