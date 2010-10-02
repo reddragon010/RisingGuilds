@@ -29,7 +29,7 @@ describe 'as a guest on the sign in page' do
     end
     
     it 'can acces the account page' do
-      click "#{user.login.capitalize}" 
+      click "Account" 
       page.status_code.should == 200 
       current_path.should == account_path
     end

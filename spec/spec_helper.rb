@@ -4,7 +4,7 @@ require 'cover_me'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-
+require "email_spec"
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -26,9 +26,13 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  
+  config.include ControllerMacros
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 end
 
-# In your test_helper.rb
+# capybara hack
 class ActiveRecord::Base
   mattr_accessor :shared_connection
   @@shared_connection = nil
