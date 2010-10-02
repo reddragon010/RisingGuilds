@@ -13,7 +13,7 @@ Feature: Newsentries
 		Then I should see "PublicTestEntry"
 		And I should see "PrivateTestEntry"
 		
-	Scenario: View Newsentries as Member
+	Scenario: View Newsentries as User
 	 	Given I am a registered user
  	  And I am logged in
  	  When I go to the guildpage
