@@ -32,7 +32,7 @@
 			</ul>
 		</li>
 		<% end %>
-		<li><%= link_to "Help", :controller => 'pages', :id => 'help' %></li>
+		<li><%= link_to "Help", '/pages/help' %></li>
 		<li class="topnavbar-action">
 			<% if logged_in?%>
 			<a href="<%= logout_path %>">Logout</a>
