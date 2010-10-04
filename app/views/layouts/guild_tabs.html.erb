@@ -29,7 +29,7 @@
 
 <% content_for :tabs do %>
 <%
-@tabs << link_to("Guild", guild_path(@guild))
+@tabs << link_to("Overview", guild_path(@guild))
 @tabs << link_to("Members", guild_characters_path(@guild))
 if @guild.users.include?(current_user)
 	@tabs << link_to("Raids", guild_raids_path(@guild)) 

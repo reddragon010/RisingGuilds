@@ -7,6 +7,10 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </p>
+	<p>
+		<%= f.label :guild_id %><br />
+		<%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
+	</p>
   <p>
     <%= f.label :max_attendees %><br />
     <%= f.text_field :max_attendees %>
@@ -49,7 +53,6 @@
 	</script>
   </p>
 	<%= f.hidden_field :leader %>
-	<%= f.hidden_field :guild_id %>
   <p>
     <%= f.submit 'Create' %>
   </p>

@@ -7,7 +7,7 @@ body {
 	background-repeat: no-repeat;
 }
 #container {
-	padding: 0px;
+	padding-top: 20px;
 	width: 960px;
 	margin: auto;
 	min-height: 800px;
@@ -18,12 +18,12 @@ body {
 	vertical-align: middle;
 	border: 2px solid #666;
 	margin-bottom: 5px;
-	padding: 2px;
 }
 #fooder {
 }
 #topbar div {
-	padding: 5px 5px 5px 10px;
+	margin: 2px;
+	padding: 2px 10px 2px 10px;
 	background-color: #1C1C1C;
 }
 #guild_header {

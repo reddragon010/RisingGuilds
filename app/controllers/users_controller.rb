@@ -1,9 +1,20 @@
 class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create]
   before_filter :setup_guild_id
+  
+  add_breadcrumb "Home", :root_path
+  
   layout :choose_layout
   
   def index
+    if !@guild.nil?
+      add_breadcrumb @guild.name, guild_path(params[:guild_id])
+      add_breadcrumb "Users", ""
+    else
+      add_breadcrumb "Users", characters_path
+      add_breadcrumb "Index", ""
+    end
+    
     @users = User.all
     
     params[:sort] = 'login' if params[:sort].nil?
@@ -50,6 +61,14 @@ class UsersController < ApplicationController
       @user = @current_user
     else
       @user = User.find(params[:id])
+    end
+    
+    if !@guild.nil?
+      add_breadcrumb @guild.name, guild_path(@guild)
+      add_breadcrumb "Users", guild_users_path(@guild)
+      add_breadcrumb @user.login, guild_user_path(@guild,@user)
+    else
+      add_breadcrumb "Users", characters_path
     end
   end
 

@@ -41,6 +41,7 @@ gem 'hoe'
 gem 'rubyforge'
 
 gem 'gravtastic'
+gem "breadcrumbs_on_rails"
 
 group :development, :test do
   gem "mocha"

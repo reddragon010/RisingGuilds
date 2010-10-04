@@ -21,12 +21,16 @@
   <tbody>
 <% @characters.each do |character| %>
 	  <tr>
-	    
-		<% if @guild.nil?%>
+	  <% if !@guild.nil? %>
+		<td class="left"><%= link_to character.name, guild_character_path(@guild, character) %></td>
+		<% elsif !params[:user_id].nil? %>
+		<td class="left"><%= link_to character.name, user_character_path(params[:user_id], character) %></td>
+		<% else %>
 		<td class="left"><%= link_to character.name, character %></td>
+		<% end %> 
+		<% if @guild.nil?%>
 		<td><%= character.guild.nil? ? "" : link_to(character.guild.name, guild_path(character.guild)) %></td>
 		<% else %>
-		<td class="left"><%= link_to character.name, guild_character_path(character.guild,character) %></td>
 		<td><%=h character.rank %></td>
 		<% end %>
 	  <td><%=h character.level %></td>

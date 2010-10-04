@@ -4,11 +4,20 @@ class RaidsController < ApplicationController
   before_filter :setup_raidicons, :only => [:edit, :new, :create, :update]
   before_filter :setup_guild_id
   
+  add_breadcrumb "Home", :root_url
+  
   layout :choose_layout
   
   # GET /raids
   # GET /raids.xml
   def index
+    if !@guild.nil?
+      add_breadcrumb @guild.name, guild_path(@guild)
+      add_breadcrumb "Raids", ""
+    else
+      add_breadcrumb "Raids", raids_path
+    end
+    
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if @guild.nil?
       @raids = current_user.guilds.collect{|g| g.raids}.flatten
@@ -31,6 +40,15 @@ class RaidsController < ApplicationController
   # GET /raids/1
   # GET /raids/1.xml
   def show
+    if !params[:guild_id].nil?
+      add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
+      add_breadcrumb "Raids", guild_raid_path(@guild)
+      add_breadcrumb @raid.title, guild_raid_path(@raid)
+    else
+      add_breadcrumb "Raids", raids_path
+      add_breadcrumb @raid.title, raid_path(@character)
+    end
+    
     if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id}).all.empty?
       @attendance = Attendance.new(:raid_id => @raid.id)
     else
@@ -46,7 +64,6 @@ class RaidsController < ApplicationController
   # GET /raids/new
   # GET /raids/new.xml
   def new
-    @raid.guild_id = @guild.id
     @raid.leader = current_user.id
   	
     respond_to do |format|
@@ -76,7 +93,6 @@ class RaidsController < ApplicationController
     @raid.end = @raid.start + @raid.duration.to_i.hours
     @raid.invite_start = @raid.start - @raid.invitation_window.to_i.minutes
     @raid.guilds << @raid.guild
-    
     respond_to do |format|
       if @raid.save
         flash[:notice] = t(:created, :item => 'Raid')

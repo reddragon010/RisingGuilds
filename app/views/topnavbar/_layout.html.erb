@@ -3,9 +3,9 @@
 		<li><%= link_to 'Home', root_url %></li>
 		<% if logged_in?%>
 		<li class="expandable">
-			<%= link_to 'Guilds', rating_path %>
+			<%= link_to 'Guilds', guilds_path %>
 			<ul style="left: -999em; display: none;">
-				<li><%= link_to 'Index', rating_path %></li>
+				<li><%= link_to 'Index', guilds_path %></li>
 				<li class="expandable"><%= link_to 'My Guilds', guilds_path %>
 					<ul>
 						<% current_user.guilds.each do |guild| %>
@@ -46,13 +46,3 @@
 		<% end %>
 	</ul>
 </div> 
-
-<ul>
-  
-<% unless current_user.nil? %>
-	
-	
-	<li></li>
-	
-<% end %>
-</ul>

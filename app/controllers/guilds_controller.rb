@@ -1,24 +1,23 @@
 class GuildsController < ApplicationController
   filter_resource_access
   
-  layout "guild_tabs"
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb Proc.new { |c| c.params[:id].nil? ? "Guilds" : Guild.find(c.params[:id]).name }, Proc.new { |c| c.params[:id].nil? ? "/guilds" : "/guilds/#{c.params[:id]}" }
+  
+  layout :choose_layout
   
   # GET /guilds
   # GET /guilds.xml
   def index
-    if !params[:search].nil?
-      @guilds = Guild.where('name LIKE ?',"#{params[:search]}%")
-    elsif current_user.nil? || current_user.assignments.empty?
-      flash[:error] = t('guilds.not_assigned')
-      redirect_to_target_or_default(root_path)
-    else
-      redirect_to guild_path(current_user.assignments.first.guild)
-    end
+    add_breadcrumb "Index", guilds_path
+    @guilds = Guild.paginate(:per_page => 20, :page => params[:page], :order => 'name')
   end
 
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
+    add_breadcrumb "Overview", guild_path(@guild)
+    
     if current_user.nil? || current_user.assignments.nil?
       @guilds = [Guild.find(params[:id])]
     else
@@ -41,6 +40,7 @@ class GuildsController < ApplicationController
   # GET /guilds/new
   # GET /guilds/new.xml
   def new
+    add_breadcrumb "New", ""
 
     respond_to do |format|
       format.html { render :layout => "application"} # new.html.erb
@@ -50,12 +50,13 @@ class GuildsController < ApplicationController
 
   # GET /guilds/1/edit
   def edit
-   
+    add_breadcrumb "Edit", ""
   end
 
   # POST /guilds
   # POST /guilds.xml
   def create
+    
     respond_to do |format|
       if @guild.save
         @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => 1)
@@ -73,6 +74,7 @@ class GuildsController < ApplicationController
   # PUT /guilds/1
   # PUT /guilds/1.xml
   def update
+    add_breadcrumb "Edit", ""    
 
     respond_to do |format|
       if @guild.update_attributes(params[:guild])
@@ -98,7 +100,7 @@ class GuildsController < ApplicationController
   end
   
   def maintain
-    
+    add_breadcrumb "Maintain", ""
   end
   
   def actualize
@@ -123,6 +125,8 @@ class GuildsController < ApplicationController
   end
   
   def join
+    add_breadcrumb "Join", ""
+    
     @guild = Guild.find(params[:id])
     respond_to do |format|
       if current_user.nil?
@@ -188,6 +192,16 @@ class GuildsController < ApplicationController
         flash[:error] = t('guilds.no_arsenal_connection')
         format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
       end
+    end
+  end
+  
+  protected
+  
+  def choose_layout
+    unless params[:id].nil?
+      return 'guild_tabs'
+    else
+      return 'application'
     end
   end
   

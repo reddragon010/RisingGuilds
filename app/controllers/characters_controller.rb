@@ -1,11 +1,24 @@
 class CharactersController < ApplicationController
   filter_resource_access
   
+  add_breadcrumb "Home", :root_path
+  
   layout :choose_layout
   
   # GET /characters
   # GET /characters.xml
   def index
+    if !params[:guild_id].nil?
+      add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
+      add_breadcrumb "Members", ""
+    elsif !params[:user_id].nil?
+      add_breadcrumb "Account", account_path
+      add_breadcrumb "My Characters", ""
+    else
+      add_breadcrumb "Characters", characters_path
+      add_breadcrumb "Index", ""
+    end
+    
     params[:sort] = 'guild_id, rank' if params[:sort].nil?
     
     @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
@@ -15,7 +28,7 @@ class CharactersController < ApplicationController
     conditions.merge!(params)
     conditions.delete_if {|key,value| !filter_keys.include? key}
     
-    if conditions.empty? then
+    if conditions.empty?
       @characters = Character.order(params[:sort])
     else
       @characters = Character.where(conditions).order(params[:sort])
@@ -36,6 +49,19 @@ class CharactersController < ApplicationController
   # GET /characters/1
   # GET /characters/1.xml
   def show
+    if !params[:guild_id].nil?
+      add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
+      add_breadcrumb "Members", guild_character_path(params[:guild_id])
+      add_breadcrumb @character.name, guild_character_path(@character)
+    elsif !params[:user_id].nil?
+      add_breadcrumb "Account", account_path
+      add_breadcrumb "My Characters", user_characters_path(params[:user_id])
+      add_breadcrumb @character.name, user_character_path(params[:user_id],@character)
+    else
+      add_breadcrumb "Characters", characters_path
+      add_breadcrumb @character.name, character_path(@character)
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @character }
