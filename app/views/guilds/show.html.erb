@@ -16,14 +16,24 @@
 	  <%= sanitize @guild.description %>
 </div>
 
+<script>
+	$(function() {
+		$( "#news_entries" ).accordion({
+			autoHeight: false,
+			navigation: true
+		});
+	});
+</script>
 <div class="box_big">
 	<div class="box_headline"><%= t('guilds.news')%></div>
 	<div class="box_menu"><%= link_to "new", new_guild_newsentry_path(@guild) if permitted_to?(:new, :newsentries) %></div>
+	<div id="news_entries">
 	<% unless @newsentries.empty? %>
 		<%= render :partial => "shared/newsentry", :collection => @newsentries, :locals => {:guild => @guild} %>
 	<% else %>
 		<span><%=t(".no_news")%></span>
-	<% end %>	
+	<% end %>
+	</div>	
 </div>
 
 <div class="clear"></div>
