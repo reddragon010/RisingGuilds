@@ -1,0 +1,17 @@
+<% if @guild.users.include?(current_user) %>
+<p>You have already joined this Guild</p>
+<% else %>
+<p>You need a token to join this Guild.</p>
+<p>Please <% unless @guild.website.empty? %> visit <%= link_to @guild.website %> for more informations or <% end %> contact following players InGame (<%=  @guild.realm %>):</p>
+<ul>
+<% @guild.managers.map{|u| u.characters }.flatten.each do |char| %>
+	<li><%= char.name %></li>
+<% end %>
+</ul>
+
+<p>If you already got a token please enter it here:</p>
+<%= form_for :guild, :url => guild_path(@guild) + "/join" do |f| %>
+	<%= f.text_field :token, :value => '' %>
+	<%= f.submit 'Submit' %>
+<% end %>
+<% end %>

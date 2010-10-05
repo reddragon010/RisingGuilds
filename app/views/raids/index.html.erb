@@ -1,7 +1,7 @@
 <div id="content_menu">
 	<ul>
-		<% if !@guild.nil? && permitted_to?(:create, :raids) %>
-		<li><%= link_to 'New raid', new_guild_raid_path(@guild) %></li>
+		<% if permitted_to?(:create, :raids) %>
+		<li><%= link_to 'New raid', new_raid_path %></li>
 		<% end %>
 	</ul>
 </div>

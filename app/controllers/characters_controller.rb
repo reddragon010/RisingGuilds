@@ -146,7 +146,7 @@ class CharactersController < ApplicationController
     #error if char is not marked
     elsif @character.user.nil?
       flash[:error] = t('characters.not_linked')
-      redirect_to(guild_character_path(@character.guild,@character))
+      redirect_to(user_path(current_user) + "/characters")
     else
       @guild = @character.guild
       @user = @character.user
@@ -156,7 +156,7 @@ class CharactersController < ApplicationController
       #cleanup guild permissions
       @guild.reload
       flash[:notice] = t('characters.delinked')
-      redirect_to(guild_character_path(@character.guild,@character))
+      redirect_to(user_path(current_user) + "/characters")
     end
   end
   

@@ -13,7 +13,6 @@
 						<% end %>
 					</ul>
 				</li>
-				<li><a>Join Guild</a></li>
 				<li><%= link_to 'New Guild', new_guild_path %></li>
 			</ul>
 		</li>
@@ -21,14 +20,14 @@
 			<a>Characters</a>
 			<ul style="left: -999em; display: none;">
 				<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
-				<li><a>Add Character</a></li>
+				<li><%= link_to 'Add Character', user_path(current_user) + "/add_character", {:class => 'popup',:title => 'Add Character'}%></li>
 			</ul>
 		</li>
 		<li class="expandable">
 			<a>Raids</a>
 			<ul style="left: -999em; display: none;">
 				<li><%= link_to 'My Raids', raids_path %></li>
-				<li><a>New Raid</a></li>
+				<li><%= link_to 'New Raid', new_raid_path if permitted_to? :new, :raids %></li>
 			</ul>
 		</li>
 		<% end %>

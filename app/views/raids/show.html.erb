@@ -37,10 +37,12 @@
 			<li><%= link_to(g.name, guild_path(g))  %> <%= link_to(image_tag("icons/kick.png", :size => "10x10"), :controller => 'raids', :action => 'uninvite_guild', :id => @raid.id, :uninvited_guild => g.id) if permitted_to?(:uninvite_guild, @raid) && g != @raid.guild %></li>
 		</ul>
 	<% end %></div></td>
-	<td colspan="2"><div style="float:left;"><%= link_to_function(image_tag("icons/add.png"), visual_effect(:toggle_slide, :invite_form, :duration => 0.5))%></div><div id="invite_form" style="display:none;">
+	<td colspan="2">
+			<% if permitted_to? :edit %>
 			<%= form_for(@raid) do |f| %>
-				<%= text_field_with_auto_complete :raid, :invited_guild, {}, { :url => guilds_path(:format => :js), :method => :get, :param_name => 'search' }  %>
+				<%= f.text_field :invited_guild %>
 				<%= f.submit 'Invite' %>
+			<% end %>
 			<% end %>
 	</div></td>
     </tr>
@@ -130,3 +132,11 @@
 <% else%>
 <h2>please connect a character to your account</h2>
 <% end %>
+<script>
+$(function() {
+	$( "#raid_invited_guild" ).autocomplete({
+		source: "/guilds.json",
+		minLength: 2,
+	});
+});
+</script>

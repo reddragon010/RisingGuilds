@@ -110,7 +110,7 @@ module ApplicationHelper
   #tooltip helper
   def tooltip(id,style=nil,&block)
     content = capture(&block)
-    concat render(:partial => "shared/tooltip", :locals => {:id => id, :style => style, :text => content})
+    concat render(:partial => "shared/tooltip", :locals => {:id => id, :style => style, :text => content, :remote => true})
   end
   
   #tnb helper

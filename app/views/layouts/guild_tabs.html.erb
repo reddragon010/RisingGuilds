@@ -33,7 +33,9 @@
 @tabs << link_to("Members", guild_characters_path(@guild))
 if @guild.users.include?(current_user)
 	@tabs << link_to("Raids", guild_raids_path(@guild)) 
-	@tabs << link_to("Users", guild_users_path(@guild)) 
+	@tabs << link_to("Users", guild_users_path(@guild))
+else
+	@tabs << link_to("Join", guild_path(@guild) + "/join") 
 end
 
 if permitted_to? :maintain, @guild

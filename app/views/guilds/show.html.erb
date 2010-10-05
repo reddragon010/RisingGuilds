@@ -27,13 +27,13 @@
 <div class="box_big">
 	<div class="box_headline"><%= t('guilds.news')%></div>
 	<div class="box_menu"><%= link_to "new", new_guild_newsentry_path(@guild) if permitted_to?(:new, :newsentries) %></div>
-	<div id="news_entries">
 	<% unless @newsentries.empty? %>
+	<div id="news_entries">
 		<%= render :partial => "shared/newsentry", :collection => @newsentries, :locals => {:guild => @guild} %>
+	</div>
 	<% else %>
-		<span><%=t(".no_news")%></span>
-	<% end %>
-	</div>	
+		<%=t(".no_news")%>
+	<% end %>	
 </div>
 
 <div class="clear"></div>

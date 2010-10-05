@@ -15,7 +15,7 @@
 <div id="container">
   
 	<div id="topbar">
-		 <div><%= render_breadcrumbs.empty? ? link_to("Home",root_url) + " / Nirvana" : raw(render_breadcrumbs) %></div>
+		 <div><%= render_breadcrumbs.empty? ? link_to("Home",root_url) : raw(render_breadcrumbs) %></div>
 	</div>
 
   <div id="center">
@@ -65,6 +65,7 @@
 <div id="tooltips">
 	<%= yield(:tooltip) %>
 </div>
+<div id="formContainer"></div>
 
 <script type="text/javascript">
   var uservoiceOptions = {

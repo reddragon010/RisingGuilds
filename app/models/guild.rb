@@ -65,6 +65,10 @@ class Guild < ActiveRecord::Base
     @members
   end
   
+  def managers
+    self.officers + self.leaders
+  end
+  
   def reset_token
     self.token = ActiveSupport::SecureRandom::hex(8)
     self.save

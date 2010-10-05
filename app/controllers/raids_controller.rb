@@ -64,6 +64,9 @@ class RaidsController < ApplicationController
   # GET /raids/new
   # GET /raids/new.xml
   def new
+    add_breadcrumb "Raids", raids_path
+    add_breadcrumb "New", new_raid_path
+    
     @raid.leader = current_user.id
   	
     respond_to do |format|
@@ -74,6 +77,17 @@ class RaidsController < ApplicationController
 
   # GET /raids/1/edit
   def edit
+    if !@guild.nil?
+      add_breadcrumb @guild.name, guild_path(@guild)
+      add_breadcrumb "Raids", guild_raid_path(@guild)
+      add_breadcrumb @raid.title, guild_raid_path(@guild,@raid)
+      add_breadcrumb "Edit", edit_guild_raid_path(@guild,@raid)
+    else
+      add_breadcrumb "Raids", raids_path
+      add_breadcrumb @raid.title, raid_path(@raid)
+      add_breadcrumb "Edit", edit_raid_path(@raid)
+    end
+    
     if @raid.closed?
       flash[:error] = t('raids.closed')
       redirect_to guild_raids_path(@raid.guild)

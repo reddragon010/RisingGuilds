@@ -147,6 +147,25 @@ class UsersController < ApplicationController
     redirect_to guild_users_path(@guild)
   end
   
+  def add_character
+    unless params[:character].nil?
+      @character = Character.where(:name => params[:character][:name], :guild_id => current_user.guilds.map{|g| g.id}).first
+      if @character.nil?
+        message = t(:not_found,:item => 'Character')
+        render :text => message, :status => :error
+      elsif @character.user.nil?
+        message = t('characters.linked') if @character.update_attribute(:user_id, current_user.id)
+        render :text => message
+      else
+        message = t('characters.already_linked')
+        render :text => message, :status => :error
+      end
+    else
+      render
+    end
+    
+  end
+  
   private
   def choose_layout
     unless params[:guild_id].nil?

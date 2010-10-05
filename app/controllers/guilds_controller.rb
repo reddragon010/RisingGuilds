@@ -11,6 +11,10 @@ class GuildsController < ApplicationController
   def index
     add_breadcrumb "Index", guilds_path
     @guilds = Guild.paginate(:per_page => 20, :page => params[:page], :order => 'name')
+    respond_to do |format|
+      format.html
+      format.json {render :json => Guild.all.map{|g| g.name}.to_json}
+    end
   end
 
   # GET /guilds/1
@@ -126,40 +130,45 @@ class GuildsController < ApplicationController
   
   def join
     add_breadcrumb "Join", ""
-    
+    params[:id] = Guild.where(:name => params[:guild][:name]).first.id unless params[:guild].nil? || params[:guild][:name].nil?
+    params[:token] = params[:guild][:token] unless params[:guild].nil? || params[:guild][:token].nil?
     @guild = Guild.find(params[:id])
     respond_to do |format|
-      if current_user.nil?
-        flash[:error] = t("have_to_be_logged_in")
-        unless params[:token].nil?
-          cookies[:rguilds_jg_token] = params[:token]
-          cookies[:rguilds_jg_gid] = params[:id]
-        end
-        format.html { redirect_to(login_path) }
-      else
-        unless cookies[:rguilds_jg_token].nil? &&  cookies[:rguilds_jg_gid].nil?
-          cookies.delete(:rguilds_jg_token)
-          cookies.delete(:rguilds_jg_gid)
-        end
-        if @guild.verified?
-          if params[:token] == @guild.token
-            unless @guild.users.include?(current_user)
-              @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
-              flash[:notice] = t('guilds.joined')
-              format.html { redirect_to(@guild) }
+      if !params[:token].nil?
+        if current_user.nil?
+          flash[:error] = t("have_to_be_logged_in")
+          unless params[:token].nil?
+            cookies[:rguilds_jg_token] = params[:token]
+            cookies[:rguilds_jg_gid] = params[:id]
+          end
+          format.html { redirect_to(login_path) }
+        else
+          unless cookies[:rguilds_jg_token].nil? &&  cookies[:rguilds_jg_gid].nil?
+            cookies.delete(:rguilds_jg_token)
+            cookies.delete(:rguilds_jg_gid)
+          end
+          if @guild.verified?
+            if params[:token] == @guild.token
+              unless @guild.users.include?(current_user)
+                @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
+                flash[:notice] = t('guilds.joined')
+                format.html { redirect_to(@guild) }
+              else
+                flash[:error] = t('guilds.already_joined')
+                format.html { redirect_to(@guild) }
+              end
             else
-              flash[:error] = t('guilds.already_joined')
+              flash[:error] = t('guilds.invalid_token')
               format.html { redirect_to(@guild) }
             end
           else
-            flash[:error] = t('guilds.invalid_token')
+            flash[:error] = t('guilds.not_verified')
             format.html { redirect_to(@guild) }
           end
-        else
-          flash[:error] = t('guilds.not_verified')
-          format.html { redirect_to(@guild) }
         end
-      end
+      else
+        format.html
+      end 
     end
   end
   

@@ -10,9 +10,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 RACES   = {"human" => 1, "orc" => 2 , "dwarf" => 3, "nightelve" => 4, "undead" => 5, "tauren" => 6, "gnome" => 7,"troll" => 8,"bloodelve" => 10, "draenei" => 11}
 CLASSES = {"warrior" => 1, "paladin" => 2, "hunter" => 3, "rogue" => 4, "priest" => 5, "dk" => 6, "shaman" => 7, "mage" => 8, "warlock" => 9, "druid" => 11} 
-FACTION = {"alliance" => 0, "horde" => 1}
+FACTIONS = {"alliance" => 0, "horde" => 1}
 RAIDTYPES = {"tank" => 1, "damage" => 2, "healer" => 3}
-GENDER  = {"male" => 0, "female" => 1}
+GENDERS  = {"male" => 0, "female" => 1}
 LEVELS = {"10" => 10, "20" => 20, "30" => 30, "40" => 40, "50" => 50, "60" => 60, "70" => 70, "80" => 80}
 
 require 'arsenal'
