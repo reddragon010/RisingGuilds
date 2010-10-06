@@ -40,6 +40,7 @@ class RemoteQuery < ActiveRecord::Base
     xml = get_xml(url) 
     
     faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
+    self.guild.update_attribute(:faction_id,faction) if self.guild.faction_id.nil?
     
     if !(xml%'guildInfo').children.empty?
 			arsenal_chars = Array.new
