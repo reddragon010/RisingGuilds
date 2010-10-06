@@ -7,6 +7,50 @@
 	margin-top: 10px;
 	font-size: 18pt;
 	margin-bottom: 10px;
+}  
+
+.guilddetails {
+	text-align:left;
+	height: 100px;
+	margin-left: 105px;
+}   
+
+/* ---- index --- */
+.guild {
+	height: 100px;
+	margin-bottom:10px;
+	border: 1px solid #999;
+	padding: 10px;
+}
+
+.guild .logo {
+	float:left;
+	margin-right: 10px;
+}
+
+.guild .name {
+	font-size: 14pt;
+	border-bottom: 1px solid #555;
+	margin-left: 110px;
+	margin-bottom: 5px;
+}
+
+.guild .website {
+	float:right;
+}
+
+.guild .description {
+	margin-top:5px;
+	margin-bottom:20px;
+	max-width:100% ;
+	height: auto;
+	overflow: hidden;
+	border: 2px solid #575656;
+	background-color: #bbbaba;
+}
+
+#filter_form {
+	margin-bottom: 20px;
 }
 
 /* --- show --- */
@@ -35,35 +79,6 @@
 	right: 0;
 	margin:5px;
 	font-size: 8pt;
-}
-
-/* ---- index --- */
-.guild {
-	height: 100px;
-	position: relative;
-	margin-bottom:10px;
-}
-
-.guilddetails {
-	text-align:left;
-	height: 100px;
-	margin-left: 105px;
-}
-
-.adminmenu {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-}
-
-.description {
-	margin-top:5px;
-	margin-bottom:20px;
-	max-width:100% ;
-	height: auto;
-	overflow: hidden;
-	border: 2px solid #575656;
-	background-color: #bbbaba;
 }
 
 /* news */

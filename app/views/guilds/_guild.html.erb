@@ -1,0 +1,19 @@
+<% @leader =  guild.leaders.first %>
+<div class="guild">
+	<div class="website"><%= link_to guild.website, guild.website %></div>
+	<div class="logo"><%= link_to image_tag(guild.logo.url, :alt => "guildlogo", :size => "100x100"), guild_path(guild) %></div>
+	<div class="name"><%= link_to h(guild.name), guild_path(guild) %></div>
+	<div class="details">
+		<span style="margin-right:10px">Faction: <%= FACTIONS.index(guild.faction_id) %></span>
+		<span style="margin-right:10px">Realm: <%= guild.realm %></span>
+		<span style="margin-right:10px">Recruting: <%= guild.recruit_open ? "Yes" : "No" %></span>
+		<span style="margin-right:10px">Leader: <%= raw link_to(@leader.login, user_path(@leader), :id => "leader_#{@leader.id}")%></span>
+	</div>
+	<div class="statistics">
+		<span style="margin-right:10px">Members: <%= guild.characters.select{|c| c.online == true}.size %>/<%= guild.characters.count %>  online</span>
+		<span style="margin-right:10px">Growth: <%= guild.growth.nil? ? "n/a" : guild.growth.to_s + "% per month" %></span>
+		<span style="margin-right:10px">AIL: <%= guild.ail.nil? ? "n/a" : guild.ail %></span> 
+	</div>
+	
+	
+</div>
