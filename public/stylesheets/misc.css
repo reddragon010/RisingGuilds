@@ -92,6 +92,7 @@ div.bar-container > div {
 
 /* ---- Tooltips ---- */
 div.tooltip {
+	display:none;
   padding: 5px;
   margin: 5px;
   background-color: #111;
