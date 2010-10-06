@@ -2,15 +2,24 @@ class GuildsController < ApplicationController
   filter_resource_access
   
   add_breadcrumb "Home", :root_path
-  add_breadcrumb Proc.new { |c| c.params[:id].nil? ? "Guilds" : Guild.find(c.params[:id]).name }, Proc.new { |c| c.params[:id].nil? ? "/guilds" : "/guilds/#{c.params[:id]}" }
+  add_breadcrumb "Guilds", :guilds_path
+  add_breadcrumb Proc.new { |c| Guild.find(c.params[:id]).name }, Proc.new { |c| "/guilds/#{c.params[:id]}" }, :if => Proc.new { |c| !c.params[:id].nil? }
   
   layout :choose_layout
   
   # GET /guilds
   # GET /guilds.xml
   def index
-    add_breadcrumb "Index", guilds_path
-    @guilds = Guild.paginate(:per_page => 20, :page => params[:page], :order => 'name')
+    if params[:commit].nil?
+      @guilds = Guild.paginate(:per_page => 20, :page => params[:page], :order => 'name')
+    else
+      @guilds = Guild
+      @guilds = @guilds.where("name LIKE ?", "%#{params[:name]}%") unless params[:name].blank?
+      @guilds = @guilds.where(:realm => params[:realm]) unless params[:realm].blank?
+      @guilds = @guilds.where(:faction_id => params[:faction]) unless params[:faction].blank?
+      @guilds = @guilds.where(:recruit_open => params[:open_recruit]) unless params[:open_recruit].blank?
+      @guilds = @guilds.paginate(:per_page => 10, :page => params[:page], :order => 'name')
+    end
     respond_to do |format|
       format.html
       format.json {render :json => Guild.all.map{|g| g.name}.to_json}

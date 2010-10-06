@@ -9,6 +9,7 @@ class CharactersController < ApplicationController
   # GET /characters.xml
   def index
     if !params[:guild_id].nil?
+      add_breadcrumb "Guilds", :guilds_path
       add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
       add_breadcrumb "Members", ""
     elsif !params[:user_id].nil?
@@ -50,6 +51,7 @@ class CharactersController < ApplicationController
   # GET /characters/1.xml
   def show
     if !params[:guild_id].nil?
+      add_breadcrumb "Guilds", :guilds_path
       add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
       add_breadcrumb "Members", guild_character_path(params[:guild_id])
       add_breadcrumb @character.name, guild_character_path(@character)
