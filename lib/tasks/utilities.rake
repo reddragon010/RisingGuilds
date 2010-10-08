@@ -58,7 +58,7 @@ namespace :onlinestatus do
     #process every character
     Character.all.each do |char|
       #test if char is online
-      newonline = doc[char.realm.to_s].include?(">#{char.name}<")
+      newonline = doc[char.realm.to_s].include?(">#{char.name}<".force_encoding('ASCII-8BIT'))
       attributes = Hash.new
       
       char.online = false if char.online.nil?
