@@ -1,12 +1,3 @@
-<%- content_for :tooltip do 
-	@guild.users.each do |user| 
-		user.characters.each do |character| -%>
-			<%- tooltip("tooltip_#{character.id}") do -%>
-<%= character.name %>
-			<%- end -%>
-		<%- end -%>
-	<%- end -%>
-<%- end -%>
 <table>
 	<thead>
 	<tr>
