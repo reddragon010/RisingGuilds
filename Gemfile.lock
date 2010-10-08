@@ -100,6 +100,7 @@ GEM
     mime-types (1.16)
     mocha (0.9.8)
       rake
+    mysql2 (0.2.4)
     nokogiri (1.4.3.1)
     paperclip (2.3.3)
       activerecord
@@ -136,7 +137,6 @@ GEM
       rspec-expectations (= 2.0.0.beta.22)
     rspec-rails (2.0.0.beta.22)
       rspec (= 2.0.0.beta.22)
-    ruby-mysql (2.9.3)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
     rubyzip (0.9.4)
@@ -178,10 +178,10 @@ DEPENDENCIES
   hpricot
   launchy
   mocha
+  mysql2
   paperclip
   rails (= 3.0.0.rc)
   rspec-rails (>= 2.0.0.beta.19)
-  ruby-mysql
   rubyforge
   spork
   sqlite3-ruby
