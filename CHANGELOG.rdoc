@@ -51,4 +51,21 @@
 * [Fix]				Mainchar indicator to big
 * [Fix]				No raidleader icon
 * [Improved]	Char-views
-* [Improved]	Member-view 
+* [Improved]	Member-view
+
+== 0.6.0 BETA 08-10-2010
+
+* [Feature]		Update to Rails3 (rc) and Ruby 1.9.2
+* [Feature]		Added RSpec2, Capybara and Autotest
+* [Feature]		Switched form Prototyp-UJS to jQeuery-UJS
+* [Feature]		Added a TopNavBar for better Navigation
+* [Feature]		Added Breadcrumbs
+* [Feature]		Added jQuery-UI Library
+* [Feature]		Added new Raidicons (borrowed from EQDKP-Plus)
+* [Feature]		Added a faction-field to guilds
+* [Improved]	Reformatted Authrules for better readability
+* [Improved]	Migrated instegration Tests from Cucumber to RSpec/Cabybara
+* [Improved]	Migrated Mailer to new Format
+* [Improved]	Changed Gravatar-Plugin
+* [Improved]	Packed custom classes into a separate file
+* [Improved]	Major UI/Navigation improvements (modal dialogs, tobnavbar, jquery-ui-widgets) 
