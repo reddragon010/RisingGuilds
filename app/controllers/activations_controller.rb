@@ -2,7 +2,7 @@ class ActivationsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
 
   def new
-    @user = User.where("perishable_token == ?", params[:activation_code]).first
+    @user = User.where(:perishable_token => params[:activation_code]).first
     if @user.nil?
       flash[:notice] = "Wrong token"
       redirect_to root_url
