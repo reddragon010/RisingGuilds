@@ -19,7 +19,7 @@
 	</p>
 	
 	<div class="box_big">
-		<div class="box_headline"><%= f.label t('.recruit_open') %> <%= f.check_box :recruit_open, {:onClick => visual_effect(:toggle_slide, :recruit_form, :duration => 0.5)} %></div>
+		<div class="box_headline"><%= f.label t('.recruit_open') %> <%= f.check_box :recruit_open, {:onClick => '$("#recruit_form").slideToggle("slow")'} %></div>
 		<div id="recruit_form" <% unless @guild.recruit_open %>style="display:none;"<% end %> >
 		<p>
 			<%= f.label t('.recruit_text') %><br />
@@ -47,7 +47,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><%= link_to_function 'all', "$$('#edit_guild_" + @guild.id.to_s + " input.checkclass').each(function(box){box.checked=true});" %></td>
+					<td><%= link_to_function 'all', "$('.checkclass').attr('checked',true);" %></td>
 					<td><%= f.check_box :recruit_dk, :class => 'checkclass' %></td>
 					<td><%= f.check_box :recruit_druid, :class => 'checkclass' %></td>
 					<td><%= f.check_box :recruit_hunter, :class => 'checkclass' %></td>
@@ -75,7 +75,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><%= link_to_function 'all', "$$('#edit_guild_" + @guild.id.to_s + " input.checktype').each(function(box){box.checked=true});" %></td>
+					<td><%= link_to_function 'all', "$('.checktype').attr('checked',true);" %></td>
 					<td><%= f.check_box :recruit_healer, :class => 'checktype' %></td>
 					<td><%= f.check_box :recruit_damage, :class => 'checktype' %></td>
 					<td><%= f.check_box :recruit_tank, :class => 'checktype' %></td>

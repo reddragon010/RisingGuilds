@@ -1,17 +1,3 @@
-<% content_for :tooltip do %>
-	<% CLASSES.each_key do |c|%>
-		<% if @guild.send("recruit_#{c}")%>
-			<%= tooltip("recruit_#{c}") do %><%= t("guilds.edit.recruit_#{c}") %><% end %>
-		<% end %>
-	<% end %>
-	<% RAIDTYPES.each_key do |c|%>
-		<% if @guild.send("recruit_#{c}")%>
-			<% tooltip("recruit_#{c}") do %><%= t("guilds.edit.recruit_#{c}") %><% end %>
-		<% end %>
-	<% end %>
-	<%= tooltip("recruit_level") do %><%= t("guilds.recruit_level", :level => @guild.recruit_level) %><% end %>
-<% end %>
-
 <div id="description">
 	  <%= sanitize @guild.description %>
 </div>
@@ -43,15 +29,15 @@
 	<div class="box_headline"><%= t('guilds.recruitment')%></div>
 	<div>
 		<% CLASSES.each_key do |c|%>
-			<%= get_recruit_icon(@guild,c) %>
+			<a title="<%= t("guilds.edit.recruit_#{c}") %>"><%= get_recruit_icon(@guild,c) %></a>
 		<% end %>
 		<span style="margin-left:25px">
 		<% RAIDTYPES.each_key do |c|%>
-			<%= get_recruit_icon(@guild,c) %>
+			<a title="<%= t("guilds.edit.recruit_#{c}") %>"><%= get_recruit_icon(@guild,c) %></a>
 		<% end %>
 		</span>
 		<span style="margin-left:25px">
-			<%= get_recruit_level_icon(@guild) %>
+			<a title="<%= t("guilds.recruit_level", :level => @guild.recruit_level) %>"><%= get_recruit_level_icon(@guild) %></a>
 		</span>
 	</div>
 	<% unless @guild.recruit_text.nil? || @guild.recruit_text.strip.empty?%>
