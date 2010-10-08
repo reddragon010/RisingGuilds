@@ -5,13 +5,15 @@ class User < ActiveRecord::Base
   
   is_gravtastic!
   
-  has_many :characters
-  has_many :assignments
+  has_many :characters, :dependent => :nullify
+  has_many :assignments, :dependent => :destroy
   has_many :roles, :through => :assignments
   has_many :guilds, :through => :assignments
-  has_many :newsentries
+  has_many :newsentries, :dependent => :nullify
   
   attr_accessible :login, :language, :email, :icq, :jabber, :msn, :skype, :signature, :password, :password_confirmation
+  
+  
   
   # we need to make sure that either a password or openid gets set
   # when the user activates his account
