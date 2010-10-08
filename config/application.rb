@@ -13,7 +13,6 @@ RAIDTYPES = {"tank" => 1, "damage" => 2, "healer" => 3}
 GENDERS  = {"male" => 0, "female" => 1}
 LEVELS = {"10" => 10, "20" => 20, "30" => 30, "40" => 40, "50" => 50, "60" => 60, "70" => 70, "80" => 80}
 
-require 'arsenal'
 
 module RisingGuilds
   class Application < Rails::Application

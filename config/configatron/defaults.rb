@@ -1,6 +1,6 @@
 # Put all your default configatron settings here.
 
-configatron.version = 'v0.4.0 closed-beta'
+configatron.version = 'v0.6.0 beta'
 
 configatron.arsenal.url.base = 'http://arsenal.rising-gods.de/'
 configatron.arsenal.url.realm = 'r='
@@ -17,7 +17,7 @@ configatron.wowarmory.url.item.itemid = 'i='
 
 configatron.onlinelist.url = 'http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server='
 
-#Notifier Config
+#Notifier *Config*
 configatron.notifier.default_url = 'localhost:3000'
 
 #raidplanner
