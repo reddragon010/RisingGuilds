@@ -68,18 +68,11 @@ authorization do
     end
     
     #Can change newsentries
-    has_permission_on :newsentries, :to => :change, :join_by => :or do
+    has_permission_on :newsentries, :to => [:change, :setup], :join_by => :or do
       if_attribute :guild => { :raidleaders => contains { user } }
       if_attribute :guild => { :officers => contains { user } }
       if_attribute :guild => { :leaders => contains { user } }
       if_attribute :user_id => is { user.id }
-    end
-    
-    has_permission_on :newsentries, :to => :new
-    has_permission_on :newsentries, :to => [:create] do
-      if_attribute :guild => { :raidleaders => contains { user } }
-      if_attribute :guild => { :officers => contains { user } }
-      if_attribute :guild => { :leaders => contains { user } }
     end
   end
   

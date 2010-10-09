@@ -27,19 +27,6 @@
 	
 	<div style="position:relative; width:100%">
 	  <%= yield(:tabs) %>
-	  <% unless current_user.nil? || current_user.guilds.empty? %>
-	  <div id="guild_switcher">
-		<% if controller.controller_name == "guilds" && controller.action_name == "show" %>
-		<%= select("id", "name", current_user.guilds.collect {|g| [g.name, g.id] }, 
-			{:selected => params[:id].to_i},  
-			{:onchange => "window.location='/guilds/'+this.value;"} ) %>
-		<% elsif !params[:guild_id].nil? %>
-		<%= select("id", "name", current_user.guilds.collect {|g| [g.name, g.id] }, 
-			{:selected => params[:guild_id].to_i},  
-			{:onchange => "window.location='/guilds/'+this.value+'/#{controller.controller_name}';"} ) %>
-		<% end %>
-	  </div>
-	  <% end %>
 	</div>
 	<div id="popups">
 	  <% if flash[:notice] %>
