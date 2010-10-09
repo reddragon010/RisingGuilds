@@ -115,7 +115,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.promoteable_by?(current_user,@guild)
-      asmt = @guild.assignments.where(:user_id => @user.id)
+      asmt = @guild.assignments.where(:user_id => @user.id).first
       if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
         flash[:notice] = t('users.promoted')
       else
@@ -135,7 +135,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @guild = Guild.find(params[:guild_id])
     if @user.demoteable_by?(current_user,@guild)
-      asmt = @guild.assignments.where(user_id => @user.id)
+      asmt = @guild.assignments.where(:user_id => @user.id).first
       if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
         flash[:notice] = t('users.demoted')
       else
