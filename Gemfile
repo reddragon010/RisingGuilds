@@ -50,6 +50,7 @@ group :development, :test do
   gem "email_spec"
   gem "autotest-rails"
   gem "ZenTest"
+  gem "ruby_parser"
 end
 
 gem 'cover_me', '>= 1.0.0.pre2', :require => false, :group => :test
