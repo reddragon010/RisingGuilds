@@ -190,4 +190,19 @@ describe RemoteQuery do
       @guild.reload
       @character.events.last.content.should == @guild.name
     end
+    
+    #special-signs bug
+    it "shouldn't kick umlaut-chars" do
+      guild = Factory.create(:Guild)
+      guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      guild.remoteQueries.first.execute.should be_true
+      guild.remoteQueries.count.should == 0
+      guild.remoteQueries << Factory.create(:RemoteQuery, :action => "update_guild")
+      guild.remoteQueries.first.execute.should be_true
+      guild.remoteQueries.count.should == 0
+      guild.reload
+      guild.characters.count.should == 36
+      guild.characters.include?(@char).should be_true
+      guild.characters.find_by_name("Notexistingchar_d").should be_nil
+    end
 end
