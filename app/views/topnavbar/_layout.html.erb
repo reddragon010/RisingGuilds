@@ -6,6 +6,7 @@
 			<%= link_to 'Guilds', guilds_path %>
 			<ul style="left: -999em; display: none;">
 				<li><%= link_to 'Index', guilds_path %></li>
+				<% unless current_user.guilds.empty? %>
 				<li class="expandable"><%= link_to 'My Guilds', guilds_path %>
 					<ul>
 						<% current_user.guilds.each do |guild| %>
@@ -13,6 +14,7 @@
 						<% end %>
 					</ul>
 				</li>
+				<% end %>
 				<li><%= link_to 'New Guild', new_guild_path %></li>
 			</ul>
 		</li>
