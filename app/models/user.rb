@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
   end
-  
-  is_gravtastic!
+  include Gravtastic
+  is_gravtastic
   
   has_many :characters, :dependent => :nullify
   has_many :assignments, :dependent => :destroy
