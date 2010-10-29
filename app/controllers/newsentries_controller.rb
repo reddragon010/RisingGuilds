@@ -1,13 +1,18 @@
 class NewsentriesController < ApplicationController
   filter_resource_access
+  before_filter :login_required
   
-  layout 'guild_tabs'
+  layout :choose_layout
   
   # GET /newsentries
   # GET /newsentries.xml
   def index
-    @newsentries = Newsentry.all
-
+    if params[:guild_id]
+      @newsentries = Guild.find(params[:guild_id]).newsentries
+    else
+      @newsentries = current_user.guilds.map{|g| g.newsentries.all}.flatten
+    end
+    
     respond_to do |format|
       format.xml  { render :xml => @newsentries }
     end
@@ -43,7 +48,6 @@ class NewsentriesController < ApplicationController
   # POST /newsentries
   # POST /newsentries.xml
   def create
-    @newsentry = Newsentry.new(params[:newsentry])
     @newsentry.user_id = current_user.id
     respond_to do |format|
       if @newsentry.save
@@ -83,6 +87,16 @@ class NewsentriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(guild_path(@newsentry.guild)) }
       format.xml  { head :ok }
+    end
+  end 
+  
+  protected
+  
+  def choose_layout
+    unless params[:guild_id].nil?
+      return 'guild_tabs'
+    else
+      return 'application'
     end
   end
 end

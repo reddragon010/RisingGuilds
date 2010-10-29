@@ -67,8 +67,10 @@ authorization do
       if_attribute :leader => is { user.id }
     end
     
+    has_permission_on :newsentries, :to => :setup
+    
     #Can change newsentries
-    has_permission_on :newsentries, :to => [:change, :setup], :join_by => :or do
+    has_permission_on :newsentries, :to => :change, :join_by => :or do
       if_attribute :guild => { :raidleaders => contains { user } }
       if_attribute :guild => { :officers => contains { user } }
       if_attribute :guild => { :leaders => contains { user } }
