@@ -1,7 +1,6 @@
 class Guild < ActiveRecord::Base
   has_many :events, :dependent => :destroy
   has_many :characters, :dependent => :nullify
-  has_many :remoteQueries, :dependent => :destroy
   has_many :assignments, :dependent => :destroy
   has_many :users, :through => :assignments
   has_and_belongs_to_many :raids
@@ -171,6 +170,100 @@ class Guild < ActiveRecord::Base
       return Integer(achivementpoints.sum / achivementpoints.size)
     else
       return nil
+    end
+  end
+  
+  def sync
+    xml = Arsenal::get_guild_xml(self) 
+    
+    faction = (xml%'guildInfo'%'guildHeader')[:faction].to_i
+    self.update_attribute(:faction_id,faction) if self.faction_id.nil?
+    
+    if !(xml%'guildInfo').children.empty?
+			arsenal_chars = Array.new
+			arsenal_char_names = Array.new
+			arsenal_char_ranks = Hash.new
+			
+			(xml%'guildInfo'%'guild'%'members'/:character).each do |char|
+			    arsenal_char_names << char[:name]
+			    arsenal_char_ranks[char[:name]] = char[:rank].to_i
+					arsenal_chars << Character.new(:name => char[:name], :guild_id => self.id, :class_id => char[:classId],:gender_id => char[:genderId],:race_id => char[:raceId], :level => char[:level],:rank => char[:rank], :faction_id => faction, :realm => self.realm)
+			end
+			db_char_names = self.characters.collect {|c| c.name}
+			
+			# Calculate new/missing chars
+      missing_char_names = db_char_names - arsenal_char_names
+      new_char_names = arsenal_char_names - db_char_names
+
+      # Add new chars
+      unless new_char_names.empty?
+        arsenal_chars.each do |char|
+          if new_char_names.include?(char.name) then
+            #Move an existing char instead of creating a new one
+            exist_char = Character.find_by_name(char.name)
+            unless exist_char.nil?
+              exist_char.rank = char.rank
+              exist_char.guild = char.guild
+              char = exist_char
+            end
+            
+            #save it
+            char.save!
+            
+            #Trigger Join-Event
+            unless db_char_names.empty?
+              event = Event.new(:action => 'joined')
+              event.guild = self
+              event.content = self.name
+              event.character = char
+              event.save
+            end
+          end
+        end
+      end
+
+      #Delete missing chars
+      unless missing_char_names.empty?
+        self.characters.each do |char|
+          if missing_char_names.include?(char.name) then
+            event = Event.new(:action => 'left')
+            event.character = char
+            event.guild = self
+            event.content = self.name
+            event.save
+            attributes = {:guild_id => nil, :rank => nil}
+            char.update_attributes(attributes)
+          end
+        end
+      end
+      
+      #rank update
+      unless db_char_names.empty?
+        self.characters.each do |char|
+          if char.rank != arsenal_char_ranks[char.name]
+            content = char.rank
+            char.rank = arsenal_char_ranks[char.name]
+            if char.rank < arsenal_char_ranks[char.name]
+               event = Event.new(:action => 'promoted')
+               event.character = char
+               event.guild = self
+               event.content = content
+               event.save
+            elsif char.rank < arsenal_char_ranks[char.name]
+              event = Event.new(:action => 'demoted')
+              event.character = char
+              event.guild = self
+              event.content = content
+              event.save
+            end
+            char.save!
+          end
+        end
+      end
+      
+      return true
+    else
+      raise "Empty Guild-Info"
     end
   end
   

@@ -8,7 +8,6 @@
 		<% end %>
 		<% if permitted_to? :actualize, @character %>
 		<li><%= link_to('Actualize', :action => 'actualize') %></li>
-		<li><%= link_to('Generate AIL', :action => 'generate_ail') %></li>
 		<% end %>
 	</ul>
 </div>

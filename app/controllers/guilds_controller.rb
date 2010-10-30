@@ -118,10 +118,12 @@ class GuildsController < ApplicationController
   
   def actualize
     @guild = Guild.find(params[:id])
+    @guild.last_sync = Time.now - 1.day if @guild.last_sync.nil?
     respond_to do |format|
       if @guild.verified?
-        if @guild.remoteQueries.where(:action => 'update_guild').all.empty?
-          @guild.remoteQueries << RemoteQuery.create(:priority => 1, :efford => 5, :action => "update_guild")
+        if @guild.last_sync + 30.minutes < Time.now
+          @guild.delay.sync
+          @guild.update_attribute(:last_sync,Time.now)
           flash[:notice] = t(:updating, :item => 'Guild')
           format.html { redirect_to(:controller => 'guilds', :action => 'maintain', :id => @guild.id) }
           format.xml  { head :ok }

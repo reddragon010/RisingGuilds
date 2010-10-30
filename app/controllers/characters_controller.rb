@@ -163,28 +163,15 @@ class CharactersController < ApplicationController
   end
   
   def actualize
-    @character = Character.find(params[:id])
+    @character = Character.find(params[:id]) 
+    @character.last_sync = Time.now - 1.day if @character.last_sync.nil?
     respond_to do |format|
-      if @character.remoteQueries.find_all_by_action('update_character').empty?
-        @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 5, :action => "update_character")
+      if @character.last_sync + 30.minutes < Time.now
+        @character.delay.sync
+        @character.delay.sync_ail
+        @character.update_attribute(:last_sync,Time.now)
         flash[:notice] = t(:updating, :item => "Character")
         format.html { redirect_to(@character) }
-        format.xml  { head :ok }
-      else
-        flash[:error] = t(:update_in_progress)
-        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
-        format.xml  { head :error }
-      end
-    end
-  end
-  
-  def generate_ail
-    @character = Character.find(params[:id])
-    respond_to do |format|
-      if @character.remoteQueries.find_all_by_action('update_character_ail').empty?
-        @character.remoteQueries << RemoteQuery.create(:priority => 5, :efford => 10, :action => "update_character_ail")
-        flash[:notice] = t(:updating, :item => "Character's AIL")
-        format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else
         flash[:error] = t(:update_in_progress)

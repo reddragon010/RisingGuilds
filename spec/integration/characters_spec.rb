@@ -20,7 +20,7 @@ describe "Characters" do
     it "should be able to mark a charater" do
       @char = Character.first
       visit character_path(@char)
-      click "Mark as Mine!"
+      click_link_or_button "Mark as Mine!"
       page.should have_css(".notice")
       @char.reload
       @char.user.should == @user
@@ -30,7 +30,7 @@ describe "Characters" do
       @char = Character.first
       @char.update_attribute(:user_id, @user.id)
       visit character_path(@char)
-      click "Not Mine!"
+      click_link_or_button "Not Mine!"
       page.should have_css(".notice")
       @char.reload
       @char.user.should_not == @user

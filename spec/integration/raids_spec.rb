@@ -39,7 +39,7 @@ describe "Raids" do
       select 'dd', :from => 'attendance_role'
       select "signed", :from => "attendance_status"
       fill_in "attendance_message",:with =>"TestAttendace" 
-      click 'Create'
+      click_link_or_button 'Create'
       page.should have_css(".notice")
   		page.should have_content(@char.name)
   		page.should have_content('TestAttendace')
@@ -51,7 +51,7 @@ describe "Raids" do
       select @char.name, :from => 'attendance_character_id'
       select 'tank', :from => 'attendance_role'
       fill_in "attendance_message",:with => "NewTestAttendace"
-      click 'Update'
+      click_link_or_button 'Update'
       page.should have_css(".notice")
   		page.should have_content('tank')
   		page.should have_content('NewTestAttendace')
@@ -71,7 +71,7 @@ describe "Raids" do
   		fill_in 'Max lvl',:with => '80'
   		fill_in 'Description',:with => 'Test the Raid'
   		select "Naxxramas", :from => 'raid_icon'
-  		click "Create"
+  		click_link_or_button "Create"
   		page.should have_css(".notice")
   		page.should have_content('TestRaid1')
     end
@@ -81,7 +81,7 @@ describe "Raids" do
       visit raid_path(@raid)
       click "Edit"
       fill_in 'Title',:with => 'FooBar'
-      click 'Update'
+      click_link_or_button 'Update'
       page.should have_css(".notice")
   		page.should have_content('FooBar')
     end

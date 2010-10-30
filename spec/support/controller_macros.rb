@@ -4,7 +4,7 @@ module ControllerMacros
     visit login_path
     fill_in 'Login', :with => @user.login
     fill_in 'Password', :with => 'password'
-    click 'Login'
+    click_link_or_button 'Login'
     page.should have_css(".notice")
   end
   

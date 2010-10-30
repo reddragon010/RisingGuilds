@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101029170616) do
+ActiveRecord::Schema.define(:version => 20101030034354) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "role_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20101029170616) do
     t.text     "items",            :limit => 2000
     t.integer  "ailstddev"
     t.string   "realm",                                               :null => false
+    t.datetime "last_sync"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20101029170616) do
     t.boolean  "verified"
     t.integer  "recruit_level"
     t.integer  "faction_id"
+    t.datetime "last_sync"
   end
 
   create_table "guilds_raids", :id => false, :force => true do |t|

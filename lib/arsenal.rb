@@ -40,4 +40,80 @@ module Arsenal
   	  @level = (elem%'itemInfo'%'item')[:level].to_i
   	end
   end
+  
+  def self.get_character_xml(character)
+    url = configatron.arsenal.url.base 
+    url += configatron.arsenal.url.character.sheet 
+    if configatron.arsenal.test.nil?
+      url += "?" + configatron.arsenal.url.realm
+      url += character.realm + "&"
+      url += configatron.arsenal.url.character.name
+      url += CGI.escape(character.name) 
+    end
+    
+    return get_xml(url)
+  end
+  
+  def self.get_guild_xml(guild)
+    # http://arsenal.rising-gods.de/ guild-info.xml ? r= #{self.guild.realm} gn= #{CGI.escape(self.guild.name)}
+    url = configatron.arsenal.url.base 
+    url += configatron.arsenal.url.guild.info 
+    if configatron.arsenal.test.nil?
+      url += '?' + configatron.arsenal.url.realm 
+      url += guild.realm + "&"
+      url += configatron.arsenal.url.guild.name
+      url += CGI.escape(guild.name)
+    end
+
+    return get_xml(url)
+  end
+  
+  def self.get_item_xml(item)
+    #http://eu.wowarmory.com/ item-info.xml ? i=
+    url = configatron.wowarmory.url.base
+    url += configatron.wowarmory.url.item.info
+    url += "?" + configatron.wowarmory.url.item.itemid if configatron.arsenal.test.nil?
+    
+    return get_xml(url + item.id.to_s)
+  end
+  
+  #get the HTML-Code from URI
+  def self.get_html(url)
+    return open(url).read if !url.include?("http://")
+
+    req = Net::HTTP::Get.new(url)
+  	req["user-agent"] = "Mozilla/5.0 Gecko/20070219 Firefox/2.0.0.2" # ensure returns XML
+
+  	uri = URI.parse(url)
+
+  	http = Net::HTTP.new(uri.host, uri.port)
+
+    tries = 10 
+  	begin
+  	  http.start do
+  	    res = http.request req
+  			# response = res.body
+
+  			case res
+  				when Net::HTTPSuccess, Net::HTTPRedirection
+  					res.body
+  				else
+  					tries -= 1
+  			end
+  	  end
+  	rescue
+  	  retry if tries > 0
+  		raise 'Specified server at ' + url + ' does not exist or timed out.'
+  	end
+  end
+
+  #get the preprocessed XML-Code from URI
+  def self.get_xml(url)
+    doc = Nokogiri::XML(get_html(url))
+  	if doc.xpath('page').nil?
+  		raise "EmptyPage (#{url})"
+  	else
+  		return doc.xpath('page')
+  	end
+  end
 end

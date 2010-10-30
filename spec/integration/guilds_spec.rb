@@ -23,7 +23,7 @@ describe GuildsController do
     it "shouldn't be able to sync a guild" do
       visit "guilds/#{@guild.id}/actualize"
       current_path.should == root_path
-      Guild.first.remoteQueries.count.should == 0
+      Delayed::Job.all.count.should == 1
     end
     
     it "shouldn't be able to edit a guild" do
@@ -49,7 +49,7 @@ describe GuildsController do
       fill_in "guild_name", :with => "Divine"
       fill_in "guild_website", :with => "http://divine.dreamblaze.net"
       fill_in "guild_description", :with => "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla "
-      click "guild_submit"
+      click_link_or_button "guild_submit"
       page.should have_css(".notice")
     end
     
@@ -87,14 +87,14 @@ describe GuildsController do
     it "should be able to sync the guild" do
       visit "guilds/#{@guild.id}/actualize"
       page.should have_css(".notice")
-      Guild.first.remoteQueries.count.should == 1
+      Delayed::Job.all.count.should == 1
     end
     
     it "should be able to edit the guild" do
       visit edit_guild_path(@guild)
       current_path.should == edit_guild_path(@guild)
       fill_in "guild_website", :with => "http://justworked.net"
-      click "update"
+      click_link_or_button "update"
       current_path.should == guild_path(@guild)
       page.should have_css(".notice")
       page.should have_content("http://justworked.net")

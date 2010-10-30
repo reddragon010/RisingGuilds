@@ -8,7 +8,7 @@ describe 'as a guest on the sign in page' do
   #Browse to the homepage and click the Sign In link
   before do
     visit root_path
-    click 'Login / SignUp'
+    click_link_or_button 'Login / SignUp'
   end
 
   context 'with valid credentials' do
@@ -17,7 +17,7 @@ describe 'as a guest on the sign in page' do
     before do
       fill_in 'Login', :with => user.login
       fill_in 'Password', :with => 'password'
-      click 'Login'
+      click_link_or_button 'Login'
     end
 
     it 'has a sign out link' do
@@ -29,7 +29,7 @@ describe 'as a guest on the sign in page' do
     end
     
     it 'can acces the account page' do
-      click "Account" 
+      click_link_or_button "Account" 
       page.status_code.should == 200 
       current_path.should == account_path
     end
@@ -40,7 +40,7 @@ describe 'as a guest on the sign in page' do
 
     #No form entry should produce an error
     before do
-      click 'Login'
+      click_link_or_button 'Login'
     end
 
     it 'has errors' do
