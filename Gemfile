@@ -44,6 +44,7 @@ gem 'gravtastic'
 gem "breadcrumbs_on_rails"
 
 gem "delayed_job",  :git => 'git://github.com/collectiveidea/delayed_job.git'
+gem "nokogiri"
 
 group :development, :test do
   gem "mocha"
