@@ -22,6 +22,12 @@
 <h4>Raid starts in <%= time_ago_in_words(@raid.start)%></h4>
 <% end %>
 
+<% unless @raid.description.empty? %>
+<div id="description">
+	<%= @raid.description %>
+</div>
+<% end %>
+
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="contentRaid">
     <tr>
 	<th width="25%"></th>
@@ -50,29 +56,29 @@
     <tr>
     <td><div align="left" class="raidcontent"><b>Raidleiter</b>:</div></td>
     <td><div align="left" class="raidcontent"><span class="leader"><%=h User.find(@raid.leader).login %></span></div></td>
-    <td><div align="left" class="raidcontent"><b>Member unsigned</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    <td><div align="left" class="raidcontent"><b>Confirmed Members</b>:</div></td>
+    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>Invite start</b>:</div></td>
+    <td><div align="left" class="raidcontent"><b>Invite Start</b>:</div></td>
     <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.invite_start.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"><b>Member not sure</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(1).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    <td><div align="left" class="raidcontent"><b>Available Members </b>:</div></td>
+    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
     </tr>
 
     <tr>
     <td><div align="left" class="raidcontent"><b>Start</b>:</div></td>
     <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.start.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"><b>Member signed</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    <td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
+    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(1).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
     </tr>
 
     <tr>
     <td><div align="left" class="raidcontent"><b>End</b>:</div></td>
     <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%= @raid.end.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"><b>Member approved</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_approved(true).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    <td><div align="left" class="raidcontent"></div></td>
+    <td><div align="left" class="raidcontent"></div></td>
     </tr>
 
     <tr>
@@ -98,23 +104,23 @@
 		<th></th>
 	  </tr>
 	</thead>
-	<% (1..3).each do |i| %>
+	<% configatron.raidplanner.status_manager.size.downto(1) do |i| %>
 	<tbody>
 	  <tr valign="top" class="header">
 		<th></th>
-	    <th colspan="6"><%=h configatron.raidplanner.status.key(i).to_s.sub("_"," ") %></th>
+	    <th colspan="6"><%=h configatron.raidplanner.status_manager.key(i) %></th>
 		<th></th>
 	  </tr>
 	  <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
-	  <tr style="">
-		<td><%= image_tag("icons/tick.png") if attendance.approved %></td>
-	    <td class="left"><%=h attendance.character.name %></td>
+	  <tr>
+			<td><%= image_tag("icons/tick.png") if attendance.approved %></td>
+	    <td class="left"><%= link_to attendance.character.name, character_path(attendance.character) %></td>
 	    <td><%=h attendance.character.level %></td>
-		<td><%= image_tag raceicon_path(attendance.character),:size => "18x18" %></td>
-		<td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
+			<td><%= image_tag raceicon_path(attendance.character),:size => "18x18" %></td>
+			<td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
 	    <td><%=h attendance.role %></td>
 	    <td  class="left"><%=h attendance.message %></td>
-	    <td><%= link_to((attendance.approved ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance)%></td>
+	    <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3)%></td>
 	  </tr>
 	  <% end %>
 	</tbody>
@@ -122,7 +128,7 @@
 </table>
 
 <% unless current_user.characters.empty? %>
-<h2>Attend / Change Attendance</h2>
+<h2>Create / Change Attendance</h2>
 
 <% if @attendance.new_record? %>
 <%= render :partial => "new_attend_form", :object => @attendance %>
@@ -130,7 +136,7 @@
 <%= render :partial => "update_attend_form", :object => @attendance%>
 <% end %>
 <% else%>
-<h2>please connect a character to your account</h2>
+<h2>Please connect a character to your account</h2>
 <% end %>
 <script>
 $(function() {

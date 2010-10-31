@@ -98,7 +98,12 @@ class AttendancesController < ApplicationController
   def approve
     @attendance = Attendance.find(params[:id])
     respond_to do |format|
-      if @attendance.toggle!(:approved)
+      if @attendance.status == 2
+        new_status = 3
+      elsif @attendance.status == 3
+        new_status = 2
+      end
+      if @attendance.update_attribute(:status,new_status)
         flash[:notice] = t(:updated,:item => 'Attendance')
         format.html { redirect_to guild_raid_path(@attendance.raid.guild, @attendance.raid) }
         format.xml  { head :ok }
