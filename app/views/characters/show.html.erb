@@ -54,7 +54,7 @@
 <div class="box_small" style="min-height:300px;float:right">
 	<div class="box_headline">Events</div>
 	<div id="events_box">
-	<%= render :partial => "events", :locals => {:events => @character.events}%>
+	<%= render :partial => "events", :locals => {:events => @character.events.visible}%>
   </div>
 </div>
 <div class="box_small">
@@ -67,7 +67,6 @@
 		<tr>
 			<td class="left"><b>Activity:</b></td>
 			<td><%=h @character.activity %></td>
-		</tr>
 		</tr>
 		<tr>
 			<td class="left"><b>Achivement Points:</b></td>

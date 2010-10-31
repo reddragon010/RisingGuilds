@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101030034354) do
+ActiveRecord::Schema.define(:version => 20101031144815) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "role_id"
@@ -75,12 +75,13 @@ ActiveRecord::Schema.define(:version => 20101030034354) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "events", :force => true do |t|
-    t.string   "action",       :null => false
+    t.string   "action",                         :null => false
     t.string   "content"
     t.integer  "guild_id"
     t.integer  "character_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visible",      :default => true
   end
 
   create_table "guilds", :force => true do |t|

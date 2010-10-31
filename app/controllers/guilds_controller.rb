@@ -37,7 +37,7 @@ class GuildsController < ApplicationController
       @guilds = current_user.assignments.collect{|a| a.guild }.uniq
     end
     @online_characters = @guild.characters.where(:online => true).order("rank") unless @guild.nil?
-    @events = @guild.events.paginate(:per_page => 10, :page => params[:page], :order => 'created_at DESC')
+    @events = @guild.events.visible.paginate(:per_page => 10, :page => params[:page], :order => 'created_at DESC')
     if @guild.users.include?(current_user)
       @newsentries = @guild.newsentries.order("sticky DESC, updated_at DESC").limit(10)
     else
