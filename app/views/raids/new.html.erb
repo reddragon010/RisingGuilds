@@ -9,7 +9,11 @@
   </p>
 	<p>
 		<%= f.label :guild_id %><br />
+		<% if params[:guild_id] %>
+		<%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
+		<% else %>
 		<%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
+		<% end %>
 	</p>
   <p>
     <%= f.label :max_attendees %><br />
