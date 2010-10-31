@@ -10,6 +10,7 @@
 		<th class="narrow"></th>
 	</tr>
 	</thead>
+	<% if params[:guild_id] %>
 	<tbody>
 		<tr class="header">
 			<th class="narrow"></th>
@@ -50,4 +51,9 @@
 		</tr>
 		<%= render :partial => 'user', :collection => @guild.members, :as => :user, :locals => {:guild => @guild}%>
 	</tbody>
+	<% else %>
+	<tbody>
+		<%= render :partial => 'user', :collection => @users, :as => :user, :locals => {:guild => @guild}%>
+	</tbody>
+	<% end %>
 </table>
