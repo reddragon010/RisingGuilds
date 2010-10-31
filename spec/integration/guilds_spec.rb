@@ -23,7 +23,7 @@ describe GuildsController do
     it "shouldn't be able to sync a guild" do
       visit "guilds/#{@guild.id}/actualize"
       current_path.should == root_path
-      Delayed::Job.all.count.should == 1
+      Delayed::Job.all.count.should == 0
     end
     
     it "shouldn't be able to edit a guild" do

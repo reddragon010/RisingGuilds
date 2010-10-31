@@ -36,8 +36,8 @@ describe "Raids" do
     it "should be able to attend a raid" do
       visit raid_path(@raid)
       select @char.name, :from => 'attendance_character_id'
-      select 'dd', :from => 'attendance_role'
-      select "signed", :from => "attendance_status"
+      select 'DD', :from => 'attendance_role'
+      select "Available", :from => "attendance_status"
       fill_in "attendance_message",:with =>"TestAttendace" 
       click_link_or_button 'Create'
       page.should have_css(".notice")
@@ -49,11 +49,11 @@ describe "Raids" do
       @raid.attendances << Attendance.create(:character_id => @char.id, :raid_id => @raid.id, :role => "dd", :status => 2)
       visit raid_path(@raid)
       select @char.name, :from => 'attendance_character_id'
-      select 'tank', :from => 'attendance_role'
+      select 'Tank', :from => 'attendance_role'
       fill_in "attendance_message",:with => "NewTestAttendace"
       click_link_or_button 'Update'
       page.should have_css(".notice")
-  		page.should have_content('tank')
+  		page.should have_content('Tank')
   		page.should have_content('NewTestAttendace')
     end
   end
@@ -79,7 +79,7 @@ describe "Raids" do
     it "should be able to edit a raid" do
       @raid = Factory(:Raid, :guild_id => @guild.id)
       visit raid_path(@raid)
-      click "Edit"
+      click_link_or_button "Edit"
       fill_in 'Title',:with => 'FooBar'
       click_link_or_button 'Update'
       page.should have_css(".notice")
