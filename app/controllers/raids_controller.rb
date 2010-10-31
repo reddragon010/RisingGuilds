@@ -123,8 +123,10 @@ class RaidsController < ApplicationController
   # PUT /raids/1.xml
   def update
     unless params[:raid][:invited_guild].nil?
-      @raid.guilds << Guild.where(:name => params[:raid][:invited_guild])
-      flash[:notice] = t('raids.guild_to_raid')
+      unless @raid.guilds.map{|g| g.name}.include?(params[:raid][:invited_guild])
+        @raid.guilds << Guild.where(:name => params[:raid][:invited_guild]) 
+        flash[:notice] = t('raids.guild_to_raid')        
+      end
       redirect_to guild_raid_path(@raid.guild, @raid)
       return true
     end
