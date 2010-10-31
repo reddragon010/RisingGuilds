@@ -68,4 +68,18 @@
 * [Improved]	Migrated Mailer to new Format
 * [Improved]	Changed Gravatar-Plugin
 * [Improved]	Packed custom classes into a separate file
-* [Improved]	Major UI/Navigation improvements (modal dialogs, tobnavbar, jquery-ui-widgets) 
+* [Improved]	Major UI/Navigation improvements (modal dialogs, tobnavbar, jquery-ui-widgets)
+
+== 0.7.0 BETA 31-10-2010
+
+* [Feature]		changed from own queueing solution to delayed_job
+* [Feature]		changed from hpricot to nokogiri
+* [Fix]				new-news-link visible for everyone
+* [Fix]				new_guild-link
+* [Fix]				no guilds-link for guests
+* [Fix]				multiple raid-invitations for the same guild
+* [Fix]				no filtering on event-index
+* [Fix]				char-links in pagination-fields
+* [Fix]				user-index
+* [Improved]	Raid-UI
+* [Improved]	updated Gravtastic 
