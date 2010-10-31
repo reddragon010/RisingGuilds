@@ -13,6 +13,9 @@ class Character < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :realm
   
+  scope :are_online, where(:online => true)
+  scope :online_today, where("last_seen >= ?", Time.now.midnight)
+  
   def netto_activity
     Integer((self.activity / ((Time.now - self.created_at) / 60 / 60)) * 100) unless self.activity.nil?
   end
