@@ -28,6 +28,7 @@ RisingGuilds::Application.routes.draw do
      resources :raids
      resources :newsentries
      resources :events
+     resources :statistics
    end
    resources :characters do
      resources :events

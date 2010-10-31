@@ -1,0 +1,12 @@
+<div class="box_small">
+	<div class="box_headline">Online Chart</div>
+	<div id="online-chart-container" class="chart-container"></div>
+</div>
+<div class="box_small">
+	<div class="box_headline">Growth Chart</div>
+	<div id="growth-chart-container" class="chart-container"></div>
+</div>
+<% content_for :javascript do %>
+    <%= raw @online_chart %>
+		<%= raw @growth_chart %>
+<% end %>

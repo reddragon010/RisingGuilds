@@ -54,6 +54,11 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        <%= yield(:javascript) %>
+    });
+</script>
+<script type="text/javascript">
   var uservoiceOptions = {
     key: 'risingguilds',
     host: 'risingguilds.uservoice.com', 
