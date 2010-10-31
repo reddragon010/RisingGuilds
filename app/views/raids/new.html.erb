@@ -33,11 +33,11 @@
   </p>
   <p>
     <%= f.label :min_lvl %><br />
-    <%= f.text_field :min_lvl %>
+    <%= f.text_field :min_lvl, :value => "80" %>
   </p>
   <p>
     <%= f.label :max_lvl %><br />
-    <%= f.text_field :max_lvl %>
+    <%= f.text_field :max_lvl, :value => "80" %>
   </p>
   <p>
     <%= f.label :description %><br />
@@ -61,5 +61,3 @@
     <%= f.submit 'Create' %>
   </p>
 <% end %>
-
-<%= link_to 'Back', raids_path %>
