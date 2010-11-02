@@ -43,8 +43,8 @@
 		<td style="width:100px"><%= profession_progressbar(character.profession2) unless character.profession2.nil? %></td>
 		<td style="right">
 		<% permitted_to? :make_main, character do%>
-		<%= link_to(image_tag("icons/mainchar.png", :alt => "main", :size => "16x16"), "/characters/#{character.id}/make_main") unless character.main %>
-		<%= link_to(image_tag("icons/kick.png", :alt => "delink", :size => "16x16"), "/characters/#{character.id}/delink") %>
+		<%= link_to(image_tag("icons/mainchar.png", :title => "Make Main", :size => "16x16"), "/characters/#{character.id}/make_main") unless character.main %>
+		<%= link_to(image_tag("icons/kick.png", :title => "Delink", :size => "16x16"), "/characters/#{character.id}/delink") %>
 		<% end %>
 		</td>
 	  </tr>

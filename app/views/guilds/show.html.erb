@@ -66,8 +66,8 @@
 		<tr>
 			<td><%= link_to character.name, character_path(character) %></td>
 			<td><%= character.rank %></td>
-			<td><%= image_tag classicon_path(character),:size => "18x18" %></td>
-		    <td><%= image_tag raceicon_path(character),:size => "18x18" %></td>
+			<td><%= image_tag classicon_path(character),{:size => "18x18", :title => CLASSES.index(character.class_id)} %></td>
+		  <td><%= image_tag raceicon_path(character),{:size => "18x18", :title => RACES.index(character.race_id)} %></td>
 			<td><%= character.level %></td>
 		</tr>
 		<% end %>

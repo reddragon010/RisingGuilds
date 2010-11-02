@@ -14,11 +14,11 @@ module ApplicationHelper
   end
   
   def professionicon(profession)
-    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :alt => profession.key})
+    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :title => profession.key})
   end
   
   def talentspecicon(talentspec)
-    image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:alt => talentspec.prim})
+    image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:title => talentspec.prim})
     #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
   end
   
