@@ -1,12 +1,17 @@
 class StatisticsController < ApplicationController
+  
   def index
-    @online_chart = generate_online_chart
-    @growth_chart = generate_growth_chart
+    #UNFINISHED!
+    #@guild = Guild.find(params[:guild_id])
+    #@online_chart = generate_online_chart(@guild)
+    #@growth_chart = generate_growth_chart(@guild)
   end
   
   protected
   
-  def generate_online_chart
+  def generate_online_chart(guild)
+    events = 
+    
     # format the tooltips
     pie_tooltip_formatter = '
       function() {
@@ -52,7 +57,10 @@ class StatisticsController < ApplicationController
         })
   end
   
-  def generate_growth_chart
+  def generate_growth_chart(guild)
+    sd = guild.events.first.created_at
+    ed = guild.events.last.created_at
+    
     # format the tooltips
     pie_tooltip_formatter = '
       function() {

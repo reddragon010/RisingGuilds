@@ -2,8 +2,7 @@ namespace :statistics do
   desc "generate the guild-statistic events"
   task :generate => :environment do
     Guild.all.each do |guild|
-      online_chars = guild.characters.where("last_seen >= ? OR online == true", Time.now)
-      puts online_chars
+      guild.events << Event.create(:action => "today_online", :visible => false, :content => guild.characters.online_today.count)
     end
   end
 end
