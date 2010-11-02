@@ -19,7 +19,7 @@
 <div id="website">
   <%= link_to @guild.website, @guild.website, {'data-popup' => true} %>
 </div>
-<% unless @guild.verified? %>
+<% unless @guild.verified? || !permitted_to?(:maintain, @guild) %>
 <div id="verify_guild">
   <p><%= link_to 'Please verify the guildname!', :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
 </div>

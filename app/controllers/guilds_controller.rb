@@ -11,14 +11,14 @@ class GuildsController < ApplicationController
   # GET /guilds.xml
   def index
     if params[:commit].nil?
-      @guilds = Guild.paginate(:per_page => 20, :page => params[:page], :order => 'name')
+      @guilds = Guild.where(:verified => true).paginate(:per_page => 20, :page => params[:page], :order => 'name')
     else
       @guilds = Guild
       @guilds = @guilds.where("name LIKE ?", "%#{params[:name]}%") unless params[:name].blank?
       @guilds = @guilds.where(:realm => params[:realm]) unless params[:realm].blank?
       @guilds = @guilds.where(:faction_id => params[:faction]) unless params[:faction].blank?
       @guilds = @guilds.where(:recruit_open => params[:open_recruit]) unless params[:open_recruit].blank?
-      @guilds = @guilds.paginate(:per_page => 10, :page => params[:page], :order => 'name')
+      @guilds = @guilds.where(:verified => true).paginate(:per_page => 10, :page => params[:page], :order => 'name')
     end
     respond_to do |format|
       format.html
