@@ -117,13 +117,15 @@
 			<td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
 	    <td><%=h attendance.role %></td>
 	    <td  class="left"><%=h attendance.message %></td>
-	    <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3)%></td>
+	    <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3) && !@raid.closed?%></td>
 	  </tr>
 	  <% end %>
 	</tbody>
 	<% end %>
 </table>
-
+<% if @raid.closed?%>
+<h3>The Raid is closed!</h3>
+<% else %>
 <% unless current_user.characters.empty? %>
 <h2>Create / Change Attendance</h2>
 
@@ -133,7 +135,8 @@
 <%= render :partial => "update_attend_form", :object => @attendance%>
 <% end %>
 <% else%>
-<h2>Please connect a character to your account</h2>
+<h3>Please connect a character to your account</h3>
+<% end %>
 <% end %>
 <script>
 $(function() {
