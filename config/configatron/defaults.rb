@@ -23,7 +23,8 @@ configatron.notifier.default_url = 'localhost:3000'
 #raidplanner
 configatron.raidplanner.status = {'Not Available' => 1, 'Available' => 2}
 configatron.raidplanner.status_manager = {'Not Available' => 1, 'Available' => 2, 'Confirmed' => 3}
-configatron.raidplanner.types = ['Range-DD','Meele-DD', 'Heal', 'Tank'] 
+configatron.raidplanner.roles = ['Range','Meele', 'Heal', 'Tank']
+configatron.raidplanner.classes = ["warrior","paladin","hunter","rogue","priest","dk","shaman","mage","warlock","druid"] 
 
 #guild serials password
 configatron.guilds.serial_salt = "ChangeMe-seriously!!-CHANGEMEEE"

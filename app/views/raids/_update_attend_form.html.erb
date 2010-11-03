@@ -10,7 +10,7 @@
 	</tr>
 	<tr>
 		<td><%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %></td>
-		<td><%= f.select(:role, configatron.raidplanner.types, {:prompt => "Select a role"}) %></td>
+		<td><%= f.select(:role, configatron.raidplanner.roles, {:prompt => "Select a role"}) %></td>
 		<td><%= f.select(:status, configatron.raidplanner.status) %></td>
 		<td><%= f.text_field :message %></td>
 		<td><%= f.submit 'Update' %></td>

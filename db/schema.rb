@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101103000410) do
+ActiveRecord::Schema.define(:version => 20101103202427) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "role_id"
@@ -148,6 +148,9 @@ ActiveRecord::Schema.define(:version => 20101103000410) do
     t.integer  "max_lvl"
     t.integer  "min_lvl"
     t.string   "icon"
+    t.string   "limit_roles"
+    t.string   "limit_classes"
+    t.boolean  "autoconfirm",   :default => false
   end
 
   create_table "remote_queries", :force => true do |t|

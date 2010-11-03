@@ -9,14 +9,12 @@
 	</ul>
 </div>
 
-<div style="position:relative; width:100%">
-	
+<div style="position:relative; width:100%">	
 	<%- @raid.icon = "nil.png" if @raid.icon == "" -%>
 	<div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
 </div>
 
 <h1><%= @raid.title %></h1>
-
 
 <% if @raid.start > Time.now %>
 <h4>Raid starts in <%= time_ago_in_words(@raid.start)%></h4>
@@ -30,64 +28,114 @@
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="contentRaid">
     <tr>
-	<th width="25%"></th>
-	<th width="25%"></th>
-	<th width="25%"></th>
-	<th width="25%"></th>	
+			<th width="25%"></th>
+			<th width="25%"></th>
+			<th width="25%"></th>
+			<th width="25%"></th>	
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>participating Guilds</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% @raid.guilds.each do |g| %>
-		<ul class="guildslist">
-			<li><%= link_to(g.name, guild_path(g))  %> <%= link_to(image_tag("icons/kick.png", :size => "10x10"), :controller => 'raids', :action => 'uninvite_guild', :id => @raid.id, :uninvited_guild => g.id) if permitted_to?(:uninvite_guild, @raid) && g != @raid.guild %></li>
-		</ul>
-	<% end %></div></td>
-	<td colspan="2">
+    	<td><div align="left" class="raidcontent"><b>participating Guilds</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><% @raid.guilds.each do |g| %>
+				<ul class="guildslist">
+					<li><%= link_to(g.name, guild_path(g))  %> <%= link_to(image_tag("icons/kick.png", :size => "10x10"), :controller => 'raids', :action => 'uninvite_guild', :id => @raid.id, :uninvited_guild => g.id) if permitted_to?(:uninvite_guild, @raid) && g != @raid.guild %></li>
+				</ul><% end %>
+			</div></td>
+			<td colspan="2">
 			<% if permitted_to? :edit %>
 			<%= form_for(@raid) do |f| %>
 				<%= f.text_field :invited_guild %>
 				<%= f.submit 'Invite' %>
 			<% end %>
 			<% end %>
-	</div></td>
+			</div></td>
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>Raidleiter</b>:</div></td>
-    <td><div align="left" class="raidcontent"><span class="leader"><%=h User.find(@raid.leader).login %></span></div></td>
-    <td><div align="left" class="raidcontent"><b>Confirmed Members</b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    	<td><div align="left" class="raidcontent"><b>Raidleader</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><span class="leader"><%=h User.find(@raid.leader).login %></span></div></td>#
+			<td><div align="left" class="raidcontent"><b>Level Range</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><%= @raid.levelrange %></div></td>
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>Invite Start</b>:</div></td>
-    <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.invite_start.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"><b>Available Members </b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    	<td><div align="left" class="raidcontent"><b>Invite Start</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.invite_start.strftime("%H:%M") %></div></td>
+    	<td><div align="left" class="raidcontent"><b>Confirmed Members</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>Start</b>:</div></td>
-    <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.start.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
-    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(1).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+    	<td><div align="left" class="raidcontent"><b>Start</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.start.strftime("%H:%M") %></div></td>
+    	<td><div align="left" class="raidcontent"><b>Available Members </b>:</div></td>
+    	<td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
     </tr>
 
     <tr>
-    <td><div align="left" class="raidcontent"><b>End</b>:</div></td>
-    <td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%= @raid.end.strftime("%H:%M") %></div></td>
-    <td><div align="left" class="raidcontent"></div></td>
-    <td><div align="left" class="raidcontent"></div></td>
-    </tr>
-
-    <tr>
-    <td><div align="left" class="raidcontent"><b>Level Range</b>:</div></td>
-    <td><div align="left" class="raidcontent"><%= @raid.levelrange %></div></td>
-	<td><div align="left" class="raidcontent"><b>Max attendees</b>:</div></td>
-    <td><div align="left" class="raidcontent"><%=h @raid.max_attendees %></div></td>
+    	<td><div align="left" class="raidcontent"><b>End</b>:</div></td>
+    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%= @raid.end.strftime("%H:%M") %></div></td>
+    	<td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
+    	<td><div align="left" class="raidcontent"><%= @raid.attendances.find_all_by_status(1).count %></div></td>
     </tr>
 </table>
+<% unless @raid.limit_roles.blank? && @raid.limit_classes.blank? %>
+<h2>Limits</h2>
+<table>
+	<thead>
+	<tr>
+		<td></td>
+		<% configatron.raidplanner.roles.each do |role| %>
+		<td style="width:40px"><%= roleicon(role.downcase) %></td>
+		<% end %>
+		<% unless @raid.limit_classes.nil?%>
+		<td style="width:40px"></td>
+		<% CLASSES.each do |key,value| %>
+		<td style="width:40px"><%= image_tag classicon_path(Character.new(:class_id => value)),:size => "18x18" %></td>
+		<% end %>
+		<% end %>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Confirmed</td>
+		<% unless @raid.limit_roles.nil?%>
+		<% configatron.raidplanner.roles.each do |role| %>
+		<td>
+			<% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 3).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 3).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
+		</td>
+		<% end %>
+		<% end %>
+		<% unless @raid.limit_classes.blank?%>
+		<td></td>
+		<% configatron.raidplanner.classes.each_with_index do |klass,i| %>
+		<td>
+			<% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
+		</td>
+		<% end %>
+		<% end %>
+	</tr>
+	<tr>
+		<td>Available</td>
+		<% unless @raid.limit_roles.nil? %>
+		<% configatron.raidplanner.roles.each do |role| %>
+		<td>
+			<% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 2).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 2).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
+		</td>
+		<% end %>
+		<% end %>
+		<% unless @raid.limit_classes.nil?%>
+		<td></td>
+		<% configatron.raidplanner.classes.each_with_index do |klass,i| %>
+		<td>
+			<% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
+		</td>
+		<% end %>
+		<% end %>
+	</tr>
+	</tbody>
+</table>
+<% end %>
 
 <h2>Attendees</h2>
 

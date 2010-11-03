@@ -15,12 +15,6 @@ describe Guild do
     guild.characters.count.should == 2
   end
   
-  it "shouldn't accept a description with lesser then 100 Characters" do
-    guild = Factory.build(:Guild, :description => "Too short man!!")
-    guild.valid?.should be_false
-    guild.should have_at_least(1).error_on(:description)
-  end
-  
   it "should not be valid without a name" do
     guild = Factory.build(:Guild, :name => "")
     guild.valid?.should be_false

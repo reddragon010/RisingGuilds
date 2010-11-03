@@ -36,7 +36,7 @@ describe "Raids" do
     it "should be able to attend a raid" do
       visit raid_path(@raid)
       select @char.name, :from => 'attendance_character_id'
-      select 'DD', :from => 'attendance_role'
+      select 'Range', :from => 'attendance_role'
       select "Available", :from => "attendance_status"
       fill_in "attendance_message",:with =>"TestAttendace" 
       click_link_or_button 'Create'
@@ -70,7 +70,7 @@ describe "Raids" do
   		fill_in 'Min lvl',:with => '1'
   		fill_in 'Max lvl',:with => '80'
   		fill_in 'Description',:with => 'Test the Raid'
-  		select "Naxxramas", :from => 'raid_icon'
+  		select "Naxx", :from => 'raid_icon'
   		click_link_or_button "Create"
   		page.should have_css(".notice")
   		page.should have_content('TestRaid1')

@@ -42,7 +42,7 @@ class RaidsController < ApplicationController
   def show
     if !params[:guild_id].nil?
       add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
-      add_breadcrumb "Raids", guild_raid_path(@guild)
+      add_breadcrumb "Raids", guild_raids_path(@guild)
       add_breadcrumb @raid.title, guild_raid_path(@raid)
     else
       add_breadcrumb "Raids", raids_path
@@ -79,7 +79,7 @@ class RaidsController < ApplicationController
   def edit
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
-      add_breadcrumb "Raids", guild_raid_path(@guild)
+      add_breadcrumb "Raids", guild_raids_path(@guild)
       add_breadcrumb @raid.title, guild_raid_path(@guild,@raid)
       add_breadcrumb "Edit", edit_guild_raid_path(@guild,@raid)
     else
@@ -94,6 +94,9 @@ class RaidsController < ApplicationController
       return true
     end
     
+    @raid.limit_roles = {} if @raid.limit_roles.nil?
+    @raid.limit_classes = {} if @raid.limit_classes.nil?
+    
     @raid.invitation_window = Integer((@raid.start.to_f - @raid.invite_start.to_f) / 60.to_f)
     @raid.duration = Integer((@raid.end - @raid.start).to_f / 3600.to_f)
     
@@ -104,6 +107,7 @@ class RaidsController < ApplicationController
   # POST /raids
   # POST /raids.xml
   def create
+    @raid.limit_roles = params[:limit_roles].delete_if{|k,v| v.blank?}
     @raid.end = @raid.start + @raid.duration.to_i.hours
     @raid.invite_start = @raid.start - @raid.invitation_window.to_i.minutes
     @raid.guilds << @raid.guild
@@ -146,6 +150,9 @@ class RaidsController < ApplicationController
     params[:raid][:"end(3i)"] = @end_time.day.to_s
     params[:raid][:"end(4i)"] = @end_time.hour.to_s
     params[:raid][:"end(5i)"] = @end_time.min.to_s
+    
+    @raid.limit_roles = params[:limit_roles].delete_if{|k,v| v.blank?}
+    @raid.limit_classes = params[:limit_classes].delete_if{|k,v| v.blank?}
     
     respond_to do |format|
       if @raid.update_attributes(params[:raid])

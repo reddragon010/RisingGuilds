@@ -22,6 +22,10 @@ module ApplicationHelper
     #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
   end
   
+  def roleicon(role)
+    image_tag("icons/roles/#{role}.png",{:size => "18x18",:title => role})
+  end
+  
   def charicon_path(char)
 		icon_types = {:default => 'wow-default', 70 => 'wow-70', 80 => 'wow-80', :other => 'wow'}
 		

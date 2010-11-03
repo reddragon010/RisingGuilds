@@ -4,6 +4,9 @@ class Raid < ActiveRecord::Base
   has_many :characters, :through => :attendances
   belongs_to :guild
   
+  serialize :limit_roles, Hash
+  serialize :limit_classes, Hash
+  
   attr_accessor :invitation_window, :duration, :invited_guild
   
   validates_presence_of :title

@@ -56,6 +56,26 @@
 		}); 
 	</script>
   </p>
+	<table>
+		<% configatron.raidplanner.roles.each do |role| %>
+		<tr>
+			<td><%= role %></td>
+			<td><%= text_field :limit_roles, role %></td>
+		</tr>
+		<% end %>
+  </table>
+ 	<table>
+		<% configatron.raidplanner.classes.each do |klass| %>
+		<tr>
+			<td><%= klass %></td>
+			<td><%= text_field :limit_classes, klass, :value => @raid.limit_classes[klass] %></td>
+		</tr>
+		<% end %>
+  </table>
+	<p>
+    <%= f.label :autoconfirm %><br />
+    <%= f.check_box :autoconfirm %>
+  </p>
 	<%= f.hidden_field :leader %>
   <p>
     <%= f.submit 'Create' %>
