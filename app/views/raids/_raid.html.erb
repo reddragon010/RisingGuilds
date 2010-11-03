@@ -10,7 +10,7 @@
     <td><%=h raid.end.strftime(@timeformat) %></td>
     <td><%= raid.leader.nil? ? "" : User.find(raid.leader.to_i).login %></td>
 	<td><%=h raid.max_attendees %></td>
-	<td><%=h raid.attendances.find_by_approved(true).nil? ? "0" : raid.attendances.find_all_by_approved(true).count %>
+	<td><%=h raid.attendances.find_all_by_status(3).nil? ? "0" : raid.attendances.find_all_by_status(3).count %>
     <td><%= raid.closed? ? image_tag('icons/lock_closed.png') : image_tag('icons/lock_open.png') %></td>
     <td><%= link_to(image_tag('icons/page_edit.png'), edit_guild_raid_path(raid.guild, raid)) if permitted_to?(:edit, raid) %></td>
     <td><%= link_to(image_tag('icons/kick.png'), guild_raid_path(raid.guild, raid), :confirm => 'Are you sure?', :method => :delete) if permitted_to?(:destroy, raid) %></td>

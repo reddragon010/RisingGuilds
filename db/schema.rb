@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101031144815) do
+ActiveRecord::Schema.define(:version => 20101103000410) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "role_id"
@@ -21,14 +21,13 @@ ActiveRecord::Schema.define(:version => 20101031144815) do
   end
 
   create_table "attendances", :force => true do |t|
-    t.integer  "character_id",                    :null => false
-    t.integer  "raid_id",                         :null => false
-    t.string   "role",                            :null => false
-    t.integer  "status",       :default => 1,     :null => false
+    t.integer  "character_id",                :null => false
+    t.integer  "raid_id",                     :null => false
+    t.string   "role",                        :null => false
+    t.integer  "status",       :default => 1, :null => false
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "approved",     :default => false
   end
 
   create_table "characters", :force => true do |t|
