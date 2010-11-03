@@ -5,6 +5,8 @@ class Raid < ActiveRecord::Base
   belongs_to :guild
   
   attr_accessor :invitation_window, :duration, :invited_guild
+  
+  validates_presence_of :title
 
   #only future Date/Time is valid
   validates_each(:invite_start,:start,:end) do |record, attr, value|
