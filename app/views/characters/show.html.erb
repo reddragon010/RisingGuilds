@@ -46,7 +46,7 @@
 	</div>
 	
 	<div id="onlinestatus">
-		<%= online_text(@character.online) %>
+		<%= raw @character.online ? "<span style=\"color:green\">Online</span>" : "<span style=\"color:green\">Offline</span>" %>
 	</div>
 </div>
 
