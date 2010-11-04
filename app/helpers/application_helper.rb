@@ -23,7 +23,7 @@ module ApplicationHelper
   end
   
   def roleicon(role)
-    image_tag("icons/roles/#{role}.png",{:size => "18x18",:title => role})
+    image_tag("icons/roles/#{role.downcase}.png",{:size => "18x18",:title => role})
   end
   
   def charicon_path(char)

@@ -67,9 +67,9 @@ describe "Raids" do
     it "should be able to create a raid" do
       visit new_guild_raid_path(@guild)
       fill_in 'Title',:with => 'TestRaid1'
-  		fill_in 'Min lvl',:with => '1'
-  		fill_in 'Max lvl',:with => '80'
-  		fill_in 'Description',:with => 'Test the Raid'
+  		fill_in 'raid_min_lvl',:with => '1'
+  		fill_in 'raid_max_lvl',:with => '80'
+  		fill_in 'raid_description',:with => 'Test the Raid'
   		select "Naxx", :from => 'raid_icon'
   		click_link_or_button "Create"
   		page.should have_css(".notice")
