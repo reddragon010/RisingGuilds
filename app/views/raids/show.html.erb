@@ -84,7 +84,7 @@
 <table>
 	<thead>
 	<tr>
-		<td></td>
+		<td style="width:200px"></td>
 		<% configatron.raidplanner.roles.each do |role| %>
 		<td style="width:40px"><%= roleicon(role.downcase) %></td>
 		<% end %>
@@ -94,11 +94,12 @@
 		<td style="width:40px"><%= image_tag classicon_path(Character.new(:class_id => value)),:size => "18x18" %></td>
 		<% end %>
 		<% end %>
+		<td></td>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>Confirmed</td>
+		<td class="left">Confirmed</td>
 		<% unless @raid.limit_roles.nil?%>
 		<% configatron.raidplanner.roles.each do |role| %>
 		<td>
@@ -114,9 +115,10 @@
 		</td>
 		<% end %>
 		<% end %>
+		<td></td>
 	</tr>
 	<tr>
-		<td>Available</td>
+		<td class="left">Available</td>
 		<% unless @raid.limit_roles.nil? %>
 		<% configatron.raidplanner.roles.each do |role| %>
 		<td>
@@ -132,6 +134,7 @@
 		</td>
 		<% end %>
 		<% end %>
+		<td></td>
 	</tr>
 	</tbody>
 </table>
