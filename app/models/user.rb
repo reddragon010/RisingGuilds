@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   end
   
   def kickable_by?(user, guild)
-    user == self || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
   end
   
   def promoteable_by?(user, guild)
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
   
   def demoteable_by?(user, guild)
-    user == self || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
   end
   
   def role_symbols
