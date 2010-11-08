@@ -1,0 +1,64 @@
+<script type="text/javascript" src="/javascripts/jquery.beautyOfCode-min.js"></script>
+
+<script type="text/javascript">
+    $.beautyOfCode.init({
+      brushes: ['Xml', 'JScript', 'Plain', 'Php'],
+			theme: 'FadeToGrey'
+    });
+</script>
+
+
+<div class="box_big">
+	<div class="box_headline">"Who Is Online"-Widget</div>
+	<div style="float:left; border: 1px solid #666; padding:5px;">
+		<script>
+			function wio_callback(obj){
+				var guild = obj[0].guild;
+				var chars = obj[1];
+				document.write('<span style="font-size:16px;font-width:bold;">' + guild.name + '</span><br />');
+				document.write('<span>' + guild.online_members_count + '/' + guild.members_count + ' Online</span>');
+
+				document.write('<table style="width:190px;">');
+				for (var i = 0; i < chars.length; i++) {
+					var chara = chars[i].character;
+				  document.write('  <tr>');
+					document.write('    <td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>');
+					document.write('    <td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>');
+					document.write('    <td>' + chara.level + '</td>');
+					document.write('    <td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
+					document.write('  </tr>');
+				}
+				document.write('</table>'); 
+			}
+		</script>
+		<script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/onlinemembers?callback=wio_callback"></script>
+	</div>
+	<div style="margin-left:210px">
+		<p style="font-size:12px">Die "WerIstOnline"-Anzeige kann ganz einfach auf jeder Webseite eingebunden werden. Dazu muss nur der untenstehende Code in die entsprechende Stelle auf der Seite eingefügt werden. Wer sich ein wenig mit JavaScript und HTML/CSS auskennt sollte ohne Probleme die Anzeige an die Website anpassen können. Dazu müssen lediglich die "document.write"-Befehle abgeändert  bzw. mit CSS gestylt werden.</p>
+		<p style="font-size:12px">Die Anzeigen funktionieren nur mit aktuellen, javascript-fähigen Browsern. Dieser Umstand ist leider nicht zu ändern. Die Scripts sind aber so simpel, dass sie auf allen Browsern problemlos laufen sollten.</p>
+		<pre class="code">
+	  	<code class="javascript">
+<%= "<script>
+function wio_callback(obj){
+	var guild = obj[0].guild;
+	var chars = obj[1];
+	document.write('<span>' + guild.name + '</span><br />');
+	document.write('<span>' + guild.online_members_count + '/' + guild.members_count + ' Online</span>');
+	document.write('<table>');
+	for (var i = 0; i < chars.length; i++) {
+		var chara = chars[i].character;
+		document.write('<tr>');
+		document.write('<td><img src=\"http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif\" /></td>');
+		document.write('<td><img src=\"http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif\" /></td>');
+		document.write('<td>' + chara.level + '</td>');
+		document.write('<td><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
+		document.write('</tr>');
+	}
+	document.write('</table>'); 
+}
+</script>\n" +
+'<script type="text/javascript" src="/guilds/' + params[:guild_id] + '/onlinemembers?callback=wio_callback"></script>' %>
+	  	</code>
+		</pre>
+	</div>
+</div>

@@ -215,6 +215,13 @@ class GuildsController < ApplicationController
     end
   end
   
+  def onlinemembers 
+    @guild = Guild.find(params[:id])
+    @characters = @guild.characters.where(:online => true).select('name, class_id, race_id, gender_id, level')
+    json = [@guild,@characters].to_json(:methods => [:online_members_count, :members_count], :only => [:name, :realm, :online_members_count, :online_members, :class_id, :race_id, :gender_id, :level])
+    render :json => json, :callback => params[:callback] 
+  end
+  
   protected
   
   def choose_layout

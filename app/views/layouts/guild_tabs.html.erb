@@ -40,6 +40,7 @@ end
 
 if permitted_to? :maintain, @guild
 	@tabs << ""
+	@tabs << link_to("Widgets", :controller => 'guilds', :action => 'widgets', :id => @guild.id)
 	@tabs << link_to("Settings", :controller => 'guilds', :action => 'maintain', :id => @guild.id)
 end
 

@@ -67,6 +67,18 @@ class Guild < ActiveRecord::Base
     self.officers + self.leaders
   end
   
+  def online_members
+    self.characters.where(:online => true)
+  end
+  
+  def online_members_count
+    self.characters.where(:online => true).count
+  end
+  
+  def members_count
+    self.characters.count
+  end
+  
   def reset_token
     self.token = ActiveSupport::SecureRandom::hex(8)
     self.save

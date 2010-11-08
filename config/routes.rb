@@ -29,6 +29,7 @@ RisingGuilds::Application.routes.draw do
      resources :newsentries
      resources :events
      resources :statistics
+     resources :widgets
    end
    resources :characters do
      resources :events
@@ -40,13 +41,9 @@ RisingGuilds::Application.routes.draw do
      resources :attendances
    end
    resources :attendances
-
    
    #Guild Join Route
    match '/guilds/:id/join/:token' => 'guilds#join'
-   
-   #Widget Auth Route
-   match '/widget/:action/:id/:token' => 'widget'
    
    #Default Route
    match ':controller/:id/:action(.:format)'

@@ -1,7 +1,7 @@
 authorization do
   role :guest do
     has_permission_on [:home, :guilds, :characters, :events], :to => [:view]
-    has_permission_on :guilds, :to => :join #permission not handled by d-auth
+    has_permission_on :guilds, :to => [:join, :onlinemembers] #permission not handled by d-auth
     has_permission_on :newsentries, :to => :view do
       if_attribute :public => is { true }
     end
