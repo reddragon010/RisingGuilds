@@ -82,4 +82,24 @@
 * [Fix]				char-links in pagination-fields
 * [Fix]				user-index
 * [Improved]	Raid-UI
-* [Improved]	updated Gravtastic 
+* [Improved]	updated Gravtastic
+
+== 0.7.1 BETA 08-11-2010
+
+* [Feature]		added Highcharts
+* [Feature]		added meele-/range-DD roles to raids
+* [Feature]		added role-/class-limits to raids
+* [Feature]		added autoconfirm option to raids
+* [Fix]       verified guild public visible
+* [Fix]       many Tooltips
+* [Fix]				Fixed public-visible user-ips
+* [Fix]				guild title validation
+* [Fix]				many misspellings
+* [Fix]				onlinetext on Charpage
+* [Fix]				leaderless guilds
+* [Improved]	raidicons
+* [Improved]	add-character form
+* [Improved]	news-entries
+* [Improved]	some code-cleanup
+* [Improved]	Raid UI/Forms
+* [Improved]	removed length-check from guild
