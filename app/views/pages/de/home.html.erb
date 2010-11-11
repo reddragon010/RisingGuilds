@@ -17,22 +17,39 @@
 <div class="clean"></div>
 
 <div class="box_small">
-<div class="box_headline">Heiße Neuigkeiten</div>
+<div class="box_headline">Tweets</div>
 <div class="newsentry">
-	<div class="news_header">
-		<span>Erste Closed-Beta geht an den Start</span>
-	</div>
-	<div class="news_body">
-		<div>
-			<p>Freudig darf ich euch hiermit die erste Closed-Beta von RisingGuilds vorstellen.</p> 
-			<p>Doch was genau heißt dieses Beta und warum ist es Closed? Beta bedeutet für mich (uns somit für dieses Projekt), dass noch nicht alles so läuft wie es für die erste vollständige Version benötigt wird. Closed ist diese Version deswegen, weil sie noch nicht für die Öffentlichkeit zugänglich ist. Zur Zeit können nur ausgewählte Gilden das System nutzen.</p>
-			<p>Ich erhoffe mir daraus ein paar Daten, die mir speziell bei der Optimierung des Codes behilflich sein könnten. Da es eine sehr frühe Beta-Version ist kann es aber immer noch vorkommen, dass ich grobe Änderungen an der Datenbank vornehmen muss und so teile der Daten unbrauchbar werden könnten. Meiner Einschätzung nach ist dies unwahrscheinlich aber durchaus möglich. Weiters ist diese Version (wie erwähnt) nicht Performance-Optimiert und könnte schon bei wenigen Usern in die Knie gehen. Genau um das zu testen ist diese Version da. Ich bitte alle Tester um Geduld und Verständis.</p>
-		</div>
-	</div>
-	<div class="news_footer">
-		<div class="news_author">RedDragon</div>
-		<div class="news_time">15-07-2010</div>
-	</div>
+	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+	<script>
+	new TWTR.Widget({
+	  version: 2,
+	  type: 'profile',
+	  rpp: 7,
+	  interval: 6000,
+	  width: 430,
+	  height: 300,
+	  theme: {
+	    shell: {
+	      background: '#333333',
+	      color: '#ffffff'
+	    },
+	    tweets: {
+	      background: '#1C1C1C',
+	      color: '#ffffff',
+	      links: '#1263b5'
+	    }
+	  },
+	  features: {
+	    scrollbar: false,
+	    loop: false,
+	    live: false,
+	    hashtags: true,
+	    timestamp: true,
+	    avatars: false,
+	    behavior: 'all'
+	  }
+	}).render().setUser('risingguilds').start();
+	</script>
 </div>
 </div>
 
