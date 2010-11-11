@@ -135,12 +135,18 @@ class AttendancesController < ApplicationController
   def check_limits(attendance)
     raid = attendance.raid
     character = attendance.character
-    role_count1 =  raid.attendances.where(:role => attendance.role, :status => 3).count
-    role_count2 =  raid.limit_roles[attendance.role].to_i
+    #check rolelimits
+    unless raid.limit_roles.nil?
+      role_count1 =  raid.attendances.where(:role => attendance.role, :status => 3).count
+      role_count2 =  raid.limit_roles[attendance.role].to_i
+    end
     t1 = raid.limit_roles.nil? || role_count2.nil? || role_count1 < role_count2
-    class_count1 = raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != character.class_id}.count
-    class_name = configatron.raidplanner.classes[attendance.character.class_id]
-    class_count2 = raid.limit_classes[class_name].to_i
+    #check classlimits
+    unless raid.limit_classes.nil?
+      class_count1 = raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != character.class_id}.count
+      class_name = configatron.raidplanner.classes[attendance.character.class_id]
+      class_count2 = raid.limit_classes[class_name].to_i
+    end
     t2 = raid.limit_classes.nil? || class_count2.nil? || class_count1 < class_count2
     t1 && t2
   end
