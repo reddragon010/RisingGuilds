@@ -1,9 +1,5 @@
 module HelperMethods
   # Put helper methods you need to be available in all tests here.
-  def assing_user_to_guild_as(role)
-    role_id = Role.where(:name => role).first.id
-    @guild.assignments << Assignment.new(:role_id => role_id, :user_id => @user.id, :guild_id => @guild.id)
-  end
   
   def log_in_with(user)
     visit '/login'

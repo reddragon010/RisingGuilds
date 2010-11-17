@@ -6,6 +6,10 @@ feature "Guild Guests" do
     Factory :Guild
   end
   
+  let :user do
+    Factory :User
+  end
+  
   scenario "Scenario name" do
     true.should == true
   end
@@ -34,5 +38,13 @@ feature "Guild Guests" do
     page.should have_css(".error")
   end
   
-  
+   #scenario "should be able to join a guild with a valid token" do
+   # visit "guilds/#{guild.id}/join/#{guild.token}"
+   # fill_in 'Login', :with => user.login
+   # fill_in 'Password', :with => 'password'
+   # click_button 'Login'
+   # puts page.body
+   # guild.reload.members.include?(user.login).should be_true
+   # page.should have_css(".notice")
+  #end
 end
