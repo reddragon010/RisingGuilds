@@ -31,11 +31,6 @@ class GuildsController < ApplicationController
   def show
     add_breadcrumb "Overview", guild_path(@guild)
     
-    if current_user.nil? || current_user.assignments.nil?
-      @guilds = [Guild.find(params[:id])]
-    else
-      @guilds = current_user.assignments.collect{|a| a.guild }.uniq
-    end
     @online_characters = @guild.characters.where(:online => true).order("rank") unless @guild.nil?
     @events = @guild.events.visible.paginate(:per_page => 10, :page => params[:page], :order => 'created_at DESC')
     if @guild.users.include?(current_user)
