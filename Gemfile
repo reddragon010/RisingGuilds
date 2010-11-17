@@ -54,15 +54,11 @@ group :development, :test do
   gem "autotest-rails"
   gem "ZenTest"
   gem "ruby_parser"
+  gem 'steak', '>= 1.0.0.rc.1'
+  gem 'capybara'
+  gem 'delorean'
+  gem 'database_cleaner'
+  gem 'spork'
 end
 
 gem 'cover_me', '>= 1.0.0.pre2', :require => false, :group => :test
-
-group :cucumber do
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'spork'
-  gem 'launchy'    # So you can do Then show me the page
-end
