@@ -14,14 +14,10 @@ class Guild < ActiveRecord::Base
     Raid.where(:guild_id => self.id).each(&:destroy)
   end
   
-  validates_presence_of :name
-  validates_presence_of :description
-  validates_uniqueness_of :name
-  
-  validates_presence_of :token
-  validates_uniqueness_of :token
-  
-  validates_presence_of :realm
+  validates :name,        :presence => true, :uniqueness => true
+  validates :description, :presence => true
+  validates :token,       :presence => true, :uniqueness => true
+  validates :realm,       :presence => true
   
   validate :serial_check, :on => :create
   
@@ -31,35 +27,29 @@ class Guild < ActiveRecord::Base
                                           :format => 'PNG'
                                           }}
   
-    
-  
   attr_accessor :serial
   
   def leaders
     @leaders = Array.new
-    @leaders_role_id ||= Role.where(:name => "leader").first.id
-    assignments.where(:role_id => @leaders_role_id).each{|a| @leaders << a.user}
+    assignments.where(:role => 'leader').each{|a| @leaders << a.user}
     @leaders
   end
   
   def officers
     @officers = Array.new
-    @officers_role_id ||= Role.where(:name => "officer").first.id
-    assignments.where(:role_id => @officers_role_id).each{|a| @officers << a.user}
+    assignments.where(:role => 'officer').each{|a| @officers << a.user}
     @officers
   end
   
   def raidleaders
     @raidleaders = Array.new
-    @raidleaders_role_id ||= Role.where(:name => "raidleader").first.id
-    assignments.where(:role_id => @raidleaders_role_id).each{|a| @raidleaders << a.user}
+    assignments.where(:role => 'raidleader').each{|a| @raidleaders << a.user}
     @raidleaders
   end
   
   def members
     @members = Array.new
-    @members_role_id ||= Role.where(:name => "member").first.id
-    assignments.where(:role_id => @members_role_id).each{|a| @members << a.user}
+    assignments.where(:role => 'member').each{|a| @members << a.user}
     @members
   end
   

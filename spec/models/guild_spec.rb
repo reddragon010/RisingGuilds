@@ -30,28 +30,28 @@ describe Guild do
   it "should know its raidleaders" do
     guild = Factory(:Guild)
     raidleader = Factory(:User)
-    guild.assignments << Assignment.create(:user_id => raidleader.id, :guild_id => guild.id, :role_id => Role.where(:name => 'raidleader').first.id)
+    guild.assignments << Assignment.create(:user_id => raidleader.id, :guild_id => guild.id, :role => 'raidleader')
     guild.raidleaders.first.should == raidleader
   end
   
   it "should know its leaders" do
     guild = Factory(:Guild)
     leader = Factory(:User)
-    guild.assignments << Assignment.create(:user_id => leader.id, :guild_id => guild.id, :role_id => Role.where(:name => 'leader').first.id)
+    guild.assignments << Assignment.create(:user_id => leader.id, :guild_id => guild.id, :role => 'leader')
     guild.leaders.first.should == leader
   end
   
   it "should know its officers" do
     guild = Factory(:Guild)
     officer = Factory(:User)
-    guild.assignments << Assignment.create(:user_id => officer.id, :guild_id => guild.id, :role_id => Role.where(:name => 'officer').first.id)
+    guild.assignments << Assignment.create(:user_id => officer.id, :guild_id => guild.id, :role => 'officer')
     guild.officers.first.should == officer
   end
   
   it "should know its members" do
     guild = Factory(:Guild)
     member = Factory(:User)
-    guild.assignments << Assignment.create(:user_id => member.id, :guild_id => guild.id, :role_id => Role.where(:name => 'member').first.id)
+    guild.assignments << Assignment.create(:user_id => member.id, :guild_id => guild.id, :role => 'member')
     guild.members.first.should == member
   end
   
@@ -61,8 +61,7 @@ describe Guild do
     guild_id = guild.id
     
     member = Factory(:User)
-    Factory(:Role,:name => 'leader')
-    guild.assignments << Assignment.create(:user_id => member.id, :guild_id => guild.id, :role_id => Role.find_by_name('leader'))
+    guild.assignments << Assignment.create(:user_id => member.id, :guild_id => guild.id, :role => 'leader')
     
     raid = Factory(:Raid, :guild_id => guild.id)
     raid.guilds << guild

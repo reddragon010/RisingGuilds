@@ -39,10 +39,6 @@ Factory.define :User do |f|
   f.active true
 end
 
-Factory.define :Role do |f|
-  f.name "testuser"
-end
-
 Factory.define :Raid do |f|
   f.sequence(:title){|n| "TestRaid#{n}"} 
   f.max_attendees 25
@@ -69,4 +65,10 @@ Factory.define :Newsentry do |f|
   f.public   true
   f.sticky   false
   f.guild_id 1
+end
+
+Factory.define :Assignment do |f|
+  f.guild_id 1
+  f.user_id 1
+  f.role :member
 end

@@ -1,0 +1,1 @@
+Rails.application.config.session_store :cookie_store, :key => 'rZZJrEVphEOoGoM80TbID5iXTjQhk2a6VRRwCRuHdteongrPzmFs4RoqyHvmgcE'

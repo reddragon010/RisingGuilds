@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   
   has_many :characters, :dependent => :nullify
   has_many :assignments, :dependent => :destroy
-  has_many :roles, :through => :assignments
   has_many :guilds, :through => :assignments
   has_many :newsentries, :dependent => :nullify
   
@@ -44,35 +43,40 @@ class User < ActiveRecord::Base
     self.active
   end
   
-  def guild_role_id(guild_id)
-    a = self.assignments.where(:guild_id => guild_id).order("role_id").last
-    unless a.nil?
-      return a.role_id
+  def guild_role_level(guild_id)
+    levels = ["member", "raidleader", "officer", "leader"]
+    assignments = self.assignments.where(:guild_id => guild_id).all
+    unless assignments.blank?
+      return assignments.map{|a| levels.index(a.role)}.sort.last
     else
-      return false
+      return -1
     end
   end
   
   def kickable_by?(user, guild)
-    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
   end
   
   def promoteable_by?(user, guild)
-    user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+    user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
   end
   
   def demoteable_by?(user, guild)
-    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_id(guild.id) < self.guild_role_id(guild.id)
+    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
+  end
+  
+  def roles
+    self.assignments.all.map{|a| a.role}
   end
   
   def role_symbols
     role_symbols = Array.new
     role_symbols << :admin if admin?
     roles.each do |role|
-      role_symbols << role.name.underscore.to_sym
+      role_symbols << role.downcase.underscore.to_sym
     end
     role_symbols << :user
     role_symbols << :member unless guilds.empty?
-    return role_symbols
+    return role_symbols.uniq
   end
 end

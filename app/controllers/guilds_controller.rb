@@ -67,7 +67,7 @@ class GuildsController < ApplicationController
     
     respond_to do |format|
       if @guild.save
-        @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => 1)
+        @guild.assignments << Assignment.create(:user_id => current_user.id, :role => 'leader')
         @guild.events << Event.create(:action => 'guild_created', :content => current_user.login)
         flash[:notice] = t(:created,:item => 'Guild')
         format.html { redirect_to(@guild) }
@@ -156,7 +156,7 @@ class GuildsController < ApplicationController
           if @guild.verified?
             if params[:token] == @guild.token
               unless @guild.users.include?(current_user)
-                @guild.assignments << Assignment.create(:user_id => current_user.id, :role_id => Role.find_by_name("member").id)
+                @guild.assignments << Assignment.create(:user_id => current_user.id, :role => "member")
                 flash[:notice] = t('guilds.joined')
                 format.html { redirect_to(@guild) }
               else
