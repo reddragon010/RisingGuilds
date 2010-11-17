@@ -1,27 +1,19 @@
 require 'spec_helper'  
 
-describe WidgetController do
+describe WidgetsController do
   fixtures :roles
   
   before(:each) do
-    @guild = Guild.first || Factory(:Guild) 
+    @guild = Guild.first || Factory(:Guild)
+    @character = Factory.create(:Character, :online => true, :guild_id => @guild.id)
     visit root_path 
   end  
   
-  context "a member" do
-    before(:each) do
-      login
-      assing_user_to_guild_as("member")
-    end
-    
-    it "should not get access with a invalid key" do
-      visit "/widget/onlinemembers/#{@guild.id}/#{@user.single_access_token}invalid"
-      page.should have_content("Invalid API Key")
-    end
-    
-    it "should get access with a valid key" do
-      visit "/widget/onlinemembers/#{@guild.id}/#{@user.single_access_token}"
-      page.should have_content("document.write(")
+  context "a guest" do
+    it "should see the onlinemembers in json" do
+      visit "guilds/#{@guild.id}/onlinemembers?callback=wio_callback"
+      page.should have_content(@character.name)
+      page.should have_content('wio_callback')
     end
   end
 end
