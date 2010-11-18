@@ -25,7 +25,7 @@
 					document.write('    <td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>');
 					document.write('    <td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>');
 					document.write('    <td>' + chara.level + '</td>');
-					document.write('    <td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
+					document.write('    <td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + guild.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
 					document.write('  </tr>');
 				}
 				document.write('</table>'); 
@@ -51,7 +51,7 @@ function wio_callback(obj){
 		document.write('<td><img src=\"http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif\" /></td>');
 		document.write('<td><img src=\"http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif\" /></td>');
 		document.write('<td>' + chara.level + '</td>');
-		document.write('<td><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
+		document.write('<td><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + guild.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>');
 		document.write('</tr>');
 	}
 	document.write('</table>'); 
