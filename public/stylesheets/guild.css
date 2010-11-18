@@ -36,7 +36,7 @@
 }
 
 .guild .website {
-	float:right;
+	float: right;
 }
 
 .guild .description {
@@ -79,6 +79,14 @@
 	right: 0;
 	margin:5px;
 	font-size: 8pt;
+}
+
+#guild_header #website img {
+        vertical-align: middle;
+}
+
+#guild_header #teamspeak img {
+        vertical-align: middle;
 }
 
 /* news */

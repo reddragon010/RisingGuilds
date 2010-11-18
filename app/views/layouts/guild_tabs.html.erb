@@ -4,7 +4,7 @@
 @online_characters ||= @guild.characters.find_all_by_online(true) unless @guild.nil?
 %>
 <div class="guildlogo">
-	<%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>
+  <%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>
 </div>
 <div class="guildname">
   <%=h @guild.name %>
@@ -16,15 +16,21 @@
   <%=h @guild.realm %>	
 </div>
 <% unless @guild.website.nil? %>
-<div id="website">
-  <%= link_to @guild.website, @guild.website, {'data-popup' => true} %>
-</div>
+<span id="website">
+  <%= image_tag("icons/website.png", :alt => "website") %> <%= link_to @guild.website, @guild.website, {'data-popup' => true} %>
+</span>
+<% end %>
+<% unless @guild.teamspeak.nil? %>
+<span id="teamspeak">
+  <%= image_tag("icons/teamspeak.png", :alt => "teamspeak") %> <a href="ts3server://<%= @guild.teamspeak %>"><%= @guild.teamspeak %></a>
+</span>
+<% end %>
 <% unless @guild.verified? || !permitted_to?(:maintain, @guild) %>
 <div id="verify_guild">
   <p><%= link_to 'Please verify the guildname!', :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
 </div>
 <% end %>
-<% end %>
+<div class="clear"></div>
 <% end %>
 
 <% content_for :tabs do %>

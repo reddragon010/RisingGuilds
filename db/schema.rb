@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117172532) do
+ActiveRecord::Schema.define(:version => 20101118005343) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(:version => 20101117172532) do
     t.integer  "recruit_level"
     t.integer  "faction_id"
     t.datetime "last_sync"
+    t.string   "teamspeak"
   end
 
   create_table "guilds_raids", :id => false, :force => true do |t|
