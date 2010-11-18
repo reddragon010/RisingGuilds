@@ -1,5 +1,5 @@
 <div style="position:relative; width:100%">
-	<div id="raidicon"><%= image_tag("/images/icons/raid/nil.png", :size => "65x65", :id => "raidiconimg") %></div>
+  <div id="raidicon"><%= image_tag("/images/icons/raid/nil.png", :size => "65x65", :id => "raidiconimg") %></div>
 </div>
 
 <h1>New Raid</h1>
@@ -7,101 +7,101 @@
 <%= form_for(@raid) do |f| %>
   <%= f.error_messages %>
   <div class="box_big" style="margin-top:60px">
-	<div class="box_headline"></div>
-  <table>
-		<tr>
-			<td class="left"><%= f.label :title %> <%= f.text_field :title, :size => 50 %></td>
-      <td>
-				<%= f.label :guild_id %>
-	      <% if params[:guild_id] %>
-				<%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
-				<% else %>
-				<%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
-				<% end %>
-			</td>
-			<td>
-				Icon
-				<%= select(:raid, :icon, @raid_icons, {:prompt => "select an icon"}) %>
-				<script type="text/javascript" charset="utf-8">
-				$("#raid_icon").live('change',function(){
-					if($("#raid_icon").val() != ""){
-					  $("#raidiconimg").attr("src","/images/icons/raid/" + $("#raid_icon").val());
-					} else {
-					  $("#raidiconimg").attr("src","/images/icons/raid/nil.png");	
-					}
-					}); 
-				</script>  
-			</td>
-		</tr>
-  </table>
-	</div>
-	<div class="box_small">
-		<div class="box_headline">Time Settings</div>
-		<p>
-	    <%= f.label :start %><br />
-	    <%= f.datetime_select :start, :default => 1.day.from_now %>
-	  </p>
-	  <p>
-	    <%= f.label :invitation_window %><br />
-	    <%= f.select :invitation_window, [15,30,45,60] %>
-	  </p>
-	  <p>
-	    <%= f.label :duration %><br />
-	    <%= f.select :duration, [1,2,3,4,5,6] %>
-	  </p>
-	</div>
-	<div class="box_small">
-		<div class="box_headline">Details</div>
-  	<p>
-	    <%= f.label :max_attendees %><br />
-	    <%= f.text_field :max_attendees %>
-	  </p>
-	  <p>
-	    Level-Range<br />
-	    <%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %>
-	  </p>
-	  <p>
-	    <%= f.label :autoconfirm %><br />
-	    <%= f.check_box :autoconfirm %>
-	  </p> 
-	</div>
-	<div class="clear"></div>
-	<div class="box_small">
-		<div class="box_headline">Role Limits</div>
-		<table>
-			<tr>
-			<% configatron.raidplanner.roles.each do |role| %>	
-				<td><%= roleicon(role) %></td>
-			<% end %>
-			</tr>
-			<tr>
-			<% configatron.raidplanner.roles.each do |role| %>	
-				<td><%= text_field :limit_roles, role, :size => 2 %></td>
-			<% end %>
-			</tr>
-	  </table>
-	</div>
-	<div class="box_small">
-		<div class="box_headline">Class Limits</div>
- 		<table>
-			<tr>
-			<% CLASSES.each do |key,value| %>
-				<td><%= image_tag classicon_path(Character.new(:class_id => value)),{:size => "18x18", :title => key} %></td>
-			<% end %>	
-			</tr>
-			<tr>
-			<% configatron.raidplanner.classes.each do |klass| %>
-				<td><%= text_field :limit_classes, klass, :size => 2 %></td>
-			<% end %>	
-			</tr>
-	  </table> 
-	</div>
-  <div class="clear"></div>
-	<div class="box_big">
-    <div class="box_headline">Description</div>
-    <%= f.text_area :description, :size => "125x2" %>
+    <div class="box_headline"></div>
+    <table>
+      <tr>
+        <td class="left"><%= f.label :title %> <%= f.text_field :title, :size => 50 %></td>
+        <td>
+          <%= f.label :guild_id %>
+          <% if params[:guild_id] %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
+          <% else %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
+          <% end %>
+        </td>
+        <td>
+                                  Icon
+          <%= select(:raid, :icon, @raid_icons, {:prompt => "select an icon"}) %>
+          <script type="text/javascript" charset="utf-8">
+            $("#raid_icon").live('change',function(){
+              if($("#raid_icon").val() != ""){
+                $("#raidiconimg").attr("src","/images/icons/raid/" + $("#raid_icon").val());
+              } else {
+                $("#raidiconimg").attr("src","/images/icons/raid/nil.png");	
+              }
+            }); 
+          </script>  
+        </td>
+      </tr>
+    </table>
   </div>
-	<%= f.hidden_field :leader %>
+  <div class="box_small">
+    <div class="box_headline">Time Settings</div>
+    <p>
+      <%= f.label :start %><br />
+      <%= f.datetime_select :start, :default => 1.day.from_now %>
+    </p>
+    <p>
+      <%= f.label :invitation_window %><br />
+      <%= f.select :invitation_window, [15,30,45,60] %>
+    </p>
+    <p>
+      <%= f.label :duration %><br />
+      <%= f.select :duration, [1,2,3,4,5,6] %>
+    </p>
+  </div>
+  <div class="box_small">
+    <div class="box_headline">Details</div>
+    <p>
+      <%= f.label :max_attendees %><br />
+      <%= f.text_field :max_attendees %>
+    </p>
+    <p>
+              Level-Range<br />
+      <%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %>
+    </p>
+    <p>
+      <%= f.label :autoconfirm %><br />
+      <%= f.check_box :autoconfirm %>
+    </p> 
+  </div>
+  <div class="clear"></div>
+  <div class="box_small">
+    <div class="box_headline">Role Limits</div>
+    <table>
+      <tr>
+        <% configatron.raidplanner.roles.each do |role| %>	
+          <td><%= roleicon(role) %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% configatron.raidplanner.roles.each do |role| %>	
+          <td><%= text_field :limit_roles, role, :size => 2 %></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+  <div class="box_small">
+    <div class="box_headline">Class Limits</div>
+    <table>
+      <tr>
+        <% CLASSES.each do |key,value| %>
+          <td><%= image_tag classicon_path(Character.new(:class_id => value)),{:size => "18x18", :title => key} %></td>
+        <% end %>	
+      </tr>
+      <tr>
+        <% configatron.raidplanner.classes.each do |klass| %>
+          <td><%= text_field :limit_classes, klass, :size => 2 %></td>
+        <% end %>	
+      </tr>
+    </table> 
+  </div>
+  <div class="clear"></div>
+  <div class="box_big">
+    <div class="box_headline">Description</div>
+    <%= f.text_area :description, :size => "100x2" %>
+  </div>
+  <%= f.hidden_field :leader %>
   <p>
     <%= f.submit 'Create' %>
   </p>
