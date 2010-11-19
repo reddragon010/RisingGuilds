@@ -15,12 +15,12 @@
 <div id="guildrealm">
   <%=h @guild.realm %>	
 </div>
-<% unless @guild.website.nil? %>
+<% unless @guild.website.blank? %>
 <span id="website">
   <%= image_tag("icons/website.png", :alt => "website") %> <%= link_to @guild.website, @guild.website, {'data-popup' => true} %>
 </span>
 <% end %>
-<% unless @guild.teamspeak.nil? %>
+<% unless @guild.teamspeak.blank? %>
 <span id="teamspeak">
   <%= image_tag("icons/teamspeak.png", :alt => "teamspeak") %> <a href="ts3server://<%= @guild.teamspeak %>"><%= @guild.teamspeak %></a>
 </span>
