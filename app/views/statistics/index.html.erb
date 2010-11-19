@@ -37,11 +37,16 @@
     });
   
   </script>
+<% end %>
   <div class="box_big">
     <div class="box_headline">Online Chart</div>
+    <% unless @online_data.blank? %>
     <div id="online-chart-container" class="chart-container"></div>
+    <% else %>
+    No statistic available
+    <% end %>
   </div>
-<% end %>
+
 <% unless @growth_data.blank? %>
   <script>
     var chart2;
@@ -80,11 +85,17 @@
    
     });  
   </script>
+<% end %>
   <div class="box_big">
     <div class="box_headline">Growth Chart</div>
+    <% unless @online_data.blank? %>
     <div id="growth-chart-container" class="chart-container"></div>
+    <% else %>
+    No statistic available
+    <% end %>
+    
   </div>
-<% end %>
+
 <% unless @ail_data.blank? %>
   <script>
     var chart2;
@@ -123,8 +134,12 @@
    
     });  
   </script>
+<% end %>
   <div class="box_big">
     <div class="box_headline">AIL Chart</div>
+    <% unless @online_data.blank? %>
     <div id="ail-chart-container" class="chart-container"></div>
+    <% else %>
+    No statistic available
+    <% end %>
   </div>
-<% end %>

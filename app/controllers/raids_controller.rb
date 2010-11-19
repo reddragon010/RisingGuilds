@@ -13,7 +13,7 @@ class RaidsController < ApplicationController
   def index
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
-      add_breadcrumb "Raids", ""
+      add_breadcrumb "Raids", :guild_raids_path
     else
       add_breadcrumb "Raids", raids_path
     end

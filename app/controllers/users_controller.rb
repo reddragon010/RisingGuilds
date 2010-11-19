@@ -8,11 +8,11 @@ class UsersController < ApplicationController
   
   def index
     if !@guild.nil?
+      add_breadcrumb "Guilds", :guilds_path
       add_breadcrumb @guild.name, guild_path(params[:guild_id])
-      add_breadcrumb "Users", ""
+      add_breadcrumb "Users", :guild_users_path
     else
       add_breadcrumb "Users", characters_path
-      add_breadcrumb "Index", ""
     end
     
     @users = User.all
@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     end
     
     if !@guild.nil?
+      add_breadcrumb "Guilds", :guilds_path
       add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Users", guild_users_path(@guild)
       add_breadcrumb @user.login, guild_user_path(@guild,@user)

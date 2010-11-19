@@ -53,7 +53,7 @@ body {
 
 }
 #secnav {
-	margin: 10px;
+	margin: 10px 20px 0px 20px;
 	height: 25px;
 }
 #secnav ul {
@@ -63,10 +63,7 @@ body {
 }
 #secnav li {
 	float: left;
-	margin-top: 0;
-	margin-right: 10px;
-	margin-bottom: 0;
-	margin-left: 10px;
+	margin: 0px 5px 0px 5px;
 }
 #secnav li a {
 	height: 22px;
@@ -78,9 +75,14 @@ body {
 	text-decoration: none;
 	text-align: center;
 	background-color: #1C1C1C;
-	border: 1px solid #CCC;
+	border: 2px solid #333;
 }
-
+#secnav li a:hover {
+        background-color: #222;
+}
+#secnav li.spacer{
+        margin: 0px 10px 0px 10px;
+}
 #tabnav {
 	margin-top: 5px;
 }
@@ -111,7 +113,7 @@ body {
 }
 
 #content {
-	margin: 10px;
+	margin: 0px 10px 10px 10px;
 	padding: 10px;
 	border: 2px solid #333;
 	background-color: #1C1C1C;

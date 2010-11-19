@@ -29,7 +29,6 @@ class GuildsController < ApplicationController
   # GET /guilds/1
   # GET /guilds/1.xml
   def show
-    add_breadcrumb "Overview", guild_path(@guild)
     
     @online_characters = @guild.characters.where(:online => true).order("rank") unless @guild.nil?
     @events = @guild.events.visible.paginate(:per_page => 10, :page => params[:page], :order => 'created_at DESC')

@@ -11,7 +11,7 @@ class CharactersController < ApplicationController
     if !params[:guild_id].nil?
       add_breadcrumb "Guilds", :guilds_path
       add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
-      add_breadcrumb "Members", ""
+      add_breadcrumb "Members", :guild_characters_path
     elsif !params[:user_id].nil?
       add_breadcrumb "Account", account_path
       add_breadcrumb "My Characters", ""

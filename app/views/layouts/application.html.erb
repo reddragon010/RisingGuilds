@@ -28,6 +28,7 @@
 	<div style="position:relative; width:100%">
 	  <%= yield(:tabs) %>
 	</div>
+        <% unless flash.blank? %>
 	<div id="popups">
 	  <% if flash[:notice] %>
 	  <p id="flash" class="notice"><%= flash[:notice] %></p>
@@ -36,6 +37,7 @@
 	  <p id="flash" class="error"><%= flash[:error] %></p>
 	  <% end %>
 	</div>
+        <% end  %>
     <div id="content">
 	  <%= content_for?(:content) ? yield(:content) : yield %>
       <div class="clear"></div>

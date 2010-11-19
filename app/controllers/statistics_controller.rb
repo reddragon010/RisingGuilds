@@ -1,7 +1,12 @@
 class StatisticsController < ApplicationController
   layout :choose_layout
   
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Guilds", :guilds_path
+  add_breadcrumb Proc.new { |c| Guild.find(c.params[:guild_id]).name }, Proc.new { |c| "/guilds/#{c.params[:id]}" }, :if => Proc.new { |c| !c.params[:guild_id].nil? }
+  
   def index
+    add_breadcrumb "Statistics", :guild_statistics_path
     @guild = Guild.find(params[:guild_id])
     online_events = @guild.events.where(:action => 'today_online').order('created_at')
     unless online_events.all.blank?
@@ -18,7 +23,6 @@ class StatisticsController < ApplicationController
       @ail_start = ail_events.first.created_at
       @ail_data = ail_events.all.map{|e| e.content.to_i}
     end
-     
   end
   
   protected
