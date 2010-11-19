@@ -20,11 +20,11 @@ feature "Guild Leaders" do
     should_have_notice "Login successful!"    
   end
     
-  it "should be able to sync the guild" do
-    visit "guilds/#{guild.id}/actualize"
-    page.should have_css(".notice")
-    Delayed::Job.all.count.should == 1
-  end
+  #it "should be able to sync the guild" do
+  #  visit "guilds/#{guild.id}/actualize"
+  #  page.should have_css(".notice")
+  #  Delayed::Job.all.count.should == 1
+  #end
     
   it "should be able to edit the guild" do
     visit "/guilds/#{guild.id}/edit"
