@@ -1,199 +1,199 @@
 <div id="content_menu">
-	<ul>
-		<% permitted_to? :edit, @raid do %>
-		<li><%= params[:guild_id].nil? ? link_to("Edit",edit_raid_path(@raid)) : link_to("Edit",edit_guild_raid_path(Guild.find(params[:guild_id]),@raid))%></li>
-		<% end %>
-		<% permitted_to? :destroy, @raid do %>
-		<li><%= link_to('Destroy', @raid, :confirm => 'Are you really sure? Destroyed raids can\'t be restored!', :method => :delete) %></li>
-		<% end %>
-	</ul>
+  <ul>
+    <% permitted_to? :edit, @raid do %>
+      <li><%= params[:guild_id].nil? ? link_to("Edit",edit_raid_path(@raid)) : link_to("Edit",edit_guild_raid_path(Guild.find(params[:guild_id]),@raid))%></li>
+    <% end %>
+    <% permitted_to? :destroy, @raid do %>
+      <li><%= link_to('Destroy', @raid, :confirm => 'Are you really sure? Destroyed raids can\'t be restored!', :method => :delete) %></li>
+    <% end %>
+  </ul>
 </div>
 
 <div style="position:relative; width:100%">	
-	<%- @raid.icon = "nil.png" if @raid.icon == "" -%>
-	<div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
+  <%- @raid.icon = "nil.png" if @raid.icon == "" -%>
+  <div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>
 </div>
 
 <h1><%= @raid.title %></h1>
 
 <% if @raid.start > Time.now %>
-<h4>Raid starts in <%= time_ago_in_words(@raid.start)%></h4>
+  <h4>Raid starts in <%= time_ago_in_words(@raid.start)%></h4>
 <% end %>
 
 <% unless @raid.description.empty? %>
-<div id="description">
-	<%= @raid.description %>
-</div>
+  <div id="description">
+    <%= @raid.description %>
+  </div>
 <% end %>
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0" class="contentRaid">
-    <tr>
-			<th width="25%"></th>
-			<th width="25%"></th>
-			<th width="25%"></th>
-			<th width="25%"></th>	
-    </tr>
+  <tr>
+    <th width="25%"></th>
+    <th width="25%"></th>
+    <th width="25%"></th>
+    <th width="25%"></th>	
+  </tr>
 
-    <tr>
-    	<td><div align="left" class="raidcontent"><b>participating Guilds</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><% @raid.guilds.each do |g| %>
-				<ul class="guildslist">
-					<li><%= link_to(g.name, guild_path(g))  %> <%= link_to(image_tag("icons/kick.png", :size => "10x10"), :controller => 'raids', :action => 'uninvite_guild', :id => @raid.id, :uninvited_guild => g.id) if permitted_to?(:uninvite_guild, @raid) && g != @raid.guild %></li>
-				</ul><% end %>
-			</div></td>
-			<td colspan="2">
-			<% if permitted_to? :edit %>
-			<%= form_for(@raid) do |f| %>
-				<%= f.text_field :invited_guild %>
-				<%= f.submit 'Invite' %>
-			<% end %>
-			<% end %>
-			</div></td>
-    </tr>
+  <tr>
+    <td><div align="left" class="raidcontent"><b>participating Guilds</b>:</div></td>
+    <td><div align="left" class="raidcontent"><% @raid.guilds.each do |g| %>
+          <ul class="guildslist">
+            <li><%= link_to(g.name, guild_path(g))  %> <%= link_to(image_tag("icons/kick.png", :size => "10x10"), :controller => 'raids', :action => 'uninvite_guild', :id => @raid.id, :uninvited_guild => g.id) if permitted_to?(:uninvite_guild, @raid) && g != @raid.guild %></li>
+          </ul><% end %>
+      </div></td>
+    <td colspan="2">
+      <% if permitted_to? :edit %>
+        <%= form_for(@raid) do |f| %>
+          <%= f.text_field :invited_guild %>
+          <%= f.submit 'Invite' %>
+        <% end %>
+      <% end %>
+      </div></td>
+  </tr>
 
-    <tr>
-    	<td><div align="left" class="raidcontent"><b>Raidleader</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><span class="leader"><%=h User.find(@raid.leader).login %></span></div></td>#
-			<td><div align="left" class="raidcontent"><b>Level Range</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><%= @raid.levelrange %></div></td>
-    </tr>
+  <tr>
+    <td><div align="left" class="raidcontent"><b>Raidleader</b>:</div></td>
+    <td><div align="left" class="raidcontent"><span class="leader"><%= User.find(@raid.leader).login %></span></div></td>
+    <td><div align="left" class="raidcontent"><b>Level Range</b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.levelrange %></div></td>
+  </tr>
 
-    <tr>
-    	<td><div align="left" class="raidcontent"><b>Invite Start</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.invite_start.strftime("%H:%M") %></div></td>
-    	<td><div align="left" class="raidcontent"><b>Confirmed Members</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
-    </tr>
+  <tr>
+    <td><div align="left" class="raidcontent"><b>Invite Start</b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.date %> @ <%= @raid.invite_start.strftime("%H:%M") %></div></td>
+    <td><div align="left" class="raidcontent"><b>Confirmed Members</b>:</div></td>
+    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(3).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+  </tr>
 
-    <tr>
-    	<td><div align="left" class="raidcontent"><b>Start</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%=h @raid.start.strftime("%H:%M") %></div></td>
-    	<td><div align="left" class="raidcontent"><b>Available Members </b>:</div></td>
-    	<td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
-    </tr>
+  <tr>
+    <td><div align="left" class="raidcontent"><b>Start</b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.date %> @ <%= @raid.start.strftime("%H:%M") %></div></td>
+    <td><div align="left" class="raidcontent"><b>Available Members </b>:</div></td>
+    <td><div align="left" class="raidcontent"><% att_s = @raid.attendances.find_all_by_status(2).count %><%= "#{att_s}/#{@raid.max_attendees} (#{Integer(att_s.to_f / @raid.max_attendees.to_f * 100)}%)"%></div></td>
+  </tr>
 
-    <tr>
-    	<td><div align="left" class="raidcontent"><b>End</b>:</div></td>
-    	<td><div align="left" class="raidcontent"><%=h @raid.date %> @ <%= @raid.end.strftime("%H:%M") %></div></td>
-    	<td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
-    	<td><div align="left" class="raidcontent"><%= @raid.attendances.find_all_by_status(1).count %></div></td>
-    </tr>
+  <tr>
+    <td><div align="left" class="raidcontent"><b>End</b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.date %> @ <%= @raid.end.strftime("%H:%M") %></div></td>
+    <td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.attendances.find_all_by_status(1).count %></div></td>
+  </tr>
 </table>
 <% unless @raid.limit_roles.blank? && @raid.limit_classes.blank? %>
-<h2>Limits</h2>
-<table>
-	<thead>
-	<tr>
-		<td style="width:200px"></td>
-		<% configatron.raidplanner.roles.each do |role| %>
-		<td style="width:40px"><%= roleicon(role.downcase) %></td>
-		<% end %>
-		<% unless @raid.limit_classes.nil?%>
-		<td style="width:40px"></td>
-		<% CLASSES.each do |key,value| %>
-		<td style="width:40px"><%= image_tag classicon_path(Character.new(:class_id => value)),:size => "18x18" %></td>
-		<% end %>
-		<% end %>
-		<td></td>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td class="left">Confirmed</td>
-		<% unless @raid.limit_roles.nil?%>
-		<% configatron.raidplanner.roles.each do |role| %>
-		<td>
-			<% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 3).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 3).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
-		</td>
-		<% end %>
-		<% end %>
-		<% unless @raid.limit_classes.blank?%>
-		<td></td>
-		<% configatron.raidplanner.classes.each_with_index do |klass,i| %>
-		<td>
-			<% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
-		</td>
-		<% end %>
-		<% end %>
-		<td></td>
-	</tr>
-	<tr>
-		<td class="left">Available</td>
-		<% unless @raid.limit_roles.nil? %>
-		<% configatron.raidplanner.roles.each do |role| %>
-		<td>
-			<% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 2).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 2).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
-		</td>
-		<% end %>
-		<% end %>
-		<% unless @raid.limit_classes.nil?%>
-		<td></td>
-		<% configatron.raidplanner.classes.each_with_index do |klass,i| %>
-		<td>
-			<% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
-		</td>
-		<% end %>
-		<% end %>
-		<td></td>
-	</tr>
-	</tbody>
-</table>
+  <h2>Limits</h2>
+  <table>
+    <thead>
+      <tr>
+        <td style="width:200px"></td>
+        <% configatron.raidplanner.roles.each do |role| %>
+          <td style="width:40px"><%= roleicon(role.downcase) %></td>
+        <% end %>
+        <% unless @raid.limit_classes.nil?%>
+          <td style="width:40px"></td>
+          <% CLASSES.each do |key,value| %>
+            <td style="width:40px"><%= image_tag classicon_path(Character.new(:class_id => value)),:size => "18x18" %></td>
+          <% end %>
+        <% end %>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="left">Confirmed</td>
+        <% unless @raid.limit_roles.nil?%>
+          <% configatron.raidplanner.roles.each do |role| %>
+            <td>
+              <% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 3).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 3).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
+            </td>
+          <% end %>
+        <% end %>
+        <% unless @raid.limit_classes.blank?%>
+          <td></td>
+          <% configatron.raidplanner.classes.each_with_index do |klass,i| %>
+            <td>
+              <% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
+            </td>
+          <% end %>
+        <% end %>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="left">Available</td>
+        <% unless @raid.limit_roles.nil? %>
+          <% configatron.raidplanner.roles.each do |role| %>
+            <td>
+              <% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 2).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 2).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
+            </td>
+          <% end %>
+        <% end %>
+        <% unless @raid.limit_classes.nil?%>
+          <td></td>
+          <% configatron.raidplanner.classes.each_with_index do |klass,i| %>
+            <td>
+              <% unless @raid.limit_classes[klass].blank? %><%= @raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count %>/<%= @raid.limit_classes[klass] %> <%= "(#{Integer(@raid.attendances.where(:status => 2).delete_if{|a| a.character.class_id != i+1}.count.to_f / @raid.limit_classes[klass].to_f * 100)}%)"%><% end %>
+            </td>
+          <% end %>
+        <% end %>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
 
 <h2>Attendees</h2>
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0" >
-	<thead>
-	  <tr>
-		<th style="text-align: left;">Name</th>
-		<th class="narrow">Level</th>
-		<th class="narrow">Race</th>
-		<th class="narrow">Class</th>
-		<th class="narrow">Role</th>
-		<th style="text-align: left;">Message</th>
-		<th></th>
-	  </tr>
-	</thead>
-	<% configatron.raidplanner.status_manager.size.downto(1) do |i| %>
-	<tbody>
-	  <tr valign="top" class="header">
-	  <th colspan="6"><%=h configatron.raidplanner.status_manager.key(i) %></th>
-		<th></th>
-	  </tr>
-	  <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
-	  <tr>
-	    <td class="left"><%= link_to attendance.character.name, character_path(attendance.character) %></td>
-	    <td><%=h attendance.character.level %></td>
-			<td><%= image_tag raceicon_path(attendance.character),:size => "18x18" %></td>
-			<td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
-	    <td><%=h attendance.role %></td>
-	    <td  class="left"><%=h attendance.message %></td>
-	    <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3) && !@raid.closed?%></td>
-	  </tr>
-	  <% end %>
-	</tbody>
-	<% end %>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Name</th>
+      <th class="narrow">Level</th>
+      <th class="narrow">Race</th>
+      <th class="narrow">Class</th>
+      <th class="narrow">Role</th>
+      <th style="text-align: left;">Message</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% configatron.raidplanner.status_manager.size.downto(1) do |i| %>
+    <tbody>
+      <tr valign="top" class="header">
+        <th colspan="6"><%=h configatron.raidplanner.status_manager.key(i) %></th>
+        <th></th>
+      </tr>
+      <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
+        <tr>
+          <td class="left"><%= link_to attendance.character.name, character_path(attendance.character) %></td>
+          <td><%=h attendance.character.level %></td>
+          <td><%= image_tag raceicon_path(attendance.character),:size => "18x18" %></td>
+          <td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
+          <td><%=h attendance.role %></td>
+          <td  class="left"><%=h attendance.message %></td>
+          <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3) && !@raid.closed?%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
 </table>
 <% if @raid.closed?%>
-<h3>The Raid is closed!</h3>
+  <h3>The Raid is closed!</h3>
 <% else %>
-<% unless current_user.characters.empty? %>
-<h2>Create / Change Attendance</h2>
+  <% unless current_user.characters.empty? %>
+    <h2>Create / Change Attendance</h2>
 
-<% if @attendance.new_record? %>
-<%= render :partial => "new_attend_form", :object => @attendance %>
-<% else %>
-<%= render :partial => "update_attend_form", :object => @attendance%>
-<% end %>
-<% else%>
-<h3>Please connect a character to your account</h3>
-<% end %>
+    <% if @attendance.new_record? %>
+      <%= render :partial => "new_attend_form", :object => @attendance %>
+    <% else %>
+      <%= render :partial => "update_attend_form", :object => @attendance%>
+    <% end %>
+  <% else%>
+    <h3>Please connect a character to your account</h3>
+  <% end %>
 <% end %>
 <script>
-$(function() {
-	$( "#raid_invited_guild" ).autocomplete({
-		source: "/guilds.json",
-		minLength: 2,
-	});
-});
+  $(function() {
+    $( "#raid_invited_guild" ).autocomplete({
+      source: "/guilds.json",
+      minLength: 2,
+    });
+  });
 </script>
