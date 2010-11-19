@@ -111,8 +111,8 @@ class Guild < ActiveRecord::Base
   
   def ail
     ails = self.characters.where(:level => 80).collect{|char| char.ail}
+    ails.delete_if{|x| x.blank?}
     size = ails.size
-    ails.delete_if{|x| x.nil?}
     unless ails.empty?
       return ails.sum / size
     else

@@ -1,3 +1,79 @@
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'online-chart-container', 
+         defaultSeriesType: 'area'
+      },
+      title: {
+         text: 'Online Activity'
+      },
+      xAxis: {
+         type: 'datetime'
+      },
+      yAxis: {
+         title: {
+            text: 'Online Members'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+               return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
+               Highcharts.numberFormat(this.y, 0) +' Members';
+         }
+      },
+      series: [{
+         name: '<%= @guild.name %>',
+         pointInterval: <%= 1.day * 1000 %>,  
+         pointStart: <%= @online_start.to_i * 1000 %>,
+         data: <%= raw  @online_data %>
+      }]
+   });
+   
+   
+});
+  
+</script>
+
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'growth-chart-container', 
+         defaultSeriesType: 'area'
+      },
+      title: {
+         text: 'Growth'
+      },
+      xAxis: {
+         type: 'datetime'
+      },
+      yAxis: {
+         title: {
+            text: 'Members'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+               return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
+               Highcharts.numberFormat(this.y, 0) +' Members';
+         }
+      },
+      series: [{
+         name: '<%= @guild.name %>',
+         pointInterval: <%= 1.week * 1000 %>,  
+         pointStart: <%= @growth_start.to_i * 1000 %>,
+         data: <%= raw  @growth_data %>
+      }]
+   });
+   
+   
+});
+  
+</script>
+
 <div class="box_small">
 	<div class="box_headline">Online Chart</div>
 	<div id="online-chart-container" class="chart-container"></div>

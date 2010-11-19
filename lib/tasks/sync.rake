@@ -6,6 +6,13 @@ namespace :sync do
     end
   end
   
+  desc "fill the queryqueue with update-character-ail-requests"
+  task :characters_ail => :environment do
+    Character.all.each do |char|
+      char.delay.sync_ail
+    end
+  end
+  
   desc "fill the queryqueue with update-guild-requests"
   task :guilds => :environment do
     Guild.find_all_by_verified(true).each do |guild|
