@@ -22,7 +22,7 @@ class GuildsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.json {render :json => Guild.all.map{|g| g.name}.to_json}
+      format.json {render :json => Guild.where("name LIKE ?", "%#{params[:term]}%").map{|g| g.name}.to_json}
     end
   end
 
