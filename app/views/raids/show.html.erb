@@ -85,10 +85,12 @@
     <thead>
       <tr>
         <td style="width:200px"></td>
+        <% unless @raid.limit_roles.blank? %>
         <% configatron.raidplanner.roles.each do |role| %>
           <td style="width:40px"><%= roleicon(role.downcase) %></td>
         <% end %>
-        <% unless @raid.limit_classes.nil?%>
+        <% end %>
+        <% unless @raid.limit_classes.blank?%>
           <td style="width:40px"></td>
           <% CLASSES.each do |key,value| %>
             <td style="width:40px"><%= image_tag classicon_path(Character.new(:class_id => value)),:size => "18x18" %></td>
@@ -100,7 +102,7 @@
     <tbody>
       <tr>
         <td class="left">Confirmed</td>
-        <% unless @raid.limit_roles.nil?%>
+        <% unless @raid.limit_roles.blank?%>
           <% configatron.raidplanner.roles.each do |role| %>
             <td>
               <% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 3).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 3).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
@@ -119,14 +121,14 @@
       </tr>
       <tr>
         <td class="left">Available</td>
-        <% unless @raid.limit_roles.nil? %>
+        <% unless @raid.limit_roles.blank? %>
           <% configatron.raidplanner.roles.each do |role| %>
             <td>
               <% unless @raid.limit_roles[role].blank? %><%= @raid.attendances.where(:role => role, :status => 2).count %>/<%= @raid.limit_roles[role] %> <%= "(#{Integer(@raid.attendances.where(:role => role, :status => 2).count.to_f / @raid.limit_roles[role].to_f * 100)}%)"%><% end %>
             </td>
           <% end %>
         <% end %>
-        <% unless @raid.limit_classes.nil?%>
+        <% unless @raid.limit_classes.blank?%>
           <td></td>
           <% configatron.raidplanner.classes.each_with_index do |klass,i| %>
             <td>

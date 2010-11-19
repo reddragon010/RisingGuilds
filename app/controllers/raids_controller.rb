@@ -57,7 +57,11 @@ class RaidsController < ApplicationController
     @guild = @raid.guild
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @raid }
+      format.json do 
+        @raid.invitation_window = Integer((@raid.start.to_f - @raid.invite_start.to_f) / 60.to_f)
+        @raid.duration = Integer((@raid.end - @raid.start).to_f / 3600.to_f)
+        render :json => @raid.to_json(:methods => [:invitation_window, :duration]) 
+      end
     end
   end
 

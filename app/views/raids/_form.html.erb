@@ -1,0 +1,182 @@
+<%
+template_raids = []
+current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| template_raids << r}}
+%>
+  
+<script type="text/javascript" charset="utf-8">
+  function set_template(raid_id){
+    $.getJSON('/raids/' + raid_id + '.json', function(data){
+      $('#raid_title').val(data.raid.title);
+      $('#raid_icon').val(data.raid.icon);
+      set_raidicon(data.raid.icon);
+      $('#raid_invitation_window').val(data.raid.invitation_window);
+      $('#raid_duration').val(data.raid.duration);
+      $('#raid_max_attendees').val(data.raid.max_attendees);
+      $('#raid_min_lvl').val(data.raid.min_lvl);
+      $('#raid_max_lvl').val(data.raid.max_lvl);
+      $('#raid_description').val(data.raid.description);
+      $('#raid_autoconfirm').attr ("checked", data.raid.autoconfirm );
+      var roles = new Array(<%= raw configatron.raidplanner.roles.map{|r| '"' + r + '"'}.join(',') %>);
+      for(var i in roles){
+        var value = data.raid.limit_roles[roles[i]];
+        if(value == null){
+          $('#limit_roles_'+roles[i]).val("");
+        } else {
+          $('#limit_roles_'+roles[i]).val(value);
+        }
+      }
+      var classes = new Array(<%= raw CLASSES.map{|k,v| '"' + k + '"'}.join(',') %>);
+      for(var i in classes){
+        var value = data.raid.limit_classes[classes[i]];
+        if(value == null){
+          $('#limit_classes_'+classes[i]).val("");
+        } else {
+          $('#limit_classes_'+classes[i]).val(value);
+        }
+      }
+    })
+    
+  }
+  
+  function set_raidicon(data){
+    if(data != ""){
+      $("#raidiconimg").attr("src","/images/icons/raid/" + data);
+    } else {
+      $("#raidiconimg").attr("src","/images/icons/raid/nil.png");	
+    }
+  } 
+</script>
+
+<div style="position:relative; width:100%">
+  <div id="template_select">
+    Template: <%= select_tag "template", options_for_select(['-'] + template_raids.map{|tr| [tr.title,tr.id]}), {:onChange => 'set_template($(this).val())'} %>
+  </div>
+  <% if raid.new_record? %>
+  <div id="raidicon"><%= image_tag("/images/icons/raid/nil.png", :size => "65x65", :id => "raidiconimg") %></div>
+  <% else %>
+  <div id="raidicon"><%= image_tag("/images/icons/raid/#{raid.icon}", :size => "65x65", :id => "raidiconimg") %></div>
+  <% end %>
+</div>
+
+<% if raid.new_record? %>
+<h1>New Raid</h1>
+<% else %>
+<h1>Edit Raid</h1>
+<% end %>
+
+<%= form_for(raid) do |f| %>
+  <%= f.error_messages %>
+  <div class="box_big" style="margin-top:60px">
+    <div class="box_headline"></div>
+    <table>
+      <tr>
+        <td class="left"><%= f.label :title %> <%= f.text_field :title, :size => 50 %></td>
+        <td>
+          <%= f.label :guild_id %>
+          <% if params[:guild_id] %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
+          <% else %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
+          <% end %>
+        </td>
+        <td>
+          Icon
+          <%= select(:raid, :icon, raid_icons, {:prompt => "select an icon"},{ :onChange => 'set_raidicon($(this).val())'}) %>  
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="box_small">
+    <div class="box_headline">Time Settings</div>
+    <table class="naked left">
+      <tr>
+        <td><%= f.label :start %> <%= f.datetime_select :start, :default => 1.day.from_now %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :invitation_window %> <%= f.select :invitation_window, [15,30,45,60] %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :duration %> <%= f.select :duration, [1,2,3,4,5,6] %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="box_small">
+    <div class="box_headline">Details</div>
+    <table class="naked left">
+      <tr>
+        <td><%= f.label :max_attendees %> <%= f.text_field :max_attendees, :size => 2 %></td>
+        <td>Level-Range <%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
+      </tr>
+    </table>
+    <% unless raid.new_record? %>
+    <p>
+      <%= f.label :leader %><br />
+      <%= f.select :leader, @possible_leaders %>
+    </p>
+    <% end %>
+    <table class="naked left">
+      <tr>
+        <td><%= f.label :template %> <%= f.check_box :template %></td>
+        <td><%= f.label :autoconfirm %> <%= f.check_box :autoconfirm %></td>
+        <td><%= f.label :closed %> <%= f.check_box :closed %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="clear"></div>
+  <div class="box_small">
+    <div class="box_headline">Role Limits</div>
+    <table>
+      <tr>
+        <% configatron.raidplanner.roles.each do |role| %>	
+          <td><%= roleicon(role) %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <% if raid.limit_roles.nil? %>
+        <% configatron.raidplanner.roles.each do |role| %>	
+          <td><%= text_field :limit_roles, role, {:size => 2} %></td>
+        <% end %>
+        <% else %>
+        <% configatron.raidplanner.roles.each do |role| %>	
+          <td><%= text_field :limit_roles, role, {:size => 2, :value => raid.limit_roles[role]} %></td>
+        <% end %>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+  <div class="box_small">
+    <div class="box_headline">Class Limits</div>
+    <table>
+      <tr>
+        <% CLASSES.each do |key,value| %>
+          <td><%= image_tag classicon_path(Character.new(:class_id => value)),{:size => "18x18", :title => key} %></td>
+        <% end %>	
+      </tr>
+      <tr>
+        <% if raid.limit_classes.nil? %>
+        <% configatron.raidplanner.classes.each do |klass| %>
+          <td><%= text_field :limit_classes, klass, {:size => 2} %></td>
+        <% end %>
+        <% else %>
+        <% configatron.raidplanner.classes.each do |klass| %>
+          <td><%= text_field :limit_classes, klass, {:size => 2, :value => raid.limit_classes[klass]} %></td>
+        <% end %>
+        <% end %>
+      </tr>
+    </table> 
+  </div>
+  <div class="clear"></div>
+  <div class="box_big">
+    <div class="box_headline">Description</div>
+    <%= f.text_area :description , :rows => 2 %>
+  </div>
+  
+  <%= f.hidden_field :leader %>
+  <p>
+    <% if raid.new_record? %>
+    <%= f.submit 'Create' %>
+    <% else %>
+    <%= f.submit 'Update' %>
+    <% end %>
+  </p>
+<% end %>
