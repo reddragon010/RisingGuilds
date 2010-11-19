@@ -53,7 +53,7 @@ body {
 
 }
 #secnav {
-	margin: 10px 20px 0px 20px;
+	margin: 10px 20px -10px 20px;
 	height: 25px;
 }
 #secnav ul {
@@ -113,7 +113,7 @@ body {
 }
 
 #content {
-	margin: 0px 10px 10px 10px;
+	margin: 10px;
 	padding: 10px;
 	border: 2px solid #333;
 	background-color: #1C1C1C;

@@ -19,16 +19,7 @@
 	</div>
 
   <div id="center">
-	<% if content_for?(:guild_header)%>
-	<div id="guild_header"> 
-	  <%= yield(:guild_header)%>
-	</div>
-	<% end %>
-	
-	<div style="position:relative; width:100%">
-	  <%= yield(:tabs) %>
-	</div>
-        <% unless flash.blank? %>
+	<% unless flash.blank? %>
 	<div id="popups">
 	  <% if flash[:notice] %>
 	  <p id="flash" class="notice"><%= flash[:notice] %></p>
@@ -38,6 +29,17 @@
 	  <% end %>
 	</div>
         <% end  %>
+    
+        <% if content_for?(:guild_header)%>
+	<div id="guild_header"> 
+	  <%= yield(:guild_header)%>
+	</div>
+	<% end %>
+	
+	<div style="position:relative; width:100%">
+	  <%= yield(:tabs) %>
+	</div>
+        
     <div id="content">
 	  <%= content_for?(:content) ? yield(:content) : yield %>
       <div class="clear"></div>

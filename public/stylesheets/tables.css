@@ -43,3 +43,23 @@ td img {
 .narrow {
 	width: 16px;
 }
+
+.naked {
+    border-style: hidden;
+}
+
+.naked th{
+    border-style: hidden;
+}
+
+.naked tr{
+    border-style: hidden;
+}
+
+.naked td{
+    border-style: hidden;
+}
+
+.left td{
+    text-align: left;
+}
