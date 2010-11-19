@@ -37,6 +37,7 @@
 <%
 @tabs << link_to("Overview", guild_path(@guild))
 @tabs << link_to("Members", guild_characters_path(@guild))
+@tabs << link_to("Statistics", guild_statistics_path(@guild))
 if @guild.users.include?(current_user)
 	@tabs << link_to("Raids", guild_raids_path(@guild)) 
 	@tabs << link_to("Users", guild_users_path(@guild))
