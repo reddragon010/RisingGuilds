@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101119151546) do
+ActiveRecord::Schema.define(:version => 20101119173803) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20101119151546) do
     t.string   "limit_classes"
     t.boolean  "autoconfirm",   :default => false
     t.boolean  "template"
+    t.integer  "min_ail"
   end
 
   create_table "remote_queries", :force => true do |t|

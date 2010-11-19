@@ -107,6 +107,10 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
         <td><%= f.label :max_attendees %> <%= f.text_field :max_attendees, :size => 2 %></td>
         <td>Level-Range <%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
       </tr>
+      <tr>
+        <td><%= f.label :min_ail %> <%= f.text_field :min_ail, :size => 3 %></td>
+        <td></td>
+      </tr>
     </table>
     <% unless raid.new_record? %>
     <p>

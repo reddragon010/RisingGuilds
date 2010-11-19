@@ -43,7 +43,7 @@ class AttendancesController < ApplicationController
   # POST /attendances.xml
   def create
     @attendance = Attendance.new(params[:attendance])
-    if @attendance.raid.autoconfirm && @attendance.status == 2 && check_limits(@attendance)
+    if @attendance.raid.autoconfirm && @attendance.status == 2 && check_limits(@attendance) && check_ail(@attendance)
       @attendance.status = 3
     end
     respond_to do |format|
@@ -67,7 +67,7 @@ class AttendancesController < ApplicationController
   # PUT /attendances/1.xml
   def update
     @attendance = Attendance.find(params[:id])
-    if @attendance.raid.autoconfirm && params[:attendance][:status] == "2" && check_limits(@attendance)
+    if @attendance.raid.autoconfirm && params[:attendance][:status] == "2" && check_limits(@attendance) && check_ail(@attendance)
       params[:attendance][:status] = 3
     end
     respond_to do |format|
@@ -106,7 +106,13 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       if  @attendance.status == 2
         if check_limits(@attendance)
-          new_status = 3
+          if check_ail(@attendance)
+            new_status = 3
+          else
+            flash[:error] = "The character's AIL is to low to get approved"
+            redirect_to guild_raid_path(@raid.guild, @raid)
+            return true
+          end
         else
           flash[:error] = "Limit is reached!"
           redirect_to guild_raid_path(@raid.guild, @raid)
@@ -135,20 +141,27 @@ class AttendancesController < ApplicationController
   def check_limits(attendance)
     raid = attendance.raid
     character = attendance.character
+    return true if raid.limit_roles.blank? && raid.limit_classes.blank?
     #check rolelimits
-    unless raid.limit_roles.nil?
+    unless raid.limit_roles.blank?
       role_count1 =  raid.attendances.where(:role => attendance.role, :status => 3).count
       role_count2 =  raid.limit_roles[attendance.role].to_i
     end
-    t1 = raid.limit_roles.nil? || role_count2.nil? || role_count1 < role_count2
+    t1 = raid.limit_roles.blank? || role_count2.blank? || role_count1 < role_count2
     #check classlimits
-    unless raid.limit_classes.nil?
+    unless raid.limit_classes.blank?
       class_count1 = raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != character.class_id}.count
       class_name = configatron.raidplanner.classes[attendance.character.class_id]
       class_count2 = raid.limit_classes[class_name].to_i
     end
-    t2 = raid.limit_classes.nil? || class_count2.nil? || class_count1 < class_count2
+    t2 = raid.limit_classes.blank? || class_count2.blank? || class_count1 < class_count2
     t1 && t2
+  end
+  
+  def check_ail(attendance)
+    raid = attendance.raid
+    character = attendance.character
+    (raid.min_ail.blank? || character.ail.blank? || character.ail >= raid.min_ail)
   end
   
 end

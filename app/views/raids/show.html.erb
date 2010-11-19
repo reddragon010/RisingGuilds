@@ -78,6 +78,14 @@
     <td><div align="left" class="raidcontent"><b>Not Available Members </b>:</div></td>
     <td><div align="left" class="raidcontent"><%= @raid.attendances.find_all_by_status(1).count %></div></td>
   </tr>
+  <% unless @raid.min_ail.blank? %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td><div align="left" class="raidcontent"><b>Min Ail</b>:</div></td>
+    <td><div align="left" class="raidcontent"><%= @raid.min_ail %></div></td>
+  </tr>
+  <% end %>
 </table>
 <% unless @raid.limit_roles.blank? && @raid.limit_classes.blank? %>
   <h2>Limits</h2>
