@@ -24,26 +24,17 @@ class CharactersController < ApplicationController
     
     @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
     
-    filter_keys = ['guild_id', 'character_id', 'user_id']
-    conditions = Hash.new
-    conditions.merge!(params)
-    conditions.delete_if {|key,value| !filter_keys.include? key}
+    @characters = Character.order(params[:sort])
+    [:guild_id, :character_id, :user_id].each do |p|
+      @characters = @characters.where(p => params[p]) unless params[p].blank?
+    end
+    @characters = @characters.where(:online => (params[:online]=='true' ? true : false)) unless params[:online].blank?
+    @characters = @characters.limit(params[:limit].to_i) unless params[:limit].blank?
     
-    if conditions.empty?
-      @characters = Character.order(params[:sort])
-    else
-      @characters = Character.where(conditions).order(params[:sort])
-    end                                       
-   
     respond_to do |format|
-      format.html do
-        unless params[:guild_id].nil?
-          render :layout => 'guild_tabs'
-        else
-          render
-        end
-      end
-      format.xml  { render :xml => @characters }
+      format.html
+      format.xml  { render :xml => @characters.to_xml }
+      format.json { render :json => @characters.to_json(:except => [:items, :created_at, :updated_at, :online, :guild_id, :user_id, :last_sync]), :callback => params[:callback] }
     end
   end
 
@@ -214,7 +205,7 @@ class CharactersController < ApplicationController
   
   def choose_layout
     unless params[:guild_id].nil?
-      return 'guild_tabs'
+        return 'guild_tabs'
     else
       return 'application'
     end
