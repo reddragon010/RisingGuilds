@@ -8,7 +8,7 @@ class StatisticsController < ApplicationController
   def index
     add_breadcrumb "Statistics", :guild_statistics_path
     @guild = Guild.find(params[:guild_id])
-    online_events = @guild.events.where(:action => 'today_online').order('created_at')
+    online_events = @guild.events.where(:action => 'today_online').where("created_at > ?", Time.now - 1.month).order('created_at')
     unless online_events.all.blank?
       @online_start = online_events.first.created_at
       @online_data = online_events.all.map{|e| [e.created_at.to_i * 1000, e.content.to_i]}
