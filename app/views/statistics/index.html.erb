@@ -1,3 +1,15 @@
+<style type="text/css">
+	.ui-tabs .ui-tabs-hide {
+		position: absolute;
+		top: -10000px;
+		display: block !important;
+	}
+</style>
+<script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+</script>
 <% unless @online_data.blank? %>
   <script>
     var chart1;
@@ -27,8 +39,6 @@
         },
         series: [{
             name: '<%= @guild.name %>',
-            pointInterval: <%= 1.day * 1000 %>,  
-            pointStart: <%= @online_start.to_i * 1000 %>,
             data: <%= raw  @online_data %>
           }]
       });
@@ -38,15 +48,6 @@
   
   </script>
 <% end %>
-  <div class="box_big">
-    <div class="box_headline">Online Chart</div>
-    <% unless @online_data.blank? %>
-    <div id="online-chart-container" class="chart-container"></div>
-    <% else %>
-    No statistic available
-    <% end %>
-  </div>
-
 <% unless @growth_data.blank? %>
   <script>
     var chart2;
@@ -76,8 +77,6 @@
         },
         series: [{
             name: '<%= @guild.name %>',
-            pointInterval: <%= 1.week * 1000 %>,  
-            pointStart: <%= @growth_start.to_i * 1000 %>,
             data: <%= raw  @growth_data %>
           }]
       });
@@ -86,21 +85,11 @@
     });  
   </script>
 <% end %>
-  <div class="box_big">
-    <div class="box_headline">Growth Chart</div>
-    <% unless @online_data.blank? %>
-    <div id="growth-chart-container" class="chart-container"></div>
-    <% else %>
-    No statistic available
-    <% end %>
-    
-  </div>
-
 <% unless @ail_data.blank? %>
   <script>
-    var chart2;
+    var chart3;
     $(document).ready(function() {
-      chart2 = new Highcharts.Chart({
+      chart3 = new Highcharts.Chart({
         chart: {
           renderTo: 'ail-chart-container', 
           defaultSeriesType: 'area'
@@ -125,8 +114,6 @@
         },
         series: [{
             name: '<%= @guild.name %>',
-            pointInterval: <%= 1.week * 1000 %>,  
-            pointStart: <%= @ail_start.to_i * 1000 %>,
             data: <%= raw  @ail_data %>
           }]
       });
@@ -135,11 +122,32 @@
     });  
   </script>
 <% end %>
-  <div class="box_big">
-    <div class="box_headline">AIL Chart</div>
-    <% unless @online_data.blank? %>
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Online Chart</a></li>
+		<li><a href="#tabs-2">Growth Chart</a></li>
+		<li><a href="#tabs-3">AIL Chart</a></li>
+	</ul>
+	<div id="tabs-1">
+		<% unless @online_data.blank? %>
+	  <div id="online-chart-container" class="chart-container"></div>
+	  <% else %>
+	  No statistic available
+	  <% end %>
+	</div>
+	<div id="tabs-2">
+		<% unless @online_data.blank? %>
+	  <div id="growth-chart-container" class="chart-container"></div>
+	  <% else %>
+	  No statistic available
+	  <% end %>
+	</div>
+	<div id="tabs-3">
+		<% unless @online_data.blank? %>
     <div id="ail-chart-container" class="chart-container"></div>
     <% else %>
     No statistic available
     <% end %>
-  </div>
+	</div>
+</div>
