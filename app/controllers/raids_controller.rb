@@ -20,7 +20,7 @@ class RaidsController < ApplicationController
     
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if @guild.nil?
-      @raids = current_user.guilds.collect{|g| g.raids}.flatten
+      @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month)}.flatten
     else
       @raids = @guild.raids
     end
