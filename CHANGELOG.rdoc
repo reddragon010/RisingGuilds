@@ -103,3 +103,17 @@
 * [Improved]	some code-cleanup
 * [Improved]	Raid UI/Forms
 * [Improved]	removed length-check from guild
+
+== 0.8.0 BETA 22-11-2010
+
+* [Feature]		Guild-Members widget
+* [Feature]		Rails 3.0.3
+* [Feature]		AIL-limit on raids
+* [Feature]		Teamspeak field in Guilds
+* [Feature]		Statistics
+* [Feature]		Raidtemplates
+* [Fix]				Autocomplete fixed
+* [Fix]				WIO-Widget Links
+* [Fix]				Description-Field Length
+* [Fix]				Enter-Key-Bug in Add_Char-Form
+* [Improved]	some small UI-improvements
