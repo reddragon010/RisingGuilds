@@ -112,8 +112,8 @@ class RaidsController < ApplicationController
   # POST /raids.xml
   def create
     @raid.limit_roles = params[:limit_roles].delete_if{|k,v| v.blank?}
-    @raid.end = @raid.start + @raid.duration.to_i.hours
-    @raid.invite_start = @raid.start - @raid.invitation_window.to_i.minutes
+    @raid.end = @raid.start + params[:raid][:duration].to_i.hours
+    @raid.invite_start = @raid.start - params[:raid][:invitation_window].to_i.minutes
     @raid.guilds << @raid.guild
     respond_to do |format|
       if @raid.save
