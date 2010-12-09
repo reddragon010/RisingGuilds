@@ -1,3 +1,4 @@
+<% cache @character do %>
 <div id="content_menu">
 	<ul>
 		<% if permitted_to? :link, @character %>
@@ -116,7 +117,4 @@
 			</tr>
     </table>
 </div>
-
-
-
-                  
+<% end %>
