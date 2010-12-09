@@ -7,7 +7,7 @@ class PasswordResetsController < ApplicationController
   end  
   
   def create  
-    @user = User.where(email => params[:email])  
+    @user = User.where(:email => params[:email]).first  
     if @user  
       Notifier.password_reset_instructions(@user).deliver  
       flash[:notice] = t('password_resets.instructions_sent')  
