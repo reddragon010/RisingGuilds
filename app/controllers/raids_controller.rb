@@ -20,14 +20,14 @@ class RaidsController < ApplicationController
     
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if @guild.nil?
-      @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start DESC")}.flatten
+      @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
     else
-      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start DESC").all
+      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
     end
 
     unless @raids.empty?
       @upcoming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
-      @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
+      @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}.reverse
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
     end
     
