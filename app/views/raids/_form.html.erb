@@ -81,7 +81,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
         </td>
         <td>
           Icon
-          <%= select(:raid, :icon, raid_icons, {:prompt => "select an icon"},{ :onChange => 'set_raidicon($(this).val())'}) %>  
+          <%= select(:raid, :icon, raid_icons, {:include_blank => "select an icon"},{ :onChange => 'set_raidicon($(this).val())'}) %>  
         </td>
       </tr>
     </table>

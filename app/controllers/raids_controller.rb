@@ -115,6 +115,7 @@ class RaidsController < ApplicationController
     @raid.end = @raid.start + params[:raid][:duration].to_i.hours
     @raid.invite_start = @raid.start - params[:raid][:invitation_window].to_i.minutes
     @raid.guilds << @raid.guild
+    @raid.icon = "nil.png" if @raid.icon.blank?
     respond_to do |format|
       if @raid.save
         flash[:notice] = t(:created, :item => 'Raid')
@@ -157,6 +158,8 @@ class RaidsController < ApplicationController
     
     @raid.limit_roles = params[:limit_roles].delete_if{|k,v| v.blank?}
     @raid.limit_classes = params[:limit_classes].delete_if{|k,v| v.blank?}
+    
+    params[:raid][:icon] = "nil.png" if params[:raid][:icon].blank?
     
     respond_to do |format|
       if @raid.update_attributes(params[:raid])
