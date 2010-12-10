@@ -44,25 +44,25 @@ class User < ActiveRecord::Base
   end
   
   def guild_role_level(guild_id)
-    levels = ["member", "raidleader", "officer", "leader"]
+    levels = configatron.guilds.roles
     assignments = self.assignments.where(:guild_id => guild_id).all
     unless assignments.blank?
-      return assignments.map{|a| levels.index(a.role)}.sort.last
+      return assignments.map{|a| levels.index(a.role.downcase)}.sort.last
     else
       return -1
     end
   end
   
   def kickable_by?(user, guild)
-    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
+    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_level(guild.id) > self.guild_role_level(guild.id)
   end
   
   def promoteable_by?(user, guild)
-    user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
+    user.guild_role_level(guild.id) > self.guild_role_level(guild.id) && self.guild_role_level(guild.id) != 3
   end
   
   def demoteable_by?(user, guild)
-    (user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1)) || user.guild_role_level(guild.id) < self.guild_role_level(guild.id)
+    ((user == self && (!guild.leaders.include?(user) || guild.leaders.count > 1))  || user.guild_role_level(guild.id) > self.guild_role_level(guild.id)) && self.guild_role_level(guild.id) != 0
   end
   
   def roles

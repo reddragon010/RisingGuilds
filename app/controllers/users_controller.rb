@@ -117,7 +117,7 @@ class UsersController < ApplicationController
     @guild = Guild.find(params[:guild_id])
     if @user.promoteable_by?(current_user,@guild)
       asmt = @guild.assignments.where(:user_id => @user.id).first
-      if asmt.role_id > 1 && asmt.update_attribute(:role_id, asmt.role_id - 1)
+      if asmt.update_attribute(:role, configatron.guilds.roles.at(configatron.guilds.roles.index(asmt.role) + 1))
         flash[:notice] = t('users.promoted')
       else
         flash[:error] = t('error')
@@ -137,7 +137,7 @@ class UsersController < ApplicationController
     @guild = Guild.find(params[:guild_id])
     if @user.demoteable_by?(current_user,@guild)
       asmt = @guild.assignments.where(:user_id => @user.id).first
-      if asmt.role_id < 4 && asmt.update_attribute(:role_id, asmt.role_id + 1)
+      if asmt.update_attribute(:role, configatron.guilds.roles.at(configatron.guilds.roles.index(asmt.role) - 1))
         flash[:notice] = t('users.demoted')
       else
         flash[:error] = t('error')

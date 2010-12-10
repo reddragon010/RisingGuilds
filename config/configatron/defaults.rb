@@ -2,6 +2,8 @@
 
 configatron.version = 'v0.8.0 beta'
 
+configatron.guilds.roles = ["member", "raidleader", "officer", "leader"]
+
 configatron.arsenal.url.base = 'http://arsenal.rising-gods.de/'
 configatron.arsenal.url.realm = 'r='
 
