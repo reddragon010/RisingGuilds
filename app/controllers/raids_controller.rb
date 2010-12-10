@@ -26,7 +26,7 @@ class RaidsController < ApplicationController
     end
 
     unless @raids.empty?
-      @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
+      @upcoming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
       @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
     end
