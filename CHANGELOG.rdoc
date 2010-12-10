@@ -117,3 +117,12 @@
 * [Fix]				Description-Field Length
 * [Fix]				Enter-Key-Bug in Add_Char-Form
 * [Improved]	some small UI-improvements
+
+== 0.8.1 BETA 10-12-2010
+
+* [Fix]				Timesettings on raid-creation
+* [Fix]				WIO-Widget kills the layout
+* [Fix]				character-widget table headlines
+* [Fix]				Guild-user-managment
+* [Feature]		Reset lost password
+* [Improved]	Raids now get ordered in DESC
