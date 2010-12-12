@@ -126,4 +126,5 @@
 * [Fix]				Guild-user-managment
 * [Fix]				Failing on empty raidicon
 * [Feature]		Reset lost password
+* [Feature]		Added password-fields to edit-account
 * [Improved]	Raids now get ordered in DESC
