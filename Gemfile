@@ -59,6 +59,7 @@ group :development, :test do
   gem 'delorean'
   gem 'database_cleaner'
   gem 'spork'
+  gem 'rcov'
 end
 
 gem 'cover_me', '>= 1.0.0.pre2', :require => false, :group => :test
