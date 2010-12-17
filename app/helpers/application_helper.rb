@@ -97,7 +97,7 @@ module ApplicationHelper
     end
   end
   
-  #Progressbar helper
+  #Progreessbar helper
   def progressbar(value,text)
     op =  "<div class=\"bar-container\">\n"    
     op += "<div style=\"width: #{value}%;\">#{text}</div>\n"
