@@ -93,10 +93,10 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
         <td><%= f.label :start %> <%= f.datetime_select :start, :default => 1.day.from_now %></td>
       </tr>
       <tr>
-        <td><%= f.label :invitation_window %> <%= f.select :invitation_window, [15,30,45,60] %></td>
+        <td><%= f.label :invitation_window %> <%= f.select :invitation_window, [15,30,45,60]%> <%=t('datetime.prompts.minute').pluralize%></td>
       </tr>
       <tr>
-        <td><%= f.label :duration %> <%= f.select :duration, [1,2,3,4,5,6] %></td>
+        <td><%= f.label :duration %> <%= f.select:duration, [1,2,3,4,5,6]%> <%=t("datetime.prompts.hour").pluralize%></td>
       </tr>
     </table>
   </div>
