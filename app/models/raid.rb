@@ -23,6 +23,10 @@ class Raid < ActiveRecord::Base
   validates_each(:end) do |record, attr, value|
     record.errors.add attr, 'have to happen after start' if value < record.start
   end
+  
+  def users
+    self.characters.map{|c| c.user}
+  end
 
   def invitation_window
     return 15 if new_record?

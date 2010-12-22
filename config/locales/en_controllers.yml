@@ -50,6 +50,7 @@ en:
     token_not_found: "Could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process."
 
   raids:
+<<<<<<< HEAD
     closed: "This raid is closed! You can't do this anymore."
     guild_to_raid: "Guild has been added to Raid."
     uninvited: "Guild has been uninvited."
@@ -63,6 +64,13 @@ en:
     created: "Your account has been created. Please check your e-mail for your account activation instructions."
     updated: "Account updated."
     profile_updated: "You have updated your profile."
+=======
+    closed: "This raid is closed! You can't do this anymore"
+    guild_to_raid: "Guild was added to Raid"
+    uninvited: "Guild was uninvited."
+    cant_uninvite: "Can't uninvite leading Guild"
+    already_attend: "You already attend the raid"
+>>>>>>> master
 
   user_sessions:
     login_successful: "Login successful!"
