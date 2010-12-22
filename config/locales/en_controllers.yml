@@ -1,57 +1,67 @@
 en:
-  error: "error - please contact the support"
-  no_access: "Sorry, you are not allowed to access that page."
+  error: "Error - Please contact the support."
+  no_access: "Access denied!"
   created: "%{item} was successfully created."
   updated: "%{item} was successfully updated."
   not_found: "%{item} not found."
-  updating: '%{item} will be updated soon'
-  update_in_progress: 'Update is in progress. Please be patient!'
-  have_to_be_logged_in: "Sorry but you have to be logged in to access this page"
-  
-  activations:
-    password: "Set your password"
-    activate_account: "Activate your account"
-    activate: "Activate"
-    account_activated: "Your account has been activated."
-    
+  updating: "%{item} will be updated soon"
+  update_in_progress: "Update is in progress. Please be patient!"
+  have_to_be_logged_in: "You have to be logged in."
+
   account:
     created: "Your account has been created. Please check your e-mail for your account activation instructions!"
-  
-  guilds:
-    not_assigned: "you are not logged in or haven't assigned to a guild, yet"
-    joined: 'You have successfully joined this guild'
-    invalid_token: 'invalid token! Please contact your guildmanager'
-    new_token: 'You have successfully generated a new guild-token'
-    not_verified: "The guild is not verified! Please contect the guildleader"
-    verified: "The guildname is successfully verified"
-    no_valid_name: "The guild wasn't found! Please check to guildname. It is very importent that the name is exactly equal to the arsenal's guildname. If you got a typo please destroy this guild and create a new one"
-    no_arsenal_connection: "The arsenal is currently unavailable. Please check the arsenal-status and retry a little bit later.\n If the arsenal is online and you still getting this error please contact the support"
-    already_joined: "you can't join a guild two times - sorry"
-  
-  users:
-    no_guild: "No guild specified!"
-    kicked: "User kicked!"
-    not_enought_rights: "you have not enought rights to %{a} this user"
-    promoted: "User promoted!"
-    created: "Your account has been created. Please check your e-mail for your account activation instructions!"
-    updated: "Account updated!"
 
-  characters:
-    linked: "Character is now yours"
-    already_linked: "Character already marked! Please contact the support"
-    not_linked: "Character not marked"
-    delinked: "Character has been demarked"
+  activations:
+    password: "Set your password."
+    activate_account: "Activate your account."
+    activate: "Activate."
+    account_activated: "Your account has been activated."
+    wrong_token: "Wrong Token."
+    expired_token: "Token has been expired! Your account is deleted. Please try again."
+
+  attendances:
+    ail_low: "The character's AIL is too low to get approved."
+    limit_reached: "Limit is reached."
     
+  characters:
+    linked: "Character is now yours."
+    already_linked: "Character already marked! Please contact the support."
+    not_linked: "Character is not marked."
+    delinked: "Character has been demarked."
+    
+  guilds:
+    not_assigned: "You are not logged in or haven't assigned to a guild."
+    joined: "You have successfully joined this guild."
+    invalid_token: "Invalid token! Please contact your guild manager."
+    new_token: "You have successfully generated a new guild token."
+    not_verified: "The guild is not verified! Please contact the guild leader."
+    verified: "The guild name is successfully verified."
+    no_valid_name: "The guild wasn't found! Please check your guild name. It is very important that the name is exactly equal to the arsenal's guild name. If you got a typo please destroy this guild and create a new one."
+    no_arsenal_connection: "The arsenal is currently unavailable. Please check the arsenal status and retry a little bit later.\n If the arsenal is online and you still getting this error please contact the support."
+    already_joined: "You already joined a guild."
+    
+  newsentries:
+    created: "Entry was successfully created."
+    updated: "Entry was successfully updated."
+
   password_resets:
-    instructions_sent: "Instructions to reset your password have been emailed to you. Please check your email."
-    no_user_found: "No user was found with that email address"
-    token_not_found: "We're sorry, but we could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process."
+    instructions_sent: "Instructions to reset your password have been emailed to %{mail}."
+    no_user_found: "No user was found with that email address."
+    token_not_found: "Could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process."
 
   raids:
-    closed: "This raid is closed! You can't do this anymore"
-    guild_to_raid: "Guild was added to Raid"
-    uninvited: "Guild was uninvited."
-    cant_uninvite: "Can't uninvite leading Guild"
+    closed: "This raid is closed! You can't do this anymore."
+    guild_to_raid: "Guild has been added to Raid."
+    uninvited: "Guild has been uninvited."
+    cant_uninvite: "You can't uninvite leading Guild."  
+
+  users:
+    no_guild: "No guild specified."
+    kicked: "User kicked."
+    not_enought_rights: "You have not enough rights to %{a} this user."
+    promoted: "User promoted."
+    created: "Your account has been created. Please check your e-mail for your account activation instructions."
+    updated: "Account updated."
 
   user_sessions:
     login_successful: "Login successful!"

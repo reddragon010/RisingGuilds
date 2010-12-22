@@ -109,12 +109,12 @@ class AttendancesController < ApplicationController
           if check_ail(@attendance)
             new_status = 3
           else
-            flash[:error] = "The character's AIL is to low to get approved"
+            flash[:error] = t('attendances.ail_low')
             redirect_to guild_raid_path(@raid.guild, @raid)
             return true
           end
         else
-          flash[:error] = "Limit is reached!"
+          flash[:error] = t('attendances.limit_reached')
           redirect_to guild_raid_path(@raid.guild, @raid)
           return true
         end

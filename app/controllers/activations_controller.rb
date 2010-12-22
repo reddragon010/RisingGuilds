@@ -4,11 +4,11 @@ class ActivationsController < ApplicationController
   def new
     @user = User.where(:perishable_token => params[:activation_code]).first
     if @user.nil?
-      flash[:notice] = "Wrong token"
+      flash[:notice] = t('activations.wrong_token')
       redirect_to root_url
     elsif @user.updated_at < 2.days.ago
       @user.destroy
-      flash[:notice] = "Token has been expired! Your account is deleted. Please try to register again"
+      flash[:notice] = t('activations.expired_token')
       redirect_to root_url 
     end
   end

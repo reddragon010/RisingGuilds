@@ -10,7 +10,7 @@ class PasswordResetsController < ApplicationController
     @user = User.where(:email => params[:email]).first  
     if @user  
       Notifier.password_reset_instructions(@user).deliver  
-      flash[:notice] = t('password_resets.instructions_sent')  
+      flash[:notice] = t('password_resets.instructions_sent', :mail => params[:email])  
       redirect_to root_url  
     else  
       flash[:notice] = t('password_resets.no_user_found')  
