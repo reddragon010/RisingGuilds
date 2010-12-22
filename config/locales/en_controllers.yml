@@ -62,6 +62,7 @@ en:
     promoted: "User promoted."
     created: "Your account has been created. Please check your e-mail for your account activation instructions."
     updated: "Account updated."
+    profile_updated: "You have updated your profile."
 
   user_sessions:
     login_successful: "Login successful!"
