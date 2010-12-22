@@ -29,11 +29,12 @@ module Arsenal
   end
 
   class Item
-  	attr_reader :id, :icon, :level
+  	attr_reader :id, :icon, :level, :slot
 
   	def initialize(elem)
   		@id 				= elem[:id].to_i
   		@icon 	    = elem[:icon]
+  		@slot       = elem[:slot].to_i
   	end
 	
   	def get_info(elem)
@@ -69,7 +70,7 @@ module Arsenal
   end
   
   def self.get_item_xml(item)
-    #http://eu.wowarmory.com/ item-info.xml ? i=
+    #http://www.wowhead.com/ item= <itemid> &xml
     url = configatron.wowarmory.url.base
     url += configatron.wowarmory.url.item.info
     url += "?" + configatron.wowarmory.url.item.itemid if configatron.arsenal.test.nil?

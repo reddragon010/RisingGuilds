@@ -33,7 +33,7 @@ describe Character do
     char.sync
     char.sync_ail
     char.reload
-    char.ail.should == 129
+    char.ail.should == 137
   end
   
   #test for Error #13 ... double-levelup-events
