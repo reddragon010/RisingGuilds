@@ -45,7 +45,7 @@ en:
     updated: "Entry was successfully updated."
 
   password_resets:
-    instructions_sent: "Instructions to reset your password have been emailed to %{mail}."
+    instructions_sent: "Instructions to reset your password have been sent to %{mail}."
     no_user_found: "No user was found with that email address."
     token_not_found: "Could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process."
 
