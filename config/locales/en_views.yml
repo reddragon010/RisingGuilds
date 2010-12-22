@@ -1,4 +1,5 @@
 en:
+  confirmation: "Are you sure?"
   views:
     labels:
       guild:

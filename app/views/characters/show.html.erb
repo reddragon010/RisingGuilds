@@ -4,7 +4,7 @@
 		<li><%= link_to('Mark as Mine!', {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?')  %></li>
 		<% end %>
 		<% if permitted_to? :delink, @character %>
-		<li><%= link_to('Not Mine!', :confirm => 'Are you sure?', :action => 'delink')  %></li>
+		<li><%= link_to('Not Mine!', :confirm => t('confirmation'), :action => 'delink')  %></li>
 		<% end %>
 		<% if permitted_to? :actualize, @character %>
 		<li><%= link_to('Actualize', :action => 'actualize') %></li>
