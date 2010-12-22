@@ -52,6 +52,7 @@ en:
     guild_to_raid: "Guild was added to Raid"
     uninvited: "Guild was uninvited."
     cant_uninvite: "Can't uninvite leading Guild"
+    already_attend: "You already attend the raid"
 
   user_sessions:
     login_successful: "Login successful!"

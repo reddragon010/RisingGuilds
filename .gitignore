@@ -8,3 +8,4 @@ public/system
 coverage/
 coverage.data
 nbproject/
+vendor/cache/*
