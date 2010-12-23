@@ -161,7 +161,9 @@
       <th class="narrow">Class</th>
       <th class="narrow">Role</th>
       <th style="text-align: left;">Message</th>
-      <th></th>
+      <th class="narrow"></th>
+			<th class="narrow"></th>
+			<th class="narrow"></th>
     </tr>
   </thead>
   <% configatron.raidplanner.status_manager.size.downto(1) do |i| %>
@@ -169,6 +171,8 @@
       <tr valign="top" class="header">
         <th colspan="6"><%=h configatron.raidplanner.status_manager.key(i) %></th>
         <th></th>
+				<th></th>
+				<th></th>
       </tr>
       <% @raid.attendances.find_all_by_status(i).each do |attendance|%>
         <tr>
@@ -178,7 +182,9 @@
           <td><%= image_tag classicon_path(attendance.character),:size => "18x18" %></td>
           <td><%=h attendance.role %></td>
           <td  class="left"><%=h attendance.message %></td>
-          <td><%= link_to((attendance.status==3 ? "reject" : "approve"), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3) && !@raid.closed?%></td>
+          <td><%= link_to((attendance.status==3 ? image_tag('icons/arrow_down.png',:title => 'reject') : image_tag('icons/arrow_up.png',:title => 'approve')), {:controller => :attendances, :id => attendance.id , :action => :approve}) if permitted_to?(:approve,attendance) && (i==2 || i==3) && !@raid.closed?%></td>
+					<td><%= link_to(image_tag('icons/page_edit.png',:title => 'edit'), edit_attendance_path(attendance), {:class => 'popup',:title => 'Add Character'}) if permitted_to?(:edit,attendance) %></td>
+					<td><%= link_to(image_tag('icons/cross.png',:title => 'destroy'), attendance_path(attendance) ,:confirm => "Are you sure?", :method=>:delete) if permitted_to?(:destroy,attendance) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -188,15 +194,11 @@
   <h3>The Raid is closed!</h3>
 <% else %>
   <% unless current_user.characters.empty? %>
-    <h2>Create / Change Attendance</h2>
-
     <% if @attendance.new_record? %>
-      <%= render :partial => "new_attend_form", :object => @attendance %>
-    <% else %>
-      <%= render :partial => "update_attend_form", :object => @attendance%>
+			<span><%= link_to 'Attend Raid', new_raid_attendance_path(@raid), {:class => 'popup',:title => 'New Attendance', :id => 'new_attendance'} %></span>
     <% end %>
   <% else%>
-    <h3>Please connect a character to your account</h3>
+    <span>Please connect a character to your account</span>
   <% end %>
 <% end %>
 <script>
