@@ -37,6 +37,7 @@ $(document).ready(function() {
 							$form.html("");
 							$form.append('<div class="'+status+'">'+xhr.responseText+'</div>');
 							$(".ui-dialog-buttonset").hide();
+							location.reload(true);
             	return false;
 						}else{
 							$form.append('<div class="'+status+'">'+xhr.responseText+'</div>');
