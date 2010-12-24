@@ -141,7 +141,7 @@ class GuildsController < ApplicationController
     respond_to do |format|
       if !params[:token].nil?
         if current_user.nil?
-          flash[:error] = t("have_to_be_logged_in")
+          flash[:error] = t('have_to_be_logged_in')
           unless params[:token].nil?
             cookies[:rguilds_jg_token] = params[:token]
             cookies[:rguilds_jg_gid] = params[:id]

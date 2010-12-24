@@ -179,7 +179,7 @@ class CharactersController < ApplicationController
     end
     respond_to do |format|
       if @character.update_attribute(:main,true)
-        flash[:notice] =  @character.name + ' is now your new main'
+        flash[:notice] =  @character.name + t.('characters.is_main')
         format.html { redirect_to(guild_character_path(@character.guild,@character)) }
         format.xml  { head :ok }
       else

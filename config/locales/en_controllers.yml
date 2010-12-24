@@ -28,6 +28,7 @@ en:
     already_linked: "Character already marked! Please contact the support."
     not_linked: "Character is not marked."
     delinked: "Character has been demarked."
+    is_main: " is now your main."
     
   guilds:
     not_assigned: "You are not logged in or haven't assigned to a guild."

@@ -27,7 +27,7 @@
 <% end %>
 <% unless @guild.verified? || !permitted_to?(:maintain, @guild) %>
 <div id="verify_guild">
-  <p><%= link_to 'Please verify the guildname!', :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
+  <p><%= link_to t.('guilds.verified'), :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
 </div>
 <% end %>
 <div class="clear"></div>
@@ -35,20 +35,20 @@
 
 <% content_for :tabs do %>
 <%
-@tabs << link_to("Overview", guild_path(@guild))
-@tabs << link_to("Members", guild_characters_path(@guild))
-@tabs << link_to("Statistics", guild_statistics_path(@guild))
+@tabs << link_to(t('guilds.tabs.overview'), guild_path(@guild))
+@tabs << link_to(t('guilds.tabs.members'), guild_characters_path(@guild))
+@tabs << link_to(t('guilds.tabs.statistics'), guild_statistics_path(@guild))
 if @guild.users.include?(current_user)
-	@tabs << link_to("Raids", guild_raids_path(@guild)) 
-	@tabs << link_to("Users", guild_users_path(@guild))
+	@tabs << link_to(t('guilds.tabs.raids'), guild_raids_path(@guild)) 
+	@tabs << link_to(t('guilds.tabs.users'), guild_users_path(@guild))
 else
-	@tabs << link_to("Join", guild_path(@guild) + "/join") 
+	@tabs << link_to(t('guilds.tabs.join'), guild_path(@guild) + "/join") 
 end
 
 if permitted_to? :maintain, @guild
 	@tabs << ""
-	@tabs << link_to("Widgets", :controller => 'guilds', :action => 'widgets', :id => @guild.id)
-	@tabs << link_to("Settings", :controller => 'guilds', :action => 'maintain', :id => @guild.id)
+	@tabs << link_to(t('guilds.tabs.widgets'), :controller => 'guilds', :action => 'widgets', :id => @guild.id)
+	@tabs << link_to(t('guilds.tabs.settings'), :controller => 'guilds', :action => 'maintain', :id => @guild.id)
 end
 
 render :partial => 'shared/tabs', :locals => {:tabs => @tabs}

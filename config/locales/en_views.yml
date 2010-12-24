@@ -20,6 +20,7 @@ en:
     recruitment: "Recruitment"
     recruit_level: "Level %{level} and above"
     news: "News"
+    verified: "Verify guildname!"
     show:
       no_news: "No News Available"
     edit:
@@ -39,6 +40,15 @@ en:
       recruit_healer: "Healer"
       recruit_damage: "Damage"
       recruit_tank: "Tank"
+    tabs:
+      overview: "Overview"
+      members: "Members"
+      statistics: "Statistics"
+      raids: "Raids"
+      users: "Users"
+      join: "Join"
+      widgets: "Widgets"
+      settings: "Settings"
       
   events:
     actiontexts:
