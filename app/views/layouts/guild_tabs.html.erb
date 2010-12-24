@@ -27,7 +27,7 @@
 <% end %>
 <% unless @guild.verified? || !permitted_to?(:maintain, @guild) %>
 <div id="verify_guild">
-  <p><%= link_to t.('guilds.verified'), :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
+  <p><%= link_to t('guilds.verified'), :controller => 'guilds', :action => 'verify', :id => @guild.id %></p>
 </div>
 <% end %>
 <div class="clear"></div>

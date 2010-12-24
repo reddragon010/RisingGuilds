@@ -1,5 +1,9 @@
 en:
   confirmation: "Are you sure?"
+
+  characters:
+    select: "Select a character." 
+
   views:
     labels:
       guild:

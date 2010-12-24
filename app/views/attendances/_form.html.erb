@@ -5,9 +5,9 @@
 			<td><%= f.label :character %></td>
 			<td class="left">
 			<% if @attendance.new_record? %>
-				<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %>
+				<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => t('characters.select')}) %>
 			<% else %>
-				<%= f.collection_select(:character_id, @attendance.character.user.characters, :id, :name, {:prompt => "Select a character"}) %>
+				<%= f.collection_select(:character_id, @attendance.character.user.characters, :id, :name, {:prompt => t('characters.select')}) %>
 			<% end %>
 			</td>
 		</tr>
