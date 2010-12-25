@@ -1,8 +1,28 @@
 en:
   confirmation: "Are you sure?"
+  online: "Online"
+  offline: "Offline"
 
+  attendences:
+    character: "Character"
+    raid: "Raid"
+    role: "Role"
+    status: "Status"
+    message: "Message"
+      
   characters:
+    editing: "Editing character"
+    creation: "New character"
     select: "Select a character." 
+    role: "Select a role."
+    mark_char: "Mark as my character."
+    not_my_char: "This character is not yours."
+    update: "Update character."
+    events: "Events"
+    last_seen: "Last seen"
+    activity: "Activity"
+    achievements: "Achievement Points"
+    ail: "AverageItemLevel"
 
   views:
     labels:
@@ -62,3 +82,19 @@ en:
       demoted: "was demoted from rank %{content}"
       levelup: "has got level %{content}"
       guild_created: "Guild was created by %{content}"
+
+  professions:
+    profs: "Professions"
+    164: "Blacksmithing"
+    165: "Leatherworking"
+    171: "Alchemy"
+    182: "Herbalism"
+    197: "Tailoring"
+    202: "Engineering"
+    333: "Enchanting"
+    393: "Skinning"
+    755: "Jewelcrafting"
+    773: "Inscription"
+
+  talents:
+    specs: "Talent specialization"
