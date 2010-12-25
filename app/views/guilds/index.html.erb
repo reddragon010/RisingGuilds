@@ -1,9 +1,9 @@
 <div id="filter_form">
 	<%= form_tag guilds_path, :method => 'get' do %>
 	  Name:<%= text_field_tag :name, params[:name] %>
-		Faction:<%= select_tag :faction, options_for_select({:all => nil, :alliance => "0" , :horde => "1"}, params[:faction]) %>
-		Realm:<%= select_tag :realm, options_for_select({:all => nil, :PvP => "PvP-Realm" , :PvE => "PvE-Realm"}, params[:realm])%>
-		Recruting:<%= check_box_tag :open_recruit, 1 , params[:open_recruit].nil? || params[:open_recruit] == 0 ? false : true %>
+		<%= t('guilds.details.faction')%>:<%= select_tag :faction, options_for_select({:all => nil, :alliance => "0" , :horde => "1"}, params[:faction]) %>
+		<%= t('guilds.details.realm')%>:<%= select_tag :realm, options_for_select({:all => nil, :PvP => "PvP-Realm" , :PvE => "PvE-Realm"}, params[:realm])%>
+		<%= t('guilds.details.recruiting')%>:<%= check_box_tag :open_recruit, 1 , params[:open_recruit].nil? || params[:open_recruit] == 0 ? false : true %>
 		<%= submit_tag 'Filter' %>
 	<% end %>
 </div>

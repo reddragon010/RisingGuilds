@@ -2,9 +2,9 @@ en:
   confirmation: "Are you sure?"
   online: "Online"
   offline: "Offline"
+  character: "Character"
 
   attendences:
-    character: "Character"
     raid: "Raid"
     role: "Role"
     status: "Status"
@@ -45,6 +45,11 @@ en:
     recruit_level: "Level %{level} and above"
     news: "News"
     verified: "Verify guildname!"
+    already_joined: "You have already joined this guild."
+    already_token: "You can enter your token here if you have one"
+    need_token: "You need a token to join this guild."
+    more_info_with_http: "For more information visit %{website} or contact the following players InGame"
+    more_info: "For more information contact the following players"
     show:
       no_news: "No News Available"
     edit:
@@ -73,8 +78,19 @@ en:
       join: "Join"
       widgets: "Widgets"
       settings: "Settings"
+    details:
+      faction: "Faction"
+      realm: "Realm"
+      recruiting: "Recruiting"
+      leader: "Leader"
+      members: "Members"
+      growth: "Growth"
       
   events:
+    labels:
+      action: "Action"
+      content: "Content"
+      guild: "Guild"
     actiontexts:
       joined: "has joined the Guild %{content}"
       left: "has left the Guild %{content}"
