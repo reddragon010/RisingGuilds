@@ -16,11 +16,12 @@ module Arsenal
   end
 
   class Profession
-  	attr_reader :key, :name, :value, :max
+  	attr_reader :key, :name, :value, :max, :id
   	alias_method :to_s, :name
   	alias_method :to_i, :value
 
   	def initialize(elem)
+  	  @id     = elem[:id]
   		@key 		= elem[:key]
   		@name 	= elem[:name]
   		@value 	= elem[:value].to_i
