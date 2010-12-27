@@ -5,15 +5,15 @@
 			<td><%= f.label :character %></td>
 			<td class="left">
 			<% if @attendance.new_record? %>
-				<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => "Select a character"}) %>
+				<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => t('characters.select')}) %>
 			<% else %>
-				<%= f.collection_select(:character_id, @attendance.character.user.characters, :id, :name, {:prompt => "Select a character"}) %>
+				<%= f.collection_select(:character_id, @attendance.character.user.characters, :id, :name, {:prompt => t('characters.select')}) %>
 			<% end %>
 			</td>
 		</tr>
 		<tr>
 			<td><%= f.label :role %></td>
-			<td class="left"><%= f.select(:role, configatron.raidplanner.roles, {:prompt => "Select a role"}) %></td>
+			<td class="left"><%= f.select(:role, configatron.raidplanner.roles, {:prompt => t('characters.role')}) %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :status %></td>

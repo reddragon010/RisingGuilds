@@ -1,5 +1,27 @@
 en:
   confirmation: "Are you sure?"
+  character: "Character"
+  update: "Update"
+
+  attendences:
+    raid: "Raid"
+    role: "Role"
+    status: "Status"
+    message: "Message"
+      
+  characters:
+    editing: "Editing character"
+    creation: "New character"
+    select: "Select a character." 
+    role: "Select a role."
+    link_char: "Link"
+    unlink_char: "Unlink"
+    events: "Events"
+    last_seen: "Last seen"
+    activity: "Activity"
+    achievements: "Achievement Points"
+    ail: "AverageItemLevel"
+
   views:
     labels:
       guild:
@@ -9,7 +31,6 @@ en:
     logged_in_as: "You are logged in as"
     
   guilds:
-    update: "Update"
     show: "Show"
     back: "Back"
     logo: "Logo"
@@ -20,6 +41,12 @@ en:
     recruitment: "Recruitment"
     recruit_level: "Level %{level} and above"
     news: "News"
+    verified: "Verify guildname!"
+    already_joined: "You have already joined this guild."
+    already_token: "You can enter your token here if you have one"
+    need_token: "You need a token to join this guild."
+    more_info_with_http: "For more information visit %{website} or contact the following players InGame"
+    more_info: "For more information contact the following players InGame"
     show:
       no_news: "No News Available"
     edit:
@@ -39,8 +66,28 @@ en:
       recruit_healer: "Healer"
       recruit_damage: "Damage"
       recruit_tank: "Tank"
+    tabs:
+      overview: "Overview"
+      members: "Members"
+      statistics: "Statistics"
+      raids: "Raids"
+      users: "Users"
+      join: "Join"
+      widgets: "Widgets"
+      settings: "Settings"
+    details:
+      faction: "Faction"
+      realm: "Realm"
+      recruiting: "Recruiting"
+      leader: "Leader"
+      members: "Members"
+      growth: "Growth"
       
   events:
+    labels:
+      action: "Action"
+      content: "Content"
+      guild: "Guild"
     actiontexts:
       joined: "has joined the Guild %{content}"
       left: "has left the Guild %{content}"
@@ -48,3 +95,19 @@ en:
       demoted: "was demoted from rank %{content}"
       levelup: "has got level %{content}"
       guild_created: "Guild was created by %{content}"
+
+  professions:
+    profs: "Professions"
+    164: "Blacksmithing"
+    165: "Leatherworking"
+    171: "Alchemy"
+    182: "Herbalism"
+    197: "Tailoring"
+    202: "Engineering"
+    333: "Enchanting"
+    393: "Skinning"
+    755: "Jewelcrafting"
+    773: "Inscription"
+
+  talents:
+    specs: "Talent specialization"
