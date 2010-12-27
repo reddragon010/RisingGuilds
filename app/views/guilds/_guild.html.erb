@@ -4,7 +4,7 @@
 	<div class="logo"><%= link_to image_tag(guild.logo.url, :alt => "guildlogo", :size => "100x100"), guild_path(guild) %></div>
 	<div class="name"><%= link_to h(guild.name), guild_path(guild) %></div>
 	<div class="details">
-		<span style="margin-right:10px"><%= t('guilds.details.faction')%>: <%= FACTIONS.index(guild.faction_id) %></span>
+		<span style="margin-right:10px"><%= t('guilds.details.faction')%>: <%= t("factions.#{FACTIONS.index(guild.faction_id)}") %></span>
 		<span style="margin-right:10px"><%= t('guilds.details.realm')%>: <%= guild.realm %></span>
 		<span style="margin-right:10px"><%= t('guilds.details.recruiting')%>: <%= guild.recruit_open ? "Yes" : "No" %></span>
 		<span style="margin-right:10px"><%= t('guilds.details.leader')%>: <%= raw link_to(@leader.login, user_path(@leader), :id => "leader_#{@leader.id}")%></span>
