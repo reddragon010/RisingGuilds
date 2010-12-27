@@ -36,9 +36,9 @@
           <td><%=h character.rank %></td>
         <% end %>
         <td><%=h character.level %></td>
-        <td class="left"><%= image_tag classicon_path(character),{:size => "18x18", :title => CLASSES.key(character.class_id)} %> <%= talentspecicon(character.talentspec1) unless character.talentspec1.nil? %><%= talentspecicon(character.talentspec2) unless character.talentspec2.nil? %></td>
-        <td><%= image_tag raceicon_path(character),{:size => "18x18", :title => RACES.key(character.race_id)} %></td>
-        <td><%= image_tag factionicon_path(character), {:size => "18x18", :title => FACTIONS.key(character.faction_id)} %></td>
+        <td class="left"><%= image_tag classicon_path(character),{:size => "18x18", :title => t("classes.#{CLASSES.key(character.class_id)}")} %> <%= talentspecicon(character.talentspec1) unless character.talentspec1.nil? %><%= talentspecicon(character.talentspec2) unless character.talentspec2.nil? %></td>
+        <td><%= image_tag raceicon_path(character),{:size => "18x18", :title => t("races.#{RACES.key(character.race_id)}")} %></td>
+        <td><%= image_tag factionicon_path(character), {:size => "18x18", :title => t("factions.#{FACTIONS.key(character.faction_id)}")} %></td>
         <td><%= online_text(character.online) %></td>
         <td><%= character.ail.nil? ? "n/a" : character.ail %></td>
         <td><%= professionicon(character.profession1) unless character.profession1.nil? %></td>

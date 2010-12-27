@@ -112,3 +112,31 @@ en:
 
   talents:
     specs: "Talent specialization"
+  
+  classes:
+    dk: "Death Knight"
+    druid: "Druid"
+    hunter: "Hunter"
+    mage: "Mage"
+    paladin: "Paladin"
+    priest: "Priest"
+    rogue: "Rogue"
+    shaman: "Shaman"
+    warlock: "Warlock"
+    warrior: "Warrior"
+    
+  races:
+    human: "Human"
+    orc: "Orc"
+    dwarf: "Dwarf"
+    nightelve: "Nightelve"
+    undead: "Undead"
+    tauren: "Tauren"
+    gnome: "Gnome"
+    troll: "Troll"
+    bloodelve: "Bloodelve"
+    draenei: "Draenei"
+    
+  factions:
+    horde: "Horde"
+    alliance: "Alliance"
