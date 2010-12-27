@@ -98,16 +98,17 @@ en:
 
   professions:
     profs: "Professions"
-    164: "Blacksmithing"
-    165: "Leatherworking"
-    171: "Alchemy"
-    182: "Herbalism"
-    197: "Tailoring"
-    202: "Engineering"
-    333: "Enchanting"
-    393: "Skinning"
-    755: "Jewelcrafting"
-    773: "Inscription"
+    p164: "Blacksmithing"
+    p165: "Leatherworking"
+    p171: "Alchemy"
+    p182: "Herbalism"
+    p186: "Mining"
+    p197: "Tailoring"
+    p202: "Engineering"
+    p333: "Enchanting"
+    p393: "Skinning"
+    p755: "Jewelcrafting"
+    p773: "Inscription"
 
   talents:
     specs: "Talent specialization"

@@ -14,7 +14,7 @@ module ApplicationHelper
   end
   
   def professionicon(profession)
-    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :title => profession.key})
+    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :title => t("professions.p#{profession.id}")})
   end
   
   def talentspecicon(talentspec)
