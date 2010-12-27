@@ -5,7 +5,7 @@
 <%unless @guild.website.empty? %>
   <p><%= t('guilds.more_info_with_http', :website => <%= link_to @guild.website %>) %> ( <%= @guild.realm %> )
 <% else %>
-  <p><%= t('guilds.more_info') %>
+  <p><%= t('guilds.more_info') %> ( <%= @guild.realm %> )
 <% end %>
   <ul>
     <% @guild.managers.map{|u| u.characters }.flatten.each do |char| %>

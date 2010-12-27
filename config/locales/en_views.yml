@@ -1,8 +1,7 @@
 en:
   confirmation: "Are you sure?"
-  online: "Online"
-  offline: "Offline"
   character: "Character"
+  update: "Update"
 
   attendences:
     raid: "Raid"
@@ -15,9 +14,8 @@ en:
     creation: "New character"
     select: "Select a character." 
     role: "Select a role."
-    mark_char: "Mark as my character."
-    not_my_char: "This character is not yours."
-    update: "Update character."
+    link_char: "Link"
+    unlink_char: "Unlink"
     events: "Events"
     last_seen: "Last seen"
     activity: "Activity"
@@ -33,7 +31,6 @@ en:
     logged_in_as: "You are logged in as"
     
   guilds:
-    update: "Update"
     show: "Show"
     back: "Back"
     logo: "Logo"
@@ -49,7 +46,7 @@ en:
     already_token: "You can enter your token here if you have one"
     need_token: "You need a token to join this guild."
     more_info_with_http: "For more information visit %{website} or contact the following players InGame"
-    more_info: "For more information contact the following players"
+    more_info: "For more information contact the following players InGame"
     show:
       no_news: "No News Available"
     edit:

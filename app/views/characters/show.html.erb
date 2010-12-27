@@ -1,13 +1,13 @@
 <div id="content_menu">
 	<ul>
 		<% if permitted_to? :link, @character %>
-		<li><%= link_to(t('mark_char'), {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => 'Is this really your character?')  %></li>
+		<li><%= link_to(t('characters.link_char'), {:controller => "characters", :id => @character.id, :action => 'link'}, :confirm => t('confirmation'))  %></li>
 		<% end %>
 		<% if permitted_to? :delink, @character %>
-		<li><%= link_to(t('not_my_char'), :confirm => t('confirmation'), :action => 'delink')  %></li>
+		<li><%= link_to(t('characters.unlink_char'), {:action => 'delink'}, :confirm => t('confirmation'))  %></li>
 		<% end %>
 		<% if permitted_to? :actualize, @character %>
-		<li><%= link_to(t('update'), :action => 'actualize') %></li>
+		<li><%= link_to( t('update'), :action => 'actualize') %></li>
 		<% end %>
 	</ul>
 </div>
@@ -46,13 +46,13 @@
 	</div>
 	
 	<div id="onlinestatus">
-		<%= raw @character.online ? "<span style=\"color:green\">t('online')</span>" : "<span style=\"color:red\">t('offline')</span>" %>
+		<%= raw @character.online ? "<span style=\"color:green\">online</span>" : "<span style=\"color:red\">offline</span>" %>
 	</div>
 </div>
 
 <div class="clear"></div>
 <div class="box_small" style="min-height:300px;float:right">
-	<div class="box_headline">t('characters.events')</div>
+	<div class="box_headline"><%= t('characters.events') %></div>
 	<div id="events_box">
 	<%= render :partial => "events", :locals => {:events => @character.events.visible}%>
   </div>
@@ -61,20 +61,20 @@
 	<div class="box_headline">Details</div>
 	<table>
 		<tr>
-			<td class="left" style="width:50%;"><b><%=t('charactes.last_seen')%>:</b></td>
+			<td class="left" style="width:50%;"><b><%=t('characters.last_seen')%>:</b></td>
 			<td style="width:50%;"><%=h @character.last_seen %></td>
 		</tr>
 		<tr>
-			<td class="left"><b><%=t('charactes.activity')%>:</b></td>
+			<td class="left"><b><%=t('characters.activity')%>:</b></td>
 			<td><%=h @character.activity %></td>
 		</tr>
 		<tr>
-			<td class="left"><b><%=t('charactes.achievements')%>:</b></td>
+			<td class="left"><b><%=t('characters.achievements')%>:</b></td>
 			<td><%=h @character.achivementpoints %></td>
 		</tr>
 		<% unless @character.ail.nil? || @character.ailstddev.nil? %>
 		<tr>
-			<td class="left"><b><%=t('charactes.ail')%>:</b></td>
+			<td class="left"><b><%=t('characters.ail')%>:</b></td>
 			<td><%=h @character.ail %> &plusmn; <%=h @character.ailstddev %></td>
 		</tr>
 		<% end %>
