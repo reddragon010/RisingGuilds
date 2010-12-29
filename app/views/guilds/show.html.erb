@@ -118,7 +118,7 @@
 	<div class="box_small">
 	  <div class="box_headline">Newest Events</div>
 	  <div id="events_box">
-		<%= render :partial => "events", :locals => {:events => @events}%>
+		<%= render :partial => "events", :locals => {:guild => @guild, :events => @events}%>
 	  </div>
 	</div>
 

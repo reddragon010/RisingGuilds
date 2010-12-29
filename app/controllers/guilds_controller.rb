@@ -40,7 +40,7 @@ class GuildsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
-      format.js
+      format.json {render :json => @guild.to_json(:methods => [:online_members_count, :members_count], :only => [:name, :realm, :faction_id, :online_members_count, :online_members, :logo_content_type, :logo_file_name])}
     end
   end
 
