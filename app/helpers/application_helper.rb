@@ -136,6 +136,6 @@ module ApplicationHelper
   	end
   	cache_path += "#{params[:controller]}/#{params[:action]}"
   	cache_path += "?sort=#{params[:sort]}" unless params[:sort].blank? 
-  	cache_path += "--#{@newest.updated_at.to_i}"
+  	cache_path += "-#{@newest.updated_at.to_i}"
   end
 end
