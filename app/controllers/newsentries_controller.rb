@@ -51,7 +51,7 @@ class NewsentriesController < ApplicationController
     @newsentry.user_id = current_user.id
     respond_to do |format|
       if @newsentry.save
-        flash[:notice] = 'Newsentry was successfully created.'
+        flash[:notice] = t('newsentries.created')
         format.html { redirect_to(guild_path(@newsentry.guild)) }
         format.xml  { render :xml => @newsentry, :status => :created, :location => @newsentry }
       else
@@ -68,7 +68,7 @@ class NewsentriesController < ApplicationController
 
     respond_to do |format|
       if @newsentry.update_attributes(params[:newsentry])
-        flash[:notice] = 'Newsentry was successfully updated.'
+        flash[:notice] = t('newsentries.updated')
         format.html { redirect_to(guild_path(@newsentry.guild)) }
         format.xml  { head :ok }
       else

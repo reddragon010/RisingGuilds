@@ -2,11 +2,11 @@
 
 <table>
   <tr>
-    <th>Character</th>
-    <th>Raid</th>
-    <th>Role</th>
-    <th>Status</th>
-    <th>Message</th>
+    <th><%= t('character') %></th>
+    <th><%= t('raid') %></th>
+    <th><%= t('role') %></th>
+    <th><%= t('status') %></th>
+    <th><%= t('message') %></th>
   </tr>
 
 <% @attendances.each do |attendance| %>
@@ -18,7 +18,7 @@
     <td><%=h attendance.message %></td>
     <td><%= link_to 'Show', attendance %></td>
     <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-    <td><%= link_to 'Destroy', attendance, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', attendance, :confirm => t('confirmation'), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

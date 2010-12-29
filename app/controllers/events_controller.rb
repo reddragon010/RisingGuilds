@@ -6,12 +6,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.where(:guild_id => params[:guild_id]) unless params[:guild_id].nil?
-    @events = Event.where(:character_id => params[:character_id]) unless params[:character_id].nil?
+    @events = Event.visible.where(:guild_id => params[:guild_id]) unless params[:guild_id].nil?
+    @events = Event.visible.where(:character_id => params[:character_id]) unless params[:character_id].nil?
     @events = @events.order("created_at DESC").paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
+      format.js
     end
   end
 

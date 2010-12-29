@@ -53,7 +53,7 @@ class Character < ActiveRecord::Base
     
     ilevelsum = 0
     items = Array.new
-    self.items.each do |item|
+    self.items.delete_if{|i| i.slot == 3 || i.slot == 18}.each do |item|
       xml = Arsenal::get_item_xml(item)
       item.get_info(xml)
       ilevelsum += item.level

@@ -1,0 +1,64 @@
+de:
+  error: "Fehler - wenden Sie sich bitte an den Support."
+  no_access: "Sorry, Sie sind nicht berechtigt, diese Seite aufzurufen."
+  created: "%{item} wurde erfolgreich erstellt"
+  updated: "%{item} wurde erfolgreich aktualisiert"
+  not_found: "%{item} wurde nicht gefunden"
+  updating: '%{item} wird bald aktualisiert'
+  update_in_progress: 'Aktualisierung läuft. Bitte haben Sie etwas Geduld.'
+  have_to_be_logged_in: "Sorry, Sie müssen eingeloggt sein, um diese Seite aufzurufen"
+  
+  activations:
+    password: "Setzten Sie ihr Passwort"
+    activate_account: "Aktivieren Sie ihren Account"
+    activate: "Aktivieren"
+    account_activated: "Ihr Account wurde aktiviert."
+    
+  account:
+    created: "Ihr Account wurde erstellt. Instruktionen zur Aktivierung ihres Accounts erhalten Sie per E-Mail!"
+  
+  guilds:
+    not_assigned: "Sie sind nicht eingeloggt, oder gehören zu keiner Gilde"
+    joined: 'Sie sind erfolgreich der Gilde beigetreten'
+    invalid_token: 'Falscher Token! Wenden Sie sich bitte an Ihren Gildenleiter'
+    new_token: 'Neuer Gilden-Token wurde erfolgreich generiert'
+    not_verified: "Die Gilde ist nicht verifiziert! Wenden sie sich bitte an den Gildenleiter"
+    verified: "Der Gildenname wurde erfolgreich verifiziert"
+    no_valid_name: "Die Gilde wurde nicht gefunden! Überprüfen Sie bitte den Gildennamen. Der eingetragene Name muss mit dem Gildennamen im Arsenal exakt übereinstimmen."
+    no_arsenal_connection: "Das Arsenal ist moment nicht erreichbar. Versuchen Sie es später nocheinmal.\n Sollten sie diese Fehlermeldung erhalten, obwohl das Arsenal verfügbar ist, wenden Sie sich bitte an den Support."
+    already_joined: "Sie können einer Gilde nicht zweimal beitreten."
+  
+  users:
+    no_guild: "Geben Sie eine Gilde an!"
+    kicked: "User entfernt!"
+    not_enought_rights: "Sie haben nicht genügend Rechte um diesen Benutzer zu %{a}"
+    promoted: "User befördert!"
+    created: "Ihr Account wurde erstellt. Instruktionen zur Aktivierung ihres Accounts erhalten Sie per E-Mail!"
+    updated: "Account aktualisiert!"
+
+  characters:
+    linked: "Character gehört nun Ihnen"
+    already_linked: "Character ist bereits zugeordnet! Wenden Sie sich bitte an den Support"
+    not_linked: "Character nicht zugeordnet"
+    delinked: "Character wurde abgegeben"
+    
+  password_resets:
+    instructions_sent: "Instruktionen zum Reset Ihres Passworts wurden per E-Mail versand."
+    no_user_found: "Es wurde kein User mit dieser E-Mail-Adresse gefunden."
+    token_not_found: "Sorry, ihr Account wurde nicht gefunden. Sollten Sie Probleme mit dem Passwort Reset haben, verwenden Sie bitte Copy & Paste zum Kopieren der URL aus ihrer E-Mail oder starten sie den Passwort-Reset Prozess noch einmal."
+
+  raids:
+    closed: "Dieser Raid ist bereits abgeschlossen"
+    guild_to_raid: "Gilde wurde zum Raid eingeladen"
+    uninvited: "Gilde wurde ausgeladen."
+    cant_uninvite: "Die Ersteller-Gilde kann nicht ausgeladen werden."
+
+  user_sessions:
+    login_successful: "Login erfolgreich!"
+    login_incorrect: "Login oder Passwort falsch!"
+    logout_successful: "Logout erfolgreich!"
+
+  widget:
+    no_action: "Bitte wähle eine Aktion"
+    no_access: "Keine Berechtigung"
+    invalid_key: "Ungültiger API Schlüssel"

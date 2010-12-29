@@ -1,0 +1,29 @@
+<%= form_for(@attendance) do |f| %>
+  <%= f.error_messages %>
+	<table>
+		<tr>
+			<td><%= f.label :character %></td>
+			<td class="left">
+			<% if @attendance.new_record? %>
+				<%= f.collection_select(:character_id, current_user.characters, :id, :name, {:prompt => t('characters.select')}) %>
+			<% else %>
+				<%= f.collection_select(:character_id, @attendance.character.user.characters, :id, :name, {:prompt => t('characters.select')}) %>
+			<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td><%= f.label :role %></td>
+			<td class="left"><%= f.select(:role, configatron.raidplanner.roles, {:prompt => t('characters.role')}) %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :status %></td>
+			<td class="left"><%= f.select(:status, configatron.raidplanner.status, {:selected => 2}) %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :message %></td>
+			<td class="left"><%= f.text_field :message %></td>
+		</tr>
+	</table>
+	<%= f.hidden_field :raid_id %>
+	<%= f.submit "Create"%>
+<% end %>

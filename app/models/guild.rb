@@ -29,6 +29,10 @@ class Guild < ActiveRecord::Base
   
   attr_accessor :serial
   
+  def logo_url
+    self.logo.url
+  end
+  
   def leaders
     @leaders = Array.new
     assignments.where(:role => 'leader').each{|a| @leaders << a.user}

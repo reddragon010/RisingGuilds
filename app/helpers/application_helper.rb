@@ -14,11 +14,15 @@ module ApplicationHelper
   end
   
   def professionicon(profession)
-    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :title => profession.key})
+    image_tag("icons/professions/#{profession.key}.png", {:size => "18x18", :title => t("professions.p#{profession.id}")})
   end
   
   def talentspecicon(talentspec)
-    image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:title => talentspec.prim})
+    if talentspec.icon.blank?
+      image_tag("icons/talentspecs/inv_misc_questionmark.png", {:size => "18x18"})
+    else
+      image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:title => talentspec.prim})
+    end
     #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
   end
   
@@ -97,7 +101,7 @@ module ApplicationHelper
     end
   end
   
-  #Prograssbar helper
+  #Progreessbar helper
   def progressbar(value,text)
     op =  "<div class=\"bar-container\">\n"    
     op += "<div style=\"width: #{value}%;\">#{text}</div>\n"

@@ -20,14 +20,14 @@ class RaidsController < ApplicationController
     
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if @guild.nil?
-      @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month)}.flatten
+      @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
     else
-      @raids = @guild.raids
+      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
     end
 
     unless @raids.empty?
-      @upcomming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
-      @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}
+      @upcoming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
+      @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}.reverse
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
     end
     
@@ -115,6 +115,7 @@ class RaidsController < ApplicationController
     @raid.end = @raid.start + params[:raid][:duration].to_i.hours
     @raid.invite_start = @raid.start - params[:raid][:invitation_window].to_i.minutes
     @raid.guilds << @raid.guild
+    @raid.icon = "nil.png" if @raid.icon.blank?
     respond_to do |format|
       if @raid.save
         flash[:notice] = t(:created, :item => 'Raid')
@@ -157,6 +158,8 @@ class RaidsController < ApplicationController
     
     @raid.limit_roles = params[:limit_roles].delete_if{|k,v| v.blank?}
     @raid.limit_classes = params[:limit_classes].delete_if{|k,v| v.blank?}
+    
+    params[:raid][:icon] = "nil.png" if params[:raid][:icon].blank?
     
     respond_to do |format|
       if @raid.update_attributes(params[:raid])

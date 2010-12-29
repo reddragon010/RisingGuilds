@@ -1,0 +1,77 @@
+ <div>
+	<div id="charswidget" style="border: 1px solid #666; padding:5px;">
+    <script>
+      function chars_callback(obj){
+        var chars = obj;
+        var out = "";
+        out += '<table><thead>';
+        out += '  <tr>';
+        out += '    <th>Name</th><th>Level</th><th>Race</th><th>Class</th><th>AIL</th><th>Specs</th><th>Prof1</th><th>Prof2</th>';
+        out += '  </tr>';
+        out += '</thead><tbody>';
+        for (var i = 0; i < chars.length; i++) {
+          var chara = chars[i].character;
+          out += '<tr><td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>';
+          out += '    <td>' + chara.level + '</td>';
+          out += '    <td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>';
+          out += '    <td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>';
+          out += '    <td>' + chara.ail + '</td>';
+          out += '    <td>';
+          if(chara.talentspec1){out += '      <img src="<%= root_url %>images/icons/talentspecs/' + chara.talentspec1.icon + '.png" width="18" heigth="18" />';}
+          if(chara.talentspec2){out += '      <img src="<%= root_url %>images/icons/talentspecs/' + chara.talentspec2.icon + '.png" width="18" heigth="18" />';}
+          out += '    </td>';
+          if(chara.profession1){out += '    <td><img src="<%= root_url %>images/icons/professions/' + chara.profession1.key + '.png" /> ' + chara.profession1.value + '/' + chara.profession1.max + '</td>';}
+          if(chara.profession2){out += '    <td><img src="<%= root_url %>images/icons/professions/' + chara.profession2.key + '.png" /> ' + chara.profession2.value + '/' + chara.profession2.max + '</td>';}
+          out += '</tr>';
+        }
+        out += '</tbody></table>';
+        document.getElementById('charswidget').innerHTML = out;
+      }
+    </script>
+    <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/characters.json?limit=5&callback=chars_callback"></script>
+  </div>
+	<br />
+	<a href="javascript:$('#code2').slideToggle('slow')">Code</a>
+   <div id="code2" style="display: none;">
+	<pre class="code">
+   <code class="javascript">
+<%=  "<script>" %><script>
+function chars_callback(obj){
+ var chars = obj;
+ var out = "";
+ out += '<table><thead><tr>';
+ out += '<th>Name</th><th>Level</th><th>Race</th><th>Class</th><th>AIL</th><th>Specs</th><th>Prof1</th><th>Prof2</th>';
+ out += '</tr></thead><tbody>';
+ for (var i = 0; i < chars.length; i++) {
+   var chara = chars[i].character;
+   out += '<tr><td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + chara.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>';
+   out += '<td>' + chara.level + '</td>';
+   out += '<td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>';
+   out += '<td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>';
+   out += '<td>' + chara.ail + '</td>';
+   out += '<td>';
+   if(chara.talentspec1){
+     out += '<img src="<%= root_url %>images/icons/talentspecs/' + chara.talentspec1.icon + '.png" width="18" heigth="18" />';
+   }
+   if(chara.talentspec2){
+     out += '<img src="<%= root_url %>images/icons/talentspecs/' + chara.talentspec2.icon + '.png" width="18" heigth="18" />';
+   }
+   out += '</td>';
+   if(chara.profession1){
+     out += '<td><img src="<%= root_url %>images/icons/professions/' + chara.profession1.key + '.png" /> ' + chara.profession1.value + '/' + chara.profession1.max + '</td>';
+   }
+   if(chara.profession2){
+     out += '<td><img src="<%= root_url %>images/icons/professions/' + chara.profession2.key + '.png" /> ' + chara.profession2.value + '/' + chara.profession2.max + '</td>';
+   }
+   out += '</tr>';
+ }
+ out += '</tbody></table>';
+ document.getElementById('charswidget').innerHTML = out;
+}
+</script><%= "</script>" %>
+<%= "<script type=\"text/javascript\" src=\"/guilds/" + params[:guild_id] + "/characters.json?callback=chars_callback\"></script>" %>
+<%= '<div id="charswidget" style="border: 1px solid #666; padding:5px;"></div>' %>
+   </code>
+   </pre>
+	</div>
+ </div>

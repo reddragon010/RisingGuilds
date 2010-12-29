@@ -27,6 +27,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/new.xml
   def new
     @attendance = Attendance.new
+    @attendance.raid_id = params[:raid_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,18 +48,19 @@ class AttendancesController < ApplicationController
       @attendance.status = 3
     end
     respond_to do |format|
-      unless @attendance.raid.closed?
-      if @attendance.save
-        flash[:notice] = t(:created, :item => 'Attendance')
-        format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
-        format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
+      unless @attendance.raid.closed? || @attendance.raid.users.include?(current_user)
+        if @attendance.save
+          format.html { render :text => t(:created, :item => 'Attendance') }
+          format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
+        else
+          format.html { render :text => "", :status => :error }
+          format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
+        end
       else
-        format.html { render :controller => "raid", :action => "show", :id => @attendance.raid.id }
-        format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
-      end
-      else
-        flash[:error] = t("raids.closed")
-        format.html { redirect_to guild_raids_path(@attendance.raid.guild) }
+        message = ""
+        message = t("raids.closed") if @attendance.raid.closed?
+        message = t("raids.already_attend") if @attendance.raid.users.include?(current_user)
+        format.html { render :text => message, :status => :error }
       end
     end
   end
@@ -73,16 +75,14 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       unless @attendance.raid.closed?
         if @attendance.update_attributes(params[:attendance])
-          flash[:notice] = t(:updated,:item => 'Attendance')
-          format.html { redirect_to guild_raid_path(@attendance.raid.guild,@attendance.raid) }
+          format.html { render :text => t(:updated,:item => 'Attendance') }
           format.xml  { head :ok }
         else
-          format.html {  render :controller => "raid", :action => "show", :id => @attendance.raid.id  }
+          format.html { render :text => "Error", :status => :error  }
           format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
         end
       else
-        flash[:error] = t("raids.closed")
-        format.html {  redirect_to guild_raids_path(@attendance.raid.guild) }
+        format.html { render :text => t("raids.closed"), :status => :error }
       end
     end
   end
@@ -94,7 +94,7 @@ class AttendancesController < ApplicationController
     @attendance.destroy
 
     respond_to do |format|
-      format.html { redirect_to(attendances_url) }
+      format.html { redirect_to(guild_raid_path(@attendance.raid.guild,@attendance.raid)) }
       format.xml  { head :ok }
     end
   end
@@ -109,12 +109,12 @@ class AttendancesController < ApplicationController
           if check_ail(@attendance)
             new_status = 3
           else
-            flash[:error] = "The character's AIL is to low to get approved"
+            flash[:error] = t('attendances.ail_low')
             redirect_to guild_raid_path(@raid.guild, @raid)
             return true
           end
         else
-          flash[:error] = "Limit is reached!"
+          flash[:error] = t('attendances.limit_reached')
           redirect_to guild_raid_path(@raid.guild, @raid)
           return true
         end

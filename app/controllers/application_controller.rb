@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def render_error(status_code)
     respond_to do |type| 
       type.html { render :template => "application/#{status_code}", :layout => 'application', :status => status_code } 
-      type.all  { render :nothing => true, :status => 404 } 
+      type.all  { render :nothing => true, :status => status_code } 
     end
     true
   end

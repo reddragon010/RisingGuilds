@@ -55,6 +55,12 @@
 	background-color: #DFD;
 }
 
+.success {
+	color: green;
+	border: 1px green solid;
+	background-color: #DFD;
+}
+
 .info {
 	padding: 5px;
 	margin: 20px 5px;
