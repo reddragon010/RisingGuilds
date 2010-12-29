@@ -18,7 +18,11 @@ module ApplicationHelper
   end
   
   def talentspecicon(talentspec)
-    image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:title => talentspec.prim})
+    if talentspec.icon.blank?
+      image_tag("icons/talentspecs/inv_misc_questionmark.png", {:size => "18x18"})
+    else
+      image_tag("icons/talentspecs/#{talentspec.icon}.png",{:size => "18x18",:title => talentspec.prim})
+    end
     #"http://eu.wowarmory.com/wow-icons/_images/43x43/#{talentspec.icon}.png"
   end
   
