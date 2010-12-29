@@ -20,6 +20,7 @@ RisingGuilds::Application.routes.draw do
    resources :users do
      resources :characters
      resources :guilds
+     resources :raids
    end
        
    resources :guilds do
