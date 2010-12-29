@@ -1,13 +1,4 @@
-<% 
-	if !params[:user_id].blank?
-		cache_path = "users/#{params[:user_id]}/characters?ts=#{@newest.updated_at.to_i}&sort=#{params[:sort]}"
-	elsif !params[:guild_id].blank?
-		cache_path = "users/#{params[:guild_id]}/characters?ts=#{@newest.updated_at.to_i}&sort=#{params[:sort]}"
-	else
-		cache_path = "characters?ts=#{@newest.updated_at.to_i}&sort=#{params[:sort]}"
-	end
-%>
-<% cache(cache_path) do %>
+<% cache(caching_path(params,@newest.updated_at.to_i)) do %>
 <table width="100%" border="0" cellspacing="3" cellpadding="1" align="center" class="poll">
   <thead>
     <tr>
