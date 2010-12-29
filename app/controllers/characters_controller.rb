@@ -5,6 +5,10 @@ class CharactersController < ApplicationController
   
   layout :choose_layout
   
+  before_filter do |c|
+    c.load_newest(Character)
+  end
+  
   # GET /characters
   # GET /characters.xml
   def index
