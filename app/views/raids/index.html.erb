@@ -10,6 +10,7 @@
 	</ul>
 </div>
 
+<% cache(caching_path(params,@newest.updated_at.to_i)) do %>
 <% unless @raids.nil? || @raids.empty? %>
 <div id="calendar">
 	<h2 id="month">
@@ -87,4 +88,5 @@
 </table>
 <% else %>
 <p>There are no raids which could be attended by you</p>
+<% end %>
 <% end %>

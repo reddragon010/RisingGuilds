@@ -11,17 +11,22 @@ class RaidsController < ApplicationController
   # GET /raids
   # GET /raids.xml
   def index
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
+    
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Raids", :guild_raids_path
-    else
-      add_breadcrumb "Raids", raids_path
-    end
-    
-    @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    if @guild.nil?
+      if current_user.admin?
+        @raids = Raid.all
+      else
+        @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
+      end
+    elsif !params[:user_id].nil?
+      add_breadcrumb 'Account', :account_path
+      add_breadcrumb "Raids", :user_raids_path
       @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
     else
+      add_breadcrumb "Raids", :raids_path
       @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
     end
 
@@ -30,6 +35,8 @@ class RaidsController < ApplicationController
       @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}.reverse
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
     end
+    
+    @newest = @raids.sort{|a,b| b.updated_at <=> a.updated_at}.first
     
     respond_to do |format|
       format.html # index.html.erb

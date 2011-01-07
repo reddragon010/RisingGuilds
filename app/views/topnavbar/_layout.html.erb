@@ -30,7 +30,7 @@
 		<li class="expandable">
 			<a>Raids</a>
 			<ul style="left: -999em; display: none;">
-				<li><%= link_to 'My Raids', raids_path %></li>
+				<li><%= link_to 'My Raids', user_raids_path(current_user) %></li>
 				<li><%= link_to 'New Raid', new_raid_path if permitted_to? :new, :raids %></li>
 			</ul>
 		</li>
