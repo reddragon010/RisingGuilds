@@ -74,7 +74,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
         <td>
           <%= f.label :guild_id %>
           <% if params[:guild_id] %>
-            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:selected => params[:guild_id]}) %>
           <% else %>
             <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
           <% end %>
