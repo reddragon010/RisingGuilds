@@ -150,8 +150,8 @@ class AttendancesController < ApplicationController
     t1 = raid.limit_roles.blank? || role_count2.blank? || role_count1 < role_count2
     #check classlimits
     unless raid.limit_classes.blank?
-      class_count1 = raid.attendances.where(:status => 3).delete_if{|a| a.character.class_id != character.class_id}.count
-      class_name = configatron.raidplanner.classes[attendance.character.class_id]
+      class_count1 = raid.attendances.joins(:character).where(:status => 3).where("characters.class_id == ?",character.class_id).count
+      class_name = configatron.raidplanner.class_id_names.key(attendance.character.class_id)
       class_count2 = raid.limit_classes[class_name].to_i
     end
     t2 = raid.limit_classes.blank? || class_count2.blank? || class_count1 < class_count2
