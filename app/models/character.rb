@@ -1,5 +1,5 @@
 class Character < ActiveRecord::Base
-  belongs_to :guild
+  belongs_to :guild, :touch => true
   has_many :events
   belongs_to :user
   has_many :attendances
@@ -16,8 +16,12 @@ class Character < ActiveRecord::Base
   scope :are_online, where(:online => true)
   scope :online_today, where("last_seen >= ?", Time.now.midnight)
   
-  def netto_activity
-    Integer((self.activity / ((Time.now - self.created_at) / 60 / 60)) * 100) unless self.activity.nil?
+  def check_activity
+    if self.last_seen > (Time.now - 3.days)
+      self.update_attribute(:activity, self.activity + 1) if (self.activity >= 0 && self.activity < 6)
+    else
+      self.update_attribute(:activity, self.activity - 1) if (self.activity > 0)
+    end
   end
   
   def sync

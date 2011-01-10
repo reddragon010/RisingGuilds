@@ -17,9 +17,7 @@ namespace :onlinestatus do
       char.online = false if char.online.nil?
       
       #if char stay online
-      if char.online == true && newonline == true then
-        #If user was still a hour online adds 1 to activity
-        attributes[:activity] = char.activity + 1 unless (char.last_seen + 1.hour) >= Time.now 
+      if char.online == true && newonline == true then 
         puts "#{char.name} is still online"
       #if char has been gone offline
       elsif char.online == true && newonline == false then
@@ -33,6 +31,7 @@ namespace :onlinestatus do
         puts "#{char.name} has come online"
       end
       char.update_attributes!(attributes) unless attributes.empty?
+      char.check_activity
     end
   end
 end

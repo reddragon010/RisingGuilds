@@ -66,8 +66,8 @@
 		<tr>
 			<td><%= link_to character.name, character_path(character) %></td>
 			<td><%= character.rank %></td>
-			<td><%= image_tag classicon_path(character),{:size => "18x18", :title => CLASSES.index(character.class_id)} %></td>
-		  <td><%= image_tag raceicon_path(character),{:size => "18x18", :title => RACES.index(character.race_id)} %></td>
+			<td><%= image_tag classicon_path(character),{:size => "18x18", :title => CLASSES.key(character.class_id)} %></td>
+		  <td><%= image_tag raceicon_path(character),{:size => "18x18", :title => RACES.key(character.race_id)} %></td>
 			<td><%= character.level %></td>
 		</tr>
 		<% end %>
@@ -85,21 +85,29 @@
 				<td style="width:50%;"></td>
 			</tr>
 			<tr>
-				<td class="left"><b>Average ItemLevel:</b></td>
+				<td class="left"><b>Average Item Level:</b></td>
 				<td><% unless @guild.ail.nil? then %><%= @guild.ail %><% else %>n/a<% end %></td>
 			</tr>
 			<tr>
-				<td class="left"><b>Activity:</b></td>
-				<td><% unless @guild.activity.nil? then %><%= @guild.activity %>%<% else %>n/a<% end %></td>
+				<td class="left"><b>Average Character Level:</b></td>
+				<td><% unless @guild.average_level.nil? then %><%= @guild.average_level %><% else %>n/a<% end %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Online Characters Per Day:</b></td>
+				<td><% unless @guild.activity.nil? then %><%= @guild.activity %><% else %>n/a<% end %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Active Highlevel Characters:</b></td>
+				<td><% unless @guild.active_chars_high.nil? then %><%= @guild.active_chars_high %><% else %>n/a<% end %></td>
+			</tr>
+			<tr>
+				<td class="left"><b>Active Characters:</b></td>
+				<td><% unless @guild.active_chars.nil? then %><%= @guild.active_chars %><% else %>n/a<% end %></td>
 			</tr>
 			<tr>
 				<td class="left"><b>Growth Per Month:</b></td>
 				<td><% unless @guild.growth.nil? then %><%= @guild.growth %>%<% else %>n/a<% end %></td>
 			</tr class="right">
-			<tr>
-				<td class="left"><b>Main Character Ratio:</b></td>
-				<td><% unless @guild.mainratio.nil? then %><%= @guild.mainratio %>%<% else %>n/a<% end %></td>
-			</tr>
 			<tr>
 				<td class="left"><b>Class Homogeneous Ratio:</b></td>
 				<td><% unless @guild.classratio.nil? then %><%= @guild.classratio %>%<% else %>n/a<% end %></td>
@@ -107,10 +115,6 @@
 			<tr>
 				<td class="left"><b>Average Achivement Points:</b></td>
 				<td><% unless @guild.achivementpoints.nil? then %><%= @guild.achivementpoints %><% else %>n/a<% end %></td>
-			</tr>
-			<tr>
-				<td class="left"><b>Rating:</b></td>
-				<td><% unless @guild.rating.nil? then %><%= @guild.rating %><% else %>n/a<% end %></td>
 			</tr>
 		</table>
 	</div>

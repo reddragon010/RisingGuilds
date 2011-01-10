@@ -73,6 +73,23 @@ class Guild < ActiveRecord::Base
     self.characters.count
   end
   
+  def average_level
+    char_levels = self.characters.map{|c| c.level}
+    unless char_levels.blank?
+      char_levels.sum / char_levels.count
+    else
+      nil
+    end
+  end
+  
+  def active_chars_high
+    self.characters.where(:activity => 6, :level => 80).count
+  end
+  
+  def active_chars
+    self.characters.where(:activity => 6).count
+  end
+  
   def reset_token
     self.token = ActiveSupport::SecureRandom::hex(8)
     self.save
@@ -125,21 +142,9 @@ class Guild < ActiveRecord::Base
   end
     
   def activity
-    activities = self.characters.where(:level => 80,:main => true).collect{|char| char.netto_activity}
-    activities.delete_if{|x| x.nil?}
+    activities = self.events.where("action == 'today_online' AND created_at > ?", Time.now - 1.month).collect{|e| e.value}
     unless activities.empty?
       return activities.sum / activities.size
-    else
-      return nil
-    end
-  end
-  
-  def mainratio
-    return nil if self.characters.empty?
-    unless self.characters.where(:main => true).nil? || self.characters.where(:main => false).nil?
-      mains = self.characters.where(:main => true).count 
-      alts = self.characters.where(:main => false).count
-      return Integer(mains.to_f / alts.to_f * 100)
     else
       return nil
     end
@@ -273,7 +278,6 @@ class Guild < ActiveRecord::Base
   end
   
   protected
-  
   
   def serial_check
     errors.add_to_base "incorrect serial!" unless Digest::SHA1.hexdigest("#{self.name}:#{configatron.guilds.serial_salt}") == self.serial || configatron.arsenal.test == true
