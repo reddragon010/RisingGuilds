@@ -176,4 +176,19 @@ describe Guild do
     guild.characters.count.should == 36
     guild.characters.find_by_name("Notexistingchar_d").should be_nil
   end
+  
+  it "should calculate AIL" do
+    guild = Factory.create(:Guild)
+    guild.sync
+    guild.reload
+    guild.characters.each{|c| c.update_attribute(:ail, 200)}
+    guild.ail.should == 200
+  end
+  
+  it "should calculate average-level" do
+    guild = Factory.create(:Guild)
+    guild.sync
+    guild.reload
+    guild.average_level.should == 59
+  end
 end
