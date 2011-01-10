@@ -112,8 +112,11 @@ class RaidsController < ApplicationController
     @raid.invitation_window = Integer((@raid.start.to_f - @raid.invite_start.to_f) / 60.to_f)
     @raid.duration = Integer((@raid.end - @raid.start).to_f / 3600.to_f)
     
-    @possible_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
-    @possible_leaders.collect!{|l| [l.login,l.id]}
+    @possible_leaders = Hash.new
+    guild_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
+    guild_leaders.each do |user|
+      @possible_leaders[user.login] = user.id
+    end
   end
 
   # POST /raids
@@ -148,7 +151,7 @@ class RaidsController < ApplicationController
       return true
     end
       
-    @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i,params[:raid][:"start(2i)"].to_i,params[:raid][:"start(3i)"].to_i,params[:raid][:"start(4i)"].to_i,params[:raid][:"start(5i)"].to_i)
+    @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i, params[:raid][:"start(2i)"].to_i, params[:raid][:"start(3i)"].to_i, params[:raid][:"start(4i)"].to_i, params[:raid][:"start(5i)"].to_i)
     @end_time = @start_time + params[:raid][:duration].to_i.hours
     @invite_start_time =  @start_time - params[:raid][:invitation_window].to_i.minutes
     
