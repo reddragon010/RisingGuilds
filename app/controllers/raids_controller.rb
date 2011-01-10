@@ -16,18 +16,18 @@ class RaidsController < ApplicationController
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Raids", :guild_raids_path
-      if current_user.admin?
-        @raids = Raid.all
-      else
-        @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
-      end
+      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
     elsif !params[:user_id].nil?
       add_breadcrumb 'Account', :account_path
       add_breadcrumb "Raids", :user_raids_path
       @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
     else
       add_breadcrumb "Raids", :raids_path
-      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
+      if current_user.admin?
+        @raids = Raid.all
+      else
+        @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
+      end
     end
 
     unless @raids.empty?
