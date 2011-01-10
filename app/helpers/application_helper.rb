@@ -127,7 +127,7 @@ module ApplicationHelper
   end
   
   #caching
-  def caching_path(params,timestamp)
+  def caching_path(params,timestamp,count=nil)
     cache_path = ""
     if !params[:guild_id].blank?
   		cache_path += "guilds/#{params[:guild_id]}/"
@@ -136,6 +136,7 @@ module ApplicationHelper
   	end
   	cache_path += "#{params[:controller]}/#{params[:action]}"
   	cache_path += "?sort=#{params[:sort]}" unless params[:sort].blank? 
-  	cache_path += "-#{@newest.updated_at.to_i}"
+  	cache_path += "-#{timestamp}"
+  	cache_path += "-#{count}" unless count.nil?
   end
 end

@@ -12,7 +12,7 @@ class RaidsController < ApplicationController
   # GET /raids.xml
   def index
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    
+
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Raids", :guild_raids_path
@@ -34,9 +34,10 @@ class RaidsController < ApplicationController
       @upcoming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
       @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}.reverse
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
+      @newest = @raids.sort{|a,b| b.updated_at <=> a.updated_at}.first.updated_at
+    else
+      @newest = nil
     end
-    
-    @newest = @raids.sort{|a,b| b.updated_at <=> a.updated_at}.first
     
     respond_to do |format|
       format.html # index.html.erb
@@ -184,8 +185,8 @@ class RaidsController < ApplicationController
   # DELETE /raids/1.xml
   def destroy
     @guild = @raid.guild
+    expire_fragment(@raid)
     @raid.destroy
-
     respond_to do |format|
       format.html { redirect_to(guild_raids_path(@guild)) }
       format.xml  { head :ok }
