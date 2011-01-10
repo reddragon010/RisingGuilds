@@ -6,6 +6,7 @@ class Attendance < ActiveRecord::Base
   validates_presence_of :raid_id
   validates_presence_of :character_id
   validates_presence_of :status
+  validates_presence_of :role
   
   #validate :max_attendances
   

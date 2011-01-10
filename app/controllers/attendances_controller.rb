@@ -53,7 +53,7 @@ class AttendancesController < ApplicationController
           format.html { render :text => t(:created, :item => 'Attendance') }
           format.xml  { render :xml => @attendance, :status => :created, :location => @attendance }
         else
-          format.html { render :text => "", :status => :error }
+          format.html { render :text => @attendance.errors.full_messages.join("\n"), :status => :error }
           format.xml  { render :xml => @attendance.errors, :status => :unprocessable_entity }
         end
       else
