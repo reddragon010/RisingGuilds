@@ -73,7 +73,7 @@ class Guild < ActiveRecord::Base
     self.characters.count
   end
   
-  def average_level
+  def acl
     char_levels = self.characters.map{|c| c.level}
     unless char_levels.blank?
       char_levels.sum / char_levels.count
@@ -142,7 +142,7 @@ class Guild < ActiveRecord::Base
   end
     
   def activity
-    activities = self.events.where("action == 'today_online' AND created_at > ?", Time.now - 1.month).collect{|e| e.value}
+    activities = self.events.where("action == 'today_online' AND created_at > ?", Time.now - 1.month).collect{|e| e.content.to_i}
     unless activities.empty?
       return activities.sum / activities.size
     else

@@ -189,6 +189,6 @@ describe Guild do
     guild = Factory.create(:Guild)
     guild.sync
     guild.reload
-    guild.average_level.should == 59
+    guild.acl.should == 59
   end
 end
