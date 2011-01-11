@@ -1,5 +1,5 @@
 class Attendance < ActiveRecord::Base
-  belongs_to :raid
+  belongs_to :raid, :touch => true
   belongs_to :character
   has_one :guild, :through => :raid
   
