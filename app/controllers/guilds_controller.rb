@@ -40,7 +40,7 @@ class GuildsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @guild }
-      format.json {render :json => @guild.to_json(:methods => [:online_members_count, :members_count, :logo_url], :only => [:name, :realm, :faction_id, :online_members_count, :online_members, :logo_url]), :callback => params[:callback]}
+      format.json {render :json => @guild.to_json(:methods => [:online_members_count, :members_count, :logo_url, :active_chars, :active_chars_high, :ail, :acl, :activity, :growth, :classratio, :achivementpoints], :expects => [:token]), :callback => params[:callback]}
     end
   end
 

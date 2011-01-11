@@ -1,23 +1,122 @@
 <div>
-	<div id="guildwidget" style="float:left; border: 1px solid #666; padding:5px;">
-   <script>
-     function guild_callback(obj){
-       var guild = obj.guild;
-       var out = "";
-			 out += '<div style="background-image:<%= root_url %>images/' + guild.logo_url + ';width:190px;">';
-			 out += "<h2>" + guild.name + "</h2>";
-			 out += '</div>'; 
-       document.getElementById('guildwidget').innerHTML = out;
-     }
-   </script>
-   <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>.json?callback=guild_callback"></script>
- </div>
-	<br />
-	<a href="javascript:$('#code2').slideToggle('slow')">Code</a>
-  <div id="code2" style="display: none;">
-	<pre class="code">
-  <code class="javascript">
-  </code>
-  </pre>
+	<div id="guildwidget">
+		<style>
+			#guildwidget {
+				width: 250px;
+				padding: 10px;
+				float:left;
+				border: 1px solid #666;
+			}
+			#guildwidget table {
+				border: none;
+				margin: 0px;
+			}
+			.gw_table tr {
+				border: none;
+				height: 7px;
+			}
+			#guildwidget h3 {
+				width: 100%;
+				border-bottom: 1px solid #FFF;
+				margin-bottom: 5px;
+			}
+			#guildwidget h1 {
+				width: 175px;
+				border-bottom: 2px solid #FFF;
+				margin-bottom: 5px;
+			}
+			#gw_header {
+				width: 100%;
+				height: 75px;
+				position:relative;
+			}
+			#gw_logo {
+				position: absolute;
+				right: 0px;
+				top: 0px;
+				width: 75px;
+				height: 75px;
+				border: 1px solid #999;
+			}
+			#gw_logo img {
+				width: 75px;
+				height: 75px;
+			}
+			#gw_events {
+				margin-bottom: 10px;
+			}
+		</style>
+		<div id="gw_header">
+			<h1 id="gw_guildname"></h1>
+			<span id="gw_web"></span><br />
+			<span id="gw_ts"></span><br />
+			<div><img id="gw_logo" src="http://localhost:3000/images/defaults/logos/formatted/missing.png"></div>
+		</div>
+		<h3>Stats</h3>
+		<table class="gw_table">
+			<tr>
+				<td style="text-align: left;width:75%;"><b>Average Item Level:</b></td>
+				<td id="ail" style="width:25%;"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Average Character Level:</b></td>
+				<td id="acl"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Online Characters Per Day:</b></td>
+				<td id="ocpd"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Active Highlevel Characters:</b></td>
+				<td id="ahc"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Active Characters:</b></td>
+				<td id="ac"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Growth Per Month:</b></td>
+				<td id="gpm"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Class Homogeneous Ratio:</b></td>
+				<td id="chr"></td>
+			</tr>
+			<tr>
+				<td style="text-align: left;"><b>Average Achivement Points:</b></td>
+				<td id="aap"></td>
+			</tr>
+		</table>
+		<h3>Events</h3>
+		<div id="gw_events">
+		</div>
+		<script type="text/javascript">
+			function guild_callback(obj) {
+				var guild = obj['guild'];
+				document.getElementById('gw_guildname').innerHTML = guild.name;
+				document.getElementById('gw_web').innerHTML = '<a href="' + guild.website + '">' + guild.website + '</a>';
+				document.getElementById('gw_ts').innerHTML =  '<a href="ts3server://' + guild.teamspeak + '">' + guild.teamspeak + '</a>';
+				document.getElementById('gw_logo').setAttribute("src", "<%= root_url %>images/" + guild.logo_url);
+				document.getElementById('ail').innerHTML = guild.ail;
+				document.getElementById('acl').innerHTML = guild.acl;
+				document.getElementById('ocpd').innerHTML = guild.activity;
+				document.getElementById('ahc').innerHTML = guild.active_chars_high;
+				document.getElementById('ac').innerHTML = guild.active_chars;
+				document.getElementById('gpm').innerHTML = guild.growth;
+				document.getElementById('chr').innerHTML = guild.classratio;
+				document.getElementById('aap').innerHTML = guild.achivementpoints;
+			}
+			function events_callback(events) {
+				var out = ""; 
+				for (var i = 0; i < events.length; i++) {
+					var e = events[i].event;
+					out += "<span><b>" + e.character_name + "</b> " + e.action + " " + e.content + " (" + e.created_ago + ")</span><br />" 
+				}
+				document.getElementById('gw_events').innerHTML = out;
+			}
+		</script>
+    <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>.json?callback=guild_callback"></script>
+		<script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/events.json?callback=events_callback"></script>
 	</div>
+	<a href="https://gist.github.com/774109" data-popup="true">Code</a>
 </div>

@@ -13,6 +13,7 @@ class EventsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @events }
       format.js
+      format.json { render :json => @events.to_json(:methods => [:character_name, :text, :created_ago], :only => [:action, :content, :name, :created_at, :text, :created_ago]), :callback => params[:callback]}
     end
   end
 
