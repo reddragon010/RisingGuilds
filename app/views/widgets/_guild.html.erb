@@ -1,0 +1,23 @@
+<div>
+	<div id="guildwidget" style="float:left; border: 1px solid #666; padding:5px;">
+   <script>
+     function guild_callback(obj){
+       var guild = obj.guild;
+       var out = "";
+			 out += '<div style="background-image:<%= root_url %>images/' + guild.logo_url + ';width:190px;">';
+			 out += "<h2>" + guild.name + "</h2>";
+			 out += '</div>'; 
+       document.getElementById('guildwidget').innerHTML = out;
+     }
+   </script>
+   <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>.json?callback=guild_callback"></script>
+ </div>
+	<br />
+	<a href="javascript:$('#code2').slideToggle('slow')">Code</a>
+  <div id="code2" style="display: none;">
+	<pre class="code">
+  <code class="javascript">
+  </code>
+  </pre>
+	</div>
+</div>

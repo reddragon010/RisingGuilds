@@ -1,1 +1,1 @@
-$("#events").html("<%= escape_javascript(render :partial => 'events' %>");
+$("#events").html("<%= raw(escape_javascript(render :partial => 'events')) %>");

@@ -47,6 +47,12 @@ $(document).ready(function() {
         });
       };
       $(this).dialog('option','buttons', buttons );
+			$('.ui-dialog').keydown(function(e){
+				if (e.keyCode == 13) {              
+		  		$('.ui-dialog').find('button:first').trigger('click');
+					return false;
+		  	}
+			});
     });
     return false;
   });

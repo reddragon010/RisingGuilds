@@ -1,6 +1,6 @@
 <div id="events">
 	<div class="pagination">
 	<%= render :partial => 'shared/event', :collection => events %>
-	<%= will_paginate events, :class => "pagination ajax" %>
+	<%= will_paginate events, :class => "pagination ajax", :params => {:controller => "events", :action => "index", :guild_id => guild.id} %>
 	</div>
 </div>

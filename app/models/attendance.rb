@@ -1,11 +1,12 @@
 class Attendance < ActiveRecord::Base
-  belongs_to :raid
+  belongs_to :raid, :touch => true
   belongs_to :character
   has_one :guild, :through => :raid
   
   validates_presence_of :raid_id
   validates_presence_of :character_id
   validates_presence_of :status
+  validates_presence_of :role
   
   #validate :max_attendances
   

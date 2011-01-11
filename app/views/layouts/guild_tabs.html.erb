@@ -3,6 +3,7 @@
 @guild ||= Guild.find(params[:guild_id]) 
 @online_characters ||= @guild.characters.find_all_by_online(true) unless @guild.nil?
 %>
+<% cache [@guild, "header"] do %>
 <div class="guildlogo">
   <%= image_tag(@guild.logo.url, :alt => "guildlogo", :size => "100x100") %>
 </div>
@@ -31,6 +32,7 @@
 </div>
 <% end %>
 <div class="clear"></div>
+<% end %>
 <% end %>
 
 <% content_for :tabs do %>

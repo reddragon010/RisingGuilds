@@ -74,7 +74,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
         <td>
           <%= f.label :guild_id %>
           <% if params[:guild_id] %>
-            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:default => params[:guild_id]}) %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:selected => params[:guild_id]}) %>
           <% else %>
             <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
           <% end %>
@@ -104,20 +104,23 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     <div class="box_headline">Details</div>
     <table class="naked left">
       <tr>
-        <td><%= f.label :max_attendees %> <%= f.select :max_attendees, [5,10,25,40] %></td>
-        <td>Level-Range <%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
+        <td><%= f.label :max_attendees %></td>
+				<td><%= f.select :max_attendees, [5,10,25,40] %></td>
+				<td style="width:40px"></td>
+        <td>Level-Range</td>
+				<td><%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
       </tr>
       <tr>
-        <td><%= f.label :min_ail %> <%= f.text_field :min_ail, :size => 3 %></td>
-        <td></td>
+        <td><%= f.label :min_ail %></td>
+				<td><%= f.text_field :min_ail, :size => 3 %></td>
+				<td></td>
+				<% unless raid.new_record? %>
+        <td><%= f.label :leader %></td>
+				<td><%= f.select :leader, @possible_leaders %></td>
+				<% end %>
       </tr>
     </table>
-    <% unless raid.new_record? %>
-    <p>
-      <%= f.label :leader %><br />
-      <%= f.select :leader, @possible_leaders %>
-    </p>
-    <% end %>
+    
     <table class="naked left">
       <tr>
         <td><%= f.label :template %> <%= f.check_box :template %></td>
@@ -175,7 +178,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     <%= f.text_area :description , :rows => 2 %>
   </div>
   
-  <%= f.hidden_field :leader %>
+  <% if raid.new_record? %><%= f.hidden_field :leader %><% end %>
   <p>
     <% if raid.new_record? %>
     <%= f.submit 'Create' %>

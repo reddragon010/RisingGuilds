@@ -11,24 +11,32 @@ class RaidsController < ApplicationController
   # GET /raids
   # GET /raids.xml
   def index
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
+
     if !@guild.nil?
       add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Raids", :guild_raids_path
-    else
-      add_breadcrumb "Raids", raids_path
-    end
-    
-    @date = params[:month] ? Date.parse(params[:month]) : Date.today
-    if @guild.nil?
+      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
+    elsif !params[:user_id].nil?
+      add_breadcrumb 'Account', :account_path
+      add_breadcrumb "Raids", :user_raids_path
       @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
     else
-      @raids = @guild.raids.where("created_at > ?", Time.now - 1.month).order("start ASC").all
+      add_breadcrumb "Raids", :raids_path
+      if current_user.admin?
+        @raids = Raid.all
+      else
+        @raids = current_user.guilds.collect{|g| g.raids.where("created_at > ?", Time.now - 1.month).order("start ASC")}.flatten
+      end
     end
 
     unless @raids.empty?
       @upcoming_raids = @raids.find_all{|raid| raid.invite_start > DateTime.now} 
       @past_raids = @raids.find_all{|raid| raid.end < DateTime.now}.reverse
       @running_raids = @raids.find_all{|raid| raid.start <= DateTime.now && raid.end >= DateTime.now}
+      @newest = @raids.sort{|a,b| b.updated_at <=> a.updated_at}.first.updated_at
+    else
+      @newest = nil
     end
     
     respond_to do |format|
@@ -41,12 +49,12 @@ class RaidsController < ApplicationController
   # GET /raids/1.xml
   def show
     if !params[:guild_id].nil?
-      add_breadcrumb Guild.find(params[:guild_id]).name, guild_path(params[:guild_id])
+      add_breadcrumb @guild.name, guild_path(@guild)
       add_breadcrumb "Raids", guild_raids_path(@guild)
-      add_breadcrumb @raid.title, guild_raid_path(@raid)
+      add_breadcrumb @raid.title, :guild_raid_path
     else
       add_breadcrumb "Raids", raids_path
-      add_breadcrumb @raid.title, raid_path(@character)
+      add_breadcrumb @raid.title, raid_path(@raid)
     end
     
     if @raid.attendances.nil? || current_user.characters.nil? || @raid.attendances.where(:character_id => current_user.characters.collect{|c| c.id}).all.empty?
@@ -104,8 +112,11 @@ class RaidsController < ApplicationController
     @raid.invitation_window = Integer((@raid.start.to_f - @raid.invite_start.to_f) / 60.to_f)
     @raid.duration = Integer((@raid.end - @raid.start).to_f / 3600.to_f)
     
-    @possible_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
-    @possible_leaders.collect!{|l| [l.login,l.id]}
+    @possible_leaders = Hash.new
+    guild_leaders = @raid.guild.leaders + @raid.guild.officers + @raid.guild.raidleaders
+    guild_leaders.each do |user|
+      @possible_leaders[user.login] = user.id
+    end
   end
 
   # POST /raids
@@ -140,7 +151,7 @@ class RaidsController < ApplicationController
       return true
     end
       
-    @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i,params[:raid][:"start(2i)"].to_i,params[:raid][:"start(3i)"].to_i,params[:raid][:"start(4i)"].to_i,params[:raid][:"start(5i)"].to_i)
+    @start_time = DateTime.civil(params[:raid][:"start(1i)"].to_i, params[:raid][:"start(2i)"].to_i, params[:raid][:"start(3i)"].to_i, params[:raid][:"start(4i)"].to_i, params[:raid][:"start(5i)"].to_i)
     @end_time = @start_time + params[:raid][:duration].to_i.hours
     @invite_start_time =  @start_time - params[:raid][:invitation_window].to_i.minutes
     
@@ -177,8 +188,8 @@ class RaidsController < ApplicationController
   # DELETE /raids/1.xml
   def destroy
     @guild = @raid.guild
+    expire_fragment(@raid)
     @raid.destroy
-
     respond_to do |format|
       format.html { redirect_to(guild_raids_path(@guild)) }
       format.xml  { head :ok }
