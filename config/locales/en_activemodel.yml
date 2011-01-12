@@ -1,0 +1,8 @@
+en:
+  activemodel:
+    errors:
+      template:
+        header:
+          one: "%{model} can't be saved: one failure."
+          other: "%{model} can't be saved: %{count} failures."
+        body: "Please verify following fields:"

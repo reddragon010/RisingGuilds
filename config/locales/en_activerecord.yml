@@ -1,0 +1,34 @@
+de:
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "%{model} can't be saved: one failure."
+          other: "%{model} can't be saved: %{count} failures."
+        body: "Please verify following fields:"
+
+      messages:
+        inclusion: "is no valid value"
+        exclusion: "is not available"
+        invalid: "is invalid"
+        confirmation: "does not match with the confirmation"
+        accepted: "must be accepted"
+        empty: "must be filled"
+        blank: "must be filled"
+        too_long: "is too long, not more than %{count} characters"
+        too_short: "is too short, must be at least %{count} characters"
+        wrong_length: "wrong length, must be exactly %{count} characters"
+        taken: "is allready assigned"
+        not_a_number: "is no number"
+        greater_than: "must be greater than %{count}"
+        greater_than_or_equal_to: "must be greater or equal to %{count}"
+        equal_to: "must be exactly %{count}"
+        less_than: "must be less than %{count}"
+        less_than_or_equal_to: "must be less or equal to %{count}"
+        odd: "must be odd"
+        even: "must be even"
+        record_invalid: "Validation failed: %{errors}"
+    
+    attributes:
+      guild:
+        description: "Description"

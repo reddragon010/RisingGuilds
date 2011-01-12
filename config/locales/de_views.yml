@@ -1,0 +1,142 @@
+de:
+  confirmation: "Sind Sie sicher?"
+  character: "Charakter"
+  update: "Aktualisierung"
+
+  attendences:
+    raid: "Raid"
+    role: "Rolle"
+    status: "Status"
+    message: "Nachricht"
+      
+  characters:
+    editing: "Charakter bearbeiten"
+    creation: "Neuer Charakter"
+    select: "Wählen Sie einen Charakter." 
+    role: "Wählen Sie eine Rolle."
+    link_char: "Link"
+    unlink_char: "Unlink"
+    events: "Events"
+    last_seen: "Zuletzt gesehen"
+    activity: "Aktivität"
+    achievements: "Erfolgspunkte"
+    ail: "Durchschnitts Itemlevel"
+
+  views:
+    labels:
+      guild:
+        description: "TestIt!"
+        
+  layouts:
+    logged_in_as: "Eingeloggt als"
+    
+  guilds:
+    show: "Zeigen"
+    back: "Zurück"
+    logo: "Logo"
+    name: "Name"
+    website: "Website"
+    description: "Beschreibung"
+    new: "Neue Gilde"
+    recruitment: "Rekrutierung"
+    recruit_level: "Level %{level} und höher"
+    news: "Neuigkeiten"
+    verified: "Überprüfe Gildenname!"
+    already_joined: "Sie sind dieser Gilde bereits beigetreten."
+    already_token: "Haben Sie bereits einen Token, können Sie diesen hier eintragen."
+    need_token: "Sie benötigen einen Token um der Gilde beizutreteni."
+    more_info_with_http: "Besuchen Sie für weitere Informationen %{website} oder kontaktieren Sie die folgenden Spieler InGame"
+    more_info: "Für weitere Informationen kontaktieren Sie folgende Spieler InGame"
+    show:
+      no_news: "Keine Neuigkeiten verfügbar"
+    edit:
+      recruit_text: "Rekrutierungsbedingungen"
+      recruit_level: "Minimum Level"
+      recruit_open: "Rekrutierung"
+      recruit_dk: "Todesritter"
+      recruit_druid: "Druide"
+      recruit_hunter: "Jäger"
+      recruit_mage: "Magier"
+      recruit_paladin: "Paladin"
+      recruit_priest: "Priester"
+      recruit_rogue: "Schurke"
+      recruit_shaman: "Schamane"
+      recruit_warlock: "Hexenmeister"
+      recruit_warrior: "Krieger"
+      recruit_healer: "Healer"
+      recruit_damage: "Damage"
+      recruit_tank: "Tank"
+    tabs:
+      overview: "Übersicht"
+      members: "Mitglieder"
+      statistics: "Statistiken"
+      raids: "Raids"
+      users: "Benutzer"
+      join: "Beitreten"
+      widgets: "Widgets"
+      settings: "Einstellungen"
+    details:
+      faction: "Fraktion"
+      realm: "Realm"
+      recruiting: "Rekrutierung"
+      leader: "Leiter"
+      members: "Mitglieder"
+      growth: "Wachstum"
+      
+  events:
+    labels:
+      action: "Aktion"
+      content: "Content"
+      guild: "Gilde"
+    actiontexts:
+      joined: "ist der Gilde beigetreten %{content}"
+      left: "hat die Gilde verlassen %{content}"
+      promoted: "wurde befördert von Rang %{content}"
+      demoted: "wurde degradiert von Rang %{content}"
+      levelup: "erreichte level %{content}"
+      guild_created: "Gilde wurde erstellt von %{content}"
+
+  professions:
+    profs: "Berufe"
+    p164: "Schmiedekunst"
+    p165: "Lederverarbeitung"
+    p171: "Alchemie"
+    p182: "Kräuterkunde"
+    p186: "Bergbau"
+    p197: "Schneiderei"
+    p202: "Ingenierskunst"
+    p333: "Verzauberkunst"
+    p393: "Kürschnerei"
+    p755: "Juwelenschleifen"
+    p773: "Inschriftenkunde"
+
+  talents:
+    specs: "Talent Spezialisierung"
+  
+  classes:
+    dk: "Todesritter"
+    druid: "Druide"
+    hunter: "Jäger"
+    mage: "Magier"
+    paladin: "Paladin"
+    priest: "Priester"
+    rogue: "Schurke"
+    shaman: "Schamane"
+    warlock: "Hexenmeister"
+    warrior: "Krieger"
+    
+  races:
+    human: "Mensch"
+    orc: "Ork"
+    dwarf: "Zwerg"
+    nightelve: "Nachtelf"
+    undead: "Untot"
+    tauren: "Taure"
+    gnome: "Gnom"
+    troll: "Troll"
+    bloodelve: "Blutelf"
+    draenei: "Draenei"
+    
+  factions:
+    horde: "Horde"
+    alliance: "Allianz"
