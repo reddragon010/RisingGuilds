@@ -1,8 +1,8 @@
 h2. RisingGuilds
 
-RisingGuilds is a webbased system for WorldOfWarcraft-Guilds on the private server 'rising-gods.de'. Therefor it is designed to work with the RG-XML-Armory, but may be used with the Blizzard-Armory with some changes. The opensource project is realised be a small team of developers.
+RisingGuilds is a webbased system for WorldOfWarcraft-Guilds on the private server 'rising-gods.de'. Therefor it is designed to work with the RG-XML-Armory, but may be used with the Blizzard-Armory with some changes. The opensource project is realized by a small team of developers.
 
-h2. Targets
+h2. Intention
 
 With RisingGuilds players and guilds shall have a tool to manage and compare guilds. Guildleaders may use several tools to coordinate and inform their guildmembers and to present their guild to new players. Ordinary Users may use the system to find a suiting guild for themselves.
 
@@ -21,4 +21,4 @@ At this time we are looking for active and motivated developers which want to pa
 
 h2. Installation
 
-A detailed instruction for the installation on windows or debian can be found in our wiki.
+A detailed instruction for the installation on -windows- or linux can be found in our wiki.
