@@ -10,6 +10,15 @@ en:
     message: "Message"
       
   characters:
+    name: "Name"
+    level: "Level"
+    race: "Race"
+    class: "Class"
+    ail: "AIL"
+    specs: "Talent specialization"
+    prof: "Profession"
+    prof1: "Profession 1"
+    prof2: "Profession 2"
     editing: "Editing character"
     creation: "New character"
     select: "Select a character." 
@@ -110,9 +119,6 @@ en:
     p755: "Jewelcrafting"
     p773: "Inscription"
 
-  talents:
-    specs: "Talent specialization"
-  
   classes:
     dk: "Death Knight"
     druid: "Druid"
@@ -129,12 +135,12 @@ en:
     human: "Human"
     orc: "Orc"
     dwarf: "Dwarf"
-    nightelve: "Nightelve"
+    nightelve: "Night Elf"
     undead: "Undead"
     tauren: "Tauren"
     gnome: "Gnome"
     troll: "Troll"
-    bloodelve: "Bloodelve"
+    bloodelve: "Blood Elf"
     draenei: "Draenei"
     
   factions:

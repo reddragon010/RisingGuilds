@@ -6,7 +6,7 @@
         var out = "";
         out += '<table><thead>';
         out += '  <tr>';
-        out += '    <th>Name</th><th>Level</th><th>Race</th><th>Class</th><th>AIL</th><th>Specs</th><th>Prof1</th><th>Prof2</th>';
+        out += '    <th><%= t('characters.name') %></th><th><%= t('characters.level') %></th><th><%= t('characters.race') %></th><th><%= t('characters.class') %></th><th><%= t('characters.ail') %></th><th><%= t('characters.specs') %></th><th><%= t('characters.prof1') %></th><th><%= t('characters.prof2') %></th>';
         out += '  </tr>';
         out += '</thead><tbody>';
         for (var i = 0; i < chars.length; i++) {
