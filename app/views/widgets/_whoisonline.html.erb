@@ -23,8 +23,8 @@
 	<script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/onlinemembers?callback=wio_callback"></script>
 </div>
 <div style="margin-left:210px">
-	<p style="font-size:12px">Die "WerIstOnline"-Anzeige kann ganz einfach auf jeder Webseite eingebunden werden. Dazu muss nur der untenstehende Code in die entsprechende Stelle auf der Seite eingefügt werden. Wer sich ein wenig mit JavaScript und HTML/CSS auskennt sollte ohne Probleme die Anzeige an die Website anpassen können. Dazu müssen lediglich die "document.write"-Befehle abgeändert  bzw. mit CSS gestylt werden.</p>
-	<p style="font-size:12px">Die Anzeigen funktionieren nur mit aktuellen, javascript-fähigen Browsern. Dieser Umstand ist leider nicht zu ändern. Die Scripts sind aber so simpel, dass sie auf allen Browsern problemlos laufen sollten.</p>
+	<p style="font-size:12px"><%= t('widgets.wio_text1') %></p>
+	<p style="font-size:12px"><%= t('widgets.wio_text2') %></p>
 	<a href="javascript:$('#code1').slideToggle('slow')">Code</a>
 	<div id="code1" style="display: none;">
 	<pre class="code">
