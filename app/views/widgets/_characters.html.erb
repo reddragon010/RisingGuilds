@@ -1,6 +1,9 @@
  <div>
 	<div id="charswidget" style="border: 1px solid #666; padding:5px;">
     <script>
+      function show_code(code) {
+  	          $(code).slideToggle('slow');
+		};
       function chars_callback(obj){
         var chars = obj;
         var out = "";
@@ -31,8 +34,8 @@
     <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/characters.json?limit=5&callback=chars_callback"></script>
   </div>
 	<br />
-	<a href="javascript:$('#code2').slideToggle('slow')">Code</a>
-   <div id="code2" style="display: none;">
+	<button id="characters" onClick="show_code('#characters_code')">Code</a>
+   <div id="characters_code" style="display: none;">
 	<pre class="code">
    <code class="javascript">
 <%=  "<script>" %><script>
