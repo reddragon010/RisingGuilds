@@ -1,60 +1,10 @@
-<div id="wiowidget" style="float:left; border: 1px solid #666; padding:5px;">
-	<script>
-		function show_code(code) {
-  	          $(code).slideToggle('slow');
-		};
-		function wio_callback(obj){
-			var guild = obj[0].guild;
-			var chars = obj[1];
-       var out = "";
-			out += '<span style="font-size:16px;font-width:bold;">' + guild.name + '</span><br />';
-			out += '<span>' + guild.online_members_count + '/' + guild.members_count + ' Online</span>';
-			out += '<table style="width:190px;">';
-			for (var i = 0; i < chars.length; i++) {
-				var chara = chars[i].character;
-         out += '  <tr>';
-				out += '    <td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>';
-				out += '    <td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>';
-				out += '    <td>' + chara.level + '</td>';
-				out += '    <td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + guild.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>';
-				out += '  </tr>';
-			}
-			out += '</table>';
-       document.getElementById('wiowidget').innerHTML = out;
-		}
-	</script>
-	<script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/onlinemembers?callback=wio_callback"></script>
-</div>
+<%= render :partial => 'whoisonline_code', :locals => {:guild_id => params[:guild_id]}%>
 <div style="margin-left:210px">
-	<p style="font-size:12px"><%= t('widgets.wio_text1') %></p>
-	<p style="font-size:12px"><%= t('widgets.wio_text2') %></p>
 	<button id="wio" onClick="show_code('#wio_code')">Code</button> 
 	<div id="wio_code" style="display: none;">
 	<pre class="code">
-  	<code class="javascript">
-<%= "<script>
-function wio_callback(obj){
-var guild = obj[0].guild;
-var chars = obj[1];
-var out = "";
-out += '<span>' + guild.name + '</span><br />';
-out += '<span>' + guild.online_members_count + '/' + guild.members_count + ' Online</span>';
-out += '<table>';
-for (var i = 0; i < chars.length; i++) {
-	var chara = chars[i].character;
-	out += '<tr>';
-	out += '<td><img src=\"http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif\" /></td>';
-	out += '<td><img src=\"http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif\" /></td>';
-	out += '<td>' + chara.level + '</td>';
-	out += '<td><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + guild.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>';
-	out += '</tr>');
-}
-out += '</table>';
-document.getElementById('wiowidget').innerHTML = out; 
-}
-</script>\n" +
-'<script type="text/javascript" src="/guilds/' + params[:guild_id] + '/onlinemembers?callback=wio_callback"></script>' %>
-<%= '<div id="wiowidget" style="float:left; border: 1px solid #666; padding:5px;"></div>' %>
+  	<code class="html">
+<%= CGI::escapeHTML(render :partial => 'whoisonline_code', :locals => {:guild_id => params[:guild_id]}) %>
 		</code>
 	</pre>
 	</div>

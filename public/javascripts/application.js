@@ -57,3 +57,7 @@ $(document).ready(function() {
     return false;
   });
 });
+
+function show_code(code) {
+  $(code).slideToggle('slow');
+};

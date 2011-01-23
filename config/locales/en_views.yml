@@ -151,5 +151,5 @@ en:
     whoisonline: "\"Who is online?\" widget"
     characters: "Characters widget"
     guild: "Guild widget"
-    wio_text1: "You can implement the \"Who is online?\" widget easily. You just have to copy the following code into your website. You can change the interface using JavaScript, HTML and CSS."
+    wio_text1: "You can implement the widgets easily. You just have to copy the code into your website. You can change the interface using JavaScript, HTML and CSS."
     wio_text2: "This widget can only be used with a current browser. The code is simple so you can run it on all browsers."

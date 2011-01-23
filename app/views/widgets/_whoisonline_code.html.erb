@@ -1,0 +1,24 @@
+<div id="wiowidget" style="float:left; border: 1px solid #666; padding:5px;">
+	<script>
+		function wio_callback(obj){
+			var guild = obj[0].guild;
+			var chars = obj[1];
+       var out = "";
+			out += '<span style="font-size:16px;font-width:bold;">' + guild.name + '</span><br />';
+			out += '<span>' + guild.online_members_count + '/' + guild.members_count + ' Online</span>';
+			out += '<table style="width:190px;">';
+			for (var i = 0; i < chars.length; i++) {
+				var chara = chars[i].character;
+         out += '  <tr>';
+				out += '    <td><img src="http://www.wowarmory.com/_images/icons/race/' + chara.race_id + '-' + chara.gender_id + '.gif" /></td>';
+				out += '    <td><img src="http://www.wowarmory.com/_images/icons/class/' + chara.class_id + '.gif" /></td>';
+				out += '    <td>' + chara.level + '</td>';
+				out += '    <td style="text-align:left;"><a href=\"http://arsenal.rising-gods.de/character-sheet.xml?r=' + guild.realm + '&n=' + chara.name + '\">' + chara.name + '</a></td>';
+				out += '  </tr>';
+			}
+			out += '</table>';
+       document.getElementById('wiowidget').innerHTML = out;
+		}
+	</script>
+	<script type="text/javascript" src="/guilds/<%= guild_id %>/onlinemembers?callback=wio_callback"></script>
+</div>
