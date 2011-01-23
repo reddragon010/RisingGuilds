@@ -37,10 +37,10 @@ module Arsenal
   		@icon 	    = elem[:icon]
   		@slot       = elem[:slot].to_i
   	end
-	
-  	def get_info(elem)
-  	  @level = (elem%'itemInfo'%'item')[:level].to_i
-  	end
+  	
+  	def level=(level)
+  	  @level = level
+	  end
   end
   
   def self.get_character_xml(character)
@@ -72,11 +72,10 @@ module Arsenal
   
   def self.get_item_xml(item)
     #http://www.wowhead.com/ item= <itemid> &xml
-    url = configatron.wowarmory.url.base
-    url += configatron.wowarmory.url.item.info
-    url += "?" + configatron.wowarmory.url.item.itemid if configatron.arsenal.test.nil?
+    url = configatron.wowhead.url.base
+    url += configatron.wowhead.url.item.prefix
     
-    return get_xml(url + item.id.to_s)
+    return get_xml(url + item.id.to_s + configatron.wowhead.url.item.suffix, 'wowhead')
   end
   
   #get the HTML-Code from URI
@@ -98,7 +97,7 @@ module Arsenal
 
   			case res
   				when Net::HTTPSuccess, Net::HTTPRedirection
-  					res.body
+  					return res.body
   				else
   					tries -= 1
   			end
@@ -110,12 +109,12 @@ module Arsenal
   end
 
   #get the preprocessed XML-Code from URI
-  def self.get_xml(url)
+  def self.get_xml(url, base='page')
     doc = Nokogiri::XML(get_html(url))
-  	if doc.xpath('page').nil?
+  	if doc.xpath(base).nil?
   		raise "EmptyPage (#{url})"
   	else
-  		return doc.xpath('page')
+  		return doc.xpath(base)
   	end
   end
 end

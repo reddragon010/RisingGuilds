@@ -17,6 +17,10 @@ configatron.wowarmory.url.base = 'http://eu.wowarmory.com/'
 configatron.wowarmory.url.item.info = 'item-info.xml'
 configatron.wowarmory.url.item.itemid = 'i='
 
+configatron.wowhead.url.base = 'http://www.wowhead.com/'
+configatron.wowhead.url.item.prefix = 'item='
+configatron.wowhead.url.item.suffix = '&xml'
+
 configatron.onlinelist.url = 'http://www.rising-gods.de/components/com_onlinelist/views/onlinelist/ajax_request.php?server='
 
 #Notifier *Config*

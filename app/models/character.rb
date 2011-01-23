@@ -59,7 +59,7 @@ class Character < ActiveRecord::Base
     items = Array.new
     self.items.delete_if{|i| i.slot == 3 || i.slot == 18}.each do |item|
       xml = Arsenal::get_item_xml(item)
-      item.get_info(xml)
+      item.level = (xml%'item'%'level').content.to_i
       ilevelsum += item.level
       items << item
     end
