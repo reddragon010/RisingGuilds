@@ -91,6 +91,9 @@
 		<div id="gw_events">
 		</div>
 		<script type="text/javascript">
+			function show_code(code) {
+  	    $(code).slideToggle('slow');
+			};
 			function guild_callback(obj) {
 				var guild = obj['guild'];
 				document.getElementById('gw_guildname').innerHTML = guild.name;
@@ -118,5 +121,11 @@
     <script type="text/javascript" src="/guilds/<%= params[:guild_id] %>.json?callback=guild_callback"></script>
 		<script type="text/javascript" src="/guilds/<%= params[:guild_id] %>/events.json?callback=events_callback"></script>
 	</div>
-	<a href="https://gist.github.com/774109" data-popup="true">Code</a>
+	<button id="guilds" onClick="show_code('guild_code')">Code</a>
+	<div id="guild_code" style="display: none;">
+		<pre class="code">
+			<code class="javascript">
+	  	</code>
+		</pre>
+	</div>
 </div>
