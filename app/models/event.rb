@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
   
   belongs_to :character
-  belongs_to :guild
+  belongs_to :guild, :touch => true
   
   cattr_reader :per_page
   @@per_page = 10

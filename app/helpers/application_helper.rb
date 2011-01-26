@@ -138,5 +138,6 @@ module ApplicationHelper
   	cache_path += "?sort=#{params[:sort]}" unless params[:sort].blank? 
   	cache_path += "-#{timestamp}"
   	cache_path += "-#{count}" unless count.nil?
+  	return cache_path
   end
 end
