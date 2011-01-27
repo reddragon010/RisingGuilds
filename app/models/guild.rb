@@ -142,7 +142,7 @@ class Guild < ActiveRecord::Base
   end
     
   def activity
-    activities = self.events.where("action == 'today_online' AND created_at > ?", Time.now - 1.month).collect{|e| e.content.to_i}
+    activities = self.events.where("action = 'today_online' AND created_at > ?", Time.now - 1.month).collect{|e| e.content.to_i}
     unless activities.empty?
       return activities.sum / activities.size
     else
