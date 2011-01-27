@@ -12,6 +12,7 @@
 	</ul>
 </div>
 
+<% cache @character do %>
 <div id="charheader">
 	<div id="avatar">
 		<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
@@ -116,3 +117,4 @@
 			</tr>
     </table>
 </div>
+<% end %>
