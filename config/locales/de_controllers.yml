@@ -52,6 +52,7 @@ de:
     guild_to_raid: "Gilde wurde zum Raid eingeladen"
     uninvited: "Gilde wurde ausgeladen."
     cant_uninvite: "Die Ersteller-Gilde kann nicht ausgeladen werden."
+    char_not_found: "Der eingegebene Charname konnte nicht gefunden werden"
 
   user_sessions:
     login_successful: "Login erfolgreich!"
