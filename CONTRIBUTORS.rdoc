@@ -4,6 +4,8 @@
 
 == Core
 
+* Iroen
+
 == Inactive Members
 
 * Drantum	
@@ -12,4 +14,4 @@
 == Special Thanks To
 
 * Amras (for the genius XMLArsenal)
-* Nightmare and Vision (for running the rising-gods servers)
+* the Rising-Gods Team (for keep the servers running)

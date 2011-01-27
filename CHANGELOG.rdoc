@@ -128,3 +128,20 @@
 * [Feature]		Reset lost password
 * [Feature]		Added password-fields to edit-account
 * [Improved]	Raids now get ordered in DESC
+
+== 0.9.0 BETA 27-12-2010
+
+* [Fix]				raid-creation problem with zero players
+* [Fix]				druid-attend bug
+* [Fix]				multi-attend with one char
+* [Fix]				AIL calculation
+* [Fix]				post attendance without a role
+* [Fix]				change raidleader
+* [Fix]				Guildselection on "new raid"
+* [Feature]		raidleader can add chars to raids
+* [Feature]		guild-info widget
+* [Feature]		raidleader can edit raid-attendances
+* [Feature]		caching
+* [Improved]	set "available"	as first option on attend-form
+* [Improved]	german locale-files/readme
+* [Improved]	professions now works with ids
