@@ -162,7 +162,7 @@ en:
     language: "Language"
     contact: "Contact"
     signature: "Signature"
-    enter_characters_name: "Please enter your character\'s name."
+    enter_characters_name: "Enter your character's name."
     edit: "Edit"
     delete: "Delete"
     last_login: "last login"
@@ -186,12 +186,13 @@ en:
     account: "Account"
     guilds: "Guilds"
     my_guilds: "My Guilds"
-    new_guilds: "New Guild"
+    new_guild: "New Guild"
     my_raids: "My Raids"
     new_raid: "New Raid"
     my_characters: "My Characters"
     signup: "Login/SignUp"
     new_character: "New Character"
+    add_character: "Add Character"
   
   statistics:
     online_activity: "online activity"
@@ -208,10 +209,10 @@ en:
 
   raids:
     form:
-      new_raid: "New Raid"
+      new_raid: "Create Raid"
       edit_raid: "Edit Raid"
       title: "Title"
-      guild_id: "Guild ID"
+      guild_id: "Guild"
       select_guild: "Select a guild"
       select_icon: "Select an icon"
       time_setting: "Time Settings"
@@ -221,10 +222,9 @@ en:
       details: "Details"
       max_attendees: "attendees"
       level_range: "level range"
-      min_level: "minimum level"
-      max_level: "maximum level"
       min_ail: "minimum ail"
       leader: "Leader"
       template: "template"
       autoconfirm: "autoconfirm"
       closed: "closed"
+      role_limits: "role limits"

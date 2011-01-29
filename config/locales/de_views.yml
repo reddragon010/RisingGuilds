@@ -44,7 +44,7 @@ de:
     verified: "Überprüfe Gildenname!"
     already_joined: "Sie sind dieser Gilde bereits beigetreten."
     already_token: "Haben Sie bereits einen Token, können Sie diesen hier eintragen."
-    need_token: "Sie benötigen einen Token um der Gilde beizutreteni."
+    need_token: "Sie benötigen einen Token um, der Gilde beizutreten."
     more_info_with_http: "Besuchen Sie für weitere Informationen %{website} oder kontaktieren Sie die folgenden Spieler InGame"
     more_info: "Für weitere Informationen kontaktieren Sie folgende Spieler InGame"
     show:

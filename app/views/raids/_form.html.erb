@@ -108,14 +108,14 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
 				<td><%= f.select :max_attendees, [5,10,25,40] %></td>
 				<td style="width:40px"></td>
         <td><%= t('raids.form.level_range') %></td>
-				<td><%= f.text_field :min_lvl, t('raids.form.min_level') , {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, t('raids.form.max_level') , {:value => "80", :size => 2} %></td>
+				<td><%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
       </tr>
       <tr>
         <td><%= f.label :min_ail, t('raids.form.min_ail') %></td>
 				<td><%= f.text_field :min_ail, :size => 3 %></td>
 				<td></td>
 				<% unless raid.new_record? %>
-        <td><%= f.label :leader. t('raids.form.leader') %></td>
+        <td><%= f.label :leader, t('raids.form.leader') %></td>
 				<td><%= f.select :leader, @possible_leaders %></td>
 				<% end %>
       </tr>
