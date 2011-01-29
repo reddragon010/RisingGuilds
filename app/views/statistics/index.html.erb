@@ -20,20 +20,20 @@
           defaultSeriesType: 'area'
         },
         title: {
-          text: 'Online Activity'
+          text: <%= t('statistics.online_activity') %>
         },
         xAxis: {
           type: 'datetime'
         },
         yAxis: {
           title: {
-            text: 'Online Members'
+            text: <%= t('statistics.online_members') %>
           }
         },
         tooltip: {
           formatter: function() {
             return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
-              Highcharts.numberFormat(this.y, 0) +' Members';
+              Highcharts.numberFormat(this.y, 0) +' <%= t('guilds.details.members') %>';
           }
         },
         series: [{
@@ -57,20 +57,20 @@
           defaultSeriesType: 'area'
         },
         title: {
-          text: 'Growth'
+          text: <%= t('guilds.details.growth') %>
         },
         xAxis: {
           type: 'datetime'
         },
         yAxis: {
           title: {
-            text: 'Members'
+            text: <%= t('guilds.details.members') %>
           }
         },
         tooltip: {
           formatter: function() {
             return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
-              Highcharts.numberFormat(this.y, 0) +' Members';
+              Highcharts.numberFormat(this.y, 0) +' <%= t('guilds.details.members') %>';
           }
         },
         series: [{
@@ -93,20 +93,20 @@
           defaultSeriesType: 'area'
         },
         title: {
-          text: 'Average Item Level'
+          text: '<%= t('characters.ail_long') %>'
         },
         xAxis: {
           type: 'datetime'
         },
         yAxis: {
           title: {
-            text: 'AIL'
+            text: '<%= t('characters.ail') %>'
           }
         },
         tooltip: {
           formatter: function() {
             return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
-              Highcharts.numberFormat(this.y, 0) +' AIL';
+              Highcharts.numberFormat(this.y, 0) +' <%= t('characters.ail') %>';
           }
         },
         series: [{
@@ -122,29 +122,29 @@
 
 <div id="tabs">
 	<ul>
-		<li><a href="#tabs-1">Online Chart</a></li>
-		<li><a href="#tabs-2">Growth Chart</a></li>
-		<li><a href="#tabs-3">AIL Chart</a></li>
+		<li><a href="#tabs-1"><%= t('statistics.online_chart') %></a></li>
+		<li><a href="#tabs-2"><%= t('statistics.growth_chart') %></a></li>
+		<li><a href="#tabs-3"><%= t('statistics.ail_chart') %></a></li>
 	</ul>
 	<div id="tabs-1">
 		<% unless @online_data.blank? %>
 	  <div id="online-chart-container" class="chart-container"></div>
 	  <% else %>
-	  No statistic available
+	  <%= t('statistics.not_aviable') %>
 	  <% end %>
 	</div>
 	<div id="tabs-2">
 		<% unless @online_data.blank? %>
 	  <div id="growth-chart-container" class="chart-container"></div>
 	  <% else %>
-	  No statistic available
+	  <%= t('statistics.not_aviable') %>
 	  <% end %>
 	</div>
 	<div id="tabs-3">
 		<% unless @online_data.blank? %>
-    <div id="ail-chart-container" class="chart-container"></div>
-    <% else %>
-    No statistic available
-    <% end %>
+          <div id="ail-chart-container" class="chart-container"></div>
+          <% else %>
+          <%= t('statistics.not_aviable') %>
+          <% end %>
 	</div>
 </div>

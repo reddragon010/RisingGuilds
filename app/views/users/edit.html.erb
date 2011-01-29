@@ -1,4 +1,4 @@
-<h1>Edit <%= @user.login %></h1>
+<h1><%= t('users.edit') %> <%= @user.login %></h1>
  
 <%= form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>

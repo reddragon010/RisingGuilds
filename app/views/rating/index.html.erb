@@ -1,13 +1,13 @@
-<h1>Guild Rating</h1>
+<h1><%= t('ratings.guild_rating') %></h1>
 
 <table>
   <thead>
 	<tr>
 		<th>#</th>
-		<th>Name</th>
-		<th>Rating</th>
-		<th>Members</th>
-		<th>Website</th>
+		<th><%= t('characters.name') %></th>
+		<th><%= t('ratings.rating') %></th>
+		<th><%= t('guilds.details.members') %></th>
+		<th><%= t('guilds.website') %></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -15,7 +15,7 @@
 	<tr>
 		<td><%= "#{i+1}." %></td>
 		<td><%= link_to h(guild.name), guild_path(guild) %></td>
-		<td><% unless guild.rating.nil? %><%= guild.rating %><% else %>n/a<% end %></td>
+		<td><% unless guild.rating.nil? %><%= guild.rating %><% else %><%= t('raitings.not_aviable') %><% end %></td>
 		<td><%= guild.characters.count %></td>
 		<td><%= link_to guild.website, guild.website %></td>
 	</tr>	

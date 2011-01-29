@@ -5,8 +5,8 @@
 	<div>
 		<%= sanitize newsentry.body  %>
 		<div class="news_menu">
-			<%= link_to image_tag("icons/page_edit.png", :alt => "edt", :size => "16x16"), edit_guild_newsentry_path(guild,newsentry) %>
-			<%= link_to image_tag("icons/kick.png", :alt => "delete", :size => "16x16"), newsentry, :confirm => 'Are you really sure?', :method => :delete %>
+			<%= link_to image_tag("icons/page_edit.png", :alt => t('users.edit'), :size => "16x16"), edit_guild_newsentry_path(guild,newsentry) %>
+			<%= link_to image_tag("icons/kick.png", :alt => t('users.delete'), :size => "16x16"), newsentry, :confirm => t('confirmation'), :method => :delete %>
 		</div>
 		<div class="news_footer">
 			<div class="news_author"><%= link_to(newsentry.user.login, user_path(newsentry.user)) %></div>

@@ -1,7 +1,7 @@
 <div id="content_menu">
 	<ul>
 		<% if current_user == @user %>
-		<li><%= link_to 'Edit', edit_account_path %></li>
+		<li><%= link_to t('users.edit'), edit_account_path %></li>
 		<% end %>
 	</ul>
 </div>
@@ -13,35 +13,35 @@
 <h1><%=h @user.login %></h1>
 
 <div class="box_small">
-	<div class="box_headline">Login</div>
+	<div class="box_headline"><%= t('login') %></div>
 	<table>
 		<tr>
-			<td class="left"><b>Login count:</b></td>
+			<td class="left"><b><%= t('users.login_count') %>:</b></td>
 			<td class="left"><%=h @user.login_count %></td>
 		</tr>
 		<tr>
-			<td class="left"><b>Last request at:</b></td>
+			<td class="left"><b><%= t('users.last_request_at') %>:</b></td>
 			<td class="left"><%=h @user.last_request_at %></td>
 		</tr>
 		<tr>
-			<td class="left"><b>Last login at:</b></td>
+			<td class="left"><b><%= t('users.last_login_at') %>:</b></td>
 			<td class="left"><%=h @user.last_login_at %></td>
 		</tr>
 		<tr>
-			<td class="left"><b>Current login at:</b></td>
+			<td class="left"><b><%= t('users.current_login_at') %>:</b></td>
 			<td class="left"><%=h @user.current_login_at %></td>
 		</tr>
 		<% if @user == current_user || current_user.admin? %>
 		<tr>
-			<td class="left"><b>Last login ip:</b></td>
+			<td class="left"><b><%= t('users.last_login_ip') %>:</b></td>
 			<td class="left"><%=h @user.last_login_ip %></td>
 		</tr>
 		<tr>
-			<td class="left"><b>Current login ip:</b></td>
+			<td class="left"><b><%= t('users.current_login_ip') %>:</b></td>
 			<td class="left"><%=h @user.current_login_ip %></td>
 		</tr>
 		<tr>
-			<td class="left">API-Key</td>
+			<td class="left"><%= t('users.api_key') %></td>
 			<td class="left"><%=h @user.single_access_token %></td>
 		</tr>
 		<% end %>
@@ -49,10 +49,10 @@
 </div>
 
 <div class="box_small">
-	<div class="box_headline">Contact</div>
+	<div class="box_headline"><%= t('users.contact') %></div>
 	<table>
 		<tr>
-			<td class="left"><b>E-Mail:</b></td>
+			<td class="left"><b><%= t('users.email') %>:</b></td>
 			<td class="left"><%=h @user.email %></td>
 		</tr>
 		<tr>
@@ -77,7 +77,7 @@
 <div class="clear"></div>
 
 <div class="box_big">
-	<div class="box_headline">Signature</div>
+	<div class="box_headline"><%= t('users.signature') %></div>
 	<p class="signature">
 		<%= @user.signature %>
 	</p>

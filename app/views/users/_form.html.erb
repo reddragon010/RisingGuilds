@@ -1,19 +1,19 @@
 <div class="box_small">
 	<div class="box_headline">Account</div>
-	<%= form.label :email %><br />
+	<%= form.label :email, t('users.email') %><br />
 	<%= form.text_field :email %><br />
 	<br />
-	<%= form.label :password %><br />
+	<%= form.label :password, t('users.password') %><br />
 	<%= form.password_field :password %><br />
 	<br />
-	<%= form.label :password_confirmation %><br />
+	<%= form.label :password_confirmation, t('users.pw_confirmation') %><br />
 	<%= form.password_field :password_confirmation %><br />
 	<br />
-	<%= form.label :language, "Language" %><br />
+	<%= form.label :language, t('users.language') %><br />
 	<%= form.select :language, [['English', 'en'], ['Deutsch', 'de']] %>
 </div>
 <div class="box_small">
-	<div class="box_headline">Contact</div>
+	<div class="box_headline"><%= t('users.contact') %></div>
 	<%= form.label :icq %><br />
 	<%= form.text_field :icq %><br />
 	<br />
@@ -28,6 +28,6 @@
 </div>
 <div class="clear"></div>
 <div class="box_big">
-	<div class="box_headline"><%= form.label :signature %></div>
+	<div class="box_headline"><%= form.label :signature, t('users.signature') %></div>
 	<%= form.text_area :signature, :size => '100x3' %><br />
 </div>
