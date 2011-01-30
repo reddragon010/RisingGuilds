@@ -3,7 +3,7 @@
 <% else %>
 <p><%= t('guilds.need_token')%></p>
 <%unless @guild.website.empty? %>
-  <p><%= t('guilds.more_info_with_http', :website => link_to(@guild.website)) %> ( <%= @guild.realm %> )
+  <p><%= raw t('guilds.more_info_with_http', :website => link_to(@guild.website)) %> ( <%= @guild.realm %> )
 <% else %>
   <p><%= t('guilds.more_info') %> ( <%= @guild.realm %> )
 <% end %>
