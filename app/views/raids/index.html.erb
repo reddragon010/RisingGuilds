@@ -10,6 +10,7 @@
 	</ul>
 </div>
 
+<% cache (["raid_index", current_user.id, if params[:month].nil? then @date.strftime("%Y/%m") else params[:month] end, @raids]) do %>
 <% unless @raids.nil? || @raids.empty? %>
 <div id="calendar">
 	<h2 id="month">
@@ -88,4 +89,4 @@
 <% else %>
 <p>There are no raids which could be attended by you</p>
 <% end %>
-<% #end %>
+<% end %>

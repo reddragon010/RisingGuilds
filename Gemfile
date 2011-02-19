@@ -21,6 +21,8 @@ gem 'breadcrumbs_on_rails'
 gem 'delayed_job',  :git => 'git://github.com/collectiveidea/delayed_job.git'
 gem 'nokogiri'
 
+gem 'memcache-client'
+
 group :development, :test do
   gem 'mocha'
   gem 'rspec-rails', '>= 2.0.0.beta.19'

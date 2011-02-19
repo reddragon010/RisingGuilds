@@ -4,10 +4,10 @@ class CharactersController < ApplicationController
   add_breadcrumb "Home", :root_path
   
   layout :choose_layout
-  
-  before_filter do |c|
-    c.load_newest(Character)
-  end
+
+ # before_filter do |c|
+ #   c.load_newest(Character)
+ # end
   
   # GET /characters
   # GET /characters.xml
@@ -27,14 +27,14 @@ class CharactersController < ApplicationController
     params[:sort] = 'guild_id, rank' if params[:sort].nil?
     
     @guild = Guild.find(params[:guild_id]) unless params[:guild_id].nil?
-    
+
     @characters = Character.order(params[:sort])
     [:guild_id, :character_id, :user_id].each do |p|
       @characters = @characters.where(p => params[p]) unless params[p].blank?
     end
     @characters = @characters.where(:online => (params[:online]=='true' ? true : false)) unless params[:online].blank?
     @characters = @characters.limit(params[:limit].to_i) unless params[:limit].blank?
-    
+
     respond_to do |format|
       format.html
       format.xml  { render :xml => @characters.to_xml }
