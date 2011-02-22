@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   before_filter :write_return_to
   before_filter :setup_tabs
   before_filter :set_user_language
-  before_filter :get_cache_key
 
   def render_optional_error_file(status_code)
     case status_code 
@@ -30,14 +29,6 @@ class ApplicationController < ActionController::Base
       type.all  { render :nothing => true, :status => status_code } 
     end
     true
-  end
-
-  def get_cache_key
-    if logged_in?
-      @cache_k = current_user.id
-    else
-      @cache_k = "public"
-    end
   end
 
   protected

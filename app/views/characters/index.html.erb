@@ -1,4 +1,4 @@
-<% cache (["character_index", @characters.all]) do %>
+<% cache (["character_index", if params[:user_id] then "user_char_index" else "guild_char_index" end, if params[:user_id] then params[:user_id] else params[:guild_id] end, @characters.all.count]), :expires_in => 6.hours do %>
 <table width="100%" border="0" cellspacing="3" cellpadding="1" align="center" class="poll">
   <thead>
     <tr>
