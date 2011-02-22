@@ -1,0 +1,91 @@
+<h1 class="nomargin" style="font-size:20pt">Welcome to RisingGuilds ...</h1>
+<h2 class="right"style="font-size:16pt">... the Guild Management System for RisingGods</h2>
+
+<p id="flash" class="info">RisingGuilds is still under construction and can only be accessed by chosen testers. If you want to test RisingGuilds contact the support for an account.</p>
+
+<div class="box_small" style="text-align:justify; font-size:11pt">
+<div class="box_headline">What is RisingGuilds?</div>
+<p>RisingGuilds is an opensource system to manage your guild. All data is read from the Armory and updated automatically. RisingGuilds is developed for the private server "Rising Gods" but it should be fine with other </p>
+</div>
+
+<div class="box_small" style="text-align:justify; font-size:11pt">
+<div class="box_headline">Getting started</div>
+<p>First you have to create an <b>account</b>. You just have to click on <b>Login / Signup</b> or you can wait until a guild leader invites you. If you want to create a new guild you have to be logged in an click on <b>"New Guild"</b>. If you want to <b>join</b> a guild you have to wait until a guild leader sends you a <b>"Join-Link"</b>.</p>
+<p>If you have problems or questions use the <b>Help</b> in the top left corner. </p>
+</div>
+
+<div class="clean"></div>
+
+<div class="box_small">
+<div class="box_headline">Tweets</div>
+<div class="newsentry">
+	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+	<script>
+	new TWTR.Widget({
+	  version: 2,
+	  type: 'profile',
+	  rpp: 7,
+	  interval: 6000,
+	  width: 430,
+	  height: 300,
+	  theme: {
+	    shell: {
+	      background: '#333333',
+	      color: '#ffffff'
+	    },
+	    tweets: {
+	      background: '#1C1C1C',
+	      color: '#ffffff',
+	      links: '#1263b5'
+	    }
+	  },
+	  features: {
+	    scrollbar: false,
+	    loop: false,
+	    live: false,
+	    hashtags: true,
+	    timestamp: true,
+	    avatars: false,
+	    behavior: 'all'
+	  }
+	}).render().setUser('risingguilds').start();
+	</script>
+</div>
+</div>
+
+<div class="box_small">
+<div class="box_headline">Features</div>
+<ul>
+	<li>Connection to the RG-XMLArmory
+		<ul>
+			<li>Characters (including professions, talent specialization, etc) are updated automatically</li>
+			<li>Guild joining/leaving and promotion/demotion are being recorded</li>
+			<li class="disabled">Guild achievements calculated from the achievements of their members (not yet implemented)</li>
+		</ul>
+	</li>
+	<li>Create and Mange your Guild with ease
+		<ul>
+			<li>Guilds can be created by a Guild Leader</li>
+			<li>Terms of Admission can be established and announced</li>
+			<li>each Guild can write their own Guild news (accessable by public or Guild members only)</li>
+		</ul>
+	</li>
+	<li>Rating (not finished)
+		<ul>
+		</ul>
+	</li>
+	<li>Schedule your Raids
+		<ul>
+			<li>create Raids with all important data</li>
+			<li>clearly arranged view of all your Raids</li>
+			<li>Invite other Guilds to your Raids</li>
+			<li>(un)subscribe Members to Raids</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div id="linkicons">
+	<%= link_to image_tag('icons/facebook.png', :alt => "facebook",:size => "60x60"), 'http://www.facebook.com/pages/RisingGuilds/128886163820546', {'data-popup' => true} %>
+	<%= link_to image_tag('icons/twitter.png', :alt => "twitter",:size => "60x60"), 'http://twitter.com/RisingGuilds', {'data-popup' => true} %>
+</div>
