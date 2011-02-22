@@ -10,10 +10,10 @@
 	</ul>
 </div>
 
-<% cache (["raid_index", current_user.id, if params[:month].nil? then @date.strftime("%Y/%m") else params[:month] end, @raids]) do %>
+<% cache (["raid_index", current_user.id, if params[:month] then params[:month] else @date.strftime("%Y/%m") end, @raids]) do %>
 <% unless @raids.nil? || @raids.empty? %>
 <div id="calendar">
-	<h2 id="month">
+	<h2 id="month">@date.strftime("%Y/%m")
 	  <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y/%m") %>
 	  <%=h @date.strftime("%B %Y") %>
 	  <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y/%m") %>
