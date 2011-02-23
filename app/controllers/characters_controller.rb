@@ -4,10 +4,6 @@ class CharactersController < ApplicationController
   add_breadcrumb "Home", :root_path
   
   layout :choose_layout
-
- # before_filter do |c|
- #   c.load_newest(Character)
- # end
   
   # GET /characters
   # GET /characters.xml

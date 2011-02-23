@@ -1,4 +1,4 @@
-<% cache (["topnavbar", I18n.locale, if current_user.id.nil? then "public" else current_user.id end]), :expires_in => 8.hours do %>
+<% cache (["topnavbar", I18n.locale, if current_user then current_user.id else "public" end]), :expires_in => 8.hours do %>
 <div id="topnavbar">
 	<ul>
 		<li><%= link_to t('topnavbar.home'), root_url %></li>
