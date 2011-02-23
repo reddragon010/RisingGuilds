@@ -193,6 +193,9 @@ en:
     signup: "Login/SignUp"
     new_character: "New Character"
     add_character: "Add Character"
+    support: "Support"
+    bugtracker: "Bugtracker"
+    faq: "FAQ"
   
   statistics:
     online_activity: "online activity"

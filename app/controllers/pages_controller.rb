@@ -2,9 +2,7 @@ class PagesController < ApplicationController
   rescue_from ActionView::MissingTemplate, :with => :invalid_page
 
   def show
-    Rails.cache.fetch(["pages", I18n.locale, params[:id].downcase]) do
-      render :template => current_page
-    end
+    render :template => current_page
   end
 
   protected
