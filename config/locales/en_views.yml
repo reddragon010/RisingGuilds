@@ -231,3 +231,16 @@ en:
       autoconfirm: "autoconfirm"
       closed: "closed"
       role_limits: "role limits"
+      class_limits: "class limits"
+      description: "Description"
+
+  newsentries:
+    title: "Title"
+    body: "Body"
+    public: "Public"
+    sticky: "Sticky"
+
+  password_resets:
+    password: "Password"
+    confirmation: "Confirmation"
+    update: "Update my Password"

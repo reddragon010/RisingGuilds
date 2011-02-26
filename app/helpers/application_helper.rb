@@ -125,18 +125,4 @@ module ApplicationHelper
   def tnb
     render(:partial => "topnavbar/layout")
   end
-  
-  #caching
-  def caching_path(params,timestamp,count=nil)
-    cache_path = ""
-    if !params[:guild_id].blank?
-  		cache_path += "guilds/#{params[:guild_id]}/"
-    elsif !params[:user_id].blank?
-  		cache_path += "users/#{params[:user_id]}/"
-  	end
-  	cache_path += "#{params[:controller]}/#{params[:action]}"
-  	cache_path += "?sort=#{params[:sort]}" unless params[:sort].blank? 
-  	cache_path += "-#{timestamp}"
-  	cache_path += "-#{count}" unless count.nil?
-  end
 end

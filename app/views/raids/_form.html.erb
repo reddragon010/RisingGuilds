@@ -2,7 +2,6 @@
 template_raids = []
 current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| template_raids << r}}
 %>
-  
 <script type="text/javascript" charset="utf-8">
   function set_template(raid_id){
     $.getJSON('/raids/' + raid_id + '.json', function(data){
@@ -152,7 +151,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     </table>
   </div>
   <div class="box_small">
-    <div class="box_headline">Class Limits</div>
+    <div class="box_headline"><%= t('raids.form.class_limits') %></div>
     <table>
       <tr>
         <% CLASSES.each do |key,value| %>
@@ -174,16 +173,16 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
   </div>
   <div class="clear"></div>
   <div class="box_big">
-    <div class="box_headline">Description</div>
+    <div class="box_headline"><%= t('raids.form.description') %></div>
     <%= f.text_area :description , :rows => 2 %>
   </div>
   
   <% if raid.new_record? %><%= f.hidden_field :leader %><% end %>
   <p>
     <% if raid.new_record? %>
-    <%= f.submit 'Create' %>
+    <%= f.submit "Create Raid" %>
     <% else %>
-    <%= f.submit 'Update' %>
+    <%= f.submit "Change Raid" %>
     <% end %>
   </p>
 <% end %>
