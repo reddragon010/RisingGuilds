@@ -44,7 +44,7 @@ de:
     verified: "Überprüfe Gildenname!"
     already_joined: "Sie sind dieser Gilde bereits beigetreten."
     already_token: "Haben Sie bereits einen Token, können Sie diesen hier eintragen."
-    need_token: "Sie benötigen einen Token um der Gilde beizutreteni."
+    need_token: "Sie benötigen einen Token um, der Gilde beizutreten."
     more_info_with_http: "Besuchen Sie für weitere Informationen %{website} oder kontaktieren Sie die folgenden Spieler InGame"
     more_info: "Für weitere Informationen kontaktieren Sie folgende Spieler InGame"
     show:
@@ -140,3 +140,10 @@ de:
   factions:
     horde: "Horde"
     alliance: "Allianz"
+
+  widgets:
+    whoisonline: "\"Wer ist online?\"-Widget"
+    characters: "Charactere-Widget"
+    guild: "Gilden-Widget"
+    wio_text1: "Die \"Wer ist online?\"-Anzeige kann ganz einfach auf jeder Webseite eingebunden werden. Dazu muss nur der untenstehende Code in die entsprechende Stelle auf der Seite eingefügt werden. Wer sich ein wenig mit JavaScript und HTML/CSS auskennt sollte ohne Probleme die Anzeige an die Website anpassen können. Dazu müssen lediglich die \"document.write\"-Befehle abgeändert  bzw. mit CSS gestylt werden."
+    wio_text2: "Die Anzeigen funktionieren nur mit aktuellen, javascript-faehigen Browsern. Dieser Umstand ist leider nicht zu aendern. Die Scripts sind aber so simpel, dass sie auf allen Browsern problemlos laufen sollten."

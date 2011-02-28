@@ -2,6 +2,10 @@ en:
   confirmation: "Are you sure?"
   character: "Character"
   update: "Update"
+  login: "Login"
+  logout: "Logout"
+  or: "or"
+  register: "Register"
 
   attendences:
     raid: "Raid"
@@ -29,12 +33,7 @@ en:
     last_seen: "Last seen"
     activity: "Activity"
     achievements: "Achievement Points"
-    ail: "AverageItemLevel"
-
-  views:
-    labels:
-      guild:
-        description: "TestIt!"
+    ail_long: "AverageItemLevel"
         
   layouts:
     logged_in_as: "You are logged in as"
@@ -151,5 +150,97 @@ en:
     whoisonline: "\"Who is online?\" widget"
     characters: "Characters widget"
     guild: "Guild widget"
-    wio_text1: "You can implement the widgets easily. You just have to copy the code into your website. You can change the interface using JavaScript, HTML and CSS."
-    wio_text2: "This widget can only be used with a current browser. The code is simple so you can run it on all browsers."
+    wio_text1: "You can implement the \"Who is online?\" widget easily. You just have to copy the following code into your website. You can change the interface using JavaScript, HTML and CSS."
+    wio_text2: "This widget can only be used with a current browser. But the code is simple so you can run it on all browsers without having problems."
+
+  users:
+    password: "Password"
+    pw_confirmation: "Confirm password"
+    remember_me: "Remember Me?"
+    email: "E-Mail"
+    request_new_pw: "request new password"
+    language: "Language"
+    contact: "Contact"
+    signature: "Signature"
+    enter_characters_name: "Enter your character's name."
+    edit: "Edit"
+    delete: "Delete"
+    last_login: "last login"
+    characters: "Characters"
+    leaders: "Leaders"
+    officers: "Officers"
+    raidleaders: "Raidleaders"
+    members: "Members"
+    login_count: "login count"
+    last_request_at: "last request at"
+    last_login_at: "last login at"
+    current_login_at: "lurrent login at"
+    last_login_ip: "last login IP"
+    current_login_ip: "current login IP"
+    api_key: "API key"
+  
+  topnavbar:
+    home: "Home"
+    index: "Index"
+    help: "Help"
+    account: "Account"
+    guilds: "Guilds"
+    my_guilds: "My Guilds"
+    new_guild: "New Guild"
+    my_raids: "My Raids"
+    new_raid: "New Raid"
+    my_characters: "My Characters"
+    signup: "Login/SignUp"
+    new_character: "New Character"
+    add_character: "Add Character"
+    support: "Support"
+    bugtracker: "Bugtracker"
+    faq: "FAQ"
+  
+  statistics:
+    online_activity: "online activity"
+    online_members: "online members"
+    online_chart: "online chart"
+    growth_chart: "growth chart"
+    ail_chart: "ail chart"
+    not_aviable: "no statistics aviable"
+  
+  ratings:
+    guild_rating: "Guild Rating"
+    rating: "Rating"
+    not_aviable: "no rating aviavble"
+
+  raids:
+    form:
+      new_raid: "Create Raid"
+      edit_raid: "Edit Raid"
+      title: "Title"
+      guild_id: "Guild"
+      select_guild: "Select a guild"
+      select_icon: "Select an icon"
+      time_setting: "Time Settings"
+      start: "starting time"
+      invitation_window: "invitation window"
+      duration: "duration"
+      details: "Details"
+      max_attendees: "attendees"
+      level_range: "level range"
+      min_ail: "minimum ail"
+      leader: "Leader"
+      template: "template"
+      autoconfirm: "autoconfirm"
+      closed: "closed"
+      role_limits: "role limits"
+      class_limits: "class limits"
+      description: "Description"
+
+  newsentries:
+    title: "Title"
+    body: "Body"
+    public: "Public"
+    sticky: "Sticky"
+
+  password_resets:
+    password: "Password"
+    confirmation: "Confirmation"
+    update: "Update my Password"

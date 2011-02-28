@@ -1,6 +1,6 @@
 <div id="add_character_form">
 <%= form_for :character, :url => user_path(current_user) + "/add_character", :remote => true do |f| %>
-	Please enter your character's name and hit save.
+	<%= t('users.enter_characters_name') %>
   <%= f.text_field :name %>
 	<%= f.submit(:id => "add_char_submit")%>
 <% end %>

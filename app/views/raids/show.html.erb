@@ -9,7 +9,7 @@
   </ul>
 </div>
 
-<% cache(@raid) do %>
+<% cache(["raid_show", @raid]) do %>
 <div style="position:relative; width:100%">	
   <%- @raid.icon = "nil.png" if @raid.icon == "" -%>
   <div id="raidicon"><%= image_tag("/images/icons/raid/#{@raid.icon}", :size => "65x65") %></div>

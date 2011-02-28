@@ -12,7 +12,6 @@ class PagesController < ApplicationController
   end
 
   def current_page
-    #"pages/#{I18n.locale}/#{File.join(*params[:id]).downcase}"
-    "pages/de/#{File.join(*params[:id]).downcase}"
+    "pages/#{I18n.locale}/#{File.join(*params[:id]).downcase}"
   end  
 end

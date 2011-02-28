@@ -1,12 +1,12 @@
-<h1>Register</h1>
+<h1><%= t('register') %></h1>
 
 <%= form_for @user, :url => account_path do |f| %>
   <%= f.error_messages %>
   <br />
-  <%= f.label :login %><br />
+  <%= f.label :login, t('login') %><br />
   <%= f.text_field :login %><br />  
   <br />
-  <%= f.label :email %><br />
+  <%= f.label :email, t('users.email') %><br />
   <%= f.text_field :email %><br />
   <br />
   <%= f.submit "Register" %>

@@ -2,9 +2,9 @@
 	<thead>
 	<tr>
 		<th class="narrow"></th>
-		<th>Login</th>
-		<th>Last Login</th>
-		<th>Chars</th>
+		<th><%= t('login') %></th>
+		<th><%= t('users.last_login') %></th>
+		<th><%= t('users.characters') %></th>
 		<th class="narrow"></th>
 		<th class="narrow"></th>
 		<th class="narrow"></th>
@@ -14,7 +14,7 @@
 	<tbody>
 		<tr class="header">
 			<th class="narrow"></th>
-			<th colspan="3"><%= image_tag('icons/role-leader.gif') %>Leaders</th>
+			<th colspan="3"><%= image_tag('icons/role-leader.gif') %> <%= t('users.leaders') %></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
@@ -24,7 +24,7 @@
 	<tbody>
 		<tr class="header">
 			<th class="narrow"></th>
-			<th colspan="3"><%= image_tag('icons/role-officer.gif') %> Officers</th>
+			<th colspan="3"><%= image_tag('icons/role-officer.gif') %> <%= t('users.officers') %></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
@@ -34,7 +34,7 @@
 	<tbody>
 		<tr class="header">
 			<th class="narrow"></th>
-			<th colspan="3"><%= image_tag('icons/role-raidleader.gif', :size => "16x16") %> Raidleaders</th>
+			<th colspan="3"><%= image_tag('icons/role-raidleader.gif', :size => "16x16") %> <%= t('users.raidleaders') %></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
@@ -44,7 +44,7 @@
 	<tbody>
 		<tr class="header">
 			<th class="narrow"></th>
-			<th colspan="3"><%= image_tag('icons/role-member.gif') %>Members</th>
+			<th colspan="3"><%= image_tag('icons/role-member.gif') %><%= t('users.members') %></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>
 			<th class="narrow"></th>

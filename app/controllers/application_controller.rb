@@ -30,10 +30,6 @@ class ApplicationController < ActionController::Base
     end
     true
   end
-  
-  def load_newest(obj)
-    @newest = obj.order("updated_at DESC").limit(1).first
-  end
 
   protected
   def set_user_language

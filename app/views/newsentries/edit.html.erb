@@ -3,19 +3,19 @@
 <%= form_for(@newsentry) do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :title %><br />
+    <%= f.label :title, t('newsentry.title') %><br />
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :body %><br />
+    <%= f.label :body, t('newsentry.body') %><br />
     <%= f.text_area :body %>
   </p>
   <p>
-    <%= f.label :public %><br />
+    <%= f.label :public, t('newsentry.public') %><br />
     <%= f.check_box :public %>
   </p>
   <p>
-    <%= f.label :sticky %><br />
+    <%= f.label :sticky, t('newsentry.sticky') %><br />
     <%= f.check_box :sticky %>
   </p>
   <p>

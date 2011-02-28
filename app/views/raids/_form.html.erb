@@ -2,7 +2,6 @@
 template_raids = []
 current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| template_raids << r}}
 %>
-  
 <script type="text/javascript" charset="utf-8">
   function set_template(raid_id){
     $.getJSON('/raids/' + raid_id + '.json', function(data){
@@ -59,9 +58,9 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
 </div>
 
 <% if raid.new_record? %>
-<h1>New Raid</h1>
+<h1><%= t('raids.form.new_raid') %></h1>
 <% else %>
-<h1>Edit Raid</h1>
+<h1><%= t('raids.form.edit_raid') %></h1>
 <% end %>
 
 <%= form_for(raid) do |f| %>
@@ -70,52 +69,52 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     <div class="box_headline"></div>
     <table>
       <tr>
-        <td class="left"><%= f.label :title %> <%= f.text_field :title, :size => 50 %></td>
+        <td class="left"><%= f.label :title, t('raids.form.title') %> <%= f.text_field :title, :size => 50 %></td>
         <td>
-          <%= f.label :guild_id %>
+          <%= f.label :guild_id, t('raids.form.guild_id') %>
           <% if params[:guild_id] %>
             <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:selected => params[:guild_id]}) %>
           <% else %>
-            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => "Select a guild"}) %>
+            <%= collection_select(:raid, :guild_id, current_user.guilds, :id, :name, {:prompt => t('raids.form.select_guild')}) %>
           <% end %>
         </td>
         <td>
           Icon
-          <%= select(:raid, :icon, raid_icons, {:include_blank => "select an icon"},{ :onChange => 'set_raidicon($(this).val())'}) %>  
+          <%= select(:raid, :icon, raid_icons, {:include_blank => t('raids.form.select_icon')},{ :onChange => 'set_raidicon($(this).val())'}) %>  
         </td>
       </tr>
     </table>
   </div>
   <div class="box_small">
-    <div class="box_headline">Time Settings</div>
+    <div class="box_headline"><%= t('raids.form.time_setting') %></div>
     <table class="naked left">
       <tr>
-        <td><%= f.label :start %> <%= f.datetime_select :start, :default => 1.day.from_now %></td>
+        <td><%= f.label :start, t('raids.form.start') %> <%= f.datetime_select :start, :default => 1.day.from_now %></td>
       </tr>
       <tr>
-        <td><%= f.label :invitation_window %> <%= f.select :invitation_window, [15,30,45,60]%> <%=t('datetime.prompts.minute').pluralize%></td>
+        <td><%= f.label :invitation_window, t('raids.form.invitation_window')%> <%= f.select :invitation_window, [15,30,45,60]%> <%=t('datetime.prompts.minute').pluralize%></td>
       </tr>
       <tr>
-        <td><%= f.label :duration %> <%= f.select:duration, [1,2,3,4,5,6]%> <%=t("datetime.prompts.hour").pluralize%></td>
+        <td><%= f.label :duration, t('raids.form.duration')%> <%= f.select:duration, [1,2,3,4,5,6]%> <%=t("datetime.prompts.hour").pluralize%></td>
       </tr>
     </table>
   </div>
   <div class="box_small">
-    <div class="box_headline">Details</div>
+    <div class="box_headline"><%= t('raids.form.details') %></div>
     <table class="naked left">
       <tr>
-        <td><%= f.label :max_attendees %></td>
+        <td><%= f.label :max_attendees, t('raids.form.max_attendees') %></td>
 				<td><%= f.select :max_attendees, [5,10,25,40] %></td>
 				<td style="width:40px"></td>
-        <td>Level-Range</td>
+        <td><%= t('raids.form.level_range') %></td>
 				<td><%= f.text_field :min_lvl, {:value => "80", :size => 2} %> - <%= f.text_field :max_lvl, {:value => "80", :size => 2} %></td>
       </tr>
       <tr>
-        <td><%= f.label :min_ail %></td>
+        <td><%= f.label :min_ail, t('raids.form.min_ail') %></td>
 				<td><%= f.text_field :min_ail, :size => 3 %></td>
 				<td></td>
 				<% unless raid.new_record? %>
-        <td><%= f.label :leader %></td>
+        <td><%= f.label :leader, t('raids.form.leader') %></td>
 				<td><%= f.select :leader, @possible_leaders %></td>
 				<% end %>
       </tr>
@@ -123,15 +122,15 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     
     <table class="naked left">
       <tr>
-        <td><%= f.label :template %> <%= f.check_box :template %></td>
-        <td><%= f.label :autoconfirm %> <%= f.check_box :autoconfirm %></td>
-        <td><%= f.label :closed %> <%= f.check_box :closed %></td>
+        <td><%= f.label :template, t('raids.form.template') %> <%= f.check_box :template %></td>
+        <td><%= f.label :autoconfirm, t('raids.form.autoconfirm') %> <%= f.check_box :autoconfirm %></td>
+        <td><%= f.label :closed, t('raids.form.closed') %> <%= f.check_box :closed %></td>
       </tr>
     </table>
   </div>
   <div class="clear"></div>
   <div class="box_small">
-    <div class="box_headline">Role Limits</div>
+    <div class="box_headline"><%= t('raids.form.role_limits') %></div>
     <table>
       <tr>
         <% configatron.raidplanner.roles.each do |role| %>	
@@ -152,7 +151,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     </table>
   </div>
   <div class="box_small">
-    <div class="box_headline">Class Limits</div>
+    <div class="box_headline"><%= t('raids.form.class_limits') %></div>
     <table>
       <tr>
         <% CLASSES.each do |key,value| %>
@@ -174,16 +173,16 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
   </div>
   <div class="clear"></div>
   <div class="box_big">
-    <div class="box_headline">Description</div>
+    <div class="box_headline"><%= t('raids.form.description') %></div>
     <%= f.text_area :description , :rows => 2 %>
   </div>
   
   <% if raid.new_record? %><%= f.hidden_field :leader %><% end %>
   <p>
     <% if raid.new_record? %>
-    <%= f.submit 'Create' %>
+    <%= f.submit "Create Raid" %>
     <% else %>
-    <%= f.submit 'Update' %>
+    <%= f.submit "Change Raid" %>
     <% end %>
   </p>
 <% end %>

@@ -1,12 +1,13 @@
+<% cache (["topnavbar", I18n.locale, if current_user then current_user.id else "public" end]), :expires_in => 8.hours do %>
 <div id="topnavbar">
 	<ul>
-		<li><%= link_to 'Home', root_url %></li>
+		<li><%= link_to t('topnavbar.home'), root_url %></li>
 		<li class="expandable">
-			<%= link_to 'Guilds', guilds_path %>
+			<%= link_to t('topnavbar.guilds'), guilds_path %>
 			<ul style="left: -999em; display: none;">
-				<li><%= link_to 'Index', guilds_path %></li>
+				<li><%= link_to t('topnavbar.index'), guilds_path %></li>
 				<% unless !logged_in? || current_user.guilds.empty? %>
-				<li class="expandable"><%= link_to 'My Guilds', guilds_path %>
+				<li class="expandable"><%= link_to t('topnavbar.my_guilds'), guilds_path %>
 					<ul>
 						<% current_user.guilds.each do |guild| %>
 							<li><%= link_to guild.name, guild_path(guild) %></li>
@@ -15,37 +16,46 @@
 				</li>
 				<% end %>
 				<% if logged_in? %>
-				<li><%= link_to 'New Guild', new_guild_path %></li>
+				<li><%= link_to t('topnavbar.new_guild'), new_guild_path %></li>
 				<% end %>
 			</ul>
 		</li>
 		<% if logged_in? %>
 		<li class="expandable">
-			<a>Characters</a>
+			<a><%= t('users.characters') %></a>
 			<ul style="left: -999em; display: none;">
-				<li><%= link_to 'My Characters', user_characters_path(current_user) %></li>
-				<li><%= link_to 'Add Character', user_path(current_user) + "/add_character", {:class => 'popup',:title => 'Add Character'}%></li>
+				<li><%= link_to t('topnavbar.my_characters'), user_characters_path(current_user) %></li>
+				<li><%= link_to t('topnavbar.add_character'), user_path(current_user) + "/add_character", {:class => 'popup',:title => t('topnavbar.add_character')}%></li>
 			</ul>
 		</li>
 		<li class="expandable">
-			<a>Raids</a>
+			<a><%= t('guilds.tabs.raids') %></a>
 			<ul style="left: -999em; display: none;">
-				<li><%= link_to 'My Raids', user_raids_path(current_user) %></li>
-				<li><%= link_to 'New Raid', new_raid_path if permitted_to? :new, :raids %></li>
+				<li><%= link_to t('topnavbar.my_raids'), user_raids_path(current_user) %></li>
+				<li><%= link_to t('topnavbar.new_raid'), new_raid_path if permitted_to? :new, :raids %></li>
 			</ul>
 		</li>
 		<% end %>
-		<li><%= link_to "Help", '/pages/help' %></li>
+		<li class="expandable">
+                  <a><%= t('topnavbar.support') %></a>
+		    <ul style="left: -999em; display: none;">
+		      <li><%= link_to t('topnavbar.help'), '/pages/help' %></li>
+		      <li><%= link_to t('topnavbar.faq'), '/pages/faq' %></li>
+		      <li><%= link_to t('topnavbar.bugtracker'), 'http://code.dreamblaze.net/projects/risingguilds/issues' %></li>
+		    </ul>
+                </li>
+
 		<li class="topnavbar-action">
 			<% if logged_in?%>
-			<a href="<%= logout_path %>">Logout</a>
+			<%= link_to t('logout'), logout_path %>
 			<% else %>
-			<a href="<%= login_path %>">Login / SignUp</a>
+			<%= link_to t('topnavbar.signup'), login_path %>
 			<% end %>
 		</li>
 		<% if logged_in? %>
-			<li class="topnavbar-action"><%= link_to 'Account', account_path %></li> 
+			<li class="topnavbar-action"><%= link_to t('topnavbar.account'), account_path %></li> 
 		  <li class="topnavbar-action"><a><%= t("layouts.logged_in_as") %> <%= current_user.login.capitalize %></a></li>
 		<% end %>
 	</ul>
-</div> 
+</div>
+<% end %>

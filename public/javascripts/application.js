@@ -58,6 +58,8 @@ $(document).ready(function() {
   });
 });
 
+//Shows a hidden text
+//params: code - code that becomes visible
 function show_code(code) {
   $(code).slideToggle('slow');
 };
