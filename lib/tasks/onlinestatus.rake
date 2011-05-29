@@ -2,22 +2,23 @@ namespace :onlinestatus do
   desc "update the onlinestatus of all characters"
   task :update => :environment do
     doc = Hash.new
-    doc['PvE-Realm'] = Arsenal::get_html(configatron.onlinelist.url + "pve")
-    doc['PvP-Realm'] = Arsenal::get_html(configatron.onlinelist.url + "pvp")
+    doc['PvE-Realm'] = ServerStatus.new(configatron.onlinelist.pve)
+    doc['PvP-Realm'] = ServerStatus.new(configatron.onlinelist.pvp)
     
-    raise "Can't get PvE-Onlinelist" unless doc['PvE-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_deactiv.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_activ.gif\'></a>') 
-    raise "Can't get PvP-Onlinelist" unless doc['PvP-Realm'].include?('<a href="javascript:AjaxRequest(\'pvp\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pvp_activ.gif\'></a>&nbsp;<a href="javascript:AjaxRequest(\'pve\');"><img src=\'/components/com_onlinelist/views/onlinelist/tmpl/img/pve_deactiv.gif\'></a>')
+    raise "Can't get PvE-Onlinelist" unless doc['PvE-Realm'].ok?
+    raise "Can't get PvP-Onlinelist" unless doc['PvP-Realm'].ok?
     
     #process every character
     Character.all.each do |char|
       #test if char is online
-      newonline = doc[char.realm.to_s].include?(">#{char.name}<".force_encoding('ASCII-8BIT'))
+      newonline = doc[char.realm.to_s].user_online?("#{char.name}")
       attributes = Hash.new
       
       char.online = false if char.online.nil?
       
       #if char stay online
       if char.online == true && newonline == true then 
+        attributes[:last_seen] = Time.now
         puts "#{char.name} is still online"
       #if char has been gone offline
       elsif char.online == true && newonline == false then
@@ -31,7 +32,7 @@ namespace :onlinestatus do
         puts "#{char.name} has come online"
       end
       char.update_attributes!(attributes) unless attributes.empty?
-      char.check_activity
+      char.check_activity unless char.online == false && newonline == false
     end
   end
 end
