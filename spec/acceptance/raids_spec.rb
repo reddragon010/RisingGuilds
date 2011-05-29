@@ -77,7 +77,7 @@ feature "Raids" do
     visit "/raids/#{raid.id}"
     click_link "Edit"
     fill_in 'Title',:with => 'FooBar'
-    click_button 'Update'
+    click_button 'raid_submit'
     page.should have_css(".notice")
     page.should have_content('FooBar')
   end

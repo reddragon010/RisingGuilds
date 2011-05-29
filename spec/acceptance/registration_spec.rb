@@ -11,9 +11,9 @@ feature "Registration" do
   end
   
   scenario "Register new user" do
-    visit "/signup"
-    fill_in 'Login', :with => 'test123'
-    fill_in 'Email', :with => 'test123@test.com'
+    visit "/login"
+    fill_in 'user_login', :with => 'test123'
+    fill_in 'user_email', :with => 'test123@test.com'
     click_button 'Register'
     should_be_on "/"
     visit "/register/#{User.find_by_login('test123').perishable_token}"
