@@ -1,4 +1,3 @@
-<% cache (["character_show", @character]) do %>
 <div id="content_menu">
 	<ul>
 		<% if permitted_to? :link, @character %>
@@ -13,7 +12,7 @@
 	</ul>
 </div>
 
-<% cache @character do %>
+<% cache(["character_show", @character]) do %>
 <div id="charheader">
 	<div id="avatar">
 		<%= image_tag charicon_path(@character), :size => "64x64", :alt => "Character Icon" %>
