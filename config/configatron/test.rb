@@ -17,4 +17,7 @@ configatron.wowarmory.url.item.info = 'items/'
 configatron.wowhead.url.base = Rails.root.to_s + '/test/files/'
 configatron.wowhead.url.item.prefix = 'items/item='
 
-configatron.onlinelist.url =  Rails.root.to_s + '/test/files/onlinelist.html'
+configatron.realms = {
+  'PvE-Realm' => {
+    :status_url => Rails.root.to_s + '/test/files/stats.xml'}
+}

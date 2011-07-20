@@ -75,4 +75,18 @@ describe Character do
     char.items.count.should == 0
     char.ail.should == nil
   end
+  
+  it "should update online-status if in onlinelist" do
+    char = Factory.create(:Character, :name => "Nerox")
+    char.online.should == false
+    char.update_onlinestatus
+    char.online.should == true
+  end
+  
+  it "shouldn't update online-status if not in onlinelist" do
+    char = Factory.create(:Character, :name => "NoChar")
+    char.online.should == false
+    char.update_onlinestatus
+    char.online.should == false
+  end
 end

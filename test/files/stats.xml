@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="server_stats.xsl"?>
+<serverpage>
+	<status>
+		<platform>MaNGOS (Unix/Linux platform)</platform>
+		<uptime>0 d 16 h 10 min</uptime>
+		<oplayers>669</oplayers>
+		<cpu>0.00</cpu>
+		<qplayers>0</qplayers>
+		<ram>0.00</ram>
+		<avglat>0.00</avglat>
+		<threads>1</threads>
+		<fthreads>1</fthreads>
+		<gmcount>5</gmcount>
+		<lastupdate>16:20:01 20.07.2011</lastupdate>
+		<alliance>324</alliance>
+		<horde>345</horde>
+		<acceptedconns>1000</acceptedconns>
+		<peakcount>1105</peakcount>
+		<wdbquerysize></wdbquerysize>
+		<cdbquerysize></cdbquerysize>
+	</status>
+	<gms>
+		<gmplr><name>Corthezz</name><race>10</race><class>8</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>1</map><areaid>876</areaid><ontime>ontime</ontime><latency>0</latency><permissions>GM</permissions></gmplr>
+		<gmplr><name>Departure</name><race>11</race><class>1</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>1</map><areaid>876</areaid><ontime>ontime</ontime><latency>56</latency><permissions>GM</permissions></gmplr>
+		<gmplr><name>Bajonne</name><race>10</race><class>9</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>1</map><areaid>876</areaid><ontime>ontime</ontime><latency>19</latency><permissions>GM</permissions></gmplr>
+		<gmplr><name>Bornko</name><race>6</race><class>11</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>1</map><areaid>876</areaid><ontime>ontime</ontime><latency>14</latency><permissions>GM</permissions></gmplr>
+		<gmplr><name>Spaace</name><race>3</race><class>4</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>1</map><areaid>876</areaid><ontime>ontime</ontime><latency>57</latency><permissions>GM</permissions></gmplr>
+
+	</gms>
+	<sessions>
+		<plr><name>Nerox</name><race>11</race><class>7</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>572</map><areaid>3968</areaid><xpos>1278.12</xpos><ypos>1731.31</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Illandra</name><race>11</race><class>7</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>572</map><areaid>3968</areaid><xpos>1278.12</xpos><ypos>1731.31</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Ollodoom</name><race>11</race><class>2</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>533</map><areaid>3456</areaid><xpos>3082.17</xpos><ypos>-3099.82</ypos><ontime>ontime</ontime><latency>312</latency></plr>
+		<plr><name>Xandera</name><race>5</race><class>5</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>562</map><areaid>3702</areaid><xpos>6191.72</xpos><ypos>258.901</ypos><ontime>ontime</ontime><latency>39</latency></plr>
+		<plr><name>Zotty</name><race>3</race><class>3</class><gender>0</gender><pvprank>0</pvprank><level>72</level><map>349</map><areaid>2100</areaid><xpos>905.841</xpos><ypos>-86.2957</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Nezzliok</name><race>6</race><class>11</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>571</map><areaid>4395</areaid><xpos>5926.4</xpos><ypos>628.376</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Fatboy</name><race>5</race><class>1</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>566</map><areaid>3820</areaid><xpos>1802.85</xpos><ypos>1537.04</ypos><ontime>ontime</ontime><latency>31</latency></plr>
+		<plr><name>Thør</name><race>5</race><class>8</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>604</map><areaid>4416</areaid><xpos>1828.03</xpos><ypos>853.416</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Wizzy</name><race>10</race><class>8</class><gender>0</gender><pvprank>0</pvprank><level>70</level><map>530</map><areaid>3522</areaid><xpos>3638.7</xpos><ypos>5331.25</ypos><ontime>ontime</ontime><latency>32</latency></plr>
+		<plr><name>Lutger</name><race>10</race><class>3</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>571</map><areaid>4395</areaid><xpos>5962.7</xpos><ypos>612.168</ypos><ontime>ontime</ontime><latency>0</latency></plr>
+		<plr><name>Bonga</name><race>11</race><class>7</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>572</map><areaid>3968</areaid><xpos>1278.12</xpos><ypos>1731.31</ypos><ontime>ontime</ontime><latency>36</latency></plr>
+		<plr><name>Ragnalex</name><race>6</race><class>1</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>572</map><areaid>3968</areaid><xpos>1293.54</xpos><ypos>1600.92</ypos><ontime>ontime</ontime><latency>43</latency></plr>
+		<plr><name>Levaneri</name><race>1</race><class>2</class><gender>1</gender><pvprank>0</pvprank><level>75</level><map>571</map><areaid>394</areaid><xpos>3425.91</xpos><ypos>-2759.09</ypos><ontime>ontime</ontime><latency>132</latency></plr>
+		<plr><name>Evilsource</name><race>10</race><class>9</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>0</map><areaid>1497</areaid><xpos>1647.6</xpos><ypos>260.949</ypos><ontime>ontime</ontime><latency>58</latency></plr>
+		<plr><name>Frogwitch</name><race>10</race><class>9</class><gender>1</gender><pvprank>0</pvprank><level>80</level><map>571</map><areaid>4395</areaid><xpos>5815.24</xpos><ypos>416.29</ypos><ontime>ontime</ontime><latency>44</latency></plr>
+		<plr><name>Artayanis</name><race>5</race><class>5</class><gender>0</gender><pvprank>0</pvprank><level>80</level><map>601</map><areaid>4277</areaid><xpos>413.314</xpos><ypos>795.968</ypos><ontime>ontime</ontime><latency>34</latency></plr>
+	</sessions>
+</serverpage>

@@ -21,8 +21,12 @@ configatron.wowhead.url.base = 'http://www.wowhead.com/'
 configatron.wowhead.url.item.prefix = 'item='
 configatron.wowhead.url.item.suffix = '&xml'
 
-configatron.onlinelist.pve = 'http://www.rising-gods.de/external/MaNGOSstats_pve/stats.xml'
-configatron.onlinelist.pvp = 'http://www.rising-gods.de/external/MaNGOSstats/stats.xml'
+configatron.realms = {
+  'PvE-Realm' => {
+    :status_url => 'http://www.rising-gods.de/external/MaNGOSstats_pve/stats.xml'},
+  'PvP-Realm' => {
+    :status_url => 'http://www.rising-gods.de/external/MaNGOSstats/stats.xml'}
+}
 
 #Notifier *Config*
 configatron.notifier.default_url = 'localhost:3000'

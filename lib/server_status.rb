@@ -1,7 +1,18 @@
 class ServerStatus
-    def initialize(url)
-      @url = url
-      self.get_xml()
+    @@instances = {}
+    
+    def ServerStatus.instance(name)
+      if @@instances[name].nil? then
+        @@instances[name] = ServerStatus.new(name)
+      end
+      return @@instances[name]
+    end
+  
+    def initialize(name)
+      @realm = configatron.realms[name]
+      @status_url = @realm[:status_url]
+      self.get_status_xml()
+      raise "Can't get #{name} Onlinelist" unless self.ok?
     end
     
     def user_online?(name)
@@ -17,7 +28,7 @@ class ServerStatus
       @doc.errors.empty?
     end
     
-    def get_xml()
-      @doc = Nokogiri::XML(open(@url))
+    def get_status_xml()
+      @doc = Nokogiri::XML(open(@status_url))
     end
 end

@@ -16,6 +16,29 @@ class Character < ActiveRecord::Base
   scope :are_online, where(:online => true)
   scope :online_today, where("last_seen >= ?", Time.now.midnight)
   
+  def update_onlinestatus
+    newonline = ServerStatus.instance(self.realm.to_s).user_online?(self.name.to_s)
+    attributes = Hash.new
+    
+    self.online = false if self.online.nil?
+    
+    #if char stay online
+    if self.online == true && newonline == true then 
+      attributes[:last_seen] = Time.now
+    #if char has been gone offline
+    elsif self.online == true && newonline == false then
+      attributes[:last_seen] = Time.now
+      attributes[:online] = false
+    #if char comes online
+    elsif self.online == false && newonline == true
+      attributes[:last_seen] = Time.now
+      attributes[:online] = true
+    end
+    self.update_attributes!(attributes) unless attributes.empty?
+    self.check_activity unless self.online == false && newonline == false
+    return newonline
+  end
+  
   def check_activity
     if self.last_seen > (Time.now - 3.days)
       self.update_attribute(:activity, self.activity + 1) if (self.activity >= 0 && self.activity < 6)
