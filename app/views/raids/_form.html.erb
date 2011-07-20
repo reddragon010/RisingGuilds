@@ -89,7 +89,7 @@ current_user.guilds.each{|g| g.raids.where(:template => true).all.map{|r| templa
     <div class="box_headline"><%= t('raids.form.time_setting') %></div>
     <table class="naked left">
       <tr>
-        <td><%= f.label :start, t('raids.form.start') %> <%= f.datetime_select :start, :default => 1.day.from_now %></td>
+        <td><%= f.label :start, t('raids.form.start') %> <%= f.datetime_select :start, :default => 1.day.from_now, :minute_step => 5 %></td>
       </tr>
       <tr>
         <td><%= f.label :invitation_window, t('raids.form.invitation_window')%> <%= f.select :invitation_window, [15,30,45,60]%> <%=t('datetime.prompts.minute').pluralize%></td>
