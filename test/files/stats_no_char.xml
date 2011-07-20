@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="server_stats.xsl"?>
+<serverpage>
+	<status>
+		<platform>MaNGOS (Unix/Linux platform)</platform>
+		<uptime>0 d 16 h 10 min</uptime>
+		<oplayers>669</oplayers>
+		<cpu>0.00</cpu>
+		<qplayers>0</qplayers>
+		<ram>0.00</ram>
+		<avglat>0.00</avglat>
+		<threads>1</threads>
+		<fthreads>1</fthreads>
+		<gmcount>5</gmcount>
+		<lastupdate>16:20:01 20.07.2011</lastupdate>
+		<alliance>324</alliance>
+		<horde>345</horde>
+		<acceptedconns>1000</acceptedconns>
+		<peakcount>1105</peakcount>
+		<wdbquerysize></wdbquerysize>
+		<cdbquerysize></cdbquerysize>
+	</status>
+	<gms>
+
+	</gms>
+	<sessions>
+		
+	</sessions>
+</serverpage>

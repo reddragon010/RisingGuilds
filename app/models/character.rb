@@ -34,16 +34,24 @@ class Character < ActiveRecord::Base
       attributes[:last_seen] = Time.now
       attributes[:online] = true
     end
+    
+    if self.online != newonline && self.last_seen.to_date != Time.now.to_date
+      attributes[:activity] = self.check_activity 
+    end
+    
     self.update_attributes!(attributes) unless attributes.empty?
-    self.check_activity unless self.online == false && newonline == false
     return newonline
   end
   
   def check_activity
-    if self.last_seen > (Time.now - 3.days)
-      self.update_attribute(:activity, self.activity + 1) if (self.activity >= 0 && self.activity < 6)
+    if self.activity > 0 && self.activity < 5 
+      if Time.now - self.last_seen < 3.days
+        return self.activity + 1
+      else
+        return self.activity - 1
+      end
     else
-      self.update_attribute(:activity, self.activity - 1) if (self.activity > 0)
+      return self.activity
     end
   end
   
