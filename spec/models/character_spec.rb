@@ -52,4 +52,27 @@ describe Character do
     char.reload
     char.events.last.should == event
   end
+  
+  #testing DivisionByZero-Bug on AIL-Sync
+  it "should not set the ail if no items equiped" do
+    char = Factory.create(:Character,:name => "Nerox")
+    char.sync
+    char.sync_ail
+    char.reload
+    char.ail.should == 137
+    configatron.arsenal.url.character.sheet = 'char_zeroitems.xml'
+    char.sync_ail
+    char.reload
+    char.ail.should == 137
+  end
+  
+  it "should not update the ail if no items equiped" do
+    configatron.arsenal.url.character.sheet = 'char_zeroitems.xml'
+    char = Factory.create(:Character,:name => "Nerox",:ail=>nil)
+    char.sync
+    char.sync_ail
+    char.reload
+    char.items.count.should == 0
+    char.ail.should == nil
+  end
 end

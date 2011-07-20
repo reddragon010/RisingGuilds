@@ -45,7 +45,7 @@ class Character < ActiveRecord::Base
     (xml%'items'/:item).each do |item|
 			items << Arsenal::Item.new(item)
 		end
-		attributes["items"] = items unless items.empty?
+		attributes["items"] = items
     
     Event.create(:character_id => self.id, :action => "levelup", :content => attributes['level']) if !self.level.nil? && attributes['level'].to_i != self.level.to_i
     
@@ -53,7 +53,7 @@ class Character < ActiveRecord::Base
   end
   
   def sync_ail
-    return true if self.items.nil?
+    return true if self.items.nil? || self.items.count <= 0
     
     ilevelsum = 0
     items = Array.new

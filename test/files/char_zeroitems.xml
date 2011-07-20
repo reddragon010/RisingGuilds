@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/layout/character/sheet.xsl"?>
+<page globalSearch="1" lang="de_de" requestUrl="/character-sheet.xml">
+  <tabInfo subTab="profile" tab="character" tabGroup="character" tabUrl="r=PvE-Realm&amp;cn=Nerox&amp;gn=Delirium"/>
+  <characterInfo>
+    <character battleGroup="Rising Gods" charUrl="r=PvE-Realm&amp;n=Nerox" class="Schamane" classId="7" classUrl="c=Schamane" faction="Horde" factionId="1" gender="Männlich" genderId="0" guildName="Delirium" guildUrl="r=PvE-Realm&amp;gn=Delirium" lastModified="08.03.2010 18:45" level="77" name="Nerox" points="1425" prefix="" race="Taure" raceId="6" realm="PvE-Realm" suffix="" titleId="0"/>
+    <characterTab>
+      <talentSpecs>
+        <talentSpec active="1" group="1" icon="spell_nature_lightning" prim="Elementar" treeOne="57" treeThree="0" treeTwo="11"/>
+        <talentSpec group="2" icon="spell_nature_magicimmunity" prim="Wiederherst." treeOne="0" treeThree="54" treeTwo="13"/>
+      </talentSpecs>
+      <buffs/>
+      <debuffs/>
+      <pvp>
+        <lifetimehonorablekills value="260"/>
+        <arenacurrency value="0"/>
+      </pvp>
+      <professions>
+        <skill id="165" key="leatherworking" max="450" name="Lederverarbeitung" value="419"/>
+        <skill id="393" key="skinning" max="450" name="Kürschnerei" value="450"/>
+      </professions>
+      <characterBars>
+        <health effective="11437"/>
+        <secondBar casting="78" effective="13390" notCasting="78" type="m"/>
+      </characterBars>
+      <baseStats>
+        <strength attack="138" base="119" block="69" effective="138"/>
+        <agility armor="180" attack="90" base="66" critHitPercent="0" effective="90"/>
+        <stamina base="131" effective="613" health="5950" petBonus="-1"/>
+        <intellect base="186" critHitPercent="0" effective="647" mana="8915" petBonus="-1"/>
+        <spirit base="138" effective="157" healthRegen="24" manaRegen="78"/>
+        <armor base="11906" effective="11906" percent="46.26" petBonus="-1"/>
+      </baseStats>
+      <resistances>
+        <arcane petBonus="-1" value="35"/>
+        <fire petBonus="-1" value="35"/>
+        <frost petBonus="-1" value="35"/>
+        <holy petBonus="-1" value="35"/>
+        <nature petBonus="-1" value="35"/>
+        <shadow petBonus="-1" value="35"/>
+      </resistances>
+      <melee>
+        <mainHandDamage dps="68.64" max="176" min="67" percent="0" speed="1.77"/>
+        <offHandDamage dps="0" max="0" min="0" percent="0" speed="1.96"/>
+        <mainHandSpeed hastePercent="0.98" hasteRating="0" value="1.77"/>
+        <offHandSpeed hastePercent="0.98" hasteRating="0" value="1.96"/>
+        <power base="362" effective="362" increasedDps="0"/>
+        <hitRating increasedHitPercent="0" penetration="0" reducedArmorPercent="0" value="153"/>
+        <critChance percent="16.81" plusPercent="0" rating="294"/>
+        <expertise additional="0" percent="0" rating="0" value="0"/>
+      </melee>
+      <ranged>
+        <weaponSkill rating="0" value="0"/>
+        <damage dps="6.38" max="13" min="12" percent="0" speed="1.96"/>
+        <speed hastePercent="0.98" hasteRating="0" value="0.00"/>
+        <power base="362" effective="362" increasedDps="0" petAttack="-1.00" petSpell="-1.00"/>
+        <hitRating increasedHitPercent="0" penetration="0" reducedArmorPercent="0" value="153"/>
+        <critChance percent="0" plusPercent="0" rating="294"/>
+      </ranged>
+      <spell>
+        <bonusDamage>
+          <arcane value="959"/>
+          <fire value="959"/>
+          <frost value="959"/>
+          <holy value="959"/>
+          <nature value="959"/>
+          <shadow value="959"/>
+          <petBonus attack="-1" damage="-1" fromType="0"/>
+        </bonusDamage>
+        <bonusHealing value="773"/>
+        <hitRating increasedHitPercent="0" penetration="0" reducedResist="0" value="153"/>
+        <critChance rating="0">
+          <arcane percent="20.03"/>
+          <fire percent="20.03"/>
+          <frost percent="20.03"/>
+          <holy percent="20.03"/>
+          <nature percent="20.03"/>
+          <shadow percent="20.03"/>
+        </critChance>
+        <penetration value="0"/>
+        <manaRegen casting="78" notCasting="78"/>
+        <hasteRating hastePercent="0.98" hasteRating="0"/>
+      </spell>
+      <defenses>
+        <armor base="11906" effective="11906" percent="46.26" petBonus="-1"/>
+        <defense decreasePercent="0" increasePercent="0" plusDefense="0" rating="0" value="0"/>
+        <dodge increasePercent="0.00" percent="3.02" rating="95"/>
+        <parry increasePercent="0.00" percent="0" rating="0"/>
+        <block increasePercent="0.00" percent="5" rating="66"/>
+        <resilience damagePercent="0" hitPercent="0.00" value="0"/>
+      </defenses>
+      <items>
+      </items>
+      <glyphs/>
+    </characterTab>
+    <summary>
+      <c earned="141" points="1425" total="931" totalPoints="10285"/>
+      <category id="92" name="Allgemein">
+        <c earned="19" earnedPoints="190" total="54" totalPoints="570"/>
+      </category>
+      <category id="96" name="Quests">
+        <c earned="12" earnedPoints="120" total="49" totalPoints="530"/>
+      </category>
+      <category id="97" name="Erkundung">
+        <c earned="24" earnedPoints="255" total="70" totalPoints="830"/>
+      </category>
+      <category id="95" name="Spieler gegen Spieler">
+        <c earned="8" earnedPoints="80" total="149" totalPoints="1735"/>
+      </category>
+      <category id="168" name="Dungeon &amp; Schlachtzug">
+        <c earned="39" earnedPoints="390" total="366" totalPoints="3945"/>
+      </category>
+      <category id="169" name="Berufe">
+        <c earned="28" earnedPoints="280" total="75" totalPoints="760"/>
+      </category>
+      <category id="201" name="Ruf">
+        <c earned="1" earnedPoints="10" total="44" totalPoints="545"/>
+      </category>
+      <category id="155" name="Weltereignisse">
+        <c earned="10" earnedPoints="100" total="124" totalPoints="1370"/>
+      </category>
+      <category id="81" name="Heldentaten">
+        <c earned="0"/>
+      </category>
+    </summary>
+  </characterInfo>
+</page>
