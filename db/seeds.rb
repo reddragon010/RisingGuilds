@@ -5,8 +5,3 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
-
-Role.create(:name => "leader")
-Role.create(:name => "officer")
-Role.create(:name => "raidleader")
-Role.create(:name => "member")
